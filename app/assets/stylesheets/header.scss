@@ -1,0 +1,25 @@
+
+$logo_image: 'ADRL_Logo_363x84.png';
+$header_background_image: 'ADRL_BG_1280x160.png';
+
+
+#header-navbar {
+  background: transparent image_url($header_background_image) repeat;
+  padding-top: 10px;
+
+  .navbar-brand {
+    background: transparent image_url($logo_image) no-repeat top left;
+    background-size: 80%;
+    width: 363px;
+    height: 75px;
+    margin-left: 2px;
+  }
+
+  .navbar-right {
+    margin-top: 1.5em;
+
+    a {
+      color: white;
+    }
+  }
+}
