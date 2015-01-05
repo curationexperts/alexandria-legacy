@@ -43,3 +43,15 @@ group :development, :test do
   gem 'spring'
 end
 
+gem "hydra-head", "~> 9.0.0.beta1"
+gem "active-fedora", "~> 9.0.0.beta5"
+# gem "hydra-collections", "~> 4.0.0.beta4"
+# gem 'hydra-derivatives', '~> 1.0.0.beta1'
+
+
+gem 'devise'
+gem 'devise-guests', '~> 0.3'
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'jettywrapper'
+end
