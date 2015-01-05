@@ -18,3 +18,4 @@
 /jetty
 
 .rvmrc
+config/secrets.yml
