@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $inner_width: 70%;
+$welcome_blue: #004E6E;
 
 .page-splash-container {
   margin: 0px 10px 10px 10px;
@@ -14,7 +15,7 @@ $inner_width: 70%;
     margin-right: auto;
     text-align: center;
     font: 28px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #004E6E;
+    color: $welcome_blue;
     line-height: 1.2;
   }
 
@@ -26,7 +27,6 @@ $inner_width: 70%;
     text-align: center;
     font-weight: normal;
   }
-
 }
 
 .page-splash-container #left_column {
@@ -47,7 +47,7 @@ $inner_width: 70%;
   font-weight: normal;
 
   h4 {
-    color: #004E6E;
+    color: $welcome_blue;
     font: bold 16px 'Helvetica Neue',Helvetica,Arial,sans-serif;
   }
 
@@ -63,4 +63,24 @@ $inner_width: 70%;
     font: 16px sans-serif !important;
     line-height: 16px !important;
   }
+}
+
+// -----------------------------
+//   About Page
+// -----------------------------
+
+#about_main_body {
+  h2 {
+    font: bold 28px 'Helvetica Neue', Helvetica,Arial,sans-serif;
+  }
+}
+
+#about_body {
+  max-width: 600px;
+
+  p, a {
+    font: 14px 'Helvetica Neue', Helvetica,Arial,sans-serif;
+  }
+
+  a { color: $welcome_blue; }
 }
