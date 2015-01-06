@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  root :to => "catalog#index"
+
+  root 'welcome#index'
+
+  get 'welcome/about', as: 'about'
+  get 'welcome/off_campus_login', as: 'off_campus_login'
+
   blacklight_for :catalog
   devise_for :users
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
