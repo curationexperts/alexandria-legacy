@@ -38,7 +38,7 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    active-fedora (9.0.0.beta8)
+    active-fedora (9.0.0.rc1)
       active-triples (~> 0.5.0)
       activesupport (>= 4.1.0)
       deprecation
@@ -133,7 +133,7 @@ GEM
       nokogiri (>= 1.4.3)
     erubis (2.7.0)
     execjs (2.2.2)
-    faraday (0.9.0)
+    faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.6)
     globalid (0.3.0)
@@ -143,21 +143,21 @@ GEM
     hike (1.2.3)
     htmlentities (4.3.3)
     http_logger (0.5.1)
-    hydra-access-controls (9.0.0.beta2)
-      active-fedora (~> 9.0.0.beta3)
+    hydra-access-controls (9.0.0.rc1)
+      active-fedora (~> 9.0.0.rc1)
       activesupport
       blacklight (~> 5.3)
       cancancan
       deprecation
       sass-rails
-    hydra-core (9.0.0.beta2)
+    hydra-core (9.0.0.rc1)
       block_helpers
-      hydra-access-controls (= 9.0.0.beta2)
+      hydra-access-controls (= 9.0.0.rc1)
       jettywrapper (>= 1.4.1)
       rails (>= 3.2.3, < 5)
-    hydra-head (9.0.0.beta2)
-      hydra-access-controls (= 9.0.0.beta2)
-      hydra-core (= 9.0.0.beta2)
+    hydra-head (9.0.0.rc1)
+      hydra-access-controls (= 9.0.0.rc1)
+      hydra-core (= 9.0.0.rc1)
       rails (>= 3.2.6)
     i18n (0.7.0)
     iso-639 (0.2.5)
@@ -397,7 +397,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active-fedora (~> 9.0.0.beta5)
+  active-fedora (~> 9.0.0.rc1)
   byebug
   capybara
   coffee-rails (~> 4.1.0)
