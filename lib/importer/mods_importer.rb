@@ -8,6 +8,7 @@ module Importer
     def import_all
       count = 0
       Dir.glob("#{@dirname}/**/*").each do |filename|
+        next if File.directory?(filename)
         import_file(filename)
         count += 1
       end
