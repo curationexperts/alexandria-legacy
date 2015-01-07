@@ -42,13 +42,11 @@ class CatalogController < ApplicationController
     #
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
-    config.add_facet_field solr_name('object_type', :facetable), :label => 'Format'
-    config.add_facet_field 'origin_date_created_ssim', :label => 'Date Created'
-    config.add_facet_field 'genre_ssim', :label => 'Genre', :limit => 20
-    config.add_facet_field solr_name('language', :facetable), :label => 'Language', :limit => true
-    config.add_facet_field solr_name('lc1_letter', :facetable), :label => 'Call Number'
-    config.add_facet_field solr_name('subject_geo', :facetable), :label => 'Region'
-    config.add_facet_field solr_name('subject_era', :facetable), :label => 'Era'
+    config.add_facet_field 'active_fedora_model_ssi', :label => 'Format'
+    config.add_facet_field solr_name('location_label', :facetable), label: 'Location'
+    config.add_facet_field solr_name('lcsubject_label', :facetable), label: 'Subject'
+    config.add_facet_field solr_name('publisher', :facetable), label: 'Publisher'
+    config.add_facet_field solr_name('workType_label', :facetable), label: 'Type'
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -60,22 +58,20 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field solr_name('title', :stored_searchable, type: :string), :label => 'Title'
-    config.add_index_field solr_name('personal_name', :stored_searchable, type: :string), :label => 'Personal Name'
-    config.add_index_field solr_name('origin_date_created', :symbol), :label => 'Date Created'
-    config.add_index_field solr_name('language', :stored_searchable, type: :string), :label => 'Language'
-    config.add_index_field solr_name('origin_place_term', :stored_searchable, type: :string), :label => 'Place Created'
-    config.add_index_field solr_name('published_vern', :stored_searchable, type: :string), :label => 'Published'
+    config.add_index_field solr_name('location_label', :stored_searchable), label: 'Location'
+    config.add_index_field solr_name('lcsubject_label', :stored_searchable), label: 'Subject'
+    config.add_index_field solr_name('publisher', :stored_searchable), label: 'Publisher'
+    config.add_index_field solr_name('workType_label', :stored_searchable), label: 'Type'
+    config.add_index_field solr_name('language', :stored_searchable, type: :string), label: 'Language'
 
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    config.add_show_field solr_name('title', :stored_searchable), label: 'Title'
     config.add_show_field solr_name('location_label', :stored_searchable), label: 'Location'
     config.add_show_field solr_name('lcsubject_label', :stored_searchable), label: 'Subject'
-    config.add_show_field solr_name('publisher', :stored_searchable), :label => 'Publisher'
-    config.add_show_field solr_name('workType_label', :stored_searchable), :label => 'Type'
-    config.add_show_field solr_name('language', :stored_searchable, type: :string), :label => 'Language:'
+    config.add_show_field solr_name('publisher', :stored_searchable), label: 'Publisher'
+    config.add_show_field solr_name('workType_label', :stored_searchable), label: 'Type'
+    config.add_show_field solr_name('language', :stored_searchable, type: :string), label:'Language'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
