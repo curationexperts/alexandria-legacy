@@ -15,5 +15,6 @@ rake jetty:start
 
 ```
 rake alexandria:solr:seed
+script/import_mods_records ../mods-for-adrl/mods_records/object_records
 ```
 
