@@ -4,7 +4,7 @@
 
 .page-header-splash {
   background: transparent image_url('ADRL_Large_BG_1209x450.png') repeat;
-  height: 450px;
+  padding-bottom: 2.5em;
   color: white;
 
 
@@ -13,7 +13,7 @@
   }
 
   .bottom-links a {
-	  font: 23px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	  font: 1.8em 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   a, a:hover {
@@ -37,7 +37,23 @@
   .large-logo img {
     width: 70%;
     margin-bottom: 2.5em;
-    margin-top: 1em;
+    margin-top: 1.5em;
+    margin-left: -1%;
   }
 }
 
+// -----------------------------
+//   The search bar
+// -----------------------------
+
+.page-header-splash .splash-search-bar {
+  margin-bottom: 3em;
+  width: 80%;
+  margin-left: 10%;
+
+  .form-inline .input-group .input-group-btn {
+    width: 10%;
+  }
+}
+
+// -----------------------------
