@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>AlexandriaV2</title>
+  <title><%= render_page_title %></title>
+  <%= favicon_link_tag 'favicon.ico' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -16,7 +18,7 @@
     </div>
   </div>
 
-  <%= render :partial => 'shared/footer' %>
+  <%= render 'shared/footer' %>
 </body>
 
 </html>
