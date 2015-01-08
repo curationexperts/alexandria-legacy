@@ -3,11 +3,7 @@
 
     <div class="top-links">
       <div class="pull-right login-link">
-        <% if on_campus? %>
-          <p> Logged In <p>
-        <% else %>
-          <%= link_to 'Off-Campus Login', off_campus_login_path %>
-        <% end %>
+        <%= render 'shared/login_link' %>
       </div>
 
       <p>

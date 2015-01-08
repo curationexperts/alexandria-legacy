@@ -1,0 +1,5 @@
+<% if on_campus? %>
+  <p> Logged In </p>
+<% else %>
+  <%= link_to 'Off-Campus Login', off_campus_login_path %>
+<% end %>

@@ -6,6 +6,7 @@ $header_background_image: 'ADRL_BG_1280x160.png';
 #header-navbar {
   background: transparent image_url($header_background_image) repeat;
   padding-top: 10px;
+  color: white;
 
   .navbar-brand {
     background: transparent image_url($logo_image) no-repeat top left;
@@ -23,3 +24,25 @@ $header_background_image: 'ADRL_BG_1280x160.png';
     }
   }
 }
+
+
+//---------------------------
+//  Login Link
+//---------------------------
+
+#header-navbar .navbar-right .login-link a,
+.page-header-splash .login-link a {
+  color: #ffcb05;
+}
+
+#header-navbar .navbar-right .login-link p,
+.page-header-splash .login-link p {
+  margin: 0;
+}
+
+#header-navbar .navbar-right .login-link p {
+  padding-top: 15px;
+  padding-left: 10px;
+}
+
+//---------------------------
