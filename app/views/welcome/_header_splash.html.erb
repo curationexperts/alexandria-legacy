@@ -1,2 +1,37 @@
-<h2> Placeholder for welcome header </h2>
-<hr />
+<div class="page-header-splash">
+  <div class="page-header-container">
+
+    <div class="top-links">
+      <div class="pull-right login-link">
+        <% if on_campus? %>
+          <p> Logged In <p>
+        <% else %>
+          <%= link_to 'Off-Campus Login', off_campus_login_path %>
+        <% end %>
+      </div>
+
+      <p>
+        <%= link_to 'Bookmarks', bookmarks_path %>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <%= link_to 'History', search_history_path %>
+      </p>
+    </div>
+    <div class='clearfix'></div>
+
+
+    <div class="imageset">
+      <div class="large-logo">
+        <%= link_to image_tag("ADRL_Large_Logo_805x186.png", { alt: "ADRL Logo" }), root_path, { title: "ADRL Home" } %>
+      </div>
+
+      <div class="splash-search-bar">
+        <%= render 'splash_search_form' %>
+      </div>
+
+      <div class="bottom-links">
+        <%= link_to 'Browse by Collection', catalog_index_path %>
+      </div>
+    </div>
+
+  </div>
+</div>

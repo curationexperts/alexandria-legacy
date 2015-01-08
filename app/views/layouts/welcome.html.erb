@@ -8,11 +8,15 @@
 </head>
 
 <body>
+  <%= render 'welcome/header_splash' %>
+
   <div id="main-container" class="container">
     <div class="row">
       <%= yield %>
     </div>
   </div>
+
+  <%= render :partial => 'shared/footer' %>
 </body>
 
 </html>
