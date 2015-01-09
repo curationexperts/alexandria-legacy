@@ -9,6 +9,7 @@ class CatalogController < ApplicationController
   # before_filter :enforce_show_permissions, :only=>:show
   # This applies appropriate access controls to all solr queries
   # CatalogController.solr_search_params_logic += [:add_access_controls_to_solr_params]
+  CatalogController.solr_search_params_logic += [:only_images_and_collections]
 
 
   configure_blacklight do |config|
@@ -142,5 +143,9 @@ class CatalogController < ApplicationController
   end
 
 
-
+  protected
+    def only_images_and_collections(solr_parameters, user_parameters)
+      solr_parameters[:fq] ||= []
+      solr_parameters[:fq] << "has_model_ssim:(\"#{Image.to_class_uri}\")" # OR \"#{CourseCollection.to_class_uri}\")"
+    end
 end
