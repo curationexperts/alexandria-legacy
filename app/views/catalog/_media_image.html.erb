@@ -1,10 +1,28 @@
-<div class="row media">
-  <a class="media-left">
-    <% Array(document['image_url_ssm'].first).each do |img| %>
-      <%= image_tag img, class: 'media-object', style: 'width: 400px' %>
-    <% end %>
-  </a>
-  <div class="media-body">
+<div class="row">
+  <div class="col-md-6">
+    <div class="stage-wrapper clearfix">
+        <div class="stage clearfix">
+            <div class="stage-container">
+                <div class="jcarousel-wrapper">
+                    <div class="jcarousel">
+                        <ul class="clearfix">
+                            <% Array(document['image_url_ssm']).each do |img| %>
+                              <li><%= image_tag img, style: 'width: 340px' %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+
+                    <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+                    <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+
+                    <p class="jcarousel-pagination"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
     <%= render 'show_header_default', document: document %>
   </div>
 </div>
