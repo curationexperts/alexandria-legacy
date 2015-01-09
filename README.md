@@ -14,6 +14,6 @@ rake jetty:start
 ### Set up test files:
 
 ```
-script/import_mods_records ../mods-for-adrl/mods_records/object_records
+script/import_mods_records ../mods-for-adrl/mods_demo_set
 ```
 
