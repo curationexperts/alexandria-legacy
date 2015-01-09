@@ -3,6 +3,6 @@ class Image < ActiveFedora::Base
   has_many :generic_files
 
   def self.indexer
-    DeepIndexer
+    ImageIndexer
   end
 end

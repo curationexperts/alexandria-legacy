@@ -3,6 +3,7 @@
 ### Configuration
   * Copy config/secrets.yml.template to config/secrets.yml
   * Edit config/secrets.yml and paste in a new secret keys
+  * update the host\_name in config/environments/{environment}.rb
 
 ### Set up Jetty
 
