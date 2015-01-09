@@ -24,7 +24,7 @@ module Importer
         return
       end
       image = create_image(mods)
-      puts "  Created #{image.id}"
+      puts "  Created #{image.id}" if image
     end
 
     def create_image(mods)
@@ -39,12 +39,14 @@ module Importer
           create_file(image, file_node.text)
         end
       image
+    rescue Oargun::RDF::Controlled::ControlledVocabularyError => e
+      puts "Skipping, due to #{e.message}"
     end
 
     def create_file(image, file_name)
       path = image_path(file_name)
       unless File.exists?(path)
-        puts "File doesn't exist at #{path}"
+        puts "  * File doesn't exist at #{path}"
         return
       end
       image.generic_files.create do |gf|
