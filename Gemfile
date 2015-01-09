@@ -51,8 +51,7 @@ gem "active-fedora", github: 'projecthydra/active_fedora'
 #
 gem 'mods', github: 'sul-dlss/mods'
 gem 'oargun', github: 'curationexperts/oargun'
-
-
+gem 'riiif'
 
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
