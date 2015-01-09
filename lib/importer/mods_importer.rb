@@ -1,24 +1,19 @@
 module Importer
   class ModsImporter
-    IMAGE_DIRECTORY = '../alexandria-images/special_collections/mss36-sb-postcards/tiff-a16/'
 
-    def initialize(dirname=nil)
-      @dirname = dirname
+    def initialize(image_directory, metadata_directory=nil)
+      @image_directory = image_directory
+      @metadata_directory = metadata_directory
     end
 
     def import_all
       count = 0
-      Dir.glob("#{@dirname}/**/*").each do |filename|
+      Dir.glob("#{@metadata_directory}/**/*").each do |filename|
         next if File.directory?(filename)
         import(filename)
         count += 1
       end
       count
-    end
-
-    def self.import
-      file = File.join(Rails.root, 'spec/fixtures/mods/cusbspcmss36_110108.xml')
-      importer = ModsImporter.new.import(file)
     end
 
     def import(file)
@@ -64,8 +59,7 @@ module Importer
     end
 
     def image_dir
-      IMAGE_DIRECTORY
+      @image_directory
     end
-
   end
 end
