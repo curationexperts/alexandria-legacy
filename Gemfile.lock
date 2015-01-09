@@ -89,6 +89,11 @@ GEM
       nokogiri (~> 1.6)
       rails (>= 3.2.6, < 5)
       rsolr (~> 1.0.6)
+    blacklight-gallery (0.1.1)
+      blacklight (~> 5.0)
+      bootstrap-sass (~> 3.0)
+      openseadragon (>= 0.0.9)
+      rails
     block_helpers (0.3.3)
       activesupport (>= 2.0)
     bootstrap-sass (3.3.1.0)
@@ -231,6 +236,8 @@ GEM
       activesupport
       nokogiri (>= 1.4.2)
       solrizer (~> 3.3)
+    openseadragon (0.0.9)
+      rails (> 3.2.0)
     orm_adapter (0.5.0)
     qa (0.3.0)
       activerecord-import
@@ -405,6 +412,7 @@ PLATFORMS
 
 DEPENDENCIES
   active-fedora!
+  blacklight-gallery
   byebug
   capybara
   coffee-rails (~> 4.1.0)

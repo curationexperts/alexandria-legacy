@@ -51,6 +51,7 @@ gem "active-fedora", github: 'projecthydra/active_fedora'
 #
 gem 'mods', github: 'sul-dlss/mods'
 gem 'oargun', github: 'curationexperts/oargun'
+gem 'blacklight-gallery'
 gem 'riiif'
 
 gem 'devise'

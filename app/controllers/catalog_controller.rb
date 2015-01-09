@@ -3,6 +3,8 @@ require 'blacklight/catalog'
 
 class CatalogController < ApplicationController
 
+  # helper Openseadragon::OpenseadragonHelper
+
   include Blacklight::Catalog
   include Hydra::Controller::ControllerBehavior
   # These before_filters apply the hydra access controls
@@ -13,6 +15,12 @@ class CatalogController < ApplicationController
 
 
   configure_blacklight do |config|
+    config.view.gallery.partials = [:index_header, :index]
+    config.view.slideshow.partials = [:index]
+
+    # config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
+    # config.show.partials.insert(1, :openseadragon)
+
     config.default_solr_params = {
       :qt => 'search',
       :rows => 10
