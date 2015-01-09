@@ -52,7 +52,7 @@ module Importer
       image.generic_files.create do |gf|
         puts "  Reading image #{file_name}"
         gf.original.content = File.new(path)
-        gf.original.save
+        gf.save!
       end
     end
 
