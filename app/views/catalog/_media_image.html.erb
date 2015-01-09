@@ -1,0 +1,10 @@
+<div class="row media">
+  <a class="media-left">
+    <% Array(document['image_url_ssm'].first).each do |img| %>
+      <%= image_tag img, class: 'media-object', style: 'width: 400px' %>
+    <% end %>
+  </a>
+  <div class="media-body">
+    <%= render 'show_header_default', document: document %>
+  </div>
+</div>

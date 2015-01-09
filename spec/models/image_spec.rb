@@ -26,12 +26,19 @@ describe Image do
     end
 
     context "with a generic_file" do
-      'bf%2f74%2f27%2f75%2fbf742775-2a24-46dc-889e-cca03b27b5f3%2foriginal'
       let(:generic_file) { GenericFile.new(id: 'bf/74/27/75/bf742775-2a24-46dc-889e-cca03b27b5f3') }
       subject { Image.new(generic_files: [generic_file]).to_solr }
 
-      it "should have a thumbnail" do
+      it "should have a thumbnail image" do
         expect(subject['thumbnail_url_ssm']).to eq ['http://test.host/images/bf%2F74%2F27%2F75%2Fbf742775-2a24-46dc-889e-cca03b27b5f3%2Foriginal/full/300,/0/native.jpg']
+      end
+
+      it "should have a medium image" do
+        expect(subject['image_url_ssm']).to eq ['http://test.host/images/bf%2F74%2F27%2F75%2Fbf742775-2a24-46dc-889e-cca03b27b5f3%2Foriginal/full/600,/0/native.jpg']
+      end
+
+      it "should have a large image" do
+        expect(subject['large_image_url_ssm']).to eq ['http://test.host/images/bf%2F74%2F27%2F75%2Fbf742775-2a24-46dc-889e-cca03b27b5f3%2Foriginal/full/1000,/0/native.jpg']
       end
     end
   end

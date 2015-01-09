@@ -24,6 +24,8 @@ class CatalogController < ApplicationController
 
     config.index.thumbnail_field = 'thumbnail_url_ssm'
 
+    config.show.partials = [:media, :show]
+
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
     #
