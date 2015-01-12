@@ -1,8 +1,9 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: bd64f535d503f14a138ecf351fd1ce3a145e4b25
+  revision: 0909e4b22f8dce0e0dd898dfed27ea99646b89b0
   specs:
     oargun (0.0.1)
+      active-triples (~> 0.5.0)
       activesupport (~> 4.0)
       qa (~> 0.3.0)
       rest_client (~> 1.8)
@@ -220,7 +221,7 @@ GEM
       mime-types (>= 1.16, < 3)
     mime-types (2.4.3)
     mini_portile (0.6.2)
-    minitest (5.5.0)
+    minitest (5.5.1)
     multi_json (1.10.1)
     multipart-post (2.0.0)
     net-http-persistent (2.9.4)

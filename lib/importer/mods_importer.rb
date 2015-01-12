@@ -18,29 +18,26 @@ module Importer
 
     def import(file)
       puts "Importing: #{file}"
-      mods = Mods::Record.new.from_file(file)
-      if Image.exists?(mods.identifier.text)
-        puts "  Skipping. #{mods.identifier.text} already exists"
-        return
+      parser = ModsParser.new(file)
+      attributes = parser.attributes
+      if Image.exists?(attributes[:id])
+        i = Image.find(attributes[:id])
+        i.update(attributes.except(:id, :files))
+        puts "  Updated. #{attributes[:id]}"
+      else
+        image = create_image(attributes)
+        puts "  Created #{image.id}" if image
       end
-      image = create_image(mods)
-      puts "  Created #{image.id}" if image
+    rescue Oargun::RDF::Controlled::ControlledVocabularyError => e
+      puts "  Skipping, due to #{e.message}"
     end
 
-    def create_image(mods)
-      image = Image.create(id: mods.identifier.text,
-                   location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
-                   lcsubject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
-                   publisher: [mods.origin_info.publisher.text],
-                   title: [mods.title_info.title.text],
-                   workType: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) })
-
-        mods.extension.xpath('./fileName').each do |file_node|
-          create_file(image, file_node.text)
+    def create_image(attributes)
+      Image.create(attributes.except(:files)).tap do |image|
+        attributes[:files].each do |file_path|
+          create_file(image, file_path)
         end
-      image
-    rescue Oargun::RDF::Controlled::ControlledVocabularyError => e
-      puts "Skipping, due to #{e.message}"
+      end
     end
 
     def create_file(image, file_name)

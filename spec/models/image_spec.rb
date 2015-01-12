@@ -25,6 +25,16 @@ describe Image do
       end
     end
 
+    context "with creator" do
+      let(:creator) { [RDF::URI.new("http://id.loc.gov/authorities/names/n87914041")] }
+      subject { Image.new(creator: creator).to_solr }
+
+      it "should have a subject" do
+        expect(subject['creator_tesim']).to eq ['http://id.loc.gov/authorities/names/n87914041']
+        expect(subject['creator_label_tesim']).to eq ["American Film Manufacturing Company"]
+      end
+    end
+
     context "with a generic_file" do
       let(:generic_file) { GenericFile.new(id: 'bf/74/27/75/bf742775-2a24-46dc-889e-cca03b27b5f3') }
       subject { Image.new(generic_files: [generic_file]).to_solr }

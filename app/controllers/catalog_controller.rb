@@ -55,6 +55,7 @@ class CatalogController < ApplicationController
     # facet bar
     config.add_facet_field 'active_fedora_model_ssi', :label => 'Format'
     config.add_facet_field solr_name('location_label', :facetable), label: 'Location'
+    config.add_facet_field solr_name('creator_label', :facetable), label: 'Creator'
     config.add_facet_field solr_name('lcsubject_label', :facetable), label: 'Subject'
     config.add_facet_field solr_name('publisher', :facetable), label: 'Publisher'
     config.add_facet_field solr_name('workType_label', :facetable), label: 'Type'
@@ -72,6 +73,7 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('location_label', :stored_searchable), label: 'Location'
     config.add_index_field solr_name('lcsubject_label', :stored_searchable), label: 'Subject'
     config.add_index_field solr_name('publisher', :stored_searchable), label: 'Publisher'
+    config.add_index_field solr_name('creator_label', :stored_searchable), label: 'Creator'
     config.add_index_field solr_name('workType_label', :stored_searchable), label: 'Type'
     config.add_index_field solr_name('language', :stored_searchable, type: :string), label: 'Language'
 
@@ -81,6 +83,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('location_label', :stored_searchable), label: 'Location'
     config.add_show_field solr_name('lcsubject_label', :stored_searchable), label: 'Subject'
     config.add_show_field solr_name('publisher', :stored_searchable), label: 'Publisher'
+    config.add_show_field solr_name('creator_label', :stored_searchable), label: 'Creator'
     config.add_show_field solr_name('workType_label', :stored_searchable), label: 'Type'
     config.add_show_field solr_name('language', :stored_searchable, type: :string), label:'Language'
 
