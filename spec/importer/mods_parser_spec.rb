@@ -12,6 +12,11 @@ describe Importer::ModsParser do
       expect(attributes[:creator]).to eq ['http://id.loc.gov/authorities/names/n87914041']
     end
 
+    it 'finds metadata for the collection' do
+      expect(attributes[:collection][:id]).to eq 'sbhcmss78'
+      expect(attributes[:collection][:title]).to eq 'Joel Conway / Flying A Studio photograph collection'
+    end
+
     it "should import earliestDate" do
       expect(attributes[:earliestDate]).to eq [1910]
     end

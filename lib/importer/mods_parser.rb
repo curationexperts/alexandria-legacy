@@ -20,7 +20,8 @@ module Importer
         latestDate: latest_date,
         issued: issued,
         workType: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
-        files: mods.extension.xpath('./fileName').map(&:text)
+        files: mods.extension.xpath('./fileName').map(&:text),
+        collection: collection
       }
     end
 
@@ -45,5 +46,15 @@ module Importer
     def issued
       [mods.origin_info.dateIssued.text.to_i]
     end
+
+    def collection
+      dc_id = mods.related_item.at_xpath('mods:identifier[@type="local"]').text
+      id = dc_id.downcase.gsub(/\s*/, '')
+
+      { id: id,
+        title: mods.at_xpath("//prefix:relatedItem[@type='host']", {'prefix' => Mods::MODS_NS}).titleInfo.title.text.strip
+      }
+    end
+
   end
 end

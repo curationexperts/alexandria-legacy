@@ -21,19 +21,20 @@ module Importer
       parser = ModsParser.new(file)
       attributes = parser.attributes
       if Image.exists?(attributes[:id])
-        i = Image.find(attributes[:id])
-        i.update(attributes.except(:id, :files))
+        image = Image.find(attributes[:id])
+        image.update(attributes.except(:id, :files, :collection))
         puts "  Updated. #{attributes[:id]}"
       else
         image = create_image(attributes)
         puts "  Created #{image.id}" if image
       end
+      add_image_to_collection(image, attributes)
     rescue Oargun::RDF::Controlled::ControlledVocabularyError => e
       puts "  Skipping, due to #{e.message}"
     end
 
     def create_image(attributes)
-      Image.create(attributes.except(:files)).tap do |image|
+      Image.create(attributes.except(:files, :collection)).tap do |image|
         attributes[:files].each do |file_path|
           create_file(image, file_path)
         end
@@ -60,5 +61,18 @@ module Importer
     def image_dir
       @image_directory
     end
+
+    def add_image_to_collection(image, attrs)
+      id = attrs[:collection][:id]
+      coll = if Collection.exists?(id)
+               Collection.find(id)
+             else
+               Collection.create(id: id, title: attrs[:collection][:title])
+             end
+
+      coll.members << image
+      coll.save
+    end
+
   end
 end

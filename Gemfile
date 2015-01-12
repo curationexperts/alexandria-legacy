@@ -43,12 +43,12 @@ group :development, :test do
   gem 'spring'
 end
 
-gem "hydra-head", "~> 9.0.0.beta1"
+gem "hydra-head", "~> 9.0.0.rc2"
 # gem "active-fedora", "~> 9.0.0.rc1"
 gem "active-fedora", github: 'projecthydra/active_fedora'
-# gem "hydra-collections", "~> 4.0.0.beta4"
+gem "hydra-collections", "~> 4.0.0.rc2"
 # gem 'hydra-derivatives', '~> 1.0.0.beta1'
-#
+
 gem 'mods', github: 'sul-dlss/mods'
 gem 'oargun', github: 'curationexperts/oargun'
 gem 'blacklight-gallery'

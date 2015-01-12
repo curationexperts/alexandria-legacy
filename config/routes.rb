@@ -10,4 +10,6 @@ Rails.application.routes.draw do
 
   mount Riiif::Engine => '/images'
 
+  mount Hydra::Collections::Engine => '/'
+
 end

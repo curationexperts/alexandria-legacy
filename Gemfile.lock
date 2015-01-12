@@ -161,6 +161,10 @@ GEM
       cancancan
       deprecation
       sass-rails
+    hydra-collections (4.0.0.rc2)
+      blacklight
+      deprecation
+      hydra-head (~> 9.0.0.rc2)
     hydra-core (9.0.0.rc2)
       block_helpers
       hydra-access-controls (= 9.0.0.rc2)
@@ -419,7 +423,8 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   devise-guests (~> 0.3)
-  hydra-head (~> 9.0.0.beta1)
+  hydra-collections (~> 4.0.0.rc2)
+  hydra-head (~> 9.0.0.rc2)
   jbuilder (~> 2.0)
   jettywrapper
   jquery-rails
