@@ -11,6 +11,21 @@ describe Importer::ModsParser do
     it "should import creator" do
       expect(attributes[:creator]).to eq ['http://id.loc.gov/authorities/names/n87914041']
     end
+
+    it "should import earliestDate" do
+      expect(attributes[:earliestDate]).to eq [1910]
+    end
+
+    it "should import latestDate" do
+      expect(attributes[:latestDate]).to eq [1919]
+    end
+
+    context "with a file that has dateIssued" do
+      let(:file) { 'spec/fixtures/mods/cusbspcmss36_110108.xml' }
+      it "should import issued" do
+        expect(attributes[:issued]).to eq [1925]
+      end
+    end
   end
 end
 

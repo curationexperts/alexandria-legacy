@@ -1,6 +1,9 @@
 module Importer
   class ModsParser
     attr_reader :mods
+
+    CREATOR = "http://id.loc.gov/vocabulary/relators/cre".freeze
+
     def initialize(file)
       @mods = Mods::Record.new.from_file(file)
     end
@@ -13,19 +16,34 @@ module Importer
         creator:   creator.map { |uri| RDF::URI.new(uri) },
         publisher: [mods.origin_info.publisher.text],
         title: [mods.title_info.title.text],
+        earliestDate: earliest_date,
+        latestDate: latest_date,
+        issued: issued,
         workType: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
         files: mods.extension.xpath('./fileName').map(&:text)
       }
     end
 
     def creator
-      if mods.corporate_name.role.roleTerm.valueURI == ["http://id.loc.gov/vocabulary/relators/cre"]
+      if mods.corporate_name.role.roleTerm.valueURI == [CREATOR]
         mods.corporate_name.valueURI
-      elsif mods.personal_name.role.roleTerm.valueURI == ["http://id.loc.gov/vocabulary/relators/cre"]
+      elsif mods.personal_name.role.roleTerm.valueURI == [CREATOR]
         mods.personal_name.valueURI
       else
         []
       end
+    end
+
+    def earliest_date
+      [mods.origin_info.dateCreated.css('[point="start"]'.freeze).text.to_i]
+    end
+
+    def latest_date
+      [mods.origin_info.dateCreated.css('[point="end"]').freeze.text.to_i]
+    end
+
+    def issued
+      [mods.origin_info.dateIssued.text.to_i]
     end
   end
 end

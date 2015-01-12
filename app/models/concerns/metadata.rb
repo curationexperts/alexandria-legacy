@@ -35,5 +35,19 @@ module Metadata
     property :workType, predicate: RDF::DC.type, class_name: Oargun::ControlledVocabularies::WorkType do |index|
       index.as :stored_searchable, :facetable
     end
+
+      # Dates
+    property :date, predicate: RDF::DC.date do |index|
+      index.as :stored_searchable, :facetable
+    end
+    property :earliestDate, predicate: Oargun::Vocabularies::VRA.earliestDate do |index|
+      index.as :stored_searchable, :facetable
+    end
+    property :issued, predicate: RDF::DC.issued do |index|
+      index.as :stored_searchable, :facetable
+    end
+    property :latestDate, predicate: Oargun::Vocabularies::VRA.latestDate do |index|
+      index.as :stored_searchable, :facetable
+    end
   end
 end
