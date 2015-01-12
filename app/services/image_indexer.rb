@@ -5,6 +5,7 @@ class ImageIndexer < ActiveFedora::IndexingService
 
   def generate_solr_document
     super.tap do |solr_doc|
+      object.index_collection_ids(solr_doc)
       solr_doc['thumbnail_url_ssm'.freeze] = generic_file_thumbnails
       solr_doc['image_url_ssm'.freeze] = generic_file_images
       solr_doc['large_image_url_ssm'.freeze] = generic_file_large_images
