@@ -43,9 +43,12 @@ group :development, :test do
   gem 'spring'
 end
 
-gem "hydra-head", "~> 9.0.0.rc2"
-# gem "active-fedora", "~> 9.0.0.rc1"
+gem 'hydra-head', '~> 9.0.0.rc2'
+# gem "active-fedora", "~> 9.0.0.rc2"
 gem "active-fedora", github: 'projecthydra/active_fedora'
+# gem 'hydra-editor', '~> 1.0.0.rc2'
+gem 'hydra-editor', github: 'projecthydra-labs/hydra-editor', ref: 'eccf512'
+gem 'hydra-role-management'
 gem "hydra-collections", "~> 4.0.0.rc2"
 # gem 'hydra-derivatives', '~> 1.0.0.beta1'
 
@@ -58,5 +61,6 @@ gem 'devise'
 gem 'devise-guests', '~> 0.3'
 group :development, :test do
   gem 'rspec-rails'
+  gem 'factory_girl_rails', '~> 4.4'
   gem 'jettywrapper'
 end

@@ -9,6 +9,17 @@ GIT
       rest_client (~> 1.8)
 
 GIT
+  remote: git://github.com/projecthydra-labs/hydra-editor.git
+  revision: eccf5125bd3073e74934b403796f0c7990e32ba5
+  ref: eccf512
+  specs:
+    hydra-editor (1.0.0.beta3)
+      active-fedora (>= 9.0.0.beta8)
+      cancancan
+      rails (~> 4.1)
+      simple_form (~> 3.1.0)
+
+GIT
   remote: git://github.com/projecthydra/active_fedora.git
   revision: bee58b88a84c2b9957b70f1d977a77d4e494fba4
   specs:
@@ -99,6 +110,7 @@ GEM
       activesupport (>= 2.0)
     bootstrap-sass (3.3.1.0)
       sass (~> 3.2)
+    bootstrap_form (2.2.0)
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -144,6 +156,11 @@ GEM
       nokogiri (>= 1.4.3)
     erubis (2.7.0)
     execjs (2.2.2)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.6)
@@ -174,6 +191,10 @@ GEM
       hydra-access-controls (= 9.0.0.rc2)
       hydra-core (= 9.0.0.rc2)
       rails (>= 3.2.6)
+    hydra-role-management (0.2.1)
+      blacklight
+      bootstrap_form
+      cancancan
     i18n (0.7.0)
     iso-639 (0.2.5)
     jbuilder (2.2.6)
@@ -360,6 +381,9 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    simple_form (3.1.0)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     slop (3.6.0)
     solrizer (3.3.0)
       activesupport
@@ -423,8 +447,11 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   devise-guests (~> 0.3)
+  factory_girl_rails (~> 4.4)
   hydra-collections (~> 4.0.0.rc2)
+  hydra-editor!
   hydra-head (~> 9.0.0.rc2)
+  hydra-role-management
   jbuilder (~> 2.0)
   jettywrapper
   jquery-rails

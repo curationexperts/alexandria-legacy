@@ -1,0 +1,1 @@
+HydraEditor.models = ["Image"]
