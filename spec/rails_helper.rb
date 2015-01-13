@@ -7,6 +7,10 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 require 'capybara/rails'
+# HttpLogger.logger = Logger.new(STDOUT)
+# HttpLogger.ignore = [/localhost:8983\/solr/]
+# HttpLogger.colorize = true
+# HttpLogger.log_headers = true
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -45,4 +49,5 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include FactoryGirl::Syntax::Methods
+  config.include Devise::TestHelpers, type: :controller
 end

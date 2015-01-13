@@ -1,27 +1,28 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: 79a546fca23ac914209dcf97592ec00dd3edf896
+  revision: 8f6a5cb8c33d1f55ebc33454b6d0334abae9e816
   specs:
     oargun (0.0.1)
       active-triples (~> 0.5.0)
       activesupport (~> 4.0)
       qa (~> 0.3.0)
-      rest_client (~> 1.8)
+      rest-client (~> 1.7)
 
 GIT
   remote: git://github.com/projecthydra-labs/hydra-editor.git
-  revision: eccf5125bd3073e74934b403796f0c7990e32ba5
-  ref: eccf512
+  revision: 92f9e687e810340412d68ae5e0584f6d5eeec82b
+  branch: build_with_index
   specs:
-    hydra-editor (1.0.0.beta3)
-      active-fedora (>= 9.0.0.beta8)
+    hydra-editor (1.0.0.rc2)
+      active-fedora (>= 9.0.0.rc2)
       cancancan
       rails (~> 4.1)
       simple_form (~> 3.1.0)
 
 GIT
   remote: git://github.com/projecthydra/active_fedora.git
-  revision: bee58b88a84c2b9957b70f1d977a77d4e494fba4
+  revision: 6f22c453daff3d99023e37c6125b48173cf778b3
+  branch: change_attributes
   specs:
     active-fedora (9.0.0.rc2)
       active-triples (~> 0.5.0)
@@ -37,9 +38,9 @@ GIT
 
 GIT
   remote: git://github.com/sul-dlss/mods.git
-  revision: 62aada7e398eaaf561a8c9198b300885c74d6215
+  revision: d174258c827aecdec040e8296352ff27cd74de8f
   specs:
-    mods (0.0.23)
+    mods (1.0.0)
       iso-639
       nokogiri
       nom-xml
@@ -250,7 +251,7 @@ GEM
     multi_json (1.10.1)
     multipart-post (2.0.0)
     net-http-persistent (2.9.4)
-    netrc (0.7.9)
+    netrc (0.10.2)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     nom-xml (0.5.1)
@@ -349,8 +350,6 @@ GEM
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rest_client (1.8.2)
-      netrc (~> 0.7.7)
     riiif (0.0.9)
       rails (> 3.2.0)
     rsolr (1.0.10)
