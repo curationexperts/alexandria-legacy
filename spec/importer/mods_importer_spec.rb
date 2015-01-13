@@ -26,6 +26,7 @@ describe Importer::ModsImporter do
       image = Image.first
 
       coll = Collection.find(collection_id)
+      expect(coll.identifier).to eq ['SBHC Mss 36']
       expect(coll.title).to eq 'Santa Barbara picture postcards collection'
       expect(coll.members).to eq [image]
       expect(image.collections).to eq [coll]

@@ -64,10 +64,11 @@ module Importer
 
     def add_image_to_collection(image, attrs)
       id = attrs[:collection][:id]
+
       coll = if Collection.exists?(id)
                Collection.find(id)
              else
-               Collection.create(id: id, title: attrs[:collection][:title])
+               Collection.create(attrs[:collection])
              end
 
       coll.members << image

@@ -48,10 +48,11 @@ module Importer
     end
 
     def collection
-      dc_id = mods.related_item.at_xpath('mods:identifier[@type="local"]').text
-      id = dc_id.downcase.gsub(/\s*/, '')
+      dc_id = Array(mods.related_item.at_xpath('mods:identifier[@type="local"]').text)
+      id = dc_id.first.downcase.gsub(/\s*/, '')
 
       { id: id,
+        identifier: dc_id,
         title: mods.at_xpath("//prefix:relatedItem[@type='host']", {'prefix' => Mods::MODS_NS}).titleInfo.title.text.strip
       }
     end

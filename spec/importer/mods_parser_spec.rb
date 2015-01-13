@@ -14,6 +14,7 @@ describe Importer::ModsParser do
 
     it 'finds metadata for the collection' do
       expect(attributes[:collection][:id]).to eq 'sbhcmss78'
+      expect(attributes[:collection][:identifier]).to eq ['SBHC Mss 78']
       expect(attributes[:collection][:title]).to eq 'Joel Conway / Flying A Studio photograph collection'
     end
 
