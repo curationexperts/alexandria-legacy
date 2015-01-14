@@ -10,8 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra-labs/hydra-editor.git
-  revision: 92f9e687e810340412d68ae5e0584f6d5eeec82b
-  branch: build_with_index
+  revision: 7822452df39cdddf481b1c12bd0c1d897bf19aef
   specs:
     hydra-editor (1.0.0.rc2)
       active-fedora (>= 9.0.0.rc2)
