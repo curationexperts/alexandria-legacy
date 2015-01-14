@@ -3,7 +3,13 @@ class RDF::DeepIndexingService < ActiveFedora::RDF::IndexingService
   def append_to_solr_doc(solr_doc, solr_field_key, field_info, val)
     return super unless val.kind_of? ActiveTriples::Resource
 
-    val.fetch # TODO This should not be in this method because it's slow. We should run it in a background job. See https://github.com/OregonDigital/oregondigital/blob/master/lib/oregon_digital/rdf/deep_fetch.rb
+    begin
+      # TODO This should not be in this method because it's slow. We should run it in a background job.
+      # See https://github.com/OregonDigital/oregondigital/blob/master/lib/oregon_digital/rdf/deep_fetch.rb
+      val.fetch
+    rescue SocketError
+      $stderr.puts "Couldn't fetch RDF label for #{val.id}"
+    end
     val = val.solrize
     self.class.create_and_insert_terms(solr_field_key,
                                        val.first,

@@ -10,6 +10,16 @@ describe Image do
     expect(subject.collections).to eq []
   end
 
+  describe "nested attributes" do
+    context "for creator" do
+      it "should ignore empty ids" do
+        subject.creator_attributes = {"0" => { "id"=>"http://id.loc.gov/authorities/names/n87141298" },
+                        "1" => { "id"=>"" } }
+        expect(subject.creator.size).to eq 1
+      end
+    end
+  end
+
   describe "#to_solr" do
     context "with a title" do
       subject { Image.new(title: ['War and Peace']).to_solr }

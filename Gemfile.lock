@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: 5575dfa06d353a2a7e40458ed56cde9445e3602b
+  revision: ea04ed3cc4e77e99f22cf4aff1a6a3b6a0ff77a1
   specs:
     oargun (0.0.1)
-      active-triples (~> 0.5.0)
+      active-triples (~> 0.6.0)
       activesupport (~> 4.0)
       qa (~> 0.3.0)
       rest-client (~> 1.7)
@@ -20,10 +20,10 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/active_fedora.git
-  revision: ad9750d5f67627c79a3ad2f35ab10b1bfdc1643b
+  revision: 601976231a5e4af3c617395988fbd9de9a09b690
   specs:
     active-fedora (9.0.0.rc2)
-      active-triples (~> 0.5.0)
+      active-triples (~> 0.6.0)
       activesupport (>= 4.1.0)
       deprecation
       ldp (~> 0.2.0)
@@ -56,7 +56,7 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    active-triples (0.5.0)
+    active-triples (0.6.0)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
       deprecation (~> 0.1)
