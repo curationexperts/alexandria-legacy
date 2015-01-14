@@ -1,4 +1,16 @@
 GIT
+  remote: git://github.com/ActiveTriples/ActiveTriples.git
+  revision: 1995f3c6ab60819554acbbee16e44dfd26f3d3c0
+  branch: discard_ids
+  specs:
+    active-triples (0.6.0)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      deprecation (~> 0.1)
+      linkeddata (~> 1.1)
+      rdf (~> 1.1)
+
+GIT
   remote: git://github.com/curationexperts/oargun.git
   revision: ea04ed3cc4e77e99f22cf4aff1a6a3b6a0ff77a1
   specs:
@@ -56,12 +68,6 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    active-triples (0.6.0)
-      activemodel (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      deprecation (~> 0.1)
-      linkeddata (~> 1.1)
-      rdf (~> 1.1)
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -433,6 +439,7 @@ PLATFORMS
 
 DEPENDENCIES
   active-fedora!
+  active-triples!
   blacklight-gallery
   byebug
   capybara
