@@ -32,27 +32,16 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
-  gem 'capybara'
-  gem 'byebug'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-end
-
 gem 'hydra-head', '~> 9.0.0.rc2'
 # gem "active-fedora", "~> 9.0.0.rc2"
-gem "active-fedora", github: 'projecthydra/active_fedora', branch: 'change_attributes'
+gem "active-fedora", github: 'projecthydra/active_fedora'
 # gem 'hydra-editor', '~> 1.0.0.rc2'
 gem 'hydra-editor', github: 'projecthydra-labs/hydra-editor', branch: 'build_with_index'
 gem 'hydra-role-management'
 gem "hydra-collections", "~> 4.0.0.rc2"
 # gem 'hydra-derivatives', '~> 1.0.0.beta1'
 
-gem 'mods', github: 'sul-dlss/mods'
+gem 'mods', '~> 1.0.0'
 gem 'oargun', github: 'curationexperts/oargun'
 gem 'blacklight-gallery'
 gem 'riiif'
@@ -64,4 +53,12 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.4'
   gem 'jettywrapper'
   # gem 'http_logger'
+  gem 'capybara'
+  gem 'byebug'
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
 end
