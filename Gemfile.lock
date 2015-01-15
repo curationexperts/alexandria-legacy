@@ -47,7 +47,8 @@ GIT
 
 GIT
   remote: git://github.com/ruby-rdf/rdf.git
-  revision: 91ebca69cb6ba5f157d1e417e6606e52cae81417
+  revision: 1d65a2ff844ab4b004b393478b1506c8dd2a3d0a
+  ref: 1d65a2ff844ab4b004b393478b1506c8dd2a3d0a
   specs:
     rdf (1.1.7)
       link_header (~> 0.0, >= 0.0.8)

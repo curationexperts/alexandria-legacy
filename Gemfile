@@ -49,7 +49,7 @@ gem 'blacklight-gallery'
 gem 'riiif'
 
 # Version 1.1.7 has this bug: https://github.com/ruby-rdf/rdf/issues/167
-gem 'rdf', github: 'ruby-rdf/rdf'
+gem 'rdf', github: 'ruby-rdf/rdf', ref: '1d65a2ff844ab4b004b393478b1506c8dd2a3d0a'
 
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
