@@ -36,15 +36,24 @@ module Importer
     end
 
     def earliest_date
-      [mods.origin_info.dateCreated.css('[point="start"]'.freeze).text.to_i]
+      # Integers trigger https://github.com/ruby-rdf/rdf/issues/167
+      # [mods.origin_info.dateCreated.css('[point="start"]'.freeze).text.to_i]
+      # So just doing a string for now:
+      [mods.origin_info.dateCreated.css('[point="start"]'.freeze).text]
     end
 
     def latest_date
-      [mods.origin_info.dateCreated.css('[point="end"]').freeze.text.to_i]
+      # Integers trigger https://github.com/ruby-rdf/rdf/issues/167
+      # [mods.origin_info.dateCreated.css('[point="end"]'.freeze).text.to_i]
+      # So just doing a string for now:
+      [mods.origin_info.dateCreated.css('[point="end"]').freeze.text]
     end
 
     def issued
-      [mods.origin_info.dateIssued.text.to_i]
+      # Integers trigger https://github.com/ruby-rdf/rdf/issues/167
+      # [mods.origin_info.dateIssued.text.to_i]
+      # So just doing a string for now:
+      [mods.origin_info.dateIssued.text]
     end
 
     def collection
