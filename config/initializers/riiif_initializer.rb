@@ -16,7 +16,9 @@ def logger
 end
 
 Riiif::HTTPFileResolver.id_to_uri = lambda do |id|
-  ActiveFedora::Base.id_to_uri(id)
+  ActiveFedora::Base.id_to_uri(CGI.unescape(id)).tap do |url|
+    logger.info "RIIIF resolving #{id} to #{url}"
+  end
 end
 
 Riiif::Engine.config.cache_duration_in_days = 365
