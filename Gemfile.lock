@@ -45,6 +45,13 @@ GIT
       rdf-rdfxml (~> 1.1.0)
       rsolr (~> 1.0.10)
 
+GIT
+  remote: git://github.com/ruby-rdf/rdf.git
+  revision: 91ebca69cb6ba5f157d1e417e6606e52cae81417
+  specs:
+    rdf (1.1.7)
+      link_header (~> 0.0, >= 0.0.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -299,8 +306,6 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
-    rdf (1.1.7)
-      link_header (~> 0.0, >= 0.0.8)
     rdf-aggregate-repo (1.1.0)
       rdf (>= 1.1)
     rdf-isomorphic (1.1.0)
@@ -461,6 +466,7 @@ DEPENDENCIES
   mods (~> 1.0.0)
   oargun!
   rails (= 4.2.0)
+  rdf!
   riiif
   rspec-rails
   sass-rails (~> 5.0)

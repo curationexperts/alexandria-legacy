@@ -48,6 +48,9 @@ gem 'oargun', github: 'curationexperts/oargun'
 gem 'blacklight-gallery'
 gem 'riiif'
 
+# Version 1.1.7 has this bug: https://github.com/ruby-rdf/rdf/issues/167
+gem 'rdf', github: 'ruby-rdf/rdf'
+
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
 group :development, :test do
