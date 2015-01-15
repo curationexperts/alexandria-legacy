@@ -1,4 +1,3 @@
-require 'oargun'
 module Metadata
   extend ActiveSupport::Concern
   included do

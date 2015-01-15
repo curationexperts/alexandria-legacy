@@ -1,7 +1,6 @@
 GIT
   remote: git://github.com/ActiveTriples/ActiveTriples.git
-  revision: 1995f3c6ab60819554acbbee16e44dfd26f3d3c0
-  branch: discard_ids
+  revision: 3d4dcd7f14386751ced64aca7873e44ca890b033
   specs:
     active-triples (0.6.0)
       activemodel (>= 3.0.0)
@@ -12,7 +11,7 @@ GIT
 
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: ea04ed3cc4e77e99f22cf4aff1a6a3b6a0ff77a1
+  revision: d4142c22f0417307a8d4ca4cd18e53114e425533
   specs:
     oargun (0.0.1)
       active-triples (~> 0.6.0)
