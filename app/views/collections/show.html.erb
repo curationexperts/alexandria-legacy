@@ -1,0 +1,5 @@
+<%= render partial: 'search_form'%>
+<h1><%=@collection.title%><h1>
+<h3><%=@collection.description%></h3>
+<div class='clearfix'> </div>
+<%= render partial: 'document_list', locals: { documents: @member_docs } %>
