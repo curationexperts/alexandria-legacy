@@ -32,16 +32,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'hydra-head', '~> 9.0.0.rc2'
-# gem "active-fedora", "~> 9.0.0.rc2"
-gem "active-fedora", github: 'projecthydra/active_fedora'
-# gem 'hydra-editor', '~> 1.0.0.rc2'
-gem 'hydra-editor', github: 'projecthydra-labs/hydra-editor'
-# gem 'hydra-editor', path: '../hydra-editor'
+gem 'hydra-head', '~> 9.0.0.rc3'
+gem 'hydra-editor', '~> 1.0.0.rc3'
 gem 'hydra-role-management'
 gem "hydra-collections", "~> 4.0.0.rc2"
-gem 'active-triples', github: 'ActiveTriples/ActiveTriples'
-# gem 'hydra-derivatives', '~> 1.0.0.beta1'
 
 gem 'mods', '~> 1.0.0'
 gem 'oargun', github: 'curationexperts/oargun'

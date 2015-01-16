@@ -19,17 +19,17 @@ describe Importer::ModsParser do
     end
 
     it "should import earliestDate" do
-      expect(attributes[:earliestDate]).to eq [1910]
+      expect(attributes[:earliestDate]).to eq ['1910']
     end
 
     it "should import latestDate" do
-      expect(attributes[:latestDate]).to eq [1919]
+      expect(attributes[:latestDate]).to eq ['1919']
     end
 
     context "with a file that has dateIssued" do
       let(:file) { 'spec/fixtures/mods/cusbspcmss36_110108.xml' }
       it "should import issued" do
-        expect(attributes[:issued]).to eq [1925]
+        expect(attributes[:issued]).to eq ['1925']
       end
     end
   end

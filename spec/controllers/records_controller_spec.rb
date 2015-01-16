@@ -17,7 +17,8 @@ describe RecordsController do
                         } }
       it "should add creators" do
         patch :update, id: image, image: { creator_attributes: creator }
-        expect(image.reload.creator.size).to eq 2
+        expect(image.reload.creator_ids).to eq ["http://id.loc.gov/authorities/names/n87914041",
+                                              "http://id.loc.gov/authorities/names/n87141298"]
       end
     end
   end

@@ -7,7 +7,7 @@ class ControlledVocabularyInput < MultiValueInput
       @collection ||= object[attribute_name]
     end
 
-    def build_text_field(value, index)
+    def build_field(value, index)
       options = input_html_options.dup
 
       if value.respond_to? :rdf_label
