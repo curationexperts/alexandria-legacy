@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/active_fedora.git
-  revision: 601976231a5e4af3c617395988fbd9de9a09b690
+  revision: 84c3be8a035be3b43e505939530fd76074557c55
   specs:
     active-fedora (9.0.0.rc2)
       active-triples (~> 0.6.0)
@@ -350,7 +350,7 @@ GEM
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    riiif (0.0.9)
+    riiif (0.0.10)
       rails (> 3.2.0)
     rsolr (1.0.10)
       builder (>= 2.1.2)
