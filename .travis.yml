@@ -3,6 +3,8 @@ cache: bundler
 sudo: false
 rvm:
   - 2.2
+before_script:
+  - "cp config/secrets.yml.template config/secrets.yml"
 
 notifications:
   email:
