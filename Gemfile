@@ -23,15 +23,6 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 gem 'hydra-head', '~> 9.0.0'
 gem 'hydra-editor', '~> 1.0.0'
 gem 'hydra-role-management'
@@ -45,9 +36,6 @@ gem 'riiif'
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
 group :development, :test do
-  gem 'capistrano'
-  gem 'capistrano-rails'
-  gem 'capistrano-bundler'
   gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 4.4'
   gem 'jettywrapper'
@@ -55,9 +43,12 @@ group :development, :test do
   gem 'capybara'
   gem 'byebug'
 
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
 end
