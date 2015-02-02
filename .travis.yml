@@ -5,6 +5,7 @@ rvm:
   - 2.2
 before_script:
   - "cp config/secrets.yml.template config/secrets.yml"
+  - "cp config/smtp.yml.template config/smtp.yml"
 
 notifications:
   email:

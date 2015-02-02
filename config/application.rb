@@ -27,5 +27,7 @@ module AlexandriaV2
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.action_mailer.smtp_settings = YAML.load(File.read(Rails.root.join('config', 'smtp.yml')))[Rails.env] || {}
   end
 end

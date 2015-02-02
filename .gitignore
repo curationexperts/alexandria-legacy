@@ -16,6 +16,7 @@
 !/log/.keep
 /tmp
 /jetty
-
 .rvmrc
+
 config/secrets.yml
+config/smtp.yml
