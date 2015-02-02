@@ -4,6 +4,10 @@ class ImageIndexer < ActiveFedora::IndexingService
   end
 
   CREATOR_MULTIPLE = Solrizer.solr_name('creator_label', :stored_searchable)
+  ISSUED = Solrizer.solr_name('issued', :facetable)
+  EARLIEST_DATE = Solrizer.solr_name('earliestDate', :facetable)
+  SORTABLE_CREATOR = Solrizer.solr_name('creator_label', :sortable)
+  SORTABLE_DATE = Solrizer.solr_name('date', :sortable, type: :integer)
 
   def generate_solr_document
     super.tap do |solr_doc|
@@ -11,11 +15,26 @@ class ImageIndexer < ActiveFedora::IndexingService
       solr_doc['thumbnail_url_ssm'.freeze] = generic_file_thumbnails
       solr_doc['image_url_ssm'.freeze] = generic_file_images
       solr_doc['large_image_url_ssm'.freeze] = generic_file_large_images
-      solr_doc[Solrizer.solr_name('creator_label', :sortable)] = solr_doc.fetch(CREATOR_MULTIPLE).first if solr_doc.key? CREATOR_MULTIPLE
+      solr_doc[SORTABLE_CREATOR] = sortable_creator(solr_doc)
+      solr_doc[SORTABLE_DATE] = sortable_date(solr_doc)
     end
   end
 
-  protected
+  private
+
+    # Create a creator field suitable for sorting on
+    def sortable_creator(solr_doc)
+      solr_doc.fetch(CREATOR_MULTIPLE).first if solr_doc.key? CREATOR_MULTIPLE
+    end
+
+    # Create a date field for sorting on
+    def sortable_date(solr_doc)
+      if solr_doc.key? ISSUED
+        solr_doc.fetch(ISSUED).first
+      elsif solr_doc.key? EARLIEST_DATE
+        solr_doc.fetch(EARLIEST_DATE).first
+      end
+    end
 
     def generic_file_thumbnails
       generic_file_images('300,'.freeze)

@@ -50,6 +50,28 @@ describe Image do
       end
     end
 
+    context "with issued_date" do
+      let(:issued_date) { [1925] }
+      subject { Image.new(issued: issued_date).to_solr }
+
+      it "should have a issued_date" do
+        expect(subject['issued_isim']).to eq ["1925"]
+        expect(subject['date_ii']).to eq "1925"
+      end
+    end
+
+    context "with earliestDate and latestDate" do
+      let(:earliestDate) { [1917] }
+      let(:latestDate) { [1923] }
+      subject { Image.new(earliestDate: earliestDate, latestDate: latestDate).to_solr }
+
+      it "should have a dates indexed" do
+        expect(subject['earliestDate_isim']).to eq ["1917"]
+        expect(subject['latestDate_isim']).to eq ["1923"]
+        expect(subject['date_ii']).to eq "1917"
+      end
+    end
+
     context "with a generic_file" do
       let(:generic_file) { GenericFile.new(id: 'bf/74/27/75/bf742775-2a24-46dc-889e-cca03b27b5f3') }
       subject { Image.new(generic_files: [generic_file]).to_solr }

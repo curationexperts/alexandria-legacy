@@ -46,7 +46,7 @@ module Importer
       # Integers trigger https://github.com/ruby-rdf/rdf/issues/167
       # [mods.origin_info.dateCreated.css('[point="end"]'.freeze).text.to_i]
       # So just doing a string for now:
-      [mods.origin_info.dateCreated.css('[point="end"]').freeze.text]
+      [mods.origin_info.dateCreated.css('[point="end"]'.freeze).text]
     end
 
     def issued
@@ -57,12 +57,12 @@ module Importer
     end
 
     def collection
-      dc_id = Array(mods.related_item.at_xpath('mods:identifier[@type="local"]').text)
+      dc_id = Array(mods.related_item.at_xpath('mods:identifier[@type="local"]'.freeze).text)
       id = dc_id.first.downcase.gsub(/\s*/, '')
 
       { id: id,
         identifier: dc_id,
-        title: mods.at_xpath("//prefix:relatedItem[@type='host']", {'prefix' => Mods::MODS_NS}).titleInfo.title.text.strip
+        title: mods.at_xpath("//prefix:relatedItem[@type='host']".freeze, {'prefix'.freeze => Mods::MODS_NS}).titleInfo.title.text.strip
       }
     end
 
