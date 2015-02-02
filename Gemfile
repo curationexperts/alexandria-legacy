@@ -32,12 +32,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'hydra-head', '~> 9.0.0.rc3'
-gem 'hydra-editor', '~> 1.0.0.rc3'
+gem 'hydra-head', '~> 9.0.0'
+gem 'hydra-editor', '~> 1.0.0'
 gem 'hydra-role-management'
-gem "hydra-collections", "~> 4.0.0.rc2"
+gem "hydra-collections", "~> 4.0.0"
 
-gem 'mods', '~> 1.0.0'
+gem 'mods', '~> 2.0.1'
 gem 'oargun', github: 'curationexperts/oargun'
 gem 'blacklight-gallery'
 gem 'riiif'
