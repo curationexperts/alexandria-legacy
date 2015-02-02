@@ -1,7 +1,7 @@
 require 'jettywrapper'
 
 desc "Run the ci build"
-task ci: ['jetty:clean', 'jetty:config_solr'] do
+task ci: ['jetty:clean', 'jetty:config'] do
   ENV['environment'] = "test"
   jetty_params = Jettywrapper.load_config
   jetty_params[:startup_wait]= 90
@@ -12,4 +12,3 @@ task ci: ['jetty:clean', 'jetty:config_solr'] do
   end
 end
 
-task default: :ci
