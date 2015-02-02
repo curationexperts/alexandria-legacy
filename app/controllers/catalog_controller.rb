@@ -145,10 +145,10 @@ class CatalogController < ApplicationController
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
-    config.add_sort_field 'score desc, pub_date_dtsi desc, title_tesi asc', :label => 'relevance'
-    config.add_sort_field 'pub_date_dtsi desc, title_tesi asc', :label => 'year'
-    config.add_sort_field 'author_tesi asc, title_tesi asc', :label => 'author'
-    config.add_sort_field 'title_tesi asc, pub_date_dtsi desc', :label => 'title'
+    config.add_sort_field 'score desc, pub_date_dtsi desc, creator_label_si asc', :label => 'relevance'
+    config.add_sort_field 'pub_date_dtsi desc, creator_label_si asc', :label => 'year'
+    config.add_sort_field 'creator_label_si asc, pub_date_dtsi asc', :label => 'creator ascending'
+    config.add_sort_field 'creator_label_si desc, pub_date_dtsi asc', :label => 'creator descending'
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.

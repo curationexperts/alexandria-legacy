@@ -43,9 +43,10 @@ describe Image do
       let(:creator) { [RDF::URI.new("http://id.loc.gov/authorities/names/n87914041")] }
       subject { Image.new(creator: creator).to_solr }
 
-      it "should have a subject" do
+      it "should have a creator" do
         expect(subject['creator_tesim']).to eq ['http://id.loc.gov/authorities/names/n87914041']
         expect(subject['creator_label_tesim']).to eq ["American Film Manufacturing Company"]
+        expect(subject['creator_label_si']).to eq "American Film Manufacturing Company"
       end
     end
 
