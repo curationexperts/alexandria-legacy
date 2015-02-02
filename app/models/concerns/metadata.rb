@@ -1,15 +1,18 @@
 module Metadata
   extend ActiveSupport::Concern
   included do
-    property :title, predicate: ::RDF::DC.title do |index|
+    property :title, predicate: ::RDF::DC.title, multiple: false do |index|
       index.as :stored_searchable
     end
+
     property :creator, predicate: ::RDF::DC.creator, class_name: Oargun::ControlledVocabularies::Creator do |index|
       index.as :stored_searchable, :facetable
     end
+
     property :contributor, predicate: ::RDF::DC.contributor do |index|
       index.as :stored_searchable
     end
+
     property :description, predicate: ::RDF::DC.description do |index|
       index.as :stored_searchable
     end

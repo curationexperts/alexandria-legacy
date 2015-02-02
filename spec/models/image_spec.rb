@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe Image do
   it 'should have a title' do
-    subject.title = ['War and Peace']
-    expect(subject.title).to eq ['War and Peace']
+    subject.title = 'War and Peace'
+    expect(subject.title).to eq 'War and Peace'
   end
 
   it 'has collections' do
@@ -22,7 +22,7 @@ describe Image do
 
   describe "#to_solr" do
     context "with a title" do
-      subject { Image.new(title: ['War and Peace']).to_solr }
+      subject { Image.new(title: 'War and Peace').to_solr }
 
       it 'should have a title' do
         expect(subject['title_tesim']).to eq ['War and Peace']
@@ -71,7 +71,7 @@ describe Image do
       let(:boring_books) { Collection.create!(title: 'Boring Books') }
 
       subject {
-        image = Image.new(title: ['War and Peace'])
+        image = Image.new(title: 'War and Peace')
         image.collections = [boring_books, long_books]
         image.to_solr
       }

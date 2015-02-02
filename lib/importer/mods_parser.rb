@@ -15,7 +15,7 @@ module Importer
         lcsubject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
         creator:   creator.map { |uri| RDF::URI.new(uri) },
         publisher: [mods.origin_info.publisher.text],
-        title: [mods.title_info.title.text],
+        title: mods.title_info.title.text,
         earliestDate: earliest_date,
         latestDate: latest_date,
         issued: issued,
