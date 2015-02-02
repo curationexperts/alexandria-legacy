@@ -11,10 +11,16 @@ describe Importer::ModsImporter do
 
   describe "#import" do
     it "should create a new image and files" do
+      image = nil
       expect {
-        importer.import(file)
+        image = importer.import(file)
       }.to change { Image.count }.by(1).
       and change { GenericFile.count }.by(2)
+
+      original = image.generic_files.first.original
+      expect(original.mime_type).to eq 'image/tiff'
+      expect(original.original_name).to eq 'cusbspcmss36_110108_1_a.tif'
+
     end
 
     it 'creates a collection' do

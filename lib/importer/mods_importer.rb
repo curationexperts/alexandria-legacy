@@ -29,6 +29,7 @@ module Importer
         puts "  Created #{image.id}" if image
       end
       add_image_to_collection(image, attributes)
+      image
     rescue Oargun::RDF::Controlled::ControlledVocabularyError => e
       puts "  Skipping, due to #{e.message}"
     end
@@ -49,9 +50,16 @@ module Importer
       end
       image.generic_files.create do |gf|
         puts "  Reading image #{file_name}"
+        gf.original.mime_type = mime_type(path)
+        gf.original.original_name = File.basename(path)
         gf.original.content = File.new(path)
         gf.save!
       end
+    end
+
+    def mime_type(file_name)
+      mime_types = MIME::Types.of(file_name)
+      mime_types.empty? ? "application/octet-stream" : mime_types.first.content_type
     end
 
     def image_path(file_name)
