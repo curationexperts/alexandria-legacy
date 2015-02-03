@@ -1,0 +1,3 @@
+<div class="document <%= render_document_class collection %>" itemscope itemtype="<%= collection.itemtype %>">
+  <%= render_document_partials collection, blacklight_config.view_config(document_index_view_type).partials, :document_counter => collection_counter %>
+</div>

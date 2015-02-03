@@ -20,4 +20,18 @@ class SolrDocument
   # Recommendation: Use field names from Dublin Core
   use_extension( Blacklight::Solr::Document::DublinCore)
 
+  ##
+  # Offer the source (ActiveFedora-based) model to Rails for some of the
+  # Rails methods (e.g. link_to).
+  # @example
+  #   link_to '...', SolrDocument(id: 'bXXXXXX5').new => <a href="/dams_object/bXXXXXX5">...</a>
+  def to_model
+    if self['has_model_ssim'] == [Collection.to_class_uri]
+      @m ||= ActiveFedora::Base.load_instance_from_solr(id)
+      return self if @m.class == ActiveFedora::Base
+      @m
+    else
+      super
+    end
+  end
 end

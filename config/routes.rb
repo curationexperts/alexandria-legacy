@@ -18,4 +18,6 @@ Rails.application.routes.draw do
 
   mount Hydra::Collections::Engine => '/'
 
+  get 'collections', to: 'collections#index', as: 'collection_index'
+
 end
