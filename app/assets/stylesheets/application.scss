@@ -13,6 +13,7 @@
  *= require_self
  */
 
+@import 'colors';
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 @import 'blacklight/blacklight';
@@ -23,8 +24,8 @@
 @import 'header';
 @import 'footer';
 @import 'catalog';
-@import 'welcome';
 @import 'contact_us';
+@import 'welcome';
 @import 'welcome_header';
 @import 'jcarousel';
 

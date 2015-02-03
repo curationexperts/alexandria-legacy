@@ -10,6 +10,9 @@
 
   .top-links {
     padding-top: 2.5em;
+
+    a { padding: 15px; }
+    p { margin: 15px 0 0 0 }
   }
 
   .bottom-links a {
@@ -19,6 +22,11 @@
   a, a:hover {
     color: white;
     text-decoration: none;
+  }
+
+  .nav li a:hover, .nav li a:focus {
+    background-color: transparent;
+    color: $login_link_color;
   }
 
   .imageset {
