@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get 'welcome/about', as: 'about'
   get 'welcome/off_campus_login', as: 'off_campus_login'
 
+  post 'contact_us' => 'contact_us#create', as: :contact_us
+  get  'contact_us' => 'contact_us#new',    as: :contact_us_form
+
   blacklight_for :catalog
   devise_for :users
   mount Hydra::RoleManagement::Engine => '/'
