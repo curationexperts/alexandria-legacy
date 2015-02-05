@@ -1,5 +1,11 @@
-<%= render partial: 'search_form'%>
-<h1><%=@collection.title%><h1>
-<h3><%=@collection.description%></h3>
-<div class='clearfix'> </div>
-<%= render partial: 'document_list', locals: { documents: @member_docs } %>
+<div id="sidebar" class="col-md-3 col-sm-4">
+  <%= render 'search_sidebar' %>
+</div>
+
+<div id="content" class="col-md-9 col-sm-8">
+  <%= render partial: 'search_form'%>
+  <h1><%=@collection.title%><h1>
+  <h3><%=@collection.description%></h3>
+  <div class='clearfix'> </div>
+  <%= render partial: 'document_list', locals: { documents: @member_docs } %>
+</div>

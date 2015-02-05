@@ -12,6 +12,8 @@ class CollectionsController < ApplicationController
     (@response, @document_list) = get_search_results( rows: 100)
   end
 
+protected
+
   # Override rails path for the views
   # (Fixed a problem where the collection show page
   # won't display the list of members because
@@ -19,7 +21,6 @@ class CollectionsController < ApplicationController
   def _prefixes
     @_prefixes ||= super + ['catalog']
   end
-
 
   def include_collection_ids(*)
     return if action_name == 'index'
@@ -31,4 +32,15 @@ class CollectionsController < ApplicationController
     solr_parameters[:fq] ||= []
     solr_parameters[:fq] << ActiveFedora::SolrQueryBuilder.construct_query_for_rel(has_model: Collection.to_class_uri)
   end
+
+  # Override Blacklight method so that you can search and
+  # facet within the current collection.
+  def search_action_url(*args)
+    if action_name == 'show'
+      collections.collection_url(*args)
+    else
+      super(*args)
+    end
+  end
+
 end
