@@ -9,7 +9,19 @@ class CollectionsController < ApplicationController
   # TODO move this to hydra-collections
   def index
     # run the solr query to find the collections
-    (@response, @document_list) = get_search_results( rows: 100)
+    (@response, @document_list) = get_search_results
+  end
+
+  # Queries Solr for members of the collection.
+  # Populates @response and @member_docs similar to Blacklight Catalog#index populating @response and @documents
+  def query_collection_members
+    query = params[:cq]
+
+    #default the rows to 100 if not specified then merge in the user parameters and the attach the collection query
+    solr_params =  params.symbolize_keys.merge(q: query)
+
+    # run the solr query to find the collections
+    (@response, @member_docs) = get_search_results(solr_params)
   end
 
 protected

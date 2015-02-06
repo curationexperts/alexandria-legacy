@@ -8,6 +8,16 @@ GIT
       qa (~> 0.3.0)
       rest-client (~> 1.7)
 
+GIT
+  remote: git://github.com/harai/kaminari.git
+  revision: 384fcb5d11b66a0cc8fad030104bf80f82616355
+  ref: 384fcb5d11b6
+  branch: route_prefix_prototype
+  specs:
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -202,9 +212,6 @@ GEM
     json (1.8.2)
     json-ld (1.1.7)
       rdf (~> 1.1, >= 1.1.4)
-    kaminari (0.16.2)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
     ldp (0.2.2)
       faraday
       http_logger
@@ -353,6 +360,10 @@ GEM
       rails (> 3.2.0)
     rsolr (1.0.10)
       builder (>= 2.1.2)
+    rspec-activemodel-mocks (1.0.1)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -457,11 +468,13 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jettywrapper
   jquery-rails
+  kaminari!
   mods (~> 2.0.1)
   oargun!
   pg
   rails (= 4.2.0)
   riiif
+  rspec-activemodel-mocks
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

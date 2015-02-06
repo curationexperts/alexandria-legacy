@@ -33,10 +33,13 @@ gem 'oargun', github: 'curationexperts/oargun'
 gem 'blacklight-gallery'
 gem 'riiif'
 
+gem 'kaminari', github: 'harai/kaminari', branch: 'route_prefix_prototype', ref: '384fcb5d11b6'
+
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
 group :development, :test do
   gem 'rspec-rails'
+  gem 'rspec-activemodel-mocks'
   gem 'factory_girl_rails', '~> 4.4'
   gem 'jettywrapper'
   # gem 'http_logger'

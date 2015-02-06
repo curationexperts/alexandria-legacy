@@ -1,11 +1,41 @@
+<% @page_title = "#{@collection.title} - #{application_name}" %>
+
 <div id="sidebar" class="col-md-3 col-sm-4">
   <%= render 'search_sidebar' %>
 </div>
 
 <div id="content" class="col-md-9 col-sm-8">
-  <%= render partial: 'search_form'%>
-  <h1><%=@collection.title%><h1>
-  <h3><%=@collection.description%></h3>
-  <div class='clearfix'> </div>
-  <%= render partial: 'document_list', locals: { documents: @member_docs } %>
+
+  <div itemscope itemtype="http://schema.org/CollectionPage" class="row">
+    <div class="col-sm-10 pull-right">
+      <header>
+        <h1><%= @collection.title %></h1>
+        <p class="collection_description"><%= @collection.description %></p>
+      </header>
+      <%= render 'collections/show_descriptions' unless has_collection_search_parameters? %>
+    </div>
+
+    <div class="col-sm-2">
+      <%= render 'collections/media_display' %>
+    </div>
+  </div>
+
+  <%= render 'sort_and_per_page' %>
+
+
+  <div>
+    <!-- Use CSS class h2 rather than HTML h2 tag to allow header and search box to align vertically -->
+    <span class="h2">
+      <% if has_collection_search_parameters? %>
+          <%= "Search Results within this Collection" %>
+      <% else %>
+          <%= "Items in this Collection" %>
+      <% end %>
+    </span>
+    <%= render partial: 'search_form'%>
+  </div>
+
+  <%= render_document_index @member_docs %>
+
+  <%= render 'paginate' %>
 </div>
