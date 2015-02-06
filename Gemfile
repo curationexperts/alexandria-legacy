@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'hydra-head', '~> 9.0.0'
-gem 'hydra-editor', '~> 1.0.0'
+gem 'hydra-editor', github: 'projecthydra-labs/hydra-editor', branch: 'percent_routes'
 gem 'hydra-role-management'
 gem "hydra-collections", "~> 4.0.0"
 

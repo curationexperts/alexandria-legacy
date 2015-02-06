@@ -8,4 +8,9 @@ module ApplicationHelper
     on_campus_network_prefixes.any? {|prefix| request.remote_ip.start_with?(prefix) }
   end
 
+  def editor?(_, stuff)
+    document = stuff.fetch(:document)
+    can? :edit, document
+  end
+
 end

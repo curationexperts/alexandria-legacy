@@ -13,4 +13,10 @@ describe CatalogController do
       expect(found).to_not include(generic_file.id)
     end
   end
+
+  describe "show tools" do
+    it "includes the edit link" do
+      expect(CatalogController.blacklight_config.show.document_actions.keys).to include :edit
+    end
+  end
 end

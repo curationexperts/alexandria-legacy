@@ -6,7 +6,7 @@ class Ability
     can :read, ActiveFedora::Base
 
     if current_user.admin?
-      can [:create, :update], ActiveFedora::Base
+      can [:create, :update], [ActiveFedora::Base, SolrDocument]
     end
   end
 end

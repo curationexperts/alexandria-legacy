@@ -19,5 +19,20 @@ describe ApplicationHelper do
     end
   end
 
+  describe "#editor?" do
+    before { allow(controller).to receive(:current_user).and_return(user) }
+    subject { helper.editor?(nil, { document: SolrDocument.new }) }
+
+    context "for an admin" do
+      let(:user) { create :admin }
+      it { is_expected.to be true }
+    end
+
+    context "for a non-admin user" do
+      let(:user) { create :user }
+      it { is_expected.to be false }
+    end
+  end
+
 end
 
