@@ -81,6 +81,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
+    config.add_show_field solr_name('collection_label', :symbol), label: 'Collection', helper_method: :link_to_collection
     config.add_show_field solr_name('location_label', :stored_searchable), label: 'Location'
     config.add_show_field solr_name('lcsubject_label', :stored_searchable), label: 'Subject'
     config.add_show_field solr_name('publisher', :stored_searchable), label: 'Publisher'
