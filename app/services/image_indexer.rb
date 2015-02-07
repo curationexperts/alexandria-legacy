@@ -8,10 +8,13 @@ class ImageIndexer < ActiveFedora::IndexingService
   EARLIEST_DATE = Solrizer.solr_name('earliestDate', :facetable)
   SORTABLE_CREATOR = Solrizer.solr_name('creator_label', :sortable)
   SORTABLE_DATE = Solrizer.solr_name('date', :sortable, type: :integer)
+  COLLECTION_LABEL = Solrizer.solr_name('collection_label', :symbol)
 
   def generate_solr_document
     super.tap do |solr_doc|
       object.index_collection_ids(solr_doc)
+      # TODO if we need to optimize, we could pull this from solr
+      solr_doc[COLLECTION_LABEL] = object.collections.map &:title
       solr_doc['thumbnail_url_ssm'.freeze] = generic_file_thumbnails
       solr_doc['image_url_ssm'.freeze] = generic_file_images
       solr_doc['large_image_url_ssm'.freeze] = generic_file_large_images

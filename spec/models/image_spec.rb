@@ -101,6 +101,7 @@ describe Image do
 
       it 'has collections' do
         expect(subject['collection_sim']).to eq [boring_books.id, long_books.id]
+        expect(subject['collection_label_ssim']).to include 'Long Books', 'Boring Books'
         expect(subject['collection_tesim']).to eq [boring_books.id, long_books.id]
       end
     end
