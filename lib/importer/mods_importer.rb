@@ -1,8 +1,8 @@
 module Importer
   class ModsImporter
 
-    def initialize(image_directory, metadata_directory=nil)
-      @image_directory = image_directory
+    def initialize(files_directory, metadata_directory=nil)
+      @files_directory = files_directory
       @metadata_directory = metadata_directory
     end
 
@@ -20,9 +20,16 @@ module Importer
       puts "Importing: #{file}"
       parser = ModsParser.new(file)
       attributes = parser.attributes
-      ImageFactory.new(attributes, @image_directory).run
+
+      # Create the object(s) in fedora
+      object_factory = factory(parser.model)
+      object_factory.new(attributes, @files_directory).run
     rescue Oargun::RDF::Controlled::ControlledVocabularyError => e
       puts "  Skipping, due to #{e.message}"
+    end
+
+    def factory(model_class)
+      (model_class.to_s + "Factory").constantize
     end
 
   end

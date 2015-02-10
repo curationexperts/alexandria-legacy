@@ -1,11 +1,6 @@
-class ImageFactory
+require_relative './object_factory'
 
-  attr_reader :attributes
-
-  def initialize(attributes, image_dir)
-    @image_directory = image_dir
-    @attributes = attributes
-  end
+class ImageFactory < ObjectFactory
 
   def run
     if Image.exists?(attributes[:id])
@@ -49,12 +44,8 @@ class ImageFactory
     mime_types.empty? ? "application/octet-stream" : mime_types.first.content_type
   end
 
-  def image_dir
-    @image_directory
-  end
-
   def image_path(file_name)
-    File.join(image_dir, file_name)
+    File.join(files_directory, file_name)
   end
 
   def add_image_to_collection(image, attrs)

@@ -1,14 +1,20 @@
 require 'rails_helper'
 require 'importer'
-require 'importer/factories/image_factory'
 
 describe Importer::ModsImporter do
   let(:image_directory) { 'spec/fixtures/images' }
+  let(:importer) { Importer::ModsImporter.new(image_directory) }
 
   before { allow($stdout).to receive(:puts) } # squelch output
 
+  describe '#factory' do
+    it 'selects the right type of object factory' do
+      expect(importer.factory(Image)).to eq ImageFactory
+      expect(importer.factory(Collection)).to eq CollectionFactory
+    end
+  end
+
   describe "#import an Image" do
-    let(:importer) { Importer::ModsImporter.new(image_directory) }
     let(:file) { 'spec/fixtures/mods/cusbspcmss36_110108.xml' }
     let(:collection_id) { 'sbhcmss36' }
 
@@ -51,6 +57,37 @@ describe Importer::ModsImporter do
         }.to change { Collection.count }.by(0)
 
         expect(coll.reload.members.count).to eq 1
+      end
+    end
+  end
+
+  describe "#import a Collection" do
+    let(:id) { 'sbhcmss78' }
+    let(:file) { 'spec/fixtures/mods/sbhcmss78_FlyingAStudios_collection.xml' }
+
+    it 'creates a collection' do
+      coll = nil
+      expect {
+        coll = importer.import(file)
+      }.to change { Collection.count }.by(1)
+
+      expect(coll.id).to eq id
+      expect(coll.identifier).to eq ['SBHC Mss 78']
+      expect(coll.title).to eq 'Joel Conway / Flying A Studio photograph collection'
+    end
+
+    context 'when the collection already exists' do
+      let!(:coll) { Collection.create(id: id) }
+
+      it 'it adds metadata to existing collection' do
+        coll = nil
+        expect {
+          coll = importer.import(file)
+        }.to change { Collection.count }.by(0)
+
+        expect(coll.id).to eq id
+        expect(coll.identifier).to eq ['SBHC Mss 78']
+        expect(coll.title).to eq 'Joel Conway / Flying A Studio photograph collection'
       end
     end
   end
