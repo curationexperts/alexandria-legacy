@@ -1,15 +1,17 @@
 require 'rails_helper'
 require 'importer'
+require 'importer/factories/image_factory'
 
 describe Importer::ModsImporter do
   let(:image_directory) { 'spec/fixtures/images' }
-  let(:importer) { Importer::ModsImporter.new(image_directory) }
-  let(:file) { 'spec/fixtures/mods/cusbspcmss36_110108.xml' }
-  let(:collection_id) { 'sbhcmss36' }
 
   before { allow($stdout).to receive(:puts) } # squelch output
 
-  describe "#import" do
+  describe "#import an Image" do
+    let(:importer) { Importer::ModsImporter.new(image_directory) }
+    let(:file) { 'spec/fixtures/mods/cusbspcmss36_110108.xml' }
+    let(:collection_id) { 'sbhcmss36' }
+
     it "should create a new image and files" do
       image = nil
       expect {
