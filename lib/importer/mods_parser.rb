@@ -39,13 +39,11 @@ module Importer
       common_attributes.merge!({
         id: mods.identifier.text,
         location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
-        lcsubject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
         publisher: [mods.origin_info.publisher.text],
         title: mods.title_info.title.text,
         earliestDate: earliest_date,
         latestDate: latest_date,
         issued: issued,
-        workType: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
         files: mods.extension.xpath('./fileName').map(&:text),
         collection: collection,
         description: description
@@ -61,13 +59,15 @@ module Importer
         title: mods.title_info.title.text,
         date_created: date_created,
         description: description.first,
-        extent: mods.physical_description.extent.map(&:text)
+        extent: mods.physical_description.extent.map(&:text),
       })
     end
 
     def common_attributes
       {
-        creator:   creator.map { |uri| RDF::URI.new(uri) }
+        creator:   creator.map { |uri| RDF::URI.new(uri) },
+        lcsubject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
+        workType: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) }
       }
     end
 

@@ -73,6 +73,8 @@ describe Importer::ModsParser do
       expect(attributes[:description]).to eq 'Black and white photographs relating to the Flying A Studios (aka American Film Manufacturing Company), a film company that operated in Santa Barbara (1912-1920).'
       expect(attributes[:date_created]).to eq ['1910-1919']
       expect(attributes[:extent]).to eq ['702 digital objects']
+      expect(attributes[:lcsubject]).to eq ["http://id.loc.gov/authorities/subjects/sh85088047", "http://id.loc.gov/authorities/subjects/sh99005024"]
+      expect(attributes[:workType]).to eq ["http://vocab.getty.edu/aat/300046300", "http://vocab.getty.edu/aat/300128343"]
     end
   end
 
