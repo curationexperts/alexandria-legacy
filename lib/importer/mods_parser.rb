@@ -53,14 +53,15 @@ module Importer
     end
 
     def collection_attributes
-      dc_id = mods.identifier.map{|id| id.text }
+      dc_id = mods.identifier.map(&:text)
       common_attributes.merge!({
         id: collection_id(dc_id.first),
         identifier: dc_id,
         publisher: [mods.origin_info.publisher.text],
         title: mods.title_info.title.text,
         date_created: date_created,
-        description: description.first
+        description: description.first,
+        extent: mods.physical_description.extent.map(&:text)
       })
     end
 
