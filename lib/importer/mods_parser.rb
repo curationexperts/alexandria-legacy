@@ -36,11 +36,10 @@ module Importer
     end
 
     def record_attributes
-      {
+      common_attributes.merge!({
         id: mods.identifier.text,
         location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
         lcsubject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
-        creator:   creator.map { |uri| RDF::URI.new(uri) },
         publisher: [mods.origin_info.publisher.text],
         title: mods.title_info.title.text,
         earliestDate: earliest_date,
@@ -48,19 +47,35 @@ module Importer
         issued: issued,
         workType: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
         files: mods.extension.xpath('./fileName').map(&:text),
-        collection: collection
-      }
+        collection: collection,
+        description: description
+      })
     end
 
     def collection_attributes
-      dc_id = Array(mods.identifier.text)
-      {
+      dc_id = mods.identifier.map{|id| id.text }
+      common_attributes.merge!({
         id: collection_id(dc_id.first),
         identifier: dc_id,
-        creator:   creator.map { |uri| RDF::URI.new(uri) },
         publisher: [mods.origin_info.publisher.text],
-        title: mods.title_info.title.text
+        title: mods.title_info.title.text,
+        date_created: date_created,
+        description: description.first
+      })
+    end
+
+    def common_attributes
+      {
+        creator:   creator.map { |uri| RDF::URI.new(uri) }
       }
+    end
+
+    def description
+      mods.abstract.map{|e| strip_whitespace(e.text) }
+    end
+
+    def strip_whitespace(text)
+      text.gsub("\n", " ").gsub("\t", "")
     end
 
     def creator
@@ -71,6 +86,11 @@ module Importer
       else
         []
       end
+    end
+
+    def date_created
+      return nil if earliest_date.blank? && latest_date.blank?
+      [earliest_date.first + '-' + latest_date.first]
     end
 
     def earliest_date

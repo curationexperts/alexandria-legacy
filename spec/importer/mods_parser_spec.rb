@@ -31,6 +31,10 @@ describe Importer::ModsParser do
   describe "#attributes for an Image record" do
     let(:file) { 'spec/fixtures/mods/cusbspcsbhc78_100239.xml' }
 
+    it 'finds metadata for the image' do
+      expect(attributes[:description]).to eq ['Another description', 'Man with a smile eyes to camera.']
+    end
+
     it "should import creator" do
       expect(attributes[:creator]).to eq ['http://id.loc.gov/authorities/names/n87914041']
     end
@@ -66,6 +70,8 @@ describe Importer::ModsParser do
       expect(attributes[:identifier]).to eq ['SBHC Mss 78']
       expect(attributes[:title]).to eq 'Joel Conway / Flying A Studio photograph collection'
       expect(attributes[:creator]).to eq []
+      expect(attributes[:description]).to eq 'Black and white photographs relating to the Flying A Studios (aka American Film Manufacturing Company), a film company that operated in Santa Barbara (1912-1920).'
+      expect(attributes[:date_created]).to eq ['1910-1919']
     end
   end
 
