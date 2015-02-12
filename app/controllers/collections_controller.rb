@@ -12,6 +12,11 @@ class CollectionsController < ApplicationController
     (@response, @document_list) = get_search_results
   end
 
+  def show
+    super
+    solr_resp, @document = get_solr_response_for_doc_id(@collection.id)
+  end
+
   # Queries Solr for members of the collection.
   # Populates @response and @member_docs similar to Blacklight Catalog#index populating @response and @documents
   def query_collection_members
@@ -22,6 +27,11 @@ class CollectionsController < ApplicationController
 
     # run the solr query to find the collections
     (@response, @member_docs) = get_search_results(solr_params)
+  end
+
+  configure_blacklight do |config|
+    config.add_show_field Solrizer.solr_name('date_created', :stored_searchable), label: 'Creation Date'
+    config.add_show_field Solrizer.solr_name('extent', :displayable), label: 'Extent'
   end
 
 protected

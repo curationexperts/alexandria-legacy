@@ -12,7 +12,7 @@
         <h1><%= @collection.title %></h1>
         <p class="collection_description"><%= @collection.description %></p>
       </header>
-      <%= render 'collections/show_descriptions' unless has_collection_search_parameters? %>
+      <%= render partial: 'collections/show_descriptions', locals: {document: @document} unless has_collection_search_parameters? %>
     </div>
 
     <div class="col-sm-2">

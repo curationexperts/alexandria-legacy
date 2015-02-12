@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'collections/show.html.erb' do
   let(:response) { Blacklight::SolrResponse.new(sample_response, {}) }
   let(:collection) { mock_model(Collection, id: '123', title: "My Collection", description: "Just a collection") }
+  let(:metadata) {{ "extent_ssm" => ["702 digital objects"] }}
 
   let(:blacklight_config) { CatalogController.blacklight_config }
   let(:member_docs) { [ SolrDocument.new(id: '234'), SolrDocument.new(id: '456') ] }
@@ -15,6 +16,7 @@ describe 'collections/show.html.erb' do
     assign(:response, response)
     assign(:collection, collection)
     assign(:member_docs, member_docs)
+    assign(:document, SolrDocument.new(metadata))
     render
   end
 
