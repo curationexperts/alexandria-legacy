@@ -19,17 +19,19 @@ module Importer
     def import(file)
       puts "Importing: #{file}"
       parser = ModsParser.new(file)
-      attributes = parser.attributes
-
-      # Create the object(s) in fedora
-      object_factory = factory(parser.model)
-      object_factory.new(attributes, @files_directory).run
+      create_fedora_objects(parser.model, parser.attributes)
     rescue Oargun::RDF::Controlled::ControlledVocabularyError => e
       puts "  Skipping, due to #{e.message}"
     end
 
-    def factory(model_class)
-      (model_class.to_s + "Factory").constantize
+    # Select a factory to create the objects in fedora.
+    # For example, if we are importing a MODS record for an
+    # image, the ModsParser will return an Image model, so
+    # we'll select the ImageFactory to create the fedora
+    # objects.
+    def create_fedora_objects(model, attributes)
+      object_factory = (model.to_s + "Factory").constantize
+      object_factory.new(attributes, @files_directory).run
     end
 
   end

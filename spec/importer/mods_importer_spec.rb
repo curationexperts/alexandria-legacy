@@ -7,13 +7,6 @@ describe Importer::ModsImporter do
 
   before { allow($stdout).to receive(:puts) } # squelch output
 
-  describe '#factory' do
-    it 'selects the right type of object factory' do
-      expect(importer.factory(Image)).to eq ImageFactory
-      expect(importer.factory(Collection)).to eq CollectionFactory
-    end
-  end
-
   describe "#import an Image" do
     let(:file) { 'spec/fixtures/mods/cusbspcmss36_110108.xml' }
     let(:collection_id) { 'sbhcmss36' }
