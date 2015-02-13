@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'welcome#index'
 
   get 'welcome/about', as: 'about'
@@ -12,8 +11,9 @@ Rails.application.routes.draw do
   devise_for :users
   mount Hydra::RoleManagement::Engine => '/'
 
-
   mount Riiif::Engine => '/images'
+  mount Qa::Engine => '/qa'
+
   mount HydraEditor::Engine => '/'
 
   mount Hydra::Collections::Engine => '/'
