@@ -19,3 +19,35 @@ $top_margin: 20px;
   color: #fab801;
   padding: 15px 0 0 10px;
 }
+
+
+//-----------------------------------
+// For "show more"/"show less" links
+//-----------------------------------
+
+.more-less-toggle {
+  float: right;
+}
+
+.show-less {
+  display: none;
+}
+
+// Fields marked with .reveal-js will be hidden at first,
+// then revealed by javascript.  These fields should stay
+// hidden if the user has disabled javascript in the browser.
+.reveal-js {
+  display: none;
+}
+
+.link-style {
+  color: $link-color;
+
+  &:hover {
+    color: darken($link-color, 15%);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+//-----------------------------------
