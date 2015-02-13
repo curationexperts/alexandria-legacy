@@ -21,7 +21,7 @@ module CollectionsHelper
       long_field = content_tag(:div, safe_join([long_desc, show_less], ' '), class: 'show-less')
       short_field = content_tag(:div, safe_join([short_desc, show_more], ' '), class: 'show-more')
 
-      display_fields = safe_join([short_field, long_field], ' ')
+      display_fields = content_tag(:div, safe_join([short_field, long_field], ' '))
 
     else
       long_field = content_tag(:div, long_desc)
