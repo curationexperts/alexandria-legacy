@@ -30,8 +30,13 @@ class CollectionsController < ApplicationController
   end
 
   configure_blacklight do |config|
+    # Fields for the Collection's show page
     config.add_show_field Solrizer.solr_name('date_created', :stored_searchable), label: 'Creation Date'
     config.add_show_field Solrizer.solr_name('extent', :displayable), label: 'Extent'
+
+    # Fields for the Collection index page
+    # (Clear out fields that were added by the CatalogController)
+    config.index_fields.clear
   end
 
 protected
