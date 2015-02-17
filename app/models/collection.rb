@@ -1,20 +1,11 @@
 class Collection < ActiveFedora::Base
+  include Metadata
   include Hydra::Collection
+
+  accepts_nested_attributes_for :creator, reject_if: proc { |attributes| attributes[:id].blank? }
 
   def self.indexer
     CollectionIndexer
-  end
-
-  property :extent, :predicate => ::RDF::DC.extent do |index|
-    index.as :searchable, :displayable
-  end
-
-  property :workType, predicate: ::RDF::DC.type, class_name: Oargun::ControlledVocabularies::WorkType do |index|
-    index.as :stored_searchable, :facetable
-  end
-
-  property :lcsubject, predicate: ::RDF::DC.subject, class_name: Oargun::ControlledVocabularies::Subject do |index|
-    index.as :stored_searchable, :facetable
   end
 
 end

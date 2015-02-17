@@ -38,6 +38,10 @@ module Metadata
       index.as :stored_searchable, :facetable
     end
 
+    property :extent, :predicate => ::RDF::DC.extent do |index|
+      index.as :searchable, :displayable
+    end
+
       # Dates
     property :date, predicate: RDF::DC.date do |index|
       index.as :stored_searchable, :facetable
