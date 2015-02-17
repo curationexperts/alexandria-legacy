@@ -38,14 +38,8 @@ module Importer
     def record_attributes
       common_attributes.merge!({
         id: mods.identifier.text,
-        location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
-        publisher: [mods.origin_info.publisher.text],
-        title: untyped_title,
-        alternative: mods.title_info.alternative_title.to_a,
-        issued: issued,
         files: mods.extension.xpath('./fileName').map(&:text),
-        collection: collection,
-        description: description
+        collection: collection
       })
     end
 
@@ -53,20 +47,23 @@ module Importer
       dc_id = mods.identifier.map(&:text)
       common_attributes.merge!({
         id: collection_id(dc_id.first),
-        identifier: dc_id,
-        publisher: [mods.origin_info.publisher.text],
-        title: mods.title_info.title.text,
-        description: description.first,
-        extent: mods.physical_description.extent.map(&:text),
+        identifier: dc_id
       })
     end
 
     def common_attributes
       {
+        title: untyped_title,
+        alternative: mods.title_info.alternative_title.to_a,
+        description: description,
         creator:   creator.map { |uri| RDF::URI.new(uri) },
         lcsubject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
+        extent: mods.physical_description.extent.map(&:text),
         earliestDate: earliest_date,
         latestDate: latest_date,
+        issued: issued,
+        publisher: [mods.origin_info.publisher.text],
+        location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
         workType: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) }
       }
     end

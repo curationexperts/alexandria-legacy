@@ -10,7 +10,7 @@
     <div class="col-sm-10 pull-right">
       <header>
         <h1><%= @collection.title %></h1>
-        <p class="collection_description"><%= @collection.description %></p>
+        <p class="collection_description"><%= Array(@collection.description).join("\n") %></p>
       </header>
       <%= render partial: 'collections/show_descriptions', locals: {document: @document} unless has_collection_search_parameters? %>
     </div>
