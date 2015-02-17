@@ -42,8 +42,6 @@ module Importer
         publisher: [mods.origin_info.publisher.text],
         title: untyped_title,
         alternative: mods.title_info.alternative_title.to_a,
-        earliestDate: earliest_date,
-        latestDate: latest_date,
         issued: issued,
         files: mods.extension.xpath('./fileName').map(&:text),
         collection: collection,
@@ -58,7 +56,6 @@ module Importer
         identifier: dc_id,
         publisher: [mods.origin_info.publisher.text],
         title: mods.title_info.title.text,
-        date_created: date_created,
         description: description.first,
         extent: mods.physical_description.extent.map(&:text),
       })
@@ -68,6 +65,8 @@ module Importer
       {
         creator:   creator.map { |uri| RDF::URI.new(uri) },
         lcsubject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
+        earliestDate: earliest_date,
+        latestDate: latest_date,
         workType: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) }
       }
     end
@@ -88,11 +87,6 @@ module Importer
       else
         []
       end
-    end
-
-    def date_created
-      return nil if earliest_date.blank? && latest_date.blank?
-      [earliest_date.first + '-' + latest_date.first]
     end
 
     def earliest_date
