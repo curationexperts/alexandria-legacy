@@ -46,7 +46,7 @@ module Metadata
       index.as :searchable, :displayable
     end
 
-      # Dates
+    # Dates
     property :date, predicate: RDF::DC.date do |index|
       index.as :stored_searchable, :facetable
     end
@@ -59,5 +59,11 @@ module Metadata
     property :latestDate, predicate: Oargun::Vocabularies::VRA.latestDate do |index|
       index.as :stored_searchable, :facetable
     end
+
+    # RDA
+    property :form_of_work, predicate: RDF::URI('http://www.rdaregistry.info/Elements/w/formOfWork.en') do |index|
+      index.as :stored_searchable
+    end
+
   end
 end

@@ -83,7 +83,7 @@ describe Importer::ModsParser do
       expect(attributes[:latestDate]).to eq ['1919']
       expect(attributes[:extent]).to eq ['702 digital objects']
       expect(attributes[:lc_subject]).to eq ["http://id.loc.gov/authorities/subjects/sh85088047", "http://id.loc.gov/authorities/subjects/sh99005024"]
-      expect(attributes[:workType]).to eq ["http://vocab.getty.edu/aat/300046300", "http://vocab.getty.edu/aat/300128343"]
+      expect(attributes[:form_of_work]).to eq ["http://vocab.getty.edu/aat/300046300", "http://vocab.getty.edu/aat/300128343"]
 
       # TODO: There is another location in the fixture file
       # that doesn't have a valueURI.  How should that be
