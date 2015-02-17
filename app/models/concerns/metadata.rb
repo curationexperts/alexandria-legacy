@@ -5,6 +5,10 @@ module Metadata
       index.as :stored_searchable
     end
 
+    property :alternative, predicate: ::RDF::DC.alternative do |index|
+      index.as :stored_searchable
+    end
+
     property :creator, predicate: ::RDF::DC.creator, class_name: Oargun::ControlledVocabularies::Creator do |index|
       index.as :stored_searchable, :facetable
     end

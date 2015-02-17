@@ -40,7 +40,8 @@ module Importer
         id: mods.identifier.text,
         location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
         publisher: [mods.origin_info.publisher.text],
-        title: mods.title_info.title.text,
+        title: untyped_title,
+        alternative: mods.title_info.alternative_title.to_a,
         earliestDate: earliest_date,
         latestDate: latest_date,
         issued: issued,
@@ -126,6 +127,15 @@ module Importer
         identifier: dc_id,
         title: mods.at_xpath("//prefix:relatedItem[@type='host']".freeze, {'prefix'.freeze => Mods::MODS_NS}).titleInfo.title.text.strip
       }
+    end
+
+    private
+      def untyped_title
+        mods.xpath('/m:mods/m:titleInfo[not(@type)]/m:title/text()', 'm' => Mods::MODS_NS).to_s
+      end
+
+    def untyped_title
+      mods.xpath('/m:mods/m:titleInfo[not(@type)]/m:title/text()', 'm' => Mods::MODS_NS).to_s
     end
 
   end

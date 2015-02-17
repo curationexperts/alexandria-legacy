@@ -35,7 +35,7 @@ describe Importer::ModsParser do
       expect(attributes[:description]).to eq ['Another description', 'Man with a smile eyes to camera.']
     end
 
-    it "should import creator" do
+    it "imports creator" do
       expect(attributes[:creator]).to eq ['http://id.loc.gov/authorities/names/n87914041']
     end
 
@@ -45,18 +45,26 @@ describe Importer::ModsParser do
       expect(attributes[:collection][:title]).to eq 'Joel Conway / Flying A Studio photograph collection'
     end
 
-    it "should import earliestDate" do
+    it "imports earliestDate" do
       expect(attributes[:earliestDate]).to eq ['1910']
     end
 
-    it "should import latestDate" do
+    it "imports latestDate" do
       expect(attributes[:latestDate]).to eq ['1919']
     end
 
     context "with a file that has dateIssued" do
       let(:file) { 'spec/fixtures/mods/cusbspcmss36_110108.xml' }
-      it "should import issued" do
+      it "imports issued" do
         expect(attributes[:issued]).to eq ['1925']
+      end
+    end
+
+    context "with a file that has an alternative title" do
+      let(:file) { 'spec/fixtures/mods/cusbspcmss36_110089.xml' }
+      it "distinguishes between title and alternative title" do
+        expect(attributes[:title]).to eq 'Patio, Gavit residence'
+        expect(attributes[:alternative]).to eq ['Lotusland']
       end
     end
   end
