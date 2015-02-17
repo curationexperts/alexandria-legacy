@@ -18,17 +18,6 @@ GIT
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
 
-GIT
-  remote: git://github.com/projecthydra-labs/hydra-editor.git
-  revision: f0e8c7ed18e697a8f75b56221f119c179122b53b
-  branch: percent_routes
-  specs:
-    hydra-editor (1.0.0)
-      active-fedora (>= 9.0.0)
-      cancancan (~> 1.8)
-      rails (~> 4.1)
-      simple_form (~> 3.1.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -193,6 +182,11 @@ GEM
       hydra-access-controls (= 9.0.1)
       jettywrapper (>= 2.0.0)
       rails (~> 4.0)
+    hydra-editor (1.0.1)
+      active-fedora (>= 9.0.0)
+      cancancan (~> 1.8)
+      rails (~> 4.1)
+      simple_form (~> 3.1.0)
     hydra-head (9.0.1)
       hydra-access-controls (= 9.0.1)
       hydra-core (= 9.0.1)
@@ -471,7 +465,7 @@ DEPENDENCIES
   devise-guests (~> 0.3)
   factory_girl_rails (~> 4.4)
   hydra-collections (~> 4.0.0)
-  hydra-editor!
+  hydra-editor (~> 1.0.1)
   hydra-head (~> 9.0.0)
   hydra-role-management
   jbuilder (~> 2.0)
