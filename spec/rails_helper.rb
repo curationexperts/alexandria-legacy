@@ -31,7 +31,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   config.before(:each) do
-    ActiveFedora::Cleaner.clean!
+    ActiveFedora::Cleaner.clean! if ActiveFedora::Base.count > 0
   end
 
   config.infer_spec_type_from_file_location!
