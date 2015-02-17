@@ -57,7 +57,7 @@ module Importer
         alternative: mods.title_info.alternative_title.to_a,
         description: description,
         creator:   creator.map { |uri| RDF::URI.new(uri) },
-        lcsubject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
+        lc_subject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
         extent: mods.physical_description.extent.map(&:text),
         earliestDate: earliest_date,
         latestDate: latest_date,

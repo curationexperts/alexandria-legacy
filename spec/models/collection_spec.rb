@@ -6,14 +6,14 @@ describe Collection do
     context 'with subject' do
       let(:label) { 'Motion picture industry' }
       let(:url) { 'http://id.loc.gov/authorities/subjects/sh85088047' }
-      let(:lcsubject) { [RDF::URI.new(url)] }
-      subject { Collection.new(lcsubject: lcsubject).to_solr }
+      let(:lc_subject) { [RDF::URI.new(url)] }
+      subject { Collection.new(lc_subject: lc_subject).to_solr }
 
       it 'has human-readable labels for subject' do
-        expect(subject["lcsubject_tesim"]).to eq [url]
-        expect(subject["lcsubject_sim"]).to eq [url]
-        expect(subject["lcsubject_label_tesim"]).to eq [label]
-        expect(subject["lcsubject_label_sim"]).to eq [label]
+        expect(subject["lc_subject_tesim"]).to eq [url]
+        expect(subject["lc_subject_sim"]).to eq [url]
+        expect(subject["lc_subject_label_tesim"]).to eq [label]
+        expect(subject["lc_subject_label_sim"]).to eq [label]
       end
     end
 

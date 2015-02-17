@@ -30,7 +30,7 @@ module Metadata
        index.as :stored_searchable, :facetable
     end
 
-    property :lcsubject, predicate: RDF::DC.subject, class_name: Oargun::ControlledVocabularies::Subject do |index|
+    property :lc_subject, predicate: RDF::DC.subject, class_name: Oargun::ControlledVocabularies::Subject do |index|
       index.as :stored_searchable, :facetable
     end
 

@@ -23,7 +23,7 @@ class CatalogController < ApplicationController
     # config.show.partials.insert(1, :openseadragon)
 
     config.default_solr_params = {
-      qf: 'title_tesim lcsubject_label_tesim',
+      qf: 'title_tesim lc_subject_label_tesim',
       qt: 'search',
       rows: 10
     }
@@ -58,7 +58,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'active_fedora_model_ssi', :label => 'Format'
     config.add_facet_field solr_name('location_label', :facetable), label: 'Location'
     config.add_facet_field solr_name('creator_label', :facetable), label: 'Creator'
-    config.add_facet_field solr_name('lcsubject_label', :facetable), label: 'Subject'
+    config.add_facet_field solr_name('lc_subject_label', :facetable), label: 'Subject'
     config.add_facet_field solr_name('publisher', :facetable), label: 'Publisher'
     config.add_facet_field solr_name('workType_label', :facetable), label: 'Type'
     config.add_facet_field solr_name('collection_label', :symbol), label: 'Collection'
@@ -74,7 +74,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field solr_name('location_label', :stored_searchable), label: 'Location'
-    config.add_index_field solr_name('lcsubject_label', :stored_searchable), label: 'Subject'
+    config.add_index_field solr_name('lc_subject_label', :stored_searchable), label: 'Subject'
     config.add_index_field solr_name('publisher', :stored_searchable), label: 'Publisher'
     config.add_index_field solr_name('creator_label', :stored_searchable), label: 'Creator'
     config.add_index_field solr_name('workType_label', :stored_searchable), label: 'Type'
@@ -85,7 +85,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_show_field solr_name('collection_label', :symbol), label: 'Collection', helper_method: :link_to_collection
     config.add_show_field solr_name('location_label', :stored_searchable), label: 'Location'
-    config.add_show_field solr_name('lcsubject_label', :stored_searchable), label: 'Subject'
+    config.add_show_field solr_name('lc_subject_label', :stored_searchable), label: 'Subject'
     config.add_show_field solr_name('publisher', :stored_searchable), label: 'Publisher'
     config.add_show_field solr_name('creator_label', :stored_searchable), label: 'Creator'
     config.add_show_field solr_name('workType_label', :stored_searchable), label: 'Type'
@@ -123,8 +123,8 @@ class CatalogController < ApplicationController
 
     config.add_search_field('subject') do |field|
       field.solr_local_parameters = {
-        :qf => 'lcsubject_label_tesim',
-        :pf => 'lcsubject_label_tesim'
+        qf: 'lc_subject_label_tesim',
+        pf: 'lc_subject_label_tesim'
       }
     end
 

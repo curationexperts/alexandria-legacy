@@ -30,12 +30,12 @@ describe Image do
     end
 
     context "with subject" do
-      let(:lcsubject) { [RDF::URI.new('http://id.loc.gov/authorities/subjects/sh85062487')] }
-      subject { Image.new(lcsubject: lcsubject).to_solr }
+      let(:lc_subject) { [RDF::URI.new('http://id.loc.gov/authorities/subjects/sh85062487')] }
+      subject { Image.new(lc_subject: lc_subject).to_solr }
 
       it "should have a subject" do
-        expect(subject['lcsubject_tesim']).to eq ['http://id.loc.gov/authorities/subjects/sh85062487']
-        expect(subject['lcsubject_label_tesim']).to eq ['Hotels']
+        expect(subject['lc_subject_tesim']).to eq ['http://id.loc.gov/authorities/subjects/sh85062487']
+        expect(subject['lc_subject_label_tesim']).to eq ['Hotels']
       end
     end
 

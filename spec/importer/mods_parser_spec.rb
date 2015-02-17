@@ -82,7 +82,7 @@ describe Importer::ModsParser do
       expect(attributes[:earliestDate]).to eq ['1910']
       expect(attributes[:latestDate]).to eq ['1919']
       expect(attributes[:extent]).to eq ['702 digital objects']
-      expect(attributes[:lcsubject]).to eq ["http://id.loc.gov/authorities/subjects/sh85088047", "http://id.loc.gov/authorities/subjects/sh99005024"]
+      expect(attributes[:lc_subject]).to eq ["http://id.loc.gov/authorities/subjects/sh85088047", "http://id.loc.gov/authorities/subjects/sh99005024"]
       expect(attributes[:workType]).to eq ["http://vocab.getty.edu/aat/300046300", "http://vocab.getty.edu/aat/300128343"]
 
       # TODO: There is another location in the fixture file
