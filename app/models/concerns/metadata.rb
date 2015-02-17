@@ -38,8 +38,8 @@ module Metadata
       index.as :stored_searchable, :facetable
     end
 
-    property :workType, predicate: RDF::DC.type, class_name: Oargun::ControlledVocabularies::WorkType do |index|
-      index.as :stored_searchable, :facetable
+    property :workType, predicate: RDF::DC.type do |index|
+      index.as :stored_searchable
     end
 
     property :extent, :predicate => ::RDF::DC.extent do |index|
@@ -61,8 +61,9 @@ module Metadata
     end
 
     # RDA
-    property :form_of_work, predicate: RDF::URI('http://www.rdaregistry.info/Elements/w/formOfWork.en') do |index|
-      index.as :stored_searchable
+    property :form_of_work, predicate: RDF::URI('http://www.rdaregistry.info/Elements/w/formOfWork.en'),
+        class_name: Oargun::ControlledVocabularies::WorkType do |index|
+      index.as :stored_searchable, :facetable
     end
 
   end

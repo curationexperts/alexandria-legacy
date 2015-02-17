@@ -17,17 +17,17 @@ describe Collection do
       end
     end
 
-    context 'with workType' do
+    context 'with form_of_work' do
       let(:label) { 'black-and-white negatives' }
       let(:url) { 'http://vocab.getty.edu/aat/300128343' }
       let(:type) { [RDF::URI.new(url)] }
-      subject { Collection.new(workType: type).to_solr }
+      subject { Collection.new(form_of_work: type).to_solr }
 
-      it 'has human-readable labels for workType' do
-        expect(subject["workType_sim"]).to eq [url]
-        expect(subject["workType_tesim"]).to eq [url]
-        expect(subject["workType_label_sim"]).to eq [label]
-        expect(subject["workType_label_tesim"]).to eq [label]
+      it 'has human-readable labels for form_of_work' do
+        expect(subject["form_of_work_sim"]).to eq [url]
+        expect(subject["form_of_work_tesim"]).to eq [url]
+        expect(subject["form_of_work_label_sim"]).to eq [label]
+        expect(subject["form_of_work_label_tesim"]).to eq [label]
       end
     end
   end
