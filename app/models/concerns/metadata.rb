@@ -67,4 +67,12 @@ module Metadata
     end
 
   end
+
+  def controlled_properties
+    @controlled_properties ||= self.class.properties.each_with_object([]) do |(key, value), arr|
+      if value["class_name"] && (value["class_name"] < ActiveTriples::Resource || value["class_name"].new.resource.class < ActiveTriples::Resource)
+        arr << key
+      end
+    end
+  end
 end
