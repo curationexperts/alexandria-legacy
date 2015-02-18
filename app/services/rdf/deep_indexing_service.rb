@@ -10,7 +10,6 @@ class RDF::DeepIndexingService < ActiveFedora::RDF::IndexingService
       # See https://github.com/OregonDigital/oregondigital/blob/master/lib/oregon_digital/rdf/deep_fetch.rb
       val.fetch
     rescue SocketError, IOError => e
-      byebug
       Rails.logger.error "Couldn't fetch RDF label for #{val.id}\n#{e.message}"
     end
     val = val.solrize
