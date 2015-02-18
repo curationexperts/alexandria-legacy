@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def link_to_collection(stuff)
-    link_to stuff.fetch(:value).first, collections.collection_path(stuff.fetch(:document)[Solrizer.solr_name(:collection)].first)
+    link_to stuff.fetch(:value).first, collections.collection_path(stuff.fetch(:document)[ImageIndexer::COLLECTION].first)
   end
 
 end

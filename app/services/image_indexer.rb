@@ -10,10 +10,11 @@ class ImageIndexer < ActiveFedora::IndexingService
   SORTABLE_DATE = Solrizer.solr_name('date', :sortable)
   FACETABLE_YEAR = 'year_iim'
   COLLECTION_LABEL = Solrizer.solr_name('collection_label', :symbol)
+  COLLECTION = Solrizer.solr_name('collection', :symbol)
 
   def generate_solr_document
     super.tap do |solr_doc|
-      object.index_collection_ids(solr_doc)
+      solr_doc[COLLECTION] = object.collection_ids
       # TODO if we need to optimize, we could pull this from solr
       solr_doc[COLLECTION_LABEL] = object.collections.map &:title
       solr_doc['thumbnail_url_ssm'.freeze] = generic_file_thumbnails

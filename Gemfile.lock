@@ -18,6 +18,15 @@ GIT
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
 
+GIT
+  remote: git://github.com/projecthydra-labs/hydra-collections.git
+  revision: 8f05f1bac2f34b9aac79474124d6cb0d4b4d10d5
+  branch: one_way_indexing
+  specs:
+    hydra-collections (4.0.0)
+      deprecation (~> 0.1.0)
+      hydra-head (~> 9.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -175,9 +184,6 @@ GEM
       cancancan (~> 1.8)
       deprecation (~> 0.1.0)
       sass-rails
-    hydra-collections (4.0.0)
-      deprecation (~> 0.1.0)
-      hydra-head (~> 9.0.1)
     hydra-core (9.0.1)
       hydra-access-controls (= 9.0.1)
       jettywrapper (>= 2.0.0)
@@ -464,7 +470,7 @@ DEPENDENCIES
   devise
   devise-guests (~> 0.3)
   factory_girl_rails (~> 4.4)
-  hydra-collections (~> 4.0.0)
+  hydra-collections!
   hydra-editor (~> 1.0.1)
   hydra-head (~> 9.0.0)
   hydra-role-management
