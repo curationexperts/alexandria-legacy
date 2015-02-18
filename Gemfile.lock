@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: d4142c22f0417307a8d4ca4cd18e53114e425533
+  revision: e2d886f1732efe3c729ef34c7fc7edb5d2fb20b3
   specs:
     oargun (0.0.1)
       active-triples (~> 0.6.0)
@@ -80,7 +80,7 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
-    blacklight (5.9.2)
+    blacklight (5.9.3)
       bootstrap-sass (~> 3.2)
       deprecation
       kaminari (~> 0.13)
@@ -95,7 +95,7 @@ GEM
     bootstrap-sass (3.3.3)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
-    bootstrap_form (2.2.0)
+    bootstrap_form (2.3.0)
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
