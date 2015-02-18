@@ -49,15 +49,32 @@ describe Importer::ModsParser do
       expect(attributes[:collection][:title]).to eq 'Joel Conway / Flying A Studio photograph collection'
     end
 
-    it "imports earliestDate" do
-      expect(attributes[:earliestDate]).to eq ['1910']
+    context "with a range of dateCreated" do
+      it "imports earliestDate" do
+        expect(attributes[:earliestDate]).to eq ['1910']
+      end
+
+      it "imports latestDate" do
+        expect(attributes[:latestDate]).to eq ['1919']
+      end
     end
 
-    it "imports latestDate" do
-      expect(attributes[:latestDate]).to eq ['1919']
+    context "with a file that has a range of dateIssued" do
+      let(:file) { 'spec/fixtures/mods/cusbspcmss36_110089.xml' }
+      it "imports issued" do
+        expect(attributes[:issued]).to eq ['1900', '1959']
+      end
+
+      it "imports earliest_date" do
+        expect(attributes[:earliestDate]).to eq ['1900']
+      end
+
+      it "imports latest_date" do
+        expect(attributes[:latestDate]).to eq ['1959']
+      end
     end
 
-    context "with a file that has dateIssued" do
+    context "with a file that has a single dateIssued" do
       let(:file) { 'spec/fixtures/mods/cusbspcmss36_110108.xml' }
       it "imports issued" do
         expect(attributes[:issued]).to eq ['1925']

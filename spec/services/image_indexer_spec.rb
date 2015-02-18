@@ -13,6 +13,10 @@ describe ImageIndexer do
     it "makes a sortable date field" do
       expect(subject['date_si']).to eq '1925-11'
     end
+
+    it "makes a facetable year field" do
+      expect(subject['year_iim']).to eq [1925]
+    end
   end
 
   context "with earliestDate and latestDate" do
@@ -27,6 +31,10 @@ describe ImageIndexer do
 
     it "makes a sortable date field" do
       expect(subject['date_si']).to eq "1917"
+    end
+
+    it "makes a facetable year field" do
+      expect(subject['year_iim']).to eq [1917, 1918, 1919, 1920, 1921, 1922, 1923]
     end
   end
 end

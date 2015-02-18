@@ -60,6 +60,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name('creator_label', :facetable), label: 'Creator'
     config.add_facet_field solr_name('lc_subject_label', :facetable), label: 'Subject'
     config.add_facet_field solr_name('publisher', :facetable), label: 'Publisher'
+    config.add_facet_field ImageIndexer::FACETABLE_YEAR, label: 'Year'
     config.add_facet_field solr_name('form_of_work_label', :facetable), label: 'Type'
     config.add_facet_field solr_name('collection_label', :symbol), label: 'Collection'
 

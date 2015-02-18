@@ -89,17 +89,17 @@ module Importer
 
     def earliest_date
       # Use a string because it may be any ISO8601 format:
-      [mods.origin_info.dateCreated.css('[point="start"]'.freeze).text]
+      [created_start, issued_start].reject(&:empty?)
     end
 
     def latest_date
       # Use a string because it may be any ISO8601 format:
-      [mods.origin_info.dateCreated.css('[point="end"]'.freeze).text]
+      [created_end, issued_end].reject(&:empty?)
     end
 
     def issued
       # Use a string because it may be any ISO8601 format:
-      [mods.origin_info.dateIssued.text]
+      mods.origin_info.dateIssued.map(&:text)
     end
 
     def collection_id(raw_id)
@@ -116,13 +116,31 @@ module Importer
     end
 
     private
+      def created_end
+        created_range_limit('end'.freeze)
+      end
+
+      def created_start
+        created_range_limit('start'.freeze)
+      end
+
+      def created_range_limit(point)
+        mods.origin_info.dateCreated.css("[point=\"#{point}\"]").text
+      end
+
+      def issued_end
+        issued_range_limit('end'.freeze)
+      end
+
+      def issued_start
+        issued_range_limit('start'.freeze)
+      end
+      def issued_range_limit(point)
+        mods.origin_info.dateIssued.css("[point=\"#{point}\"]").text
+      end
+
       def untyped_title
         mods.xpath('/m:mods/m:titleInfo[not(@type)]/m:title/text()', 'm' => Mods::MODS_NS).to_s
       end
-
-    def untyped_title
-      mods.xpath('/m:mods/m:titleInfo[not(@type)]/m:title/text()', 'm' => Mods::MODS_NS).to_s
-    end
-
   end
 end
