@@ -88,23 +88,17 @@ module Importer
     end
 
     def earliest_date
-      # Integers trigger https://github.com/ruby-rdf/rdf/issues/167
-      # [mods.origin_info.dateCreated.css('[point="start"]'.freeze).text.to_i]
-      # So just doing a string for now:
+      # Use a string because it may be any ISO8601 format:
       [mods.origin_info.dateCreated.css('[point="start"]'.freeze).text]
     end
 
     def latest_date
-      # Integers trigger https://github.com/ruby-rdf/rdf/issues/167
-      # [mods.origin_info.dateCreated.css('[point="end"]'.freeze).text.to_i]
-      # So just doing a string for now:
+      # Use a string because it may be any ISO8601 format:
       [mods.origin_info.dateCreated.css('[point="end"]'.freeze).text]
     end
 
     def issued
-      # Integers trigger https://github.com/ruby-rdf/rdf/issues/167
-      # [mods.origin_info.dateIssued.text.to_i]
-      # So just doing a string for now:
+      # Use a string because it may be any ISO8601 format:
       [mods.origin_info.dateIssued.text]
     end
 

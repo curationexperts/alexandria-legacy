@@ -7,7 +7,7 @@ class ImageIndexer < ActiveFedora::IndexingService
   ISSUED = Solrizer.solr_name('issued', :facetable)
   EARLIEST_DATE = Solrizer.solr_name('earliestDate', :facetable)
   SORTABLE_CREATOR = Solrizer.solr_name('creator_label', :sortable)
-  SORTABLE_DATE = Solrizer.solr_name('date', :sortable, type: :integer)
+  SORTABLE_DATE = Solrizer.solr_name('date', :sortable)
   COLLECTION_LABEL = Solrizer.solr_name('collection_label', :symbol)
 
   def generate_solr_document
