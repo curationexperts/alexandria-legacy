@@ -64,7 +64,8 @@ module Importer
         issued: issued,
         publisher: [mods.origin_info.publisher.text],
         location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
-        form_of_work: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) }
+        form_of_work: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
+        work_type: mods.typeOfResource.map(&:text)
       }
     end
 

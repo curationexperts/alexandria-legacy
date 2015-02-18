@@ -38,7 +38,7 @@ module Metadata
       index.as :stored_searchable, :facetable
     end
 
-    property :workType, predicate: RDF::DC.type do |index|
+    property :work_type, predicate: RDF::DC.type do |index|
       index.as :stored_searchable
     end
 
