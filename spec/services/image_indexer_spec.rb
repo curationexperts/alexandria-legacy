@@ -22,7 +22,8 @@ describe ImageIndexer do
   context "with earliestDate and latestDate" do
     let(:earliestDate) { ['1917'] }
     let(:latestDate) { ['1923'] }
-    let(:image) { Image.new(earliestDate: earliestDate, latestDate: latestDate) }
+    let(:issued) { [earliestDate.first, latestDate.first] }
+    let(:image) { Image.new(earliestDate: earliestDate, latestDate: latestDate, issued: issued) }
 
     it "indexes dates for display" do
       expect(subject['earliestDate_tesim']).to eq ["1917"]

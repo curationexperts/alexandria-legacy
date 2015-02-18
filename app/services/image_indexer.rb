@@ -44,12 +44,12 @@ class ImageIndexer < ActiveFedora::IndexingService
 
     # Create a year field (integer, multiple) for faceting on
     def facetable_year(solr_doc)
-      if solr_doc.key? ISSUED
-        solr_doc.fetch(ISSUED).map { |date| extract_year(date) }
-      elsif object.earliestDate.present? && object.latestDate.present?
+      if object.earliestDate.present? && object.latestDate.present?
         start = extract_year(object.earliestDate.first)
         stop = extract_year(object.latestDate.first)
         (start..stop).to_a
+      elsif object.issued
+        object.issued.map { |date| extract_year(date) }
       end
     end
 
