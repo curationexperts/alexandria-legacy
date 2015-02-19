@@ -22,6 +22,11 @@ describe Importer::ModsImporter do
       expect(original.mime_type).to eq 'image/tiff'
       expect(original.original_name).to eq 'cusbspcmss36_110108_1_a.tif'
 
+      # Image.reload doesn't clear @file_association
+      reloaded = Image.find(image.id)
+      expect(reloaded.generic_files.first).not_to be_nil
+      expect(reloaded.generic_files.aggregation.head.next).not_to be_nil
+
     end
 
     it 'creates a collection' do

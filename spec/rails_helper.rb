@@ -8,7 +8,7 @@ require 'rspec/rails'
 
 require 'capybara/rails'
 # HttpLogger.logger = Logger.new(STDOUT)
-# HttpLogger.ignore = [/localhost:8983\/solr/]
+# HttpLogger.ignore = [/\/solr/]
 # HttpLogger.colorize = true
 # HttpLogger.log_headers = true
 
