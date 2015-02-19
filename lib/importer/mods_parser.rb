@@ -62,6 +62,7 @@ module Importer
         earliestDate: earliest_date,
         latestDate: latest_date,
         issued: issued,
+        language: mods.language.languageTerm.valueURI.map { |uri| RDF::URI.new(uri) },
         digital_origin: mods.physical_description.digitalOrigin.map(&:text),
         publisher: [mods.origin_info.publisher.text],
         location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },

@@ -39,6 +39,10 @@ describe Importer::ModsParser do
       expect(attributes[:creator]).to eq ['http://id.loc.gov/authorities/names/n87914041']
     end
 
+    it "imports language" do
+      expect(attributes[:language]).to eq ['http://id.loc.gov/vocabulary/iso639-2/zxx']
+    end
+
     it "imports work_type" do
       expect(attributes[:work_type]).to eq ['still image']
     end
