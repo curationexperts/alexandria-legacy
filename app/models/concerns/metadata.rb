@@ -25,13 +25,18 @@ module Metadata
        index.as :displayable
     end
 
+    property :language, predicate: RDF::DC.language,
+      class_name: Oargun::ControlledVocabularies::Language do |index|
+        index.as :displayable
+    end
+
     property :longitude, predicate: RDF::EXIF.gpsLongitude do |index|
        index.as :displayable
     end
 
     property :location, predicate: RDF::DC.spatial,
       class_name: Oargun::ControlledVocabularies::Geographic do |index|
-       index.as :stored_searchable, :facetable
+        index.as :stored_searchable, :facetable
     end
 
     property :lc_subject, predicate: RDF::DC.subject, class_name: Oargun::ControlledVocabularies::Subject do |index|
