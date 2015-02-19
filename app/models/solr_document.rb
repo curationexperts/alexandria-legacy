@@ -18,7 +18,8 @@ class SolrDocument
   # single valued. See Blacklight::Solr::Document::ExtendableClassMethods#field_semantics
   # and Blacklight::Solr::Document#to_semantic_values
   # Recommendation: Use field names from Dublin Core
-  use_extension( Blacklight::Solr::Document::DublinCore)
+  use_extension(Blacklight::Solr::Document::DublinCore)
+  use_extension(ExportAsTurtle)
 
   ##
   # Offer the source (ActiveFedora-based) model to Rails for some of the

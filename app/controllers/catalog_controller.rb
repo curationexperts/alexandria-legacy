@@ -14,6 +14,7 @@ class CatalogController < ApplicationController
   CatalogController.solr_search_params_logic += [:only_images_and_collections]
 
   add_show_tools_partial(:edit, partial: 'catalog/edit', if: :editor?)
+  add_show_tools_partial(:download, partial: 'catalog/download')
 
   configure_blacklight do |config|
     config.view.gallery.partials = [:index_header, :index]
