@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra-labs/hydra-collections.git
-  revision: 8f05f1bac2f34b9aac79474124d6cb0d4b4d10d5
+  revision: 86c953c5c669dcbbfaeb693b410b4c316c34989e
   branch: one_way_indexing
   specs:
     hydra-collections (4.0.0)
@@ -137,7 +137,7 @@ GEM
     coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.0)
+    coffee-script-source (1.9.1)
     colorize (0.7.5)
     columnize (0.9.0)
     daemons (1.1.9)
