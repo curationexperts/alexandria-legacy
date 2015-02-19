@@ -70,6 +70,9 @@ module Metadata
       index.as :stored_searchable, :facetable
     end
 
+    # MODS
+    property :digital_origin, predicate: RDF::Vocab::MODS.digitalOrigin
+
   end
 
   def controlled_properties

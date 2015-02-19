@@ -27,6 +27,7 @@ gem 'hydra-head', '~> 9.0.0'
 gem 'hydra-editor', '~> 1.0.1'
 gem 'hydra-role-management'
 gem "hydra-collections", github: 'projecthydra-labs/hydra-collections', branch: 'one_way_indexing'
+gem 'rdf-vocab'
 
 gem 'mods', '~> 2.0.1'
 gem 'oargun', github: 'curationexperts/oargun'

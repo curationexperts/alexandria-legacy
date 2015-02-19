@@ -43,6 +43,10 @@ describe Importer::ModsParser do
       expect(attributes[:work_type]).to eq ['still image']
     end
 
+    it "imports digital origin" do
+      expect(attributes[:digital_origin]).to eq ["digitized other analog"]
+    end
+
     context "with a file that has coordinates" do
       let(:file) { 'spec/fixtures/mods/cusbspcmss36_110089.xml' }
       it "imports coordinates" do
