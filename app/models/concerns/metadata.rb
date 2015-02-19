@@ -13,6 +13,10 @@ module Metadata
       index.as :stored_searchable, :facetable
     end
 
+    property :collector, :predicate => Oargun::Vocabularies::MARCREL.col, class_name: Oargun::ControlledVocabularies::Creator do |index|
+      index.as :searchable, :displayable
+    end
+
     property :contributor, predicate: ::RDF::DC.contributor do |index|
       index.as :stored_searchable
     end

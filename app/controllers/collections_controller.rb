@@ -31,6 +31,7 @@ class CollectionsController < ApplicationController
 
   configure_blacklight do |config|
     # Fields for the Collection's show page
+    config.add_show_field Solrizer.solr_name('collector', :displayable), label: 'Collector', helper_method: :display_collector
     config.add_show_field Solrizer.solr_name('earliestDate', :stored_searchable), label: 'Creation Date', helper_method: :display_dates
     config.add_show_field Solrizer.solr_name('extent', :displayable), label: 'Extent'
 

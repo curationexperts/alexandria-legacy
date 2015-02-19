@@ -3,6 +3,7 @@ module Importer
     attr_reader :mods, :model
 
     CREATOR = "http://id.loc.gov/vocabulary/relators/cre".freeze
+    COLLECTOR = "http://id.loc.gov/vocabulary/relators/col".freeze
 
     def initialize(file)
       @mods = Mods::Record.new.from_file(file)
@@ -56,8 +57,9 @@ module Importer
         title: untyped_title,
         alternative: mods.title_info.alternative_title.to_a,
         description: description,
-        creator:   creator.map { |uri| RDF::URI.new(uri) },
         lc_subject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
+        creator:   creator,
+        collector: creator(COLLECTOR),
         extent: mods.physical_description.extent.map(&:text),
         earliestDate: earliest_date,
         latestDate: latest_date,
@@ -91,13 +93,24 @@ module Importer
       text.gsub("\n", " ").gsub("\t", "")
     end
 
-    def creator
-      if mods.corporate_name.role.roleTerm.valueURI == [CREATOR]
-        mods.corporate_name.valueURI
-      elsif mods.personal_name.role.roleTerm.valueURI == [CREATOR]
-        mods.personal_name.valueURI
+    def creator(role=CREATOR)
+      uris = []
+      names = []
+
+      if mods.corporate_name.role.roleTerm.valueURI == [role]
+        uris += mods.corporate_name.valueURI
+        names += mods.corporate_name.map{|names| names.namePart.text }
+      end
+
+      if mods.personal_name.role.roleTerm.valueURI == [role]
+        uris += mods.personal_name.valueURI
+        names += mods.personal_name.map{|names| names.namePart.text }
+      end
+
+      if !uris.blank?
+        uris.map { |uri| RDF::URI.new(uri) }
       else
-        []
+        names
       end
     end
 
