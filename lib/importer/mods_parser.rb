@@ -66,7 +66,19 @@ module Importer
         location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
         form_of_work: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
         work_type: mods.typeOfResource.map(&:text)
-      }
+      }.merge(coordinates)
+    end
+
+    # returns a hash with :latitude and :longitude
+    def coordinates
+      coords =  mods.subject.cartographics.coordinates.map(&:text)
+      # a hash where any value defaults to an empty array
+      result = Hash.new { |h, k| h[k] = [] }
+      coords.each_with_object(result) do |coord, result|
+        (latitude, longitude) = coord.split(/,\s*/)
+        result[:latitude] << latitude
+        result[:longitude] << longitude
+      end
     end
 
     def description

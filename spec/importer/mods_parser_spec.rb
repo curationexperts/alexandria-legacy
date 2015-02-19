@@ -43,6 +43,14 @@ describe Importer::ModsParser do
       expect(attributes[:work_type]).to eq ['still image']
     end
 
+    context "with a file that has coordinates" do
+      let(:file) { 'spec/fixtures/mods/cusbspcmss36_110089.xml' }
+      it "imports coordinates" do
+        expect(attributes[:latitude]).to eq ['34.442982']
+        expect(attributes[:longitude]).to eq ['-119.657362']
+      end
+    end
+
     it 'finds metadata for the collection' do
       expect(attributes[:collection][:id]).to eq 'sbhcmss78'
       expect(attributes[:collection][:identifier]).to eq ['SBHC Mss 78']

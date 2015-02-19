@@ -21,8 +21,12 @@ module Metadata
       index.as :stored_searchable
     end
 
-    property :geobox, predicate: RDF::URI('https://schema.org/box') do |index|
-       index.as :stored_searchable
+    property :latitude, predicate: RDF::EXIF.gpsLatitude do |index|
+       index.as :displayable
+    end
+
+    property :longitude, predicate: RDF::EXIF.gpsLongitude do |index|
+       index.as :displayable
     end
 
     property :location, predicate: RDF::DC.spatial,
