@@ -21,6 +21,20 @@ describe Image do
   end
 
   describe "#to_solr" do
+    context 'with rights' do
+      let(:uri) { 'http://www.europeana.eu/rights/rr-f/' }
+      subject { Image.new(rights: [RDF::URI.new(uri)]).to_solr }
+
+      it 'has human-friendly labels' do
+        expect(subject['rights_teim']).to eq [uri]
+        expect(subject['rights_ssm']).to eq [uri]
+        expect(subject['rights_sim']).to eq [uri]
+        expect(subject['rights_label_teim']).to eq ['Free Access - no-reuse']
+        expect(subject['rights_label_ssm']).to eq ['Free Access - no-reuse']
+        expect(subject['rights_label_sim']).to eq ['Free Access - no-reuse']
+      end
+    end
+
     context "with a title" do
       subject { Image.new(title: 'War and Peace').to_solr }
 

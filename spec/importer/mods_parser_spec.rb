@@ -33,6 +33,8 @@ describe Importer::ModsParser do
 
     it 'finds metadata for the image' do
       expect(attributes[:description]).to eq ['Another description', 'Man with a smile eyes to camera.']
+      expect(attributes[:rights].first.class).to eq RDF::URI
+      expect(attributes[:rights].map(&:to_s)).to eq ['http://www.europeana.eu/rights/unknown/']
     end
 
     it "imports creator" do

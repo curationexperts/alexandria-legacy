@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: 48a1e9ad08bb130b0ce51a999751b3c02bec0c52
+  revision: 6a52d8b7620d5921edaf7d42390413eb1a09c2f5
   specs:
     oargun (0.0.1)
       active-triples (~> 0.6.0)
@@ -362,7 +362,7 @@ GEM
     ref (1.0.5)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
-    rest-client (1.7.2)
+    rest-client (1.7.3)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     riiif (0.0.10)

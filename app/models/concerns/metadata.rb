@@ -82,6 +82,11 @@ module Metadata
     # MODS
     property :digital_origin, predicate: RDF::Vocab::MODS.digitalOrigin
 
+    # Rights
+    property :rights, :predicate => RDF::DC.rights, :class_name => Oargun::ControlledVocabularies::RightsStatement do |index|
+      index.as :searchable, :displayable, :facetable
+    end
+
   end
 
   def controlled_properties

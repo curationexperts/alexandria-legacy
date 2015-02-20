@@ -69,7 +69,8 @@ module Importer
         publisher: [mods.origin_info.publisher.text],
         location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
         form_of_work: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
-        work_type: mods.typeOfResource.map(&:text)
+        work_type: mods.typeOfResource.map(&:text),
+        rights: rights
       }.merge(coordinates)
     end
 
@@ -169,5 +170,25 @@ module Importer
       def untyped_title
         mods.xpath('/m:mods/m:titleInfo[not(@type)]/m:title/text()', 'm' => Mods::MODS_NS).to_s
       end
+
+      def rights
+        raw_data = mods.extension.xpath('./copyrightStatus').map(&:text).map(&:downcase)
+
+        raw_data.map do |rights_string|
+          uri = case rights_string
+            when 'unknown'
+              'http://www.europeana.eu/rights/unknown/'
+            when 'public domain'
+              'http://creativecommons.org/publicdomain/mark/1.0/'
+            when 'copyrighted'
+              'http://www.europeana.eu/rights/rr-f/'
+            else
+              raise Oargun::RDF::Controlled::ControlledVocabularyError.new("The 'copyrightStatus' contained data that isn't in the controlled vocabulary: #{rights_string}")
+            end
+
+          RDF::URI.new(uri)
+        end
+      end
+
   end
 end
