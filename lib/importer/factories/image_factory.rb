@@ -17,10 +17,11 @@ class ImageFactory < ObjectFactory
   end
 
   def create_image
-    Image.create(attributes.except(:files, :collection)).tap do |image|
+    i = Image.create(attributes.except(:files, :collection)).tap do |image|
       attributes[:files].each do |file_path|
         create_file(image, file_path)
       end
+      image.save # force a reindex after the files are created
     end
   end
 
@@ -35,7 +36,6 @@ class ImageFactory < ObjectFactory
       gf.original.mime_type = mime_type(path)
       gf.original.original_name = File.basename(path)
       gf.original.content = File.new(path)
-      gf.save!
     end
   end
 
