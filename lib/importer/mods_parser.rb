@@ -177,11 +177,11 @@ module Importer
         raw_data.map do |rights_string|
           uri = case rights_string
             when 'unknown'
-              'http://www.europeana.eu/rights/unknown/'
+              Oargun::Vocabularies::EURIGHTS[:"unknown/"]
             when 'public domain'
-              'http://creativecommons.org/publicdomain/mark/1.0/'
+              Oargun::Vocabularies::CCPUBLIC[:"mark/1.0/"]
             when 'copyrighted'
-              'http://www.europeana.eu/rights/rr-f/'
+              Oargun::Vocabularies::EURIGHTS[:"rr-f/"]
             else
               raise Oargun::RDF::Controlled::ControlledVocabularyError.new("The 'copyrightStatus' contained data that isn't in the controlled vocabulary: #{rights_string}")
             end
