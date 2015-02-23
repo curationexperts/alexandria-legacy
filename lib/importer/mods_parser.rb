@@ -60,7 +60,7 @@ module Importer
         lc_subject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
         creator:   creator,
         collector: creator(COLLECTOR),
-        extent: mods.physical_description.extent.map(&:text),
+        physical_extent: mods.physical_description.extent.map{|node| strip_whitespace(node.text)},
         earliestDate: earliest_date,
         latestDate: latest_date,
         issued: issued,

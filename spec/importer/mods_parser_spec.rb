@@ -37,7 +37,7 @@ describe Importer::ModsParser do
       expect(attributes[:rights]).to eq ['http://www.europeana.eu/rights/unknown/']
       expect(attributes[:location]).to eq ["http://id.loc.gov/authorities/names/n79081574"]
       expect(attributes[:form_of_work]).to eq ["http://vocab.getty.edu/aat/300134920", "http://vocab.getty.edu/aat/300046300"]
-
+      expect(attributes[:physical_extent]).to eq ['1 photograph : glass plate negative ; 13 x 18 cm (5 x 7 format)']
     end
 
     context "with a file that has a publisher" do
@@ -132,7 +132,7 @@ describe Importer::ModsParser do
       expect(attributes[:description]).to eq ['Black and white photographs relating to the Flying A Studios (aka American Film Manufacturing Company), a film company that operated in Santa Barbara (1912-1920).']
       expect(attributes[:earliestDate]).to eq ['1910']
       expect(attributes[:latestDate]).to eq ['1919']
-      expect(attributes[:extent]).to eq ['702 digital objects']
+      expect(attributes[:physical_extent]).to eq ['702 digital objects']
       expect(attributes[:lc_subject]).to eq ["http://id.loc.gov/authorities/subjects/sh85088047", "http://id.loc.gov/authorities/subjects/sh99005024"]
       expect(attributes[:form_of_work]).to eq ["http://vocab.getty.edu/aat/300046300", "http://vocab.getty.edu/aat/300128343"]
       expect(attributes[:language]).to eq ['http://id.loc.gov/vocabulary/iso639-2/zxx']

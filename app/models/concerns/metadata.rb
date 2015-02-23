@@ -55,10 +55,6 @@ module Metadata
       index.as :stored_searchable
     end
 
-    property :extent, :predicate => ::RDF::DC.extent do |index|
-      index.as :searchable, :displayable
-    end
-
     # Dates
     property :date, predicate: RDF::DC.date do |index|
       index.as :stored_searchable, :facetable
@@ -81,6 +77,12 @@ module Metadata
 
     # MODS
     property :digital_origin, predicate: RDF::Vocab::MODS.digitalOrigin
+
+    property :physical_extent, predicate: RDF::Vocab::MODS.physicalExtent do |index|
+      index.as :searchable, :displayable
+    end
+
+
 
     # Rights
     property :rights, :predicate => RDF::DC.rights, :class_name => Oargun::ControlledVocabularies::RightsStatement do |index|
