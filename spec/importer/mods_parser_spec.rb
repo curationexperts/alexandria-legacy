@@ -38,6 +38,7 @@ describe Importer::ModsParser do
       expect(attributes[:location]).to eq ["http://id.loc.gov/authorities/names/n79081574"]
       expect(attributes[:form_of_work]).to eq ["http://vocab.getty.edu/aat/300134920", "http://vocab.getty.edu/aat/300046300"]
       expect(attributes[:physical_extent]).to eq ['1 photograph : glass plate negative ; 13 x 18 cm (5 x 7 format)']
+      expect(attributes[:sub_location]).to eq ['Department of Special Collections']
     end
 
     context "with a file that has a publisher" do
@@ -137,6 +138,7 @@ describe Importer::ModsParser do
       expect(attributes[:form_of_work]).to eq ["http://vocab.getty.edu/aat/300046300", "http://vocab.getty.edu/aat/300128343"]
       expect(attributes[:language]).to eq ['http://id.loc.gov/vocabulary/iso639-2/zxx']
       expect(attributes[:work_type]).to eq ['still image']
+      expect(attributes[:sub_location]).to eq ['Department of Special Collections']
 
       # TODO: There is another location in the fixture file
       # that doesn't have a valueURI.  How should that be

@@ -68,6 +68,7 @@ module Importer
         digital_origin: mods.physical_description.digitalOrigin.map(&:text),
         publisher: [mods.origin_info.publisher.text],
         location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
+        sub_location: mods.location.holdingSimple.xpath('./mods:copyInformation/mods:subLocation').map(&:text),
         form_of_work: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
         work_type: mods.typeOfResource.map(&:text),
         rights: rights

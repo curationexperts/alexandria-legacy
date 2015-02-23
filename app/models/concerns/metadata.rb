@@ -82,7 +82,7 @@ module Metadata
       index.as :searchable, :displayable
     end
 
-
+    property :sub_location, predicate: RDF::Vocab::MODS.locationCopySublocation
 
     # Rights
     property :rights, :predicate => RDF::DC.rights, :class_name => Oargun::ControlledVocabularies::RightsStatement do |index|
