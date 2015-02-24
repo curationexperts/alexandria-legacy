@@ -72,6 +72,7 @@ module Importer
         form_of_work: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
         work_type: mods.typeOfResource.map(&:text),
         citation: citation,
+        note: note,
         record_origin: mods.record_info.recordOrigin.map{|node| strip_whitespace(node.text) },
         rights: rights
       }.merge(coordinates)
@@ -149,6 +150,12 @@ module Importer
     # Remove multiple whitespace
     def citation
       mods.xpath('//mods:note[@type="preferred citation"]'.freeze, NAMESPACES).map do |node|
+        node.text.gsub(/\n\s+/, "\n")
+      end
+    end
+
+    def note
+      mods.xpath('//mods:note[@type!="preferred citation"]'.freeze, NAMESPACES).map do |node|
         node.text.gsub(/\n\s+/, "\n")
       end
 

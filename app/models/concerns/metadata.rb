@@ -86,6 +86,8 @@ module Metadata
     # MODS
     property :digital_origin, predicate: RDF::Vocab::MODS.digitalOrigin
 
+    property :note, predicate: RDF::Vocab::MODS.note
+
     property :physical_extent, predicate: RDF::Vocab::MODS.physicalExtent do |index|
       index.as :searchable, :displayable
     end
