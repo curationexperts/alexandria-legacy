@@ -70,10 +70,12 @@ module Metadata
     end
 
     # RDA
-    property :form_of_work, predicate: RDF::URI('http://www.rdaregistry.info/Elements/w/formOfWork.en'),
+    property :form_of_work, predicate: RDF::URI('http://www.rdaregistry.info/Elements/w/#formOfWork.en'),
         class_name: Oargun::ControlledVocabularies::WorkType do |index|
       index.as :stored_searchable, :facetable
     end
+
+    property :citation, predicate: RDF::URI('http://www.rdaregistry.info/Elements/u/#preferredCitation.en')
 
     # MODS
     property :digital_origin, predicate: RDF::Vocab::MODS.digitalOrigin

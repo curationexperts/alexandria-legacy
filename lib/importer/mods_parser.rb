@@ -5,6 +5,8 @@ module Importer
     CREATOR = "http://id.loc.gov/vocabulary/relators/cre".freeze
     COLLECTOR = "http://id.loc.gov/vocabulary/relators/col".freeze
 
+    NAMESPACES = { 'mods'.freeze => Mods::MODS_NS }
+
     def initialize(file)
       @mods = Mods::Record.new.from_file(file)
       @model = if collection?
@@ -71,6 +73,7 @@ module Importer
         sub_location: mods.location.holdingSimple.xpath('./mods:copyInformation/mods:subLocation').map(&:text),
         form_of_work: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
         work_type: mods.typeOfResource.map(&:text),
+        citation: citation,
         rights: rights
       }.merge(coordinates)
     end
@@ -140,8 +143,16 @@ module Importer
 
       { id: collection_id(dc_id.first),
         identifier: dc_id,
-        title: mods.at_xpath("//prefix:relatedItem[@type='host']".freeze, {'prefix'.freeze => Mods::MODS_NS}).titleInfo.title.text.strip
+        title: mods.at_xpath("//mods:relatedItem[@type='host']".freeze, NAMESPACES).titleInfo.title.text.strip
       }
+    end
+
+    # Remove multiple whitespace
+    def citation
+      mods.xpath('//mods:note[@type="preferred citation"]'.freeze, NAMESPACES).map do |node|
+        node.text.gsub(/\n\s+/, "\n")
+      end
+
     end
 
     private
