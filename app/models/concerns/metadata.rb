@@ -88,6 +88,8 @@ module Metadata
 
     property :note, predicate: RDF::Vocab::MODS.note
 
+    property :description_standard, predicate: RDF::Vocab::MODS.recordDescriptionStandard
+
     property :physical_extent, predicate: RDF::Vocab::MODS.physicalExtent do |index|
       index.as :searchable, :displayable
     end

@@ -74,6 +74,7 @@ module Importer
         citation: citation,
         note: note,
         record_origin: mods.record_info.recordOrigin.map{|node| strip_whitespace(node.text) },
+        description_standard: mods.record_info.descriptionStandard.map(&:text),
         rights: rights
       }.merge(coordinates)
     end

@@ -43,6 +43,7 @@ describe Importer::ModsParser do
       expect(attributes[:citation]).to eq ["[Identification of Item], Joel Conway / Flying A Studio\nPhotograph Collection. SBHC Mss 78. Department of Special Collections, UC Santa Barbara\nLibrary, University of California, Santa Barbara."]
       expect(attributes[:note]).to eq ["Gift from Pat Eagle-Schnetzer and Ronald Conway, and purchase\nfrom Joan Cota (Conway children), 2009."]
       expect(attributes[:record_origin]).to eq ['Converted from CSV to MODS 3.4 using local mapping.']
+      expect(attributes[:description_standard]).to eq ['local']
     end
 
     context "with a file that has a publisher" do
