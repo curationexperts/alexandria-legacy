@@ -92,6 +92,8 @@ module Metadata
 
     property :sub_location, predicate: RDF::Vocab::MODS.locationCopySublocation
 
+    property :record_origin, predicate: RDF::Vocab::MODS.recordOrigin
+
     # Rights
     property :rights, :predicate => RDF::DC.rights, :class_name => Oargun::ControlledVocabularies::RightsStatement do |index|
       index.as :searchable, :displayable, :facetable

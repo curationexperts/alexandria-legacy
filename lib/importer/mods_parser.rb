@@ -72,6 +72,7 @@ module Importer
         form_of_work: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
         work_type: mods.typeOfResource.map(&:text),
         citation: citation,
+        record_origin: mods.record_info.recordOrigin.map{|node| strip_whitespace(node.text) },
         rights: rights
       }.merge(coordinates)
     end
