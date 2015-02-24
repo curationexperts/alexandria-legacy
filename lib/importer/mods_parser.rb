@@ -69,13 +69,23 @@ module Importer
         language: mods.language.languageTerm.valueURI.map { |uri| RDF::URI.new(uri) },
         digital_origin: mods.physical_description.digitalOrigin.map(&:text),
         publisher: [mods.origin_info.publisher.text],
-        location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
+        location: location,
         sub_location: mods.location.holdingSimple.xpath('./mods:copyInformation/mods:subLocation').map(&:text),
         form_of_work: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
         work_type: mods.typeOfResource.map(&:text),
         citation: citation,
         rights: rights
       }.merge(coordinates)
+    end
+
+    def location
+      mods.subject.geographic.map do |node|
+        if node.valueURI.blank?
+          node.text
+        else
+          RDF::URI.new(node.valueURI)
+        end
+      end
     end
 
     # returns a hash with :latitude and :longitude

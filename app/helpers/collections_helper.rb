@@ -47,11 +47,4 @@ module CollectionsHelper
     dates
   end
 
-  def display_collector(args)
-    label = args[:document][Solrizer.solr_name('collector_label', :displayable)]
-    collector = args[:document][Solrizer.solr_name('collector', :displayable)]
-
-    label.blank? ? collector : label
-  end
-
 end
