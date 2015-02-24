@@ -1,6 +1,10 @@
 module Metadata
   extend ActiveSupport::Concern
   included do
+
+    # For ARKs
+    property :identifier, predicate: ::RDF::DC.identifier
+
     property :title, predicate: ::RDF::DC.title, multiple: false do |index|
       index.as :stored_searchable
     end
