@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/projectblacklight/blacklight.git
-  revision: bf318804f0e609c42ed788cece0ec8b45ccbcb11
+  revision: 708963dc4286db345303e16dcf3b7d12ea8cea18
   specs:
     blacklight (5.10.0)
       bootstrap-sass (~> 3.2)
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra-labs/hydra-collections.git
-  revision: 366ec518a2d6cff1150c0e521082ef3d7d14cdeb
+  revision: c99cb78c5ff84a7ae1661b38567e65f8dcaff3d6
   branch: blacklight-5.10
   specs:
     hydra-collections (4.0.0)
@@ -83,7 +83,7 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    active-fedora (9.0.1)
+    active-fedora (9.0.2)
       active-triples (~> 0.6.0)
       activesupport (>= 4.1.0)
       deprecation
@@ -218,7 +218,7 @@ GEM
     jbuilder (2.2.8)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
-    jettywrapper (2.0.2)
+    jettywrapper (2.0.3)
       activesupport (>= 3.0.0)
       childprocess
       i18n
