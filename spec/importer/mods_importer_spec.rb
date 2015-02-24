@@ -38,7 +38,7 @@ describe Importer::ModsImporter do
       image = Image.first
 
       coll = Collection.find(collection_id)
-      expect(coll.identifier).to eq ['SBHC Mss 36']
+      expect(coll.accession_number).to eq ['SBHC Mss 36']
       expect(coll.title).to eq 'Santa Barbara picture postcards collection'
       expect(coll.members).to eq [image]
       expect(image.collections).to eq [coll]
@@ -70,7 +70,7 @@ describe Importer::ModsImporter do
       }.to change { Collection.count }.by(1)
 
       expect(coll.id).to eq id
-      expect(coll.identifier).to eq ['SBHC Mss 78']
+      expect(coll.accession_number).to eq ['SBHC Mss 78']
       expect(coll.title).to eq 'Joel Conway / Flying A Studio photograph collection'
     end
 
@@ -84,7 +84,7 @@ describe Importer::ModsImporter do
         }.to change { Collection.count }.by(0)
 
         expect(coll.id).to eq id
-        expect(coll.identifier).to eq ['SBHC Mss 78']
+        expect(coll.accession_number).to eq ['SBHC Mss 78']
         expect(coll.title).to eq 'Joel Conway / Flying A Studio photograph collection'
       end
     end

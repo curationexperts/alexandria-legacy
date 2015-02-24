@@ -38,6 +38,7 @@ describe Importer::ModsParser do
       expect(attributes[:location]).to eq ["http://id.loc.gov/authorities/names/n79081574"]
       expect(attributes[:form_of_work]).to eq ["http://vocab.getty.edu/aat/300134920", "http://vocab.getty.edu/aat/300046300"]
       expect(attributes[:physical_extent]).to eq ['1 photograph : glass plate negative ; 13 x 18 cm (5 x 7 format)']
+      expect(attributes[:accession_number]).to eq ['cusbspcsbhc78_100239']
       expect(attributes[:sub_location]).to eq ['Department of Special Collections']
       expect(attributes[:citation]).to eq ["[Identification of Item], Joel Conway / Flying A Studio\nPhotograph Collection. SBHC Mss 78. Department of Special Collections, UC Santa Barbara\nLibrary, University of California, Santa Barbara."]
     end
@@ -76,7 +77,7 @@ describe Importer::ModsParser do
 
     it 'finds metadata for the collection' do
       expect(attributes[:collection][:id]).to eq 'sbhcmss78'
-      expect(attributes[:collection][:identifier]).to eq ['SBHC Mss 78']
+      expect(attributes[:collection][:accession_number]).to eq ['SBHC Mss 78']
       expect(attributes[:collection][:title]).to eq 'Joel Conway / Flying A Studio photograph collection'
     end
 
@@ -127,7 +128,7 @@ describe Importer::ModsParser do
 
     it 'finds the metadata' do
       expect(attributes[:id]).to eq 'sbhcmss78'
-      expect(attributes[:identifier]).to eq ['SBHC Mss 78']
+      expect(attributes[:accession_number]).to eq ['SBHC Mss 78']
       expect(attributes[:title]).to eq 'Joel Conway / Flying A Studio photograph collection'
       expect(attributes[:creator]).to eq []
       expect(attributes[:collector]).to eq ['Conway, Joel']

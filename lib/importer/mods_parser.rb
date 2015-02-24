@@ -40,22 +40,20 @@ module Importer
 
     def record_attributes
       common_attributes.merge!({
-        id: mods.identifier.text,
         files: mods.extension.xpath('./fileName').map(&:text),
         collection: collection
       })
     end
 
     def collection_attributes
-      dc_id = mods.identifier.map(&:text)
-      common_attributes.merge!({
-        id: collection_id(dc_id.first),
-        identifier: dc_id
-      })
+      common_attributes
     end
 
     def common_attributes
+      human_readable_id = mods.identifier.map(&:text)
       {
+        id: persistent_id(human_readable_id.first),
+        accession_number: human_readable_id,
         title: untyped_title,
         alternative: mods.title_info.alternative_title.to_a,
         description: description,
@@ -134,15 +132,15 @@ module Importer
       mods.origin_info.dateIssued.map(&:text)
     end
 
-    def collection_id(raw_id)
+    def persistent_id(raw_id)
       raw_id.downcase.gsub(/\s*/, '')
     end
 
     def collection
-      dc_id = Array(mods.related_item.at_xpath('mods:identifier[@type="local"]'.freeze).text)
+      human_readable_id = Array(mods.related_item.at_xpath('mods:identifier[@type="local"]'.freeze).text)
 
-      { id: collection_id(dc_id.first),
-        identifier: dc_id,
+      { id: persistent_id(human_readable_id.first),
+        accession_number: human_readable_id,
         title: mods.at_xpath("//mods:relatedItem[@type='host']".freeze, NAMESPACES).titleInfo.title.text.strip
       }
     end
