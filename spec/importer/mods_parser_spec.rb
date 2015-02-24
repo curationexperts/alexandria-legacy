@@ -44,6 +44,7 @@ describe Importer::ModsParser do
       expect(attributes[:note]).to eq ["Gift from Pat Eagle-Schnetzer and Ronald Conway, and purchase\nfrom Joan Cota (Conway children), 2009."]
       expect(attributes[:record_origin]).to eq ['Converted from CSV to MODS 3.4 using local mapping.']
       expect(attributes[:description_standard]).to eq ['local']
+      expect(attributes[:series_name]).to eq ['Series 4: Glass Negatives']
     end
 
     context "with a file that has a publisher" do

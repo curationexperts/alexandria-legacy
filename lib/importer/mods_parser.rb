@@ -41,7 +41,8 @@ module Importer
     def record_attributes
       common_attributes.merge!({
         files: mods.extension.xpath('./fileName').map(&:text),
-        collection: collection
+        collection: collection,
+        series_name: mods.xpath("//mods:relatedItem[@type='series']").titleInfo.title.map(&:text)
       })
     end
 

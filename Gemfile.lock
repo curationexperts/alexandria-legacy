@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: 334ab520e1f571b0965e96d860f0a318b3f3488a
+  revision: 02347657ee6081ef76a884b5fbfa36320781cc16
   specs:
     oargun (0.0.1)
       active-triples (~> 0.6.0)

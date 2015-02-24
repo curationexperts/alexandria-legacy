@@ -61,6 +61,8 @@ module Metadata
       index.as :stored_searchable
     end
 
+    property :series_name, :predicate => Oargun::Vocabularies::OARGUN.seriesName
+
     # Dates
     property :date, predicate: RDF::DC.date do |index|
       index.as :stored_searchable, :facetable
