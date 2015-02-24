@@ -11,12 +11,13 @@ class CatalogController < ApplicationController
   # before_filter :enforce_show_permissions, :only=>:show
   # This applies appropriate access controls to all solr queries
   # CatalogController.solr_search_params_logic += [:add_access_controls_to_solr_params]
-  CatalogController.solr_search_params_logic += [:only_images_and_collections]
+  CatalogController.search_params_logic += [:only_images_and_collections]
 
   add_show_tools_partial(:edit, partial: 'catalog/edit', if: :editor?)
   add_show_tools_partial(:download, partial: 'catalog/download')
 
   configure_blacklight do |config|
+    config.search_builder_class = SearchBuilder
     config.view.gallery.partials = [:index_header, :index]
     config.view.slideshow.partials = [:index]
 
@@ -144,11 +145,4 @@ class CatalogController < ApplicationController
     # mean") suggestion is offered.
     config.spell_max = 5
   end
-
-
-  protected
-    def only_images_and_collections(solr_parameters, user_parameters)
-      solr_parameters[:fq] ||= []
-      solr_parameters[:fq] << "has_model_ssim:(\"#{Image.to_class_uri}\")" # OR \"#{CourseCollection.to_class_uri}\")"
-    end
 end

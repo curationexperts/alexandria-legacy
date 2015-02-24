@@ -23,11 +23,14 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'hydra-head', '~> 9.0.0'
+#gem 'hydra-head', '~> 9.0.0'
+gem 'hydra-head', github: 'projecthydra/hydra-head', branch: 'blacklight-5.10'
 gem 'hydra-editor', '~> 1.0.1'
 gem 'hydra-role-management'
-gem "hydra-collections", github: 'projecthydra-labs/hydra-collections', branch: 'one_way_indexing'
+gem "hydra-collections", github: 'projecthydra-labs/hydra-collections', branch: 'blacklight-5.10'
 gem 'rdf-vocab'
+gem "blacklight", github: 'projectblacklight/blacklight'
+gem 'rsolr'
 
 gem 'mods', '~> 2.0.1'
 gem 'oargun', github: 'curationexperts/oargun'

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: 6a52d8b7620d5921edaf7d42390413eb1a09c2f5
+  revision: 334ab520e1f571b0965e96d860f0a318b3f3488a
   specs:
     oargun (0.0.1)
       active-triples (~> 0.6.0)
@@ -19,13 +19,47 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
+  remote: git://github.com/projectblacklight/blacklight.git
+  revision: bf318804f0e609c42ed788cece0ec8b45ccbcb11
+  specs:
+    blacklight (5.10.0)
+      bootstrap-sass (~> 3.2)
+      deprecation
+      kaminari (~> 0.13)
+      nokogiri (~> 1.6)
+      rails (>= 3.2.6, < 5)
+      rsolr (~> 1.0.6)
+
+GIT
   remote: git://github.com/projecthydra-labs/hydra-collections.git
-  revision: 86c953c5c669dcbbfaeb693b410b4c316c34989e
-  branch: one_way_indexing
+  revision: 366ec518a2d6cff1150c0e521082ef3d7d14cdeb
+  branch: blacklight-5.10
   specs:
     hydra-collections (4.0.0)
+      blacklight (~> 5.10.0)
       deprecation (~> 0.1.0)
       hydra-head (~> 9.0.1)
+
+GIT
+  remote: git://github.com/projecthydra/hydra-head.git
+  revision: aea016175d2dc2c7cd57b280cc442547e999e8af
+  branch: blacklight-5.10
+  specs:
+    hydra-access-controls (9.0.1)
+      active-fedora (~> 9.0.0)
+      activesupport (~> 4.0)
+      blacklight (~> 5.10)
+      cancancan (~> 1.8)
+      deprecation (~> 0.1)
+      sass-rails
+    hydra-core (9.0.1)
+      hydra-access-controls (= 9.0.1)
+      jettywrapper (>= 2.0.0)
+      rails (~> 4.0)
+    hydra-head (9.0.1)
+      hydra-access-controls (= 9.0.1)
+      hydra-core (= 9.0.1)
+      rails (>= 3.2.6)
 
 GEM
   remote: https://rubygems.org/
@@ -85,17 +119,10 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.0)
-    autoprefixer-rails (5.1.5)
+    autoprefixer-rails (5.1.7)
       execjs
       json
     bcrypt (3.1.10)
-    blacklight (5.9.3)
-      bootstrap-sass (~> 3.2)
-      deprecation
-      kaminari (~> 0.13)
-      nokogiri (~> 1.6)
-      rails (>= 3.2.6, < 5)
-      rsolr (~> 1.0.6)
     blacklight-gallery (0.1.2)
       blacklight (~> 5.0)
       bootstrap-sass (~> 3.0)
@@ -177,33 +204,18 @@ GEM
     hike (1.2.3)
     htmlentities (4.3.3)
     http_logger (0.5.1)
-    hydra-access-controls (9.0.1)
-      active-fedora (~> 9.0.0)
-      activesupport (~> 4.0)
-      blacklight (~> 5.3)
-      cancancan (~> 1.8)
-      deprecation (~> 0.1.0)
-      sass-rails
-    hydra-core (9.0.1)
-      hydra-access-controls (= 9.0.1)
-      jettywrapper (>= 2.0.0)
-      rails (~> 4.0)
     hydra-editor (1.0.1)
       active-fedora (>= 9.0.0)
       cancancan (~> 1.8)
       rails (~> 4.1)
       simple_form (~> 3.1.0)
-    hydra-head (9.0.1)
-      hydra-access-controls (= 9.0.1)
-      hydra-core (= 9.0.1)
-      rails (>= 3.2.6)
     hydra-role-management (0.2.1)
       blacklight
       bootstrap_form
       cancancan
     i18n (0.7.0)
     iso-639 (0.2.5)
-    jbuilder (2.2.7)
+    jbuilder (2.2.8)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jettywrapper (2.0.2)
@@ -219,7 +231,7 @@ GEM
     json (1.8.2)
     json-ld (1.1.7)
       rdf (~> 1.1, >= 1.1.4)
-    ldp (0.2.2)
+    ldp (0.2.3)
       faraday
       http_logger
       linkeddata (>= 1.1)
@@ -373,23 +385,23 @@ GEM
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       rspec-mocks (>= 2.99, < 4.0)
-    rspec-core (3.2.0)
+    rspec-core (3.2.1)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
-    rspec-mocks (3.2.0)
+    rspec-mocks (3.2.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
-    rspec-rails (3.2.0)
-      actionpack (>= 3.0, <= 4.2)
-      activesupport (>= 3.0, <= 4.2)
-      railties (>= 3.0, <= 4.2)
+    rspec-rails (3.2.1)
+      actionpack (>= 3.0, < 4.3)
+      activesupport (>= 3.0, < 4.3)
+      railties (>= 3.0, < 4.3)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
-    rspec-support (3.2.1)
+    rspec-support (3.2.2)
     rubyzip (1.1.7)
     sass (3.4.12)
     sass-rails (5.0.1)
@@ -462,6 +474,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  blacklight!
   blacklight-gallery
   byebug
   capistrano
@@ -474,7 +487,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.4)
   hydra-collections!
   hydra-editor (~> 1.0.1)
-  hydra-head (~> 9.0.0)
+  hydra-head!
   hydra-role-management
   jbuilder (~> 2.0)
   jettywrapper
@@ -486,6 +499,7 @@ DEPENDENCIES
   rails (= 4.2.0)
   rdf-vocab
   riiif
+  rsolr
   rspec-activemodel-mocks
   rspec-rails
   sass-rails (~> 5.0)

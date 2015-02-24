@@ -2,19 +2,20 @@ class CollectionsController < ApplicationController
   include Blacklight::Catalog
   include Hydra::CollectionsControllerBehavior
 
-  self.solr_search_params_logic += [:only_collections]
+  configure_blacklight do |config|
+    config.search_builder_class = CollectionSearchBuilder
+  end
 
-  # include Blacklight::Catalog::SearchContext
 
   # TODO move this to hydra-collections
   def index
     # run the solr query to find the collections
-    (@response, @document_list) = get_search_results
+    (@response, @document_list) = search_results(params, search_params_logic + [:only_collections] - [:include_collection_ids])
   end
 
   def show
     super
-    solr_resp, @document = get_solr_response_for_doc_id(@collection.id)
+    solr_resp, @document = fetch(@collection.id)
   end
 
   # Queries Solr for members of the collection.
@@ -26,7 +27,7 @@ class CollectionsController < ApplicationController
     solr_params =  params.symbolize_keys.merge(q: query)
 
     # run the solr query to find the collections
-    (@response, @member_docs) = get_search_results(solr_params)
+    (@response, @member_docs) = search_results(solr_params, search_params_logic)
   end
 
   configure_blacklight do |config|
@@ -50,16 +51,10 @@ protected
     @_prefixes ||= super + ['catalog']
   end
 
-  def include_collection_ids(*)
-    return if action_name == 'index'
-    super
-  end
-
-  def only_collections(solr_parameters, user_parameters)
-    return unless action_name == 'index'
-    solr_parameters[:fq] ||= []
-    solr_parameters[:fq] << ActiveFedora::SolrQueryBuilder.construct_query_for_rel(has_model: Collection.to_class_uri)
-  end
+  # def include_collection_ids(*)
+  #   return if action_name == 'index'
+  #   super
+  # end
 
   # Override Blacklight method so that you can search and
   # facet within the current collection.
