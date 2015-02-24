@@ -140,7 +140,11 @@ describe Importer::ModsParser do
       expect(attributes[:language]).to eq ['http://id.loc.gov/vocabulary/iso639-2/zxx']
       expect(attributes[:work_type]).to eq ['still image']
       expect(attributes[:sub_location]).to eq ['Department of Special Collections']
-      expect(attributes[:location]).to eq ["http://id.loc.gov/authorities/names/n79041717", "Santa Barbara"]
+
+      # TODO: There is another location in the fixture file
+      # that doesn't have a valueURI.  How should that be
+      # handled?
+      expect(attributes[:location]).to eq ["http://id.loc.gov/authorities/names/n79041717"]
     end
   end
 

@@ -3,23 +3,6 @@ require 'rails_helper'
 describe Collection do
   describe "#to_solr" do
 
-    context 'with location' do
-      let(:uri) { 'http://id.loc.gov/authorities/names/n79041717' }
-      let(:loc_uri) { RDF::URI.new(uri) }
-      let(:loc_text) { 'Santa Barbara' }
-      let(:values) { [uri, 'Santa Barbara'] }
-      let(:labels) { ['California', 'Santa Barbara'] }
-
-      subject { Collection.new(location: [loc_uri, loc_text]).to_solr }
-
-      it 'has fields for location' do
-        expect(subject['location_tesim']).to eq values
-        expect(subject['location_sim']).to eq values
-        expect(subject['location_label_tesim']).to eq labels
-        expect(subject['location_label_sim']).to eq labels
-      end
-    end
-
     context 'collector with a URI' do
       let(:url) { 'http://id.loc.gov/authorities/names/n79064013' }
       subject { Collection.new(collector: [RDF::URI.new(url)]).to_solr }
@@ -39,8 +22,6 @@ describe Collection do
       it 'has fields for collector' do
         expect(subject['collector_teim']).to eq [jules_verne]
         expect(subject['collector_ssm']).to eq [jules_verne]
-        expect(subject['collector_label_teim']).to eq [jules_verne]
-        expect(subject['collector_label_ssm']).to eq [jules_verne]
       end
     end
 
