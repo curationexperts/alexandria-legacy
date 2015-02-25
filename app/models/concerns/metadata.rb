@@ -63,7 +63,9 @@ module Metadata
       index.as :stored_searchable
     end
 
-    property :series_name, :predicate => Oargun::Vocabularies::OARGUN.seriesName
+    property :series_name, predicate: ::RDF::URI('http://opaquenamespace.org/ns/seriesName') do |index|
+      index.as :displayable
+    end
 
     # Dates
     property :earliestDate, predicate: Oargun::Vocabularies::VRA.earliestDate do |index|
