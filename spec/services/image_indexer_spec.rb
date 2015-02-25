@@ -3,6 +3,13 @@ require 'rails_helper'
 describe ImageIndexer do
   subject { ImageIndexer.new(image).generate_solr_document }
 
+  context "with an ark" do
+    let(:image) { Image.new(identifier: ['ark:/99999/fk4123456']) }
+    it "indexes dates for display" do
+      expect(subject['identifier_ssm']).to eq ['ark:/99999/fk4123456']
+    end
+  end
+
   context "with an issued date" do
     let(:image) { Image.new(issued: ['1925-11']) }
 

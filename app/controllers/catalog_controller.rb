@@ -93,14 +93,15 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('series_name', :displayable), label: 'Series'
     config.add_show_field solr_name('work_type', :stored_searchable), label: 'Type of Resource'
     config.add_show_field solr_name('form_of_work_label', :stored_searchable), label: 'Form of Resource'
+    config.add_show_field solr_name('identifier', :displayable), label: 'ARK'
     config.add_show_field solr_name('location_label', :stored_searchable), label: 'Location'
     config.add_show_field solr_name('lc_subject_label', :stored_searchable), label: 'Subject'
     config.add_show_field solr_name('publisher', :stored_searchable), label: 'Publisher'
     config.add_show_field solr_name('creator_label', :stored_searchable), label: 'Creator'
-    config.add_show_field solr_name('language', :stored_searchable, type: :string), label:'Language'
-    config.add_show_field solr_name('latitude', :displayable, type: :string), label:'Latitude'
-    config.add_show_field solr_name('longitude', :displayable, type: :string), label:'Longitude'
-    config.add_show_field solr_name('sub_location', :displayable, type: :string), label:'Holding Sub-location'
+    config.add_show_field solr_name('language', :stored_searchable, type: :string), label: 'Language'
+    config.add_show_field solr_name('latitude', :displayable, type: :string), label: 'Latitude'
+    config.add_show_field solr_name('longitude', :displayable, type: :string), label: 'Longitude'
+    config.add_show_field solr_name('sub_location', :displayable, type: :string), label: 'Holding Sub-location'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields

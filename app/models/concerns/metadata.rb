@@ -3,7 +3,9 @@ module Metadata
   included do
 
     # For ARKs
-    property :identifier, predicate: ::RDF::DC.identifier
+    property :identifier, predicate: ::RDF::DC.identifier do |index|
+      index.as :displayable
+    end
 
     property :accession_number, predicate: ::RDF::URI('http://opaquenamespace.org/ns/cco/accessionNumber') do |index|
       index.as :symbol # needed for exact match search in the CollectionFactory
