@@ -189,6 +189,7 @@ GEM
       nokogiri (>= 1.4.3)
     erubis (2.7.0)
     execjs (2.3.0)
+    ezid-client (1.0.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.5.0)
@@ -484,6 +485,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   devise-guests (~> 0.3)
+  ezid-client (~> 1.0)
   factory_girl_rails (~> 4.4)
   hydra-collections!
   hydra-editor (~> 1.0.1)

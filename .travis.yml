@@ -6,6 +6,7 @@ rvm:
 before_script:
   - "cp config/secrets.yml.template config/secrets.yml"
   - "cp config/smtp.yml.template config/smtp.yml"
+  - "cp config/ezid.yml.template config/ezid.yml"
 
 notifications:
   email:

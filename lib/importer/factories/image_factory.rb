@@ -2,27 +2,23 @@ require_relative './object_factory'
 
 class ImageFactory < ObjectFactory
 
-  def run
-    if Image.exists?(attributes[:id])
-      image = Image.find(attributes[:id])
-      image.update(attributes.except(:id, :files, :collection))
-      puts "  Updated. #{attributes[:id]}"
-    else
-      image = create_image
-      puts "  Created #{image.id}" if image
-    end
-
-    add_image_to_collection(image, attributes)
-    image
+  def klass
+    Image
   end
 
-  def create_image
-    i = Image.create(attributes.except(:files, :collection)).tap do |image|
-      attributes[:files].each do |file_path|
-        create_file(image, file_path)
-      end
-      image.save # force a reindex after the files are created
+  def after_save(image)
+    add_image_to_collection(image, attributes)
+  end
+
+  def after_create(image)
+    attributes[:files].each do |file_path|
+      create_file(image, file_path)
     end
+    image.save # force a reindex after the files are created
+  end
+
+  def create_attributes
+    attributes.except(:files, :collection)
   end
 
   def create_file(image, file_name)

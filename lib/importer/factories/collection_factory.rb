@@ -1,17 +1,12 @@
 require_relative './object_factory'
 
 class CollectionFactory < ObjectFactory
+  def find
+    klass.where(accession_number_ssim: attributes[:accession_number].first).first
+  end
 
-  def run
-    if Collection.exists?(attributes[:id])
-      coll = Collection.find(attributes[:id])
-      coll.update(attributes.except(:id))
-      puts "  Updated. #{attributes[:id]}"
-    else
-      coll = Collection.create(attributes)
-      puts "  Created #{coll.id}" if coll
-    end
-    coll
+  def klass
+    Collection
   end
 
 end

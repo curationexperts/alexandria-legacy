@@ -13,6 +13,7 @@ describe Importer::ModsImporter do
 
     it "should create a new image and files" do
       image = nil
+      expect_any_instance_of(Ezid::Identifier).to receive(:target=).with(/http:\/\/test\.host\/catalog\/ark:\/99999\/fk4\w{7}$/)
       expect {
         image = importer.import(file)
       }.to change { Image.count }.by(1).
@@ -27,6 +28,7 @@ describe Importer::ModsImporter do
       expect(reloaded.generic_files.first).not_to be_nil
       expect(reloaded.generic_files.aggregation.head.next).not_to be_nil
 
+      expect(reloaded.identifier.first).to match /^ark:\/99999\/fk4\w{7}$/
     end
 
     it 'creates a collection' do
@@ -60,7 +62,6 @@ describe Importer::ModsImporter do
   end
 
   describe "#import a Collection" do
-    let(:id) { 'sbhcmss78' }
     let(:file) { 'spec/fixtures/mods/sbhcmss78_FlyingAStudios_collection.xml' }
 
     it 'creates a collection' do
@@ -69,13 +70,13 @@ describe Importer::ModsImporter do
         coll = importer.import(file)
       }.to change { Collection.count }.by(1)
 
-      expect(coll.id).to eq id
+      expect(coll.id).to match /^fk4\w{7}$/
       expect(coll.accession_number).to eq ['SBHC Mss 78']
       expect(coll.title).to eq 'Joel Conway / Flying A Studio photograph collection'
     end
 
     context 'when the collection already exists' do
-      let!(:coll) { Collection.create(id: id) }
+      let!(:existing) { Collection.create(id: 'fk4bv7mw47', accession_number: ['SBHC Mss 78']) }
 
       it 'it adds metadata to existing collection' do
         coll = nil
@@ -83,7 +84,7 @@ describe Importer::ModsImporter do
           coll = importer.import(file)
         }.to change { Collection.count }.by(0)
 
-        expect(coll.id).to eq id
+        expect(coll.id).to eq 'fk4bv7mw47'
         expect(coll.accession_number).to eq ['SBHC Mss 78']
         expect(coll.title).to eq 'Joel Conway / Flying A Studio photograph collection'
       end

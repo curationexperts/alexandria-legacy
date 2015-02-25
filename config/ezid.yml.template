@@ -1,0 +1,13 @@
+development:
+  host:             ezid.cdlib.org
+  port:             443
+  user:             apitest
+  password:         apitest
+  default_shoulder: ark:/99999/fk4
+test:
+  host:             ezid.cdlib.org
+  port:             443
+  user:             apitest
+  password:         apitest
+  default_shoulder: ark:/99999/fk4
+

@@ -6,7 +6,7 @@ module Metadata
     property :identifier, predicate: ::RDF::DC.identifier
 
     property :accession_number, predicate: ::RDF::URI('http://opaquenamespace.org/ns/cco/accessionNumber') do |index|
-      index.as :displayable
+      index.as :symbol # needed for exact match search in the CollectionFactory
     end
 
     property :title, predicate: ::RDF::DC.title, multiple: false do |index|
@@ -116,5 +116,9 @@ module Metadata
         arr << key
       end
     end
+  end
+
+  def ark
+    identifier.first
   end
 end
