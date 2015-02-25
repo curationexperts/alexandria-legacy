@@ -5,7 +5,9 @@ module Metadata
     # For ARKs
     property :identifier, predicate: ::RDF::DC.identifier
 
-    property :accession_number, predicate: ::RDF::URI('http://opaquenamespace.org/ns/cco/accessionNumber')
+    property :accession_number, predicate: ::RDF::URI('http://opaquenamespace.org/ns/cco/accessionNumber') do |index|
+      index.as :displayable
+    end
 
     property :title, predicate: ::RDF::DC.title, multiple: false do |index|
       index.as :stored_searchable
