@@ -66,18 +66,20 @@ module Metadata
     property :series_name, :predicate => Oargun::Vocabularies::OARGUN.seriesName
 
     # Dates
-    property :date, predicate: RDF::DC.date do |index|
-      index.as :stored_searchable, :facetable
-    end
     property :earliestDate, predicate: Oargun::Vocabularies::VRA.earliestDate do |index|
       index.as :stored_searchable, :facetable
     end
+
     property :issued, predicate: RDF::DC.issued do |index|
       index.as :stored_searchable, :facetable
     end
+
     property :latestDate, predicate: Oargun::Vocabularies::VRA.latestDate do |index|
       index.as :stored_searchable, :facetable
     end
+
+    property :date_other, predicate: RDF::DC.date
+
 
     # RDA
     property :form_of_work, predicate: RDF::URI('http://www.rdaregistry.info/Elements/w/#formOfWork.en'),

@@ -77,6 +77,13 @@ describe Importer::ModsParser do
       end
     end
 
+    context "with a file that has dateOther" do
+      let(:file) { 'spec/fixtures/mods/cusbspcmss36_110089.xml' }
+      it "imports date_other" do
+        expect(attributes[:date_other]).to eq ['undated']
+      end
+    end
+
     it 'finds metadata for the collection' do
       expect(attributes[:collection][:id]).to eq 'sbhcmss78'
       expect(attributes[:collection][:accession_number]).to eq ['SBHC Mss 78']
