@@ -33,8 +33,6 @@ describe Importer::ModsParser do
 
     it 'finds metadata for the image' do
       expect(attributes[:description]).to eq ['Another description', 'Man with a smile eyes to camera.']
-      expect(attributes[:rights].first.class).to eq RDF::URI
-      expect(attributes[:rights]).to eq ['http://www.europeana.eu/rights/unknown/']
       expect(attributes[:location]).to eq ["http://id.loc.gov/authorities/names/n79081574"]
       expect(attributes[:form_of_work]).to eq ["http://vocab.getty.edu/aat/300134920", "http://vocab.getty.edu/aat/300046300"]
       expect(attributes[:physical_extent]).to eq ['1 photograph : glass plate negative ; 13 x 18 cm (5 x 7 format)']

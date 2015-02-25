@@ -75,8 +75,7 @@ module Importer
         citation: citation,
         note: note,
         record_origin: mods.record_info.recordOrigin.map{|node| strip_whitespace(node.text) },
-        description_standard: mods.record_info.descriptionStandard.map(&:text),
-        rights: rights
+        description_standard: mods.record_info.descriptionStandard.map(&:text)
       }.merge(coordinates)
     end
 
@@ -189,25 +188,6 @@ module Importer
 
       def untyped_title
         mods.xpath('/m:mods/m:titleInfo[not(@type)]/m:title/text()', 'm' => Mods::MODS_NS).to_s
-      end
-
-      def rights
-        raw_data = mods.extension.xpath('./copyrightStatus').map(&:text).map(&:downcase)
-
-        raw_data.map do |rights_string|
-          uri = case rights_string
-            when 'unknown'
-              Oargun::Vocabularies::EURIGHTS[:"unknown/"]
-            when 'public domain'
-              Oargun::Vocabularies::CCPUBLIC[:"mark/1.0/"]
-            when 'copyrighted'
-              Oargun::Vocabularies::EURIGHTS[:"rr-f/"]
-            else
-              raise Oargun::RDF::Controlled::ControlledVocabularyError.new("The 'copyrightStatus' contained data that isn't in the controlled vocabulary: #{rights_string}")
-            end
-
-          RDF::URI.new(uri)
-        end
       end
 
   end

@@ -96,17 +96,4 @@ describe ImageIndexer do
     end
   end
 
-  context 'with rights' do
-    let(:uri) { 'http://www.europeana.eu/rights/rr-f/' }
-    let(:image) { Image.new(rights: [RDF::URI.new(uri)]) }
-
-    it 'has human-friendly labels' do
-      expect(subject['rights_teim']).to eq [uri]
-      expect(subject['rights_ssm']).to eq [uri]
-      expect(subject['rights_sim']).to eq [uri]
-      expect(subject['rights_label_teim']).to eq ["Rights Reserved - Free Access"]
-      expect(subject['rights_label_ssm']).to eq ["Rights Reserved - Free Access"]
-      expect(subject['rights_label_sim']).to eq ["Rights Reserved - Free Access"]
-    end
-  end
 end
