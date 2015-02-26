@@ -15,8 +15,8 @@ describe Importer::ModsImporter do
 
     it "creates a new image, files, and a collection" do
       image = nil
-      expect(identifier1).to receive(:target=).with(/http:\/\/test\.host\/catalog\/ark:\/99999\/fk41234567$/)
-      expect(identifier2).to receive(:target=).with(/http:\/\/test\.host\/catalog\/ark:\/99999\/fk49876543$/)
+      expect(identifier1).to receive(:target=).with(/http:\/\/test\.host\/lib\/ark:\/99999\/fk41234567$/)
+      expect(identifier2).to receive(:target=).with(/http:\/\/test\.host\/lib\/ark:\/99999\/fk49876543$/)
       expect(identifier1).to receive(:save)
       expect(identifier2).to receive(:save)
       expect_any_instance_of(ImageFactory).to receive(:mint_ark).and_return(identifier1)

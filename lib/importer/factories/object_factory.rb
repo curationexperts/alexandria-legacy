@@ -70,6 +70,6 @@ class ObjectFactory
     end
 
     def path_for(obj)
-      "http://#{host}/catalog/#{obj.ark}"
+      "http://#{host}/lib/#{obj.ark}"
     end
 end

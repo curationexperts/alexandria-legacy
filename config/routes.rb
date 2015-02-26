@@ -8,9 +8,8 @@ Rails.application.routes.draw do
   get  'contact_us' => 'contact_us#new',    as: :contact_us_form
 
   blacklight_for :catalog
-  get 'catalog/:id' => 'catalog#show',
-    constraints: { id: /ark:\/99999\/fk4\w{7}/ },
-    as: 'ark'
+  get 'lib/:id' => 'catalog#show',
+    constraints: { id: /ark:\/99999\/fk4\w{7}/ }
 
   devise_for :users
   mount Hydra::RoleManagement::Engine => '/'

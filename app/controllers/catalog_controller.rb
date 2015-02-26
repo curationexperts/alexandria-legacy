@@ -16,6 +16,8 @@ class CatalogController < ApplicationController
   add_show_tools_partial(:edit, partial: 'catalog/edit', if: :editor?)
   add_show_tools_partial(:download, partial: 'catalog/download')
 
+  before_action :convert_ark_to_id, only: :show
+
   configure_blacklight do |config|
     config.search_builder_class = SearchBuilder
     config.view.gallery.partials = [:index_header, :index]
@@ -157,4 +159,12 @@ class CatalogController < ApplicationController
     # mean") suggestion is offered.
     config.spell_max = 5
   end
+
+  private
+
+    def convert_ark_to_id
+      if matches = /^ark:\/\d{5}\/(\w{10})$/.match(params[:id])
+        params[:id] = matches[1]
+      end
+    end
 end

@@ -35,4 +35,8 @@ class SolrDocument
       super
     end
   end
+
+  def ark
+    self[Solrizer.solr_name('identifier', :displayable)].first
+  end
 end
