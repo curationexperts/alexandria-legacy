@@ -6,7 +6,7 @@ class ImageFactory < ObjectFactory
     Image
   end
 
-  def after_save(image)
+  def before_save(image)
     add_image_to_collection(image, attributes)
   end
 
@@ -48,8 +48,9 @@ class ImageFactory < ObjectFactory
     id = attrs[:collection][:id]
 
     coll = CollectionFactory.new(attrs[:collection], nil).run
-    coll.members << image
-    coll.save
+    image.collections << coll
+    # save the image to trigger a reindex with the collection association
+    image.save
   end
 
 end

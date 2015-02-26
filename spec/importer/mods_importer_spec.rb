@@ -43,6 +43,9 @@ describe Importer::ModsImporter do
       expect(coll.accession_number).to eq ['SBHC Mss 36']
       expect(coll.title).to eq 'Santa Barbara picture postcards collection'
       expect(coll.members).to eq [reloaded]
+
+      solr_doc = ActiveFedora::SolrService.query("id:#{image.id}").first
+      expect(solr_doc['collection_label_ssim']).to eq ['Santa Barbara picture postcards collection']
     end
 
     context 'when the collection already exists' do
