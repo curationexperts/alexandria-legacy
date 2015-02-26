@@ -100,7 +100,7 @@ module Metadata
 
     property :description_standard, predicate: RDF::Vocab::MODS.recordDescriptionStandard
 
-    property :physical_extent, predicate: RDF::Vocab::MODS.physicalExtent do |index|
+    property :extent, predicate: RDF::DC.extent do |index|
       index.as :searchable, :displayable
     end
 

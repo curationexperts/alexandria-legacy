@@ -7,7 +7,7 @@ RSpec.feature 'Collection show page:', :type => :feature do
   let(:pink_attrs) {{ title: 'Pink',
                       publisher: ['Colors Pub', 'Pink Pub'] }}
 
-  let(:colors_attrs) {{ title: 'Colors', physical_extent: ['7 photos'] }}
+  let(:colors_attrs) {{ title: 'Colors', extent: ['7 photos'] }}
   let(:colors) { create_collection_with_images(colors_attrs, [red_attrs, pink_attrs]) }
 
   let(:user) { create :user }
@@ -38,7 +38,7 @@ RSpec.feature 'Collection show page:', :type => :feature do
   scenario 'View collection metadata' do
     visit collections.collection_path(colors)
     expect(page).to have_content colors_attrs[:title]
-    expect(page).to have_content colors_attrs[:physical_extent].first
+    expect(page).to have_content colors_attrs[:extent].first
   end
 
 end
