@@ -10,11 +10,11 @@ class ObjectFactory
   def run
     if obj = find
       obj.update(attributes.except(:id))
-      puts "  Updated. #{obj.id} (#{attributes[:accession_number].first})"
+      puts "  Updated #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
     else
       obj = create
       after_create(obj)
-      puts "  Created. #{obj.id} (#{attributes[:accession_number].first})"
+      puts "  Created #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
     end
     after_save(obj)
     obj
@@ -38,7 +38,8 @@ class ObjectFactory
 
   def create
     attrs = create_attributes
-    identifier = mint_ark(attrs)
+    identifier = mint_ark
+    attrs.merge!(identifier: [identifier.id], id: identifier.id.split(/\//).last)
     klass.create(attrs) do |object|
       identifier.target = path_for(object)
       identifier.save
@@ -49,12 +50,9 @@ class ObjectFactory
     raise "You must implement the klass method"
   end
 
-  # Caution - This mutates attributes
   # @return [Ezid::Identifier] the new identifier
-  def mint_ark(attributes)
-    identifier = Ezid::Identifier.create
-    attributes.merge!(identifier: [identifier.id], id: identifier.id.split(/\//).last)
-    identifier
+  def mint_ark
+    Ezid::Identifier.create
   end
 
   private

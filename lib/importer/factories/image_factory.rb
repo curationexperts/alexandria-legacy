@@ -28,7 +28,7 @@ class ImageFactory < ObjectFactory
       return
     end
     image.generic_files.create do |gf|
-      puts "  Reading image #{file_name}"
+      puts "  Attaching binary #{file_name}"
       gf.original.mime_type = mime_type(path)
       gf.original.original_name = File.basename(path)
       gf.original.content = File.new(path)
@@ -47,12 +47,7 @@ class ImageFactory < ObjectFactory
   def add_image_to_collection(image, attrs)
     id = attrs[:collection][:id]
 
-    coll = if Collection.exists?(id)
-             Collection.find(id)
-           else
-             Collection.create(attrs[:collection])
-           end
-
+    coll = CollectionFactory.new(attrs[:collection], nil).run
     coll.members << image
     coll.save
   end

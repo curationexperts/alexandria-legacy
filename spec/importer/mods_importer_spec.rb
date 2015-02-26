@@ -9,15 +9,24 @@ describe Importer::ModsImporter do
 
   describe "#import an Image" do
     let(:file) { 'spec/fixtures/mods/cusbspcmss36_110108.xml' }
-    let(:collection_id) { 'sbhcmss36' }
 
-    it "should create a new image and files" do
+    let(:identifier1) { double('ARK1', id: 'ark:/99999/fk41234567') }
+    let(:identifier2) { double('ARK2', id: 'ark:/99999/fk49876543') }
+
+    it "creates a new image, files, and a collection" do
       image = nil
-      expect_any_instance_of(Ezid::Identifier).to receive(:target=).with(/http:\/\/test\.host\/catalog\/ark:\/99999\/fk4\w{7}$/)
+      expect(identifier1).to receive(:target=).with(/http:\/\/test\.host\/catalog\/ark:\/99999\/fk41234567$/)
+      expect(identifier2).to receive(:target=).with(/http:\/\/test\.host\/catalog\/ark:\/99999\/fk49876543$/)
+      expect(identifier1).to receive(:save)
+      expect(identifier2).to receive(:save)
+      expect_any_instance_of(ImageFactory).to receive(:mint_ark).and_return(identifier1)
+      expect_any_instance_of(CollectionFactory).to receive(:mint_ark).and_return(identifier2)
+
       expect {
         image = importer.import(file)
       }.to change { Image.count }.by(1).
-      and change { GenericFile.count }.by(2)
+        and change { GenericFile.count }.by(2).
+        and change { Collection.count }.by(1)
 
       original = image.generic_files.first.original
       expect(original.mime_type).to eq 'image/tiff'
@@ -29,25 +38,19 @@ describe Importer::ModsImporter do
       expect(reloaded.generic_files.aggregation.head.next).not_to be_nil
 
       expect(reloaded.identifier.first).to match /^ark:\/99999\/fk4\w{7}$/
-    end
 
-    it 'creates a collection' do
-      expect {
-        importer.import(file)
-      }.to change { Collection.count }.by(1)
-
-      expect(Image.count).to eq 1
-      image = Image.first
-
-      coll = Collection.find(collection_id)
+      coll = reloaded.collections.first
       expect(coll.accession_number).to eq ['SBHC Mss 36']
       expect(coll.title).to eq 'Santa Barbara picture postcards collection'
-      expect(coll.members).to eq [image]
-      expect(image.collections).to eq [coll]
+      expect(coll.members).to eq [reloaded]
     end
 
     context 'when the collection already exists' do
-      let!(:coll) { Collection.create(id: collection_id) }
+      let!(:coll) { Collection.create(id: 'fk44174k70', accession_number: ['SBHC Mss 36']) }
+      before do
+        # skip creating files
+        allow_any_instance_of(ImageFactory).to receive(:after_create)
+      end
 
       it 'it adds image to existing collection' do
         expect(coll.members.count).to eq 0
@@ -90,5 +93,4 @@ describe Importer::ModsImporter do
       end
     end
   end
-
 end
