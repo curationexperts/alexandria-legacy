@@ -40,7 +40,7 @@ describe Importer::ModsParser do
       expect(attributes[:sub_location]).to eq ['Department of Special Collections']
       expect(attributes[:citation]).to eq ["[Identification of Item], Joel Conway / Flying A Studio\nPhotograph Collection. SBHC Mss 78. Department of Special Collections, UC Santa Barbara\nLibrary, University of California, Santa Barbara."]
       expect(attributes[:note]).to eq ["Gift from Pat Eagle-Schnetzer and Ronald Conway, and purchase\nfrom Joan Cota (Conway children), 2009."]
-      expect(attributes[:record_origin]).to eq ['Converted from CSV to MODS 3.4 using local mapping.']
+      expect(attributes[:record_origin]).to eq ['Converted from CSV to MODS 3.4 using local mapping.', Importer::ModsParser::ORIGIN_TEXT]
       expect(attributes[:description_standard]).to eq ['local']
       expect(attributes[:series_name]).to eq ['Series 4: Glass Negatives']
     end
@@ -150,7 +150,7 @@ describe Importer::ModsParser do
       expect(attributes[:language]).to eq ['http://id.loc.gov/vocabulary/iso639-2/zxx']
       expect(attributes[:work_type]).to eq ['still image']
       expect(attributes[:sub_location]).to eq ['Department of Special Collections']
-      expect(attributes[:record_origin]).to eq ['Human created']
+      expect(attributes[:record_origin]).to eq ['Human created', Importer::ModsParser::ORIGIN_TEXT ]
 
       # TODO: There is another location in the fixture file
       # that doesn't have a valueURI.  How should that be
@@ -160,4 +160,3 @@ describe Importer::ModsParser do
   end
 
 end
-

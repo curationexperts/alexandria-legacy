@@ -5,6 +5,8 @@ module Importer
     CREATOR = "http://id.loc.gov/vocabulary/relators/cre".freeze
     COLLECTOR = "http://id.loc.gov/vocabulary/relators/col".freeze
 
+    ORIGIN_TEXT = 'Converted from MODS 3.4 to local RDF profile by ADRL'.freeze
+
     NAMESPACES = { 'mods'.freeze => Mods::MODS_NS }
 
     def initialize(file)
@@ -75,9 +77,17 @@ module Importer
         work_type: mods.typeOfResource.map(&:text),
         citation: citation,
         note: note,
-        record_origin: mods.record_info.recordOrigin.map{|node| strip_whitespace(node.text) },
+        record_origin: record_origin,
         description_standard: mods.record_info.descriptionStandard.map(&:text)
       }.merge(coordinates)
+    end
+
+    def record_origin
+      ro = []
+      if mods.record_info && mods.record_info.respond_to?(:recordOrigin)
+        ro += mods.record_info.recordOrigin.map {|node| strip_whitespace(node.text) }
+      end
+      ro << ORIGIN_TEXT
     end
 
     # returns a hash with :latitude and :longitude
