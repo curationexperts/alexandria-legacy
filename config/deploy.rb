@@ -11,7 +11,7 @@ set :keep_releases, 5
 
 set :assets_prefix, "#{shared_path}/public/assets"
 
-set :linked_files, %w{config/database.yml config/fedora.yml config/secrets.yml config/smtp.yml config/solr.yml config/environments/production.rb config/initializers/blacklight_initializer.rb config/initializers/devise.rb}
+set :linked_files, %w{config/blacklight.yml config/database.yml config/ezid.yml config/fedora.yml config/secrets.yml config/smtp.yml config/solr.yml config/environments/production.rb config/initializers/blacklight_initializer.rb config/initializers/devise.rb}
 
 set :linked_dirs, %w{tmp/pids tmp/cache tmp/sockets public/assets}
 
