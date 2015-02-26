@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'hydra-head', github: 'projecthydra/hydra-head', branch: 'blacklight-5.10'
 gem 'hydra-editor', '~> 1.0.1'
 gem 'hydra-role-management'
-gem 'hydra-collections', github: 'projecthydra-labs/hydra-collections', branch: 'blacklight-5.10'
+gem 'hydra-collections', github: 'projecthydra-labs/hydra-collections'
 gem 'rdf-vocab'
 gem 'blacklight', github: 'projectblacklight/blacklight'
 gem 'rsolr'

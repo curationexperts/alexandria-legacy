@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: 02347657ee6081ef76a884b5fbfa36320781cc16
+  revision: 3644c4783eba8c8c47a67b2af7dd923b5a649502
   specs:
     oargun (0.0.1)
       active-triples (~> 0.6.0)
@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/projectblacklight/blacklight.git
-  revision: 708963dc4286db345303e16dcf3b7d12ea8cea18
+  revision: 50acc870be1a81352255fdeb4d75d92ac7eeb67a
   specs:
     blacklight (5.10.0)
       bootstrap-sass (~> 3.2)
@@ -32,8 +32,7 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra-labs/hydra-collections.git
-  revision: c99cb78c5ff84a7ae1661b38567e65f8dcaff3d6
-  branch: blacklight-5.10
+  revision: 0786ef14ee41fa05592597b00fafb62bb02c6ecd
   specs:
     hydra-collections (4.0.0)
       blacklight (~> 5.10.0)
@@ -230,8 +229,8 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.2)
-    json-ld (1.1.7)
-      rdf (~> 1.1, >= 1.1.4)
+    json-ld (1.1.8)
+      rdf (~> 1.1, >= 1.1.7)
     ldp (0.2.3)
       faraday
       http_logger
@@ -275,7 +274,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
-    netrc (0.10.2)
+    netrc (0.10.3)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     nom-xml (0.5.2)
@@ -287,7 +286,7 @@ GEM
       activesupport
       nokogiri (>= 1.4.2)
       solrizer (~> 3.3)
-    openseadragon (0.0.9)
+    openseadragon (0.1.0)
       rails (> 3.2.0)
     orm_adapter (0.5.0)
     pg (0.18.1)
@@ -325,7 +324,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
-    rdf (1.1.8)
+    rdf (1.1.9)
       link_header (~> 0.0, >= 0.0.8)
     rdf-aggregate-repo (1.1.0)
       rdf (>= 1.1)
@@ -368,8 +367,8 @@ GEM
       rdf (~> 1.1, >= 1.1.4)
     rdf-vocab (0.4.0)
       linkeddata
-    rdf-xsd (1.1.2)
-      rdf (~> 1.1)
+    rdf-xsd (1.1.3)
+      rdf (~> 1.1, >= 1.1.9)
     rdoc (4.2.0)
       json (~> 1.4)
     ref (1.0.5)
