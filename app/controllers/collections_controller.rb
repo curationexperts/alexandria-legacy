@@ -31,6 +31,9 @@ class CollectionsController < ApplicationController
   end
 
   configure_blacklight do |config|
+    # Fields for the Collection show page
+    config.show_fields.delete(Solrizer.solr_name('description', :stored_searchable))
+
     # Fields for the Collection index page
     # (Clear out fields that were added by the CatalogController)
     config.index_fields.clear
