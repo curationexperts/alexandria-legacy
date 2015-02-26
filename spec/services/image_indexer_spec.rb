@@ -14,7 +14,7 @@ describe ImageIndexer do
     let(:image) { Image.new(issued: ['1925-11']) }
 
     it "indexes dates for display" do
-      expect(subject['issued_tesim']).to eq ["1925-11"]
+      expect(subject['issued_ssm']).to eq ["1925-11"]
     end
 
     it "makes a sortable date field" do
@@ -26,15 +26,34 @@ describe ImageIndexer do
     end
   end
 
-  context "with earliestDate and latestDate" do
-    let(:earliestDate) { ['1917'] }
-    let(:latestDate) { ['1923'] }
-    let(:issued) { [earliestDate.first, latestDate.first] }
-    let(:image) { Image.new(earliestDate: earliestDate, latestDate: latestDate, issued: issued) }
+  context "with issued_start and issued_end" do
+    let(:issued_start) { ['1917'] }
+    let(:issued_end) { ['1923'] }
+    let(:issued) { [issued_start.first, issued_end.first] }
+    let(:image) { Image.new(issued_start: issued_start, issued_end: issued_end) }
 
     it "indexes dates for display" do
-      expect(subject['earliestDate_tesim']).to eq ["1917"]
-      expect(subject['latestDate_tesim']).to eq ["1923"]
+      expect(subject['issued_start_ssm']).to eq ["1917"]
+      expect(subject['issued_end_ssm']).to eq ["1923"]
+    end
+
+    it "makes a sortable date field" do
+      expect(subject['date_si']).to eq "1917"
+    end
+
+    it "makes a facetable year field" do
+      expect(subject['year_iim']).to eq [1917, 1918, 1919, 1920, 1921, 1922, 1923]
+    end
+  end
+
+  context "with created_start and created_end" do
+    let(:created_start) { ['1917'] }
+    let(:created_end) { ['1923'] }
+    let(:image) { Image.new(created_start: created_start, created_end: created_end) }
+
+    it "indexes dates for display" do
+      expect(subject['created_start_ssm']).to eq ["1917"]
+      expect(subject['created_end_ssm']).to eq ["1923"]
     end
 
     it "makes a sortable date field" do

@@ -64,9 +64,11 @@ module Importer
         creator:   creator,
         collector: creator(COLLECTOR),
         extent: mods.physical_description.extent.map{|node| strip_whitespace(node.text)},
-        earliestDate: earliest_date,
-        latestDate: latest_date,
+        issued_start: issued_start,
+        issued_end: issued_end,
         issued: issued,
+        created_start: created_start,
+        created_end: created_end,
         date_other: mods.origin_info.dateOther.map(&:text),
         language: mods.language.languageTerm.valueURI.map { |uri| RDF::URI.new(uri) },
         digital_origin: mods.physical_description.digitalOrigin.map(&:text),
@@ -131,19 +133,10 @@ module Importer
       end
     end
 
-    def earliest_date
-      # Use a string because it may be any ISO8601 format:
-      [created_start, issued_start].reject(&:empty?)
-    end
-
-    def latest_date
-      # Use a string because it may be any ISO8601 format:
-      [created_end, issued_end].reject(&:empty?)
-    end
-
     def issued
-      # Use a string because it may be any ISO8601 format:
-      mods.origin_info.dateIssued.map(&:text)
+      # Use a string because it may be any ISO8601 format.
+      # Looking for any dateIssued without a point attribute
+      mods.origin_info.dateIssued.css(":not([point])").map(&:text)
     end
 
     def persistent_id(raw_id)
@@ -183,7 +176,7 @@ module Importer
       end
 
       def created_range_limit(point)
-        mods.origin_info.dateCreated.css("[point=\"#{point}\"]").text
+        mods.origin_info.dateCreated.css("[point=\"#{point}\"]").map(&:text)
       end
 
       def issued_end
@@ -194,7 +187,7 @@ module Importer
         issued_range_limit('start'.freeze)
       end
       def issued_range_limit(point)
-        mods.origin_info.dateIssued.css("[point=\"#{point}\"]").text
+        mods.origin_info.dateIssued.css("[point=\"#{point}\"]").map(&:text)
       end
 
       def untyped_title

@@ -91,27 +91,27 @@ describe Importer::ModsParser do
     end
 
     context "with a range of dateCreated" do
-      it "imports earliestDate" do
-        expect(attributes[:earliestDate]).to eq ['1910']
+      it "imports created_start" do
+        expect(attributes[:created_start]).to eq ['1910']
       end
 
-      it "imports latestDate" do
-        expect(attributes[:latestDate]).to eq ['1919']
+      it "imports created_end" do
+        expect(attributes[:created_end]).to eq ['1919']
       end
     end
 
     context "with a file that has a range of dateIssued" do
       let(:file) { 'spec/fixtures/mods/cusbspcmss36_110089.xml' }
       it "imports issued" do
-        expect(attributes[:issued]).to eq ['1900', '1959']
+        expect(attributes[:issued]).to eq []
       end
 
-      it "imports earliest_date" do
-        expect(attributes[:earliestDate]).to eq ['1900']
+      it "imports issued_start" do
+        expect(attributes[:issued_start]).to eq ['1900']
       end
 
-      it "imports latest_date" do
-        expect(attributes[:latestDate]).to eq ['1959']
+      it "imports issued_end" do
+        expect(attributes[:issued_end]).to eq ['1959']
       end
     end
 
@@ -142,8 +142,8 @@ describe Importer::ModsParser do
       expect(attributes[:creator]).to eq []
       expect(attributes[:collector]).to eq ['Conway, Joel']
       expect(attributes[:description]).to eq ['Black and white photographs relating to the Flying A Studios (aka American Film Manufacturing Company), a film company that operated in Santa Barbara (1912-1920).']
-      expect(attributes[:earliestDate]).to eq ['1910']
-      expect(attributes[:latestDate]).to eq ['1919']
+      expect(attributes[:created_start]).to eq ['1910']
+      expect(attributes[:created_end]).to eq ['1919']
       expect(attributes[:extent]).to eq ['702 digital objects']
       expect(attributes[:lc_subject]).to eq ["http://id.loc.gov/authorities/subjects/sh85088047", "http://id.loc.gov/authorities/subjects/sh99005024"]
       expect(attributes[:form_of_work]).to eq ["http://vocab.getty.edu/aat/300046300", "http://vocab.getty.edu/aat/300128343"]

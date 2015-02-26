@@ -31,22 +31,6 @@ module CollectionsHelper
     display_fields
   end
 
-  def display_dates(args)
-    start_date = args[:document][Solrizer.solr_name('earliestDate', :stored_searchable)]
-    end_date = args[:document][Solrizer.solr_name('latestDate', :stored_searchable)]
-
-    dates = if start_date && end_date
-              "#{Array(start_date).first}-#{Array(end_date).first}"
-            elsif start_date
-              Array(start_date).join(', ')
-            elsif end_date
-              Array(end_date).join(', ')
-            else
-              ''
-            end
-    dates
-  end
-
   def display_collector(args)
     label = args[:document][Solrizer.solr_name('collector_label', :displayable)]
     collector = args[:document][Solrizer.solr_name('collector', :displayable)]

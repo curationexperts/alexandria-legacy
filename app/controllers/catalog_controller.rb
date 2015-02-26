@@ -100,7 +100,9 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('location_label', :stored_searchable), label: 'Location'
     config.add_show_field solr_name('lc_subject_label', :stored_searchable), label: 'Subject'
     config.add_show_field solr_name('publisher', :stored_searchable), label: 'Publisher'
-    config.add_show_field solr_name('earliestDate', :stored_searchable), label: 'Creation Date', helper_method: :display_dates
+    config.add_show_field solr_name('created_start', :displayable), label: 'Creation Date', helper_method: :display_dates
+    config.add_show_field solr_name('issued', :displayable), label: 'Issued Date'
+    config.add_show_field solr_name('issued_start', :displayable), label: 'Issued Date', helper_method: :display_dates
     config.add_show_field solr_name('creator_label', :stored_searchable), label: 'Creator'
     config.add_show_field solr_name('collector', :displayable), label: 'Collector', helper_method: :display_collector
     config.add_show_field solr_name('language', :stored_searchable, type: :string), label: 'Language'

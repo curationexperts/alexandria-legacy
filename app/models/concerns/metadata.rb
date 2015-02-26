@@ -1,7 +1,6 @@
 module Metadata
   extend ActiveSupport::Concern
   included do
-
     # For ARKs
     property :identifier, predicate: ::RDF::DC.identifier do |index|
       index.as :displayable
@@ -70,16 +69,24 @@ module Metadata
     end
 
     # Dates
-    property :earliestDate, predicate: Oargun::Vocabularies::VRA.earliestDate do |index|
-      index.as :stored_searchable, :facetable
-    end
-
     property :issued, predicate: RDF::DC.issued do |index|
-      index.as :stored_searchable, :facetable
+      index.as :displayable
     end
 
-    property :latestDate, predicate: Oargun::Vocabularies::VRA.latestDate do |index|
-      index.as :stored_searchable, :facetable
+    property :issued_start, predicate: RDF::URI('http://www.loc.gov/mods/rdf/v1#dateIssuedStart') do |index|
+      index.as :displayable
+    end
+
+    property :issued_end, predicate: RDF::URI('http://www.loc.gov/mods/rdf/v1#dateIssuedEnd') do |index|
+      index.as :displayable
+    end
+
+    property :created_start, predicate: RDF::Vocab::MODS.dateCreatedStart do |index|
+      index.as :displayable
+    end
+
+    property :created_end, predicate: RDF::Vocab::MODS.dateCreatedEnd do |index|
+      index.as :displayable
     end
 
     property :date_other, predicate: RDF::DC.date
@@ -109,6 +116,8 @@ module Metadata
     end
 
     property :record_origin, predicate: RDF::Vocab::MODS.recordOrigin
+
+    accepts_nested_attributes_for :creator, reject_if: proc { |attributes| attributes[:id].blank? }
 
   end
 

@@ -27,4 +27,34 @@ describe Image do
       image.to_solr
     end
   end
+
+  describe "dates" do
+    let(:image) { Image.new }
+
+    describe "ranges" do
+      before do
+        image.created_start = ['1911']
+        image.created_end = ['1912']
+        image.issued_start = ['1913']
+        image.issued_end = ['1917']
+      end
+
+      it "stores them" do
+        expect(image.created_start).to eq ['1911']
+        expect(image.created_end).to eq ['1912']
+        expect(image.issued_start).to eq ['1913']
+        expect(image.issued_end).to eq ['1917']
+      end
+    end
+
+    describe "points" do
+      before do
+        image.issued = ['1913']
+      end
+      it "stores them" do
+        expect(image.issued).to eq ['1913']
+      end
+    end
+  end
+
 end

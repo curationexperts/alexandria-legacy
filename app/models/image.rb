@@ -2,7 +2,6 @@ class Image < ActiveFedora::Base
   include Metadata
   include Hydra::Collections::Collectible
 
-  accepts_nested_attributes_for :creator, reject_if: proc { |attributes| attributes[:id].blank? }
 
   after_save :save_aggregator
 

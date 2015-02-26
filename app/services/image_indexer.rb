@@ -4,8 +4,9 @@ class ImageIndexer < ActiveFedora::IndexingService
   end
 
   CREATOR_MULTIPLE = Solrizer.solr_name('creator_label', :stored_searchable)
-  ISSUED = Solrizer.solr_name('issued', :facetable)
-  EARLIEST_DATE = Solrizer.solr_name('earliestDate', :facetable)
+  ISSUED = Solrizer.solr_name('issued', :displayable)
+  ISSUED_START = Solrizer.solr_name('issued_start', :displayable)
+  CREATED_START = Solrizer.solr_name('created_start', :displayable)
   SORTABLE_CREATOR = Solrizer.solr_name('creator_label', :sortable)
   SORTABLE_DATE = Solrizer.solr_name('date', :sortable)
   FACETABLE_YEAR = 'year_iim'
@@ -37,19 +38,25 @@ class ImageIndexer < ActiveFedora::IndexingService
     def sortable_date(solr_doc)
       if solr_doc.key? ISSUED
         solr_doc.fetch(ISSUED).first
-      elsif solr_doc.key? EARLIEST_DATE
-        solr_doc.fetch(EARLIEST_DATE).first
+      elsif solr_doc.key? ISSUED_START
+        solr_doc.fetch(ISSUED_START).first
+      elsif solr_doc.key? CREATED_START
+        solr_doc.fetch(CREATED_START).first
       end
     end
 
     # Create a year field (integer, multiple) for faceting on
     def facetable_year(solr_doc)
-      if object.earliestDate.present? && object.latestDate.present?
-        start = extract_year(object.earliestDate.first)
-        stop = extract_year(object.latestDate.first)
+      if object.issued_start.present?
+        start = extract_year(object.issued_start.first)
+        stop = extract_year(object.issued_end.first)
         (start..stop).to_a
-      elsif object.issued
+      elsif object.issued.present?
         object.issued.map { |date| extract_year(date) }
+      elsif object.created_start.present?
+        start = extract_year(object.created_start.first)
+        stop = extract_year(object.created_end.first)
+        (start..stop).to_a
       end
     end
 
