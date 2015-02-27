@@ -58,7 +58,7 @@ module Importer
         id: persistent_id(human_readable_id.first),
         accession_number: human_readable_id,
         title: untyped_title,
-        alternative: mods.title_info.alternative_title.to_a,
+        alternative: alt_title,
         description: description,
         lc_subject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
         creator:   creator,
@@ -193,6 +193,21 @@ module Importer
 
       def untyped_title
         mods.xpath('/m:mods/m:titleInfo[not(@type)]/m:title/text()', 'm' => Mods::MODS_NS).to_s
+      end
+
+      def alt_title
+        Array(mods.xpath('//mods:titleInfo[@type]', NAMESPACES)).flat_map do |node|
+          type = node.attributes['type'].text
+          alternative = 'alternative'.freeze
+
+          node.title.map do |title|
+            value = title.text
+            unless type == alternative
+              puts "  Transformtion: \"#{type} title\" will be stored as \"#{alternative} title\": #{value}"
+            end
+            value
+          end
+        end
       end
 
   end
