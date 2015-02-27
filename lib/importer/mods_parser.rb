@@ -44,7 +44,7 @@ module Importer
       common_attributes.merge!({
         files: mods.extension.xpath('./fileName').map(&:text),
         collection: collection,
-        series_name: mods.xpath("//mods:relatedItem[@type='series']").titleInfo.title.map(&:text)
+        series_name: mods.xpath("//mods:relatedItem[@type='series']", NAMESPACES).titleInfo.title.map(&:text)
       })
     end
 
@@ -74,7 +74,7 @@ module Importer
         digital_origin: mods.physical_description.digitalOrigin.map(&:text),
         publisher: mods.origin_info.publisher.map(&:text),
         location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
-        sub_location: mods.location.holdingSimple.xpath('./mods:copyInformation/mods:subLocation').map(&:text),
+        sub_location: mods.location.holdingSimple.xpath('./mods:copyInformation/mods:subLocation', NAMESPACES).map(&:text),
         form_of_work: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
         work_type: mods.typeOfResource.map(&:text),
         citation: citation,
@@ -145,7 +145,7 @@ module Importer
     end
 
     def collection
-      human_readable_id = Array(mods.related_item.at_xpath('mods:identifier[@type="local"]'.freeze).text)
+      human_readable_id = Array(mods.related_item.at_xpath('mods:identifier[@type="local"]'.freeze, NAMESPACES).text)
 
       { id: persistent_id(human_readable_id.first),
         accession_number: human_readable_id,
