@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'ControlledVocabularyInput', type: :input do
   let(:image) { Image.new }
-  let(:bar1) { double('value 1', rdf_label: ['Item 1'], rdf_subject: 'http://example.org/1') }
+  let(:bar1) { double('value 1', rdf_label: ['Item 1'], rdf_subject: 'http://example.org/1', node?: false) }
   let(:bar2) { double('value 2', rdf_label: ['Item 2'], rdf_subject: 'http://example.org/2') }
   let(:builder) { SimpleForm::FormBuilder.new(:image, image, view, {}) }
   let(:input) { ControlledVocabularyInput.new(builder, :creator, nil, :multi_value, {}) }
@@ -17,13 +17,27 @@ describe 'ControlledVocabularyInput', type: :input do
   end
 
   describe '#build_field' do
-    subject { input.send(:build_field, bar1, 0) }
+    subject { input.send(:build_field, bar, 0) }
 
-    it 'renders multi-value' do
-      expect(subject).to have_selector('input.image_creator.multi_value')
-      expect(subject).to have_field('image[creator_attributes][0][id]', with: 'Item 1')
-      expect(subject).to have_selector('input[name="image[creator_attributes][0][hidden_label]"][value="http://example.org/1"]')
+    context "for a b-node" do
+      let(:bar) { double('value 1', rdf_label: [], rdf_subject: '_:134', node?: true) }
+      it 'renders multi-value' do
+        expect(subject).to have_selector('input.image_creator.multi_value')
+        expect(subject).to have_field('image[creator_attributes][0][id]', with: '')
+        expect(subject).not_to have_selector('input[name="image[creator_attributes][0][hidden_label]"]')
 
+      end
+    end
+
+    context "for a resource" do
+      let(:bar) { double('value 1', rdf_label: ['Item 1'], rdf_subject: 'http://example.org/1', node?: false) }
+      before { expect(bar).to receive(:fetch) }
+      it 'renders multi-value' do
+        expect(subject).to have_selector('input.image_creator.multi_value')
+        expect(subject).to have_field('image[creator_attributes][0][hidden_label]', with: 'Item 1')
+        expect(subject).to have_selector('input[name="image[creator_attributes][0][id]"][value="http://example.org/1"]')
+
+      end
     end
   end
 end

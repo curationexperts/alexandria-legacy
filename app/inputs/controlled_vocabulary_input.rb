@@ -12,10 +12,17 @@ class ControlledVocabularyInput < MultiValueInput
 
       if value.respond_to? :rdf_label
         uri = value.rdf_subject.to_s
-        value = value.rdf_label.first
-        options[:name] = "#{@builder.object_name}[#{attribute_name}_attributes][#{index}][id]"
+        if value.node?
+          options[:name] = "#{@builder.object_name}[#{attribute_name}_attributes][#{index}][id]"
+          options[:value] = ''
+        else
+          # TODO fetch is slow
+          value.fetch
+          options[:readonly] = true
+          options[:value] = value.rdf_label.first
+          options[:name] = "#{@builder.object_name}[#{attribute_name}_attributes][#{index}][hidden_label]"
+        end
       end
-      options[:value] = value
       if @rendered_first_element
         options[:id] = nil
         options[:required] = nil
@@ -28,15 +35,18 @@ class ControlledVocabularyInput < MultiValueInput
       @rendered_first_element = true
       text_field = if options.delete(:type) == 'textarea'.freeze
         @builder.text_area(attribute_name, options)
+      elsif uri
+        @builder.text_field(attribute_name, options)
       else
         @builder.text_field(attribute_name, options)
       end
-      uri_field = nil
-      if uri
-        options[:name] = options[:name].gsub("id", "hidden_label")
-        options[:value] = uri
-        uri_field = @builder.hidden_field(attribute_name, options)
-      end
-      text_field + uri_field
+      text_field + hidden_id_field(value, options)
+    end
+
+    def hidden_id_field(value, options)
+      return if value.node?
+      options[:name] = options[:name].gsub("hidden_label", "id")
+      options[:value] = value.rdf_subject
+      @builder.hidden_field(attribute_name, options)
     end
 end
