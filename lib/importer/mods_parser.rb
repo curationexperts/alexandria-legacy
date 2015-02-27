@@ -80,6 +80,7 @@ module Importer
         citation: citation,
         note: note,
         record_origin: record_origin,
+        use_restrictions: mods.xpath('/m:mods/m:accessCondition[@type="use and reproduction"]', 'm' => Mods::MODS_NS).map {|node| strip_whitespace(node.text) },
         description_standard: mods.record_info.descriptionStandard.map(&:text)
       }.merge(coordinates)
     end

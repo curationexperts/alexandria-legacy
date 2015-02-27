@@ -43,6 +43,7 @@ describe Importer::ModsParser do
       expect(attributes[:record_origin]).to eq ['Converted from CSV to MODS 3.4 using local mapping.', Importer::ModsParser::ORIGIN_TEXT]
       expect(attributes[:description_standard]).to eq ['local']
       expect(attributes[:series_name]).to eq ['Series 4: Glass Negatives']
+      expect(attributes[:use_restrictions]).to eq ['Use governed by the UCSB Special Collections policy.']
     end
 
     context "with a file that has a publisher" do

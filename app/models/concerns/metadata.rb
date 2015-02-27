@@ -117,6 +117,8 @@ module Metadata
 
     property :record_origin, predicate: RDF::Vocab::MODS.recordOrigin
 
+    property :use_restrictions, predicate: RDF::Vocab::MODS.accessCondition
+
     accepts_nested_attributes_for :creator, reject_if: proc { |attributes| attributes[:id].blank? }
 
   end
