@@ -7,7 +7,4 @@ class WelcomeController < ApplicationController
   def about
   end
 
-  def off_campus_login
-  end
-
 end

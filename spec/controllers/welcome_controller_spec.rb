@@ -30,18 +30,4 @@ RSpec.describe WelcomeController, :type => :controller do
     end
   end
 
-  describe "off_campus_login" do
-    before { get :off_campus_login }
-
-    it "is successful" do
-      expect(response).to have_http_status(:success)
-      expect(response).to render_template(:off_campus_login)
-    end
-
-    it "uses the normal blacklight layout" do
-      expect(response).to     render_template(:blacklight)
-      expect(response).to_not render_template(:welcome)
-    end
-  end
-
 end
