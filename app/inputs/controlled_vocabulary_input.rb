@@ -11,16 +11,10 @@ class ControlledVocabularyInput < MultiValueInput
       options = input_html_options.dup
 
       if value.respond_to? :rdf_label
-        uri = value.rdf_subject.to_s
         if value.node?
-          options[:name] = "#{@builder.object_name}[#{attribute_name}_attributes][#{index}][id]"
-          options[:value] = ''
+          build_options_for_new_row(attribute_name, index, options)
         else
-          # TODO fetch is slow
-          value.fetch
-          options[:readonly] = true
-          options[:value] = value.rdf_label.first
-          options[:name] = "#{@builder.object_name}[#{attribute_name}_attributes][#{index}][hidden_label]"
+          build_options_for_existing_row(attribute_name, index, value, options)
         end
       end
       if @rendered_first_element
@@ -35,8 +29,6 @@ class ControlledVocabularyInput < MultiValueInput
       @rendered_first_element = true
       text_field = if options.delete(:type) == 'textarea'.freeze
         @builder.text_area(attribute_name, options)
-      elsif uri
-        @builder.text_field(attribute_name, options)
       else
         @builder.text_field(attribute_name, options)
       end
@@ -48,5 +40,22 @@ class ControlledVocabularyInput < MultiValueInput
       options[:name] = options[:name].gsub("hidden_label", "id")
       options[:value] = value.rdf_subject
       @builder.hidden_field(attribute_name, options)
+    end
+
+    def build_options_for_new_row(attribute_name, index, options)
+      options[:name] = "#{@builder.object_name}[#{attribute_name}_attributes][#{index}][id]"
+      options[:value] = ''
+    end
+
+    def build_options_for_existing_row(attribute_name, index, value, options)
+      # TODO fetch is slow
+      begin
+        value.fetch
+        options[:value] = value.rdf_label.first
+      rescue IOError
+        options[:value] = "Error fetching value for #{value.rdf_subject}"
+      end
+      options[:readonly] = true
+      options[:name] = "#{@builder.object_name}[#{attribute_name}_attributes][#{index}][hidden_label]"
     end
 end
