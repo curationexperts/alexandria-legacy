@@ -18,6 +18,30 @@ describe Image do
         expect(subject.creator.size).to eq 1
       end
     end
+
+    context "for location" do
+      it "should ignore empty ids" do
+        subject.location_attributes = {"0" => { "id"=>"http://id.loc.gov/authorities/names/n87141298" },
+                        "1" => { "id"=>"" } }
+        expect(subject.location.size).to eq 1
+      end
+    end
+
+    context "for lc_subject" do
+      it "should ignore empty ids" do
+        subject.lc_subject_attributes = {"0" => { "id"=>"http://id.loc.gov/authorities/subjects/sh85111007" },
+                        "1" => { "id"=>"" } }
+        expect(subject.lc_subject.size).to eq 1
+      end
+    end
+
+    context "for form_of_work" do
+      it "should ignore empty ids" do
+        subject.form_of_work_attributes = {"0" => { "id"=>"http://vocab.getty.edu/aat/300026816" },
+                        "1" => { "id"=>"" } }
+        expect(subject.form_of_work.size).to eq 1
+      end
+    end
   end
 
   describe "#to_solr" do

@@ -25,7 +25,14 @@ class ImageForm
 
     def self.build_permitted_params
       permitted = super
+      permitted.delete(creator: [])
+      permitted.delete(location: [])
+      permitted.delete(lc_subject: [])
+      permitted.delete(form_of_work: [])
       permitted << { creator_attributes: [:id] }
+      permitted << { location_attributes: [:id] }
+      permitted << { lc_subject_attributes: [:id] }
+      permitted << { form_of_work_attributes: [:id] }
       permitted
     end
 end
