@@ -52,7 +52,8 @@ class ControlledVocabularyInput < MultiValueInput
       begin
         value.fetch
         options[:value] = value.rdf_label.first
-      rescue IOError
+      rescue IOError => e
+        Rails.logger.error "Error fetching value from remote repository #{value.rdf_subject}\n#{e.message}"
         options[:value] = "Error fetching value for #{value.rdf_subject}"
       end
       options[:readonly] = true
