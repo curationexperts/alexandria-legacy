@@ -6,15 +6,15 @@
 				<mods:roleTerm type="text" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators" valueURI="http://id.loc.gov/vocabulary/relators/cre">Creator</mods:roleTerm>
 			</mods:role>
 		</mods:name><mods:typeOfResource>still image</mods:typeOfResource><mods:genre authority="aat" authorityURI="http://vocab.getty.edu/aat" valueURI="http://vocab.getty.edu/aat/300134920">Gelatin dry plate negatives</mods:genre><mods:genre authority="aat" authorityURI="http://vocab.getty.edu/aat" valueURI="http://vocab.getty.edu/aat/300046300">Photographs</mods:genre><mods:originInfo>
-			<mods:dateCreated encoding="iso8601" point="start" qualifier="approximate" keyDate="yes">1910</mods:dateCreated>
-			<mods:dateCreated encoding="iso8601" point="end" qualifier="approximate">1919</mods:dateCreated>
+			<mods:dateCreated encoding="w3cdtf" point="start" qualifier="approximate" keyDate="yes">1910</mods:dateCreated>
+			<mods:dateCreated encoding="w3cdtf" point="end" qualifier="approximate">1919</mods:dateCreated>
 		</mods:originInfo><mods:identifier type="local">cusbspcsbhc78_100239</mods:identifier><mods:language>
 			<mods:languageTerm authority="iso639-2b" type="code" authorityURI="http://id.loc.gov/vocabulary/iso639-2" valueURI="http://id.loc.gov/vocabulary/iso639-2/zxx">zxx</mods:languageTerm>
 		</mods:language><mods:physicalDescription>
 			<mods:digitalOrigin>digitized other analog</mods:digitalOrigin>
 			<mods:extent>1 photograph : glass plate negative ; 13 x 18 cm (5 x 7
 				format)</mods:extent>
-      </mods:physicalDescription><mods:abstract>Another description</mods:abstract><mods:abstract>Man with a smile eyes to camera.</mods:abstract><mods:note type="acquisition">Gift from Pat Eagle-Schnetzer and Ronald Conway, and purchase
+		</mods:physicalDescription><mods:abstract>Man with a smile eyes to camera.</mods:abstract><mods:note type="acquisition">Gift from Pat Eagle-Schnetzer and Ronald Conway, and purchase
 			from Joan Cota (Conway children), 2009.</mods:note><mods:note type="preferred citation">[Identification of Item], Joel Conway / Flying A Studio
 			Photograph Collection. SBHC Mss 78. Department of Special Collections, UC Santa Barbara
 			Library, University of California, Santa Barbara.</mods:note><mods:subject>
@@ -42,19 +42,9 @@
 			</mods:holdingSimple>
 		</mods:location><mods:accessCondition type="use and reproduction">Use governed by the UCSB Special
 			Collections policy.</mods:accessCondition><mods:extension>
-			<fileName>cusbspcsbhc78_100239_d_a.tif</fileName>
+			<fileName>cusbspcsbhc78_100239_a.tif</fileName>
 			<copyrightStatus>Unknown</copyrightStatus>
-			<copyrightStatement>Some materials in these collections may be protected by the U.S.
-				Copyright Law (Title 17, U.S.C.). In addition, the reproduction, and/or commercial
-				use, of some materials may be restricted by gift or purchase agreements, donor
-				restrictions, privacy and publicity rights, licensing agreement(s), and/or trademark
-				rights (contact the Department of Special Collections at the UC Santa Barbara
-				Library for more information). Distribution or reproduction of materials protected
-				by copyright beyond that allowed by fair use requires the written permission of the
-				copyright owners. To the extent other restrictions apply, permission for
-				distribution or reproduction from the applicable rights holder is also required.
-				Responsibility for obtaining permissions, and for any use rests exclusively with the
-				user.</copyrightStatement>
+			<copyrightStatement>http://www.europeana.eu/rights/unknown/</copyrightStatement>
 			<flagged/>
 		</mods:extension><mods:recordInfo>
 			<mods:descriptionStandard>local</mods:descriptionStandard>
