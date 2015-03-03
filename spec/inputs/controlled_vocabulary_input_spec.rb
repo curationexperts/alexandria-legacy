@@ -24,6 +24,7 @@ describe 'ControlledVocabularyInput', type: :input do
       it 'renders multi-value' do
         expect(subject).to have_selector('input.image_creator.multi_value')
         expect(subject).to have_field('image[creator_attributes][0][id]', with: '')
+        expect(subject).to have_selector('input[name="image[creator_attributes][0][_destroy]"]')
         expect(subject).not_to have_selector('input[name="image[creator_attributes][0][hidden_label]"]')
 
       end
@@ -36,8 +37,10 @@ describe 'ControlledVocabularyInput', type: :input do
         expect(subject).to have_selector('input.image_creator.multi_value')
         expect(subject).to have_field('image[creator_attributes][0][hidden_label]', with: 'Item 1')
         expect(subject).to have_selector('input[name="image[creator_attributes][0][id]"][value="http://example.org/1"]')
+        expect(subject).to have_selector('input[name="image[creator_attributes][0][_destroy]"][value=""][data-destroy]')
 
       end
+
     end
   end
 end

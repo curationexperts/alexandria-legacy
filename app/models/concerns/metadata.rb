@@ -119,10 +119,12 @@ module Metadata
 
     property :use_restrictions, predicate: RDF::Vocab::MODS.accessCondition
 
-    accepts_nested_attributes_for :creator, reject_if: proc { |attributes| attributes[:id].blank? }
-    accepts_nested_attributes_for :location, reject_if: proc { |attributes| attributes[:id].blank? }
-    accepts_nested_attributes_for :lc_subject, reject_if: proc { |attributes| attributes[:id].blank? }
-    accepts_nested_attributes_for :form_of_work, reject_if: proc { |attributes| attributes[:id].blank? }
+    id_blank = proc { |attributes| attributes[:id].blank? }
+
+    accepts_nested_attributes_for :creator, reject_if: id_blank, allow_destroy: true
+    accepts_nested_attributes_for :location, reject_if: id_blank, allow_destroy: true
+    accepts_nested_attributes_for :lc_subject, reject_if: id_blank, allow_destroy: true
+    accepts_nested_attributes_for :form_of_work, reject_if: id_blank, allow_destroy: true
 
   end
 

@@ -18,10 +18,7 @@ class ControlledVocabularyInput < MultiValueInput
         end
       end
       if @rendered_first_element
-        options[:id] = nil
         options[:required] = nil
-      else
-        options[:id] ||= input_dom_id
       end
       options[:class] ||= []
       options[:class] += ["#{input_dom_id} form-control multi-text-field"]
@@ -32,19 +29,28 @@ class ControlledVocabularyInput < MultiValueInput
       else
         @builder.text_field(attribute_name, options)
       end
-      text_field + hidden_id_field(value, options)
+      text_field + hidden_id_field(value, index) + destroy_widget(attribute_name, index)
     end
 
-    def hidden_id_field(value, options)
+    def destroy_widget(attribute_name, index)
+      @builder.hidden_field(attribute_name,
+                            name: name_for(attribute_name, index, '_destroy'.freeze),
+                            id: id_for(attribute_name, index, '_destroy'.freeze),
+                            value: "", data: { destroy: true })
+    end
+
+    def hidden_id_field(value, index)
       return if value.node?
-      options[:name] = options[:name].gsub("hidden_label", "id")
-      options[:value] = value.rdf_subject
-      @builder.hidden_field(attribute_name, options)
+      name = name_for(attribute_name, index, 'id'.freeze)
+      id = id_for(attribute_name, index, 'id'.freeze)
+      value = value.rdf_subject
+      @builder.hidden_field(attribute_name, name: name, id: id, value: value)
     end
 
     def build_options_for_new_row(attribute_name, index, options)
-      options[:name] = "#{@builder.object_name}[#{attribute_name}_attributes][#{index}][id]"
+      options[:name] = name_for(attribute_name, index, 'id'.freeze)
       options[:value] = ''
+      options[:id] = id_for(attribute_name, index, 'id')
     end
 
     def build_options_for_existing_row(attribute_name, index, value, options)
@@ -52,11 +58,22 @@ class ControlledVocabularyInput < MultiValueInput
       begin
         value.fetch
         options[:value] = value.rdf_label.first
-      rescue IOError => e
+      rescue IOError, SocketError => e
+        # IOError could result from a 500 error on the remote server
+        # SocketError results if there is no server to connect to
         Rails.logger.error "Error fetching value from remote repository #{value.rdf_subject}\n#{e.message}"
         options[:value] = "Error fetching value for #{value.rdf_subject}"
       end
       options[:readonly] = true
-      options[:name] = "#{@builder.object_name}[#{attribute_name}_attributes][#{index}][hidden_label]"
+      options[:name] = name_for(attribute_name, index, 'hidden_label'.freeze)
+      options[:id] = id_for(attribute_name, index, 'hidden_label'.freeze)
+    end
+
+    def name_for(attribute_name, index, field)
+      "#{@builder.object_name}[#{attribute_name}_attributes][#{index}][#{field}]"
+    end
+
+    def id_for(attribute_name, index, field)
+      [@builder.object_name, "#{attribute_name}_attributes", index, field].join('_'.freeze)
     end
 end

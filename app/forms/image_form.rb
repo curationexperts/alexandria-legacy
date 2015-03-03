@@ -29,10 +29,10 @@ class ImageForm
       permitted.delete(location: [])
       permitted.delete(lc_subject: [])
       permitted.delete(form_of_work: [])
-      permitted << { creator_attributes: [:id] }
-      permitted << { location_attributes: [:id] }
-      permitted << { lc_subject_attributes: [:id] }
-      permitted << { form_of_work_attributes: [:id] }
+      permitted << { creator_attributes: [:id, :_destroy] }
+      permitted << { location_attributes: [:id, :_destroy] }
+      permitted << { lc_subject_attributes: [:id, :_destroy] }
+      permitted << { form_of_work_attributes: [:id, :_destroy] }
       permitted
     end
 end
