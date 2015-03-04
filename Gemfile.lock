@@ -19,8 +19,18 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
+  remote: git://github.com/jcoyne/mods.git
+  revision: 995c126ecd0921194b6f77d4d8817e6af633806c
+  branch: commented_out_reused_codes
+  specs:
+    mods (2.0.2)
+      iso-639
+      nokogiri
+      nom-xml (~> 0.5.2)
+
+GIT
   remote: git://github.com/projectblacklight/blacklight.git
-  revision: 50acc870be1a81352255fdeb4d75d92ac7eeb67a
+  revision: bf5033e9a86ffb34f56a3dfc9047012a38fe524b
   specs:
     blacklight (5.10.0)
       bootstrap-sass (~> 3.2)
@@ -32,12 +42,29 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra-labs/hydra-collections.git
-  revision: 0786ef14ee41fa05592597b00fafb62bb02c6ecd
+  revision: 9de14ccffdc60d9fdf13bcdcbe135fc28304e5bc
   specs:
     hydra-collections (4.0.0)
       blacklight (~> 5.10.0)
       deprecation (~> 0.1.0)
       hydra-head (~> 9.0.1)
+
+GIT
+  remote: git://github.com/projecthydra/active_fedora.git
+  revision: 75b4afb248ee61d9edb56911b2ef51f30f1ce17f
+  branch: encapsulate_solr_escape
+  specs:
+    active-fedora (9.0.2)
+      active-triples (~> 0.6.0)
+      activesupport (>= 4.1.0)
+      deprecation
+      ldp (~> 0.2.1)
+      linkeddata
+      nom-xml (>= 0.5.1)
+      om (~> 3.1)
+      rdf-ldp
+      rdf-rdfxml (~> 1.1.0)
+      rsolr (~> 1.0.10)
 
 GIT
   remote: git://github.com/projecthydra/hydra-head.git
@@ -59,6 +86,13 @@ GIT
       hydra-access-controls (= 9.0.1)
       hydra-core (= 9.0.1)
       rails (>= 3.2.6)
+
+GIT
+  remote: git://github.com/rsolr/rsolr.git
+  revision: 122a96de80f85aabe98db0a3dbcf281352b06434
+  specs:
+    rsolr (1.0.11)
+      builder (>= 2.1.2)
 
 GEM
   remote: https://rubygems.org/
@@ -82,17 +116,6 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    active-fedora (9.0.2)
-      active-triples (~> 0.6.0)
-      activesupport (>= 4.1.0)
-      deprecation
-      ldp (~> 0.2.1)
-      linkeddata
-      nom-xml (>= 0.5.1)
-      om (~> 3.1)
-      rdf-ldp
-      rdf-rdfxml (~> 1.1.0)
-      rsolr (~> 1.0.10)
     active-triples (0.6.1)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -122,7 +145,7 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
-    blacklight-gallery (0.1.2)
+    blacklight-gallery (0.2.0)
       blacklight (~> 5.0)
       bootstrap-sass (~> 3.0)
       openseadragon (>= 0.0.9)
@@ -137,8 +160,7 @@ GEM
       debugger-linecache (~> 1.2)
       slop (~> 3.6)
     cancancan (1.10.1)
-    capistrano (3.3.5)
-      capistrano-stats (~> 1.1.0)
+    capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
       sshkit (~> 1.3)
@@ -150,7 +172,6 @@ GEM
     capistrano-rails (1.1.2)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
-    capistrano-stats (1.1.1)
     capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -190,7 +211,7 @@ GEM
       nokogiri (>= 1.4.3)
     erubis (2.7.0)
     execjs (2.3.0)
-    ezid-client (1.0.0)
+    ezid-client (1.0.1)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.5.0)
@@ -217,7 +238,7 @@ GEM
       cancancan
     i18n (0.7.0)
     iso-639 (0.2.5)
-    jbuilder (2.2.8)
+    jbuilder (2.2.9)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jettywrapper (2.0.3)
@@ -266,10 +287,6 @@ GEM
     mime-types (2.4.3)
     mini_portile (0.6.2)
     minitest (5.5.1)
-    mods (2.0.2)
-      iso-639
-      nokogiri
-      nom-xml (~> 0.5.2)
     multi_json (1.11.0)
     multipart-post (2.0.0)
     net-http-persistent (2.9.4)
@@ -372,7 +389,6 @@ GEM
     rdf-xsd (1.1.3)
       rdf (~> 1.1, >= 1.1.9)
     rdoc (4.2.0)
-      json (~> 1.4)
     ref (1.0.5)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
@@ -381,8 +397,6 @@ GEM
       netrc (~> 0.7)
     riiif (0.0.10)
       rails (> 3.2.0)
-    rsolr (1.0.10)
-      builder (>= 2.1.2)
     rspec-activemodel-mocks (1.0.1)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
@@ -405,7 +419,7 @@ GEM
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
     rubyzip (1.1.7)
-    sass (3.4.12)
+    sass (3.4.13)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
@@ -436,7 +450,7 @@ GEM
     sparql-client (1.1.3.1)
       net-http-persistent (~> 2.9)
       rdf (~> 1.1)
-    spring (1.3.2)
+    spring (1.3.3)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -447,7 +461,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
     sqlite3 (1.3.10)
-    sshkit (1.6.1)
+    sshkit (1.7.1)
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
@@ -463,12 +477,12 @@ GEM
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.7.0)
+    uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
-    xml-simple (1.1.4)
+    xml-simple (1.1.5)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -476,6 +490,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active-fedora!
   blacklight!
   blacklight-gallery
   byebug
@@ -497,13 +512,13 @@ DEPENDENCIES
   jettywrapper
   jquery-rails
   kaminari!
-  mods (~> 2.0.1)
+  mods (~> 2.0.1)!
   oargun!
   pg
   rails (= 4.2.0)
   rdf-vocab
   riiif
-  rsolr
+  rsolr!
   rspec-activemodel-mocks
   rspec-rails
   sass-rails (~> 5.0)

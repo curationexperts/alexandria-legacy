@@ -18,6 +18,7 @@ class CatalogController < ApplicationController
 
   before_action :convert_ark_to_id, only: :show
 
+
   configure_blacklight do |config|
     config.search_builder_class = SearchBuilder
     config.view.gallery.partials = [:index_header, :index]
@@ -28,6 +29,7 @@ class CatalogController < ApplicationController
 
     config.default_solr_params = {
       qf: 'title_tesim lc_subject_label_tesim',
+      wt: 'json',
       qt: 'search',
       rows: 10
     }

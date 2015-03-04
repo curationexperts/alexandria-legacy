@@ -2,7 +2,8 @@ require 'rails_helper'
 
 describe RDF::Solr do
   let(:graph) { RDF::Graph.load('spec/fixtures/sh85062487.rdf') }
-  let(:repo) { described_class.new }
+  let(:solr) { Blacklight.default_index.connection }
+  let(:repo) { described_class.new(solr) }
   let(:uri) { RDF::URI('http://id.loc.gov/authorities/subjects/sh85062487') }
   let(:pattern) { RDF::Query::Pattern.from([uri, nil, nil]) }
 

@@ -1,6 +1,6 @@
 def configure_repositories
   ActiveTriples::Repositories.clear_repositories!
-  ActiveTriples::Repositories.add_repository :vocabs, RDF::Solr.new()
+  ActiveTriples::Repositories.add_repository :vocabs, RDF::Solr.new(Blacklight.default_index.connection)
 end
 
 configure_repositories

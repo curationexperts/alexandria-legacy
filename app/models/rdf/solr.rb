@@ -5,8 +5,8 @@ module RDF
 
     DEFAULT_GRAPH_FIELD = 'graph_ss'
 
-    def initialize(path=nil, options={})
-      @solr = Blacklight.solr
+    def initialize(solr_conn=nil, options={})
+      @solr = solr_conn
       @options = options
     end
 

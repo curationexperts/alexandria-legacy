@@ -25,14 +25,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 #gem 'hydra-head', '~> 9.0.0'
 gem 'hydra-head', github: 'projecthydra/hydra-head', branch: 'blacklight-5.10'
+gem 'active-fedora', github: 'projecthydra/active_fedora', branch: 'encapsulate_solr_escape'
 gem 'hydra-editor', '~> 1.0.1'
 gem 'hydra-role-management'
 gem 'hydra-collections', github: 'projecthydra-labs/hydra-collections'
 gem 'rdf-vocab'
 gem 'blacklight', github: 'projectblacklight/blacklight'
-gem 'rsolr'
+gem 'rsolr', github: 'rsolr/rsolr'
 
-gem 'mods', '~> 2.0.1'
+gem 'mods', '~> 2.0.1', github: 'jcoyne/mods', branch: 'commented_out_reused_codes'
 gem 'oargun', github: 'curationexperts/oargun'
 gem 'blacklight-gallery'
 gem 'riiif'
