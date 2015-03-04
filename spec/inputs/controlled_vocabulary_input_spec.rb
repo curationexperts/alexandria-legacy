@@ -32,7 +32,6 @@ describe 'ControlledVocabularyInput', type: :input do
 
     context "for a resource" do
       let(:bar) { double('value 1', rdf_label: ['Item 1'], rdf_subject: 'http://example.org/1', node?: false) }
-      before { expect(bar).to receive(:fetch) }
       it 'renders multi-value' do
         expect(subject).to have_selector('input.image_creator.multi_value')
         expect(subject).to have_field('image[creator_attributes][0][hidden_label]', with: 'Item 1')

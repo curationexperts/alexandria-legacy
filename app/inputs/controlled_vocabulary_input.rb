@@ -54,16 +54,7 @@ class ControlledVocabularyInput < MultiValueInput
     end
 
     def build_options_for_existing_row(attribute_name, index, value, options)
-      # TODO fetch is slow
-      begin
-        value.fetch
-        options[:value] = value.rdf_label.first
-      rescue IOError, SocketError => e
-        # IOError could result from a 500 error on the remote server
-        # SocketError results if there is no server to connect to
-        Rails.logger.error "Error fetching value from remote repository #{value.rdf_subject}\n#{e.message}"
-        options[:value] = "Error fetching value for #{value.rdf_subject}"
-      end
+      options[:value] = value.rdf_label.first || "Unable to fetch label for #{value.rdf_subject}"
       options[:readonly] = true
       options[:name] = name_for(attribute_name, index, 'hidden_label'.freeze)
       options[:id] = id_for(attribute_name, index, 'hidden_label'.freeze)
