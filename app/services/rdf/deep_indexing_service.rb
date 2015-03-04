@@ -38,13 +38,13 @@ class RDF::DeepIndexingService < ActiveFedora::RDF::IndexingService
   end
 
   def append_label_and_uri(solr_doc, solr_field_key, field_info, val)
-    begin
-      # TODO This should not be in this method because it's slow. We should run it in a background job.
-      # See https://github.com/OregonDigital/oregondigital/blob/master/lib/oregon_digital/rdf/deep_fetch.rb
-      val.fetch
-    rescue SocketError, IOError => e
-      Rails.logger.error "Couldn't fetch RDF label for #{val.id}\n#{e.message}"
-    end
+    # begin
+    #   # TODO This should not be in this method because it's slow. We should run it in a background job.
+    #   # See https://github.com/OregonDigital/oregondigital/blob/master/lib/oregon_digital/rdf/deep_fetch.rb
+    #   val.fetch
+    # rescue SocketError, IOError => e
+    #   Rails.logger.error "Couldn't fetch RDF label for #{val.id}\n#{e.message}"
+    # end
     val = val.solrize
     self.class.create_and_insert_terms(solr_field_key,
                                        val.first,

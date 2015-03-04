@@ -54,6 +54,14 @@ describe Importer::ModsParser do
       end
     end
 
+    context "with a file that has a photographer" do
+      let(:file) { 'spec/fixtures/mods/cusbmss228-p00003.xml' }
+
+      it 'imports photographer' do
+        expect(attributes[:photographer]).to eq ['http://id.loc.gov/authorities/names/n97003180']
+      end
+    end
+
     it "imports creator" do
       expect(attributes[:creator]).to eq ['http://id.loc.gov/authorities/names/n87914041']
     end

@@ -3,7 +3,6 @@ module Importer
     attr_reader :mods, :model
 
     CREATOR = "http://id.loc.gov/vocabulary/relators/cre".freeze
-    COLLECTOR = "http://id.loc.gov/vocabulary/relators/col".freeze
 
     ORIGIN_TEXT = 'Converted from MODS 3.4 to local RDF profile by ADRL'.freeze
 
@@ -53,36 +52,69 @@ module Importer
     end
 
     def common_attributes
-      human_readable_id = mods.identifier.map(&:text)
+      description.
+        merge(dates).
+        merge(locations).
+        merge(rights).
+        merge(identifiers).
+        merge(relations)
+    end
+
+    def description
       {
-        id: persistent_id(human_readable_id.first),
-        accession_number: human_readable_id,
         title: untyped_title,
         alternative: alt_title,
-        description: description,
+        description: mods_description,
         lc_subject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
-        creator:   creator,
-        collector: creator(COLLECTOR),
         extent: mods.physical_description.extent.map{|node| strip_whitespace(node.text)},
-        issued_start: issued_start,
-        issued_end: issued_end,
-        issued: issued,
-        created_start: created_start,
-        created_end: created_end,
-        date_other: mods.origin_info.dateOther.map(&:text),
         language: mods.language.languageTerm.valueURI.map { |uri| RDF::URI.new(uri) },
         digital_origin: mods.physical_description.digitalOrigin.map(&:text),
         publisher: mods.origin_info.publisher.map(&:text),
-        location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
-        sub_location: mods.location.holdingSimple.xpath('./mods:copyInformation/mods:subLocation', NAMESPACES).map(&:text),
         form_of_work: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
         work_type: mods.typeOfResource.map(&:text),
         citation: citation,
         note: note,
         record_origin: record_origin,
-        use_restrictions: mods.xpath('/m:mods/m:accessCondition[@type="use and reproduction"]', 'm' => Mods::MODS_NS).map {|node| strip_whitespace(node.text) },
         description_standard: mods.record_info.descriptionStandard.map(&:text)
+      }
+    end
+
+    def rights
+      {
+        use_restrictions: mods.xpath('/m:mods/m:accessCondition[@type="use and reproduction"]', 'm' => Mods::MODS_NS).map {|node| strip_whitespace(node.text) },
+      }
+    end
+
+    def locations
+      {
+        location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
+        sub_location: mods.location.holdingSimple.xpath('./mods:copyInformation/mods:subLocation', NAMESPACES).map(&:text)
       }.merge(coordinates)
+    end
+
+    def dates
+      {
+        issued_start: issued_start,
+        issued_end: issued_end,
+        issued: issued,
+        created_start: created_start,
+        created_end: created_end,
+        date_other: mods.origin_info.dateOther.map(&:text)
+      }
+    end
+
+    def identifiers
+      human_readable_id = mods.identifier.map(&:text)
+      {
+        id: persistent_id(human_readable_id.first),
+        accession_number: human_readable_id
+      }
+    end
+
+    def relations
+      Metadata::MARCREL.each_with_object({creator: creator}) do |(field, predicate), object|
+        object[field] = creator(predicate)
+      end
     end
 
     def record_origin
@@ -105,7 +137,7 @@ module Importer
       end
     end
 
-    def description
+    def mods_description
       mods.abstract.map{|e| strip_whitespace(e.text) }
     end
 

@@ -19,6 +19,22 @@ describe Image do
       end
     end
 
+    context "for landscape_architect" do
+      it "should ignore empty ids" do
+        subject.landscape_architect_attributes = {"0" => { "id"=>"http://id.loc.gov/authorities/names/n87141298" },
+                        "1" => { "id"=>"" } }
+        expect(subject.landscape_architect.size).to eq 1
+      end
+    end
+
+    context "for performer" do
+      it "should ignore empty ids" do
+        subject.performer_attributes = {"0" => { "id"=>"http://id.loc.gov/authorities/names/n87141298" },
+                        "1" => { "id"=>"" } }
+        expect(subject.performer.size).to eq 1
+      end
+    end
+
     context "for location" do
       it "should ignore empty ids" do
         subject.location_attributes = {"0" => { "id"=>"http://id.loc.gov/authorities/names/n87141298" },

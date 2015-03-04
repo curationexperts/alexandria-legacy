@@ -1,5 +1,13 @@
 module Metadata
   extend ActiveSupport::Concern
+
+  autoload :MARCREL, 'concerns/relators'
+
+  RELATIONS = {
+    contributor:         ::RDF::DC.contributor,
+    creator:             ::RDF::DC.creator,
+  }.merge(MARCREL)
+
   included do
     # For ARKs
     property :identifier, predicate: ::RDF::DC.identifier do |index|
@@ -18,17 +26,18 @@ module Metadata
       index.as :stored_searchable
     end
 
-    property :creator, predicate: ::RDF::DC.creator, class_name: Oargun::ControlledVocabularies::Creator do |index|
-      index.as :stored_searchable, :facetable
+    # property :creator, predicate: ::RDF::DC.creator, class_name: Oargun::ControlledVocabularies::Creator do |index|
+    #   index.as :stored_searchable, :facetable
+    # end
+    RELATIONS.each do |field_name, predicate|
+      property field_name, predicate: predicate, class_name: Oargun::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
     end
 
-    property :collector, :predicate => Oargun::Vocabularies::MARCREL.col, class_name: Oargun::ControlledVocabularies::Creator do |index|
-      index.as :searchable, :displayable
-    end
-
-    property :contributor, predicate: ::RDF::DC.contributor do |index|
-      index.as :stored_searchable
-    end
+    # property :contributor, predicate: ::RDF::DC.contributor do |index|
+    #   index.as :stored_searchable
+    # end
 
     property :description, predicate: ::RDF::DC.description do |index|
       index.as :stored_searchable
@@ -121,7 +130,9 @@ module Metadata
 
     id_blank = proc { |attributes| attributes[:id].blank? }
 
-    accepts_nested_attributes_for :creator, reject_if: id_blank, allow_destroy: true
+    RELATIONS.keys.each do |relation|
+      accepts_nested_attributes_for relation, reject_if: id_blank, allow_destroy: true
+    end
     accepts_nested_attributes_for :location, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :lc_subject, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :form_of_work, reject_if: id_blank, allow_destroy: true
