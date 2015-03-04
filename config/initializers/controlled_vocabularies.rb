@@ -50,3 +50,6 @@ RDF_VOCABS = {
   :dummycreator           =>  { prefix: 'http://dummynamespace.org/creator/', strict: false, fetch: false },
   # :schema               =>  { prefix: 'https://schema.org', strict: false, fetch: false}
 }
+
+
+Oargun::ControlledVocabularies::Creator.use_vocabulary :lcnames

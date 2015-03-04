@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: 684cbf4a6aeeb51b504e1b294bf18eb342a464bb
+  revision: f67d9b401df37b7ff4cf83609059d335908f604e
   specs:
     oargun (0.0.1)
       active-triples (~> 0.6.0)
@@ -270,7 +270,7 @@ GEM
       iso-639
       nokogiri
       nom-xml (~> 0.5.2)
-    multi_json (1.10.1)
+    multi_json (1.11.0)
     multipart-post (2.0.0)
     net-http-persistent (2.9.4)
     net-scp (1.2.1)
