@@ -141,7 +141,7 @@ describe Importer::ModsParser do
       expect(attributes[:accession_number]).to eq ['SBHC Mss 78']
       expect(attributes[:title]).to eq 'Joel Conway / Flying A Studio photograph collection'
       expect(attributes[:creator]).to eq []
-      expect(attributes[:collector]).to eq ['Conway, Joel']
+      expect(attributes[:collector]).to eq [{name: 'Conway, Joel', type: 'personal'}]
       expect(attributes[:description]).to eq ['Black and white photographs relating to the Flying A Studios (aka American Film Manufacturing Company), a film company that operated in Santa Barbara (1912-1920).']
       expect(attributes[:created_start]).to eq ['1910']
       expect(attributes[:created_end]).to eq ['1919']

@@ -126,6 +126,9 @@ module Metadata
     accepts_nested_attributes_for :lc_subject, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :form_of_work, reject_if: id_blank, allow_destroy: true
 
+    def self.contributor_fields
+      [:creator, :collector, :contributor]
+    end
   end
 
   def controlled_properties

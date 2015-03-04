@@ -9,7 +9,7 @@ class ObjectFactory
 
   def run
     if obj = find
-      obj.attributes = attributes.except(:id)
+      obj.attributes = transform_attributes.except(:id)
       before_save(obj)
       obj.save!
       puts "  Updated #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
@@ -34,7 +34,7 @@ class ObjectFactory
   end
 
   def create_attributes
-    attributes
+    transform_attributes
   end
 
   def find
@@ -63,6 +63,25 @@ class ObjectFactory
     Ezid::Identifier.create
   end
 
+  def find_or_create_contributors(fields, attrs)
+    Hash.new.tap do |contributors|
+      fields.each do |field|
+        next unless attrs.key?(field)
+        contributors[field] = []
+
+        attributes[field].each do |value|
+          if value.is_a?(RDF::URI)
+            contributors[field] << value
+          elsif value.is_a?(Hash)
+            contributor = contributor_classes[value[:type]].where(foaf_name: value[:name]).first
+            contributor ||= contributor_classes[value[:type]].create(foaf_name: value[:name])
+            contributors[field] << RDF::URI.new(contributor.uri)
+          end
+        end
+      end
+    end
+  end
+
   private
 
     def host
@@ -72,4 +91,21 @@ class ObjectFactory
     def path_for(obj)
       "http://#{host}/lib/#{obj.ark}"
     end
+
+    # Map the MODS name type to the correct model.
+    # Example:
+    # <mods:name type="personal">
+    # A name with type="personal" should map to the Person model
+    def contributor_classes
+      { 'personal' => Person,
+        'corporate' => Organization,
+        'conference' => Group,
+        'family' => Group }
+    end
+
+    def transform_attributes
+      contributors = find_or_create_contributors(klass.contributor_fields, attributes)
+      attributes.merge(contributors)
+    end
+
 end

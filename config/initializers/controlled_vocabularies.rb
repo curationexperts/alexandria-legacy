@@ -1,3 +1,4 @@
+
 RDF_VOCABS = {
   # :dcmitype             =>  { prefix: 'http://purl.org/dc/dcmitype/', source: 'http://dublincore.org/2012/06/14/dctype.rdf' },
   :marcrel              =>  { prefix: 'http://id.loc.gov/vocabulary/relators/', source: 'http://id.loc.gov/vocabulary/relators.nt' },
@@ -9,6 +10,7 @@ RDF_VOCABS = {
   :geonames             =>  { prefix: 'http://sws.geonames.org/', strict: false, fetch: false },
   :lcsh                 =>  { prefix: 'http://id.loc.gov/authorities/subjects/', strict: false, fetch: false },
   :lcnames              =>  { prefix: 'http://id.loc.gov/authorities/names/', strict: false, fetch: false },
+  :local                =>  { prefix: "#{ActiveFedora.fedora.host}/", strict: false, fetch: false },
   :tgm                  =>  { prefix: 'http://id.loc.gov/vocabulary/graphicMaterials', strict: false, fetch: false },
   # :afs_ethn             =>  { prefix: 'http://id.loc.gov/vocabulary/ethnographicTerms', strict: false, fetch: false },
   # :lc_orgs              =>  { prefix: 'http://id.loc.gov/vocabulary/organizations', strict: false, fetch: false },
@@ -47,9 +49,11 @@ RDF_VOCABS = {
   # :ccrel                =>  { prefix: 'http://creativecommons.org/ns#', strict: false, fetch: false },
   # :mods                 =>  { prefix: 'http://www.loc.gov/standards/mods/modsrdf/v1/#', strict: false, fetch: false },
   # :exif                 =>  { prefix: 'http://www.w3.org/2003/12/exif/ns#', strict: false, fetch: false},
-  :dummycreator           =>  { prefix: 'http://dummynamespace.org/creator/', strict: false, fetch: false },
+  #:dummycreator           =>  { prefix: 'http://dummynamespace.org/creator/', strict: false, fetch: false },
   # :schema               =>  { prefix: 'https://schema.org', strict: false, fetch: false}
 }
 
 
 Oargun::ControlledVocabularies::Creator.use_vocabulary :lcnames
+Oargun::ControlledVocabularies::Creator.use_vocabulary :local, class: '::LOCAL'
+

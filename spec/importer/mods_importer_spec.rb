@@ -2,10 +2,19 @@ require 'rails_helper'
 require 'importer'
 
 describe Importer::ModsImporter do
+
+  def stub_out_indexer
+    # Stub out the fetch to avoid calls to external services
+    allow_any_instance_of(ActiveTriples::Resource).to receive(:fetch) { 'stubbed' }
+  end
+
   let(:image_directory) { 'spec/fixtures/images' }
   let(:importer) { Importer::ModsImporter.new(image_directory) }
 
-  before { allow($stdout).to receive(:puts) } # squelch output
+  before do
+    allow($stdout).to receive(:puts)  # squelch output
+    stub_out_indexer
+  end
 
   describe "#import an Image" do
     let(:file) { 'spec/fixtures/mods/cusbspcmss36_110108.xml' }
@@ -74,11 +83,17 @@ describe Importer::ModsImporter do
       coll = nil
       expect {
         coll = importer.import(file)
-      }.to change { Collection.count }.by(1)
+      }.to change { Collection.count }.by(1).and change {
+                    Person.count }.by(1)
 
       expect(coll.id).to match /^fk4\w{7}$/
       expect(coll.accession_number).to eq ['SBHC Mss 78']
       expect(coll.title).to eq 'Joel Conway / Flying A Studio photograph collection'
+
+      expect(coll.collector.count).to eq 1
+      uri = coll.collector.first.rdf_subject.value
+      collector = Person.find(Person.uri_to_id(uri))
+      expect(collector.foaf_name).to eq 'Conway, Joel'
     end
 
     context 'when the collection already exists' do
@@ -93,6 +108,28 @@ describe Importer::ModsImporter do
         expect(coll.id).to eq 'fk4bv7mw47'
         expect(coll.accession_number).to eq ['SBHC Mss 78']
         expect(coll.title).to eq 'Joel Conway / Flying A Studio photograph collection'
+      end
+    end
+  end
+
+
+  describe 'contributors that have Strings instead of URIs' do
+    let(:file) { 'spec/fixtures/mods/sbhcmss78_FlyingAStudios_collection.xml' }
+
+    context 'when the person already exists' do
+      let!(:existing) { Person.create(foaf_name: 'Conway, Joel') }
+
+      it "doesn't create another person" do
+        coll = nil
+        expect {
+          coll = importer.import(file)
+        }.to change { Collection.count }.by(1).and change {
+                      Person.count }.by(0)
+
+        expect(coll.collector.count).to eq 1
+        uri = coll.collector.first.rdf_subject.value
+        collector = Person.find(Person.uri_to_id(uri))
+        expect(collector.id).to eq existing.id
       end
     end
   end

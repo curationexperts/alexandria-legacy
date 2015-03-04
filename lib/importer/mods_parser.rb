@@ -114,24 +114,16 @@ module Importer
     end
 
     def creator(role=CREATOR)
-      uris = []
-      names = []
-
-      if mods.corporate_name.role.roleTerm.valueURI == [role]
-        uris += mods.corporate_name.valueURI
-        names += mods.corporate_name.map{|names| names.namePart.text }
-      end
-
-      if mods.personal_name.role.roleTerm.valueURI == [role]
-        uris += mods.personal_name.valueURI
-        names += mods.personal_name.map{|names| names.namePart.text }
-      end
-
-      if !uris.blank?
-        uris.map { |uri| RDF::URI.new(uri) }
-      else
-        names
-      end
+      name_nodes = mods.xpath('//mods:mods/mods:name'.freeze, NAMESPACES)
+      name_nodes.map do |node|
+        if node.role.roleTerm.valueURI == [role]
+          uri = node.attributes['valueURI']
+          name = node.namePart.text
+          uri.blank? ? { name: name, type: node.attributes['type'].value } : RDF::URI.new(uri)
+        else
+          nil
+        end
+      end.compact
     end
 
     def issued
