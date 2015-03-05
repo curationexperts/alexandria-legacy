@@ -1,6 +1,11 @@
 def configure_repositories
   ActiveTriples::Repositories.clear_repositories!
-  ActiveTriples::Repositories.add_repository :vocabs, RDF::Solr.new(Blacklight.default_index.connection)
+  vocab_repo = if ENV['CI']
+    RDF::Repository.new
+  else
+    RDF::Marmotta.new('http://localhost:8180/marmotta')
+  end
+  ActiveTriples::Repositories.add_repository :vocabs, vocab_repo
 end
 
 configure_repositories
