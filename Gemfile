@@ -26,10 +26,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #gem 'hydra-head', '~> 9.0.0'
 gem 'hydra-head', github: 'projecthydra/hydra-head', branch: 'blacklight-5.10'
 gem 'active-fedora', github: 'projecthydra/active_fedora', branch: 'encapsulate_solr_escape'
+gem 'active-triples', github: 'ActiveTriples/ActiveTriples', branch: 'no_reload_bnodes'
 gem 'hydra-editor', '~> 1.0.1'
 gem 'hydra-role-management'
 gem 'hydra-collections', github: 'projecthydra-labs/hydra-collections'
 gem 'rdf-vocab'
+gem 'rdf-marmotta', github: 'jcoyne/rdf-marmotta', branch: 'dce'
 gem 'blacklight', github: 'projectblacklight/blacklight'
 gem 'rsolr', github: 'rsolr/rsolr'
 

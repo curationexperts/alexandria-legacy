@@ -16,6 +16,18 @@ rake jetty:unzip
 rake jetty:start
 ```
 
+### Set up Marmotta
+
+Download and unzip: https://github.com/curationexperts/marmotta-standalone/archive/master.zip
+
+Go into the unpacked archive and start it up.
+```
+java -jar start.jar -Xmx1024mb -Djetty.port=8180
+```
+
+Then configure it to connect to a Postgres instance by following the directions here:
+http://marmotta.apache.org/configuration.html
+
 ### Install imagemagick
 
 On a mac:
