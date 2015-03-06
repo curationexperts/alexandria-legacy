@@ -53,18 +53,6 @@ GIT
       sparql-client (~> 1.1, >= 1.1.4)
 
 GIT
-  remote: git://github.com/projectblacklight/blacklight.git
-  revision: bf5033e9a86ffb34f56a3dfc9047012a38fe524b
-  specs:
-    blacklight (5.10.0)
-      bootstrap-sass (~> 3.2)
-      deprecation
-      kaminari (~> 0.13)
-      nokogiri (~> 1.6)
-      rails (>= 3.2.6, < 5)
-      rsolr (~> 1.0.6)
-
-GIT
   remote: git://github.com/projecthydra-labs/hydra-collections.git
   revision: 9de14ccffdc60d9fdf13bcdcbe135fc28304e5bc
   specs:
@@ -163,6 +151,13 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
+    blacklight (5.10.0)
+      bootstrap-sass (~> 3.2)
+      deprecation
+      kaminari (~> 0.13)
+      nokogiri (~> 1.6)
+      rails (>= 3.2.6, < 5)
+      rsolr (~> 1.0.11)
     blacklight-gallery (0.2.0)
       blacklight (~> 5.0)
       bootstrap-sass (~> 3.0)
@@ -228,7 +223,7 @@ GEM
     equivalent-xml (0.5.1)
       nokogiri (>= 1.4.3)
     erubis (2.7.0)
-    execjs (2.3.0)
+    execjs (2.4.0)
     ezid-client (1.0.1)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -510,7 +505,7 @@ PLATFORMS
 DEPENDENCIES
   active-fedora!
   active-triples!
-  blacklight!
+  blacklight (~> 5.10.0)
   blacklight-gallery
   byebug
   capistrano
