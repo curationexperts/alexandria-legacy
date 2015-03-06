@@ -33,7 +33,7 @@ gem 'hydra-collections', github: 'projecthydra-labs/hydra-collections'
 gem 'rdf-vocab'
 gem 'rdf-marmotta', github: 'jcoyne/rdf-marmotta', branch: 'dce'
 gem 'blacklight', '~> 5.10.0'
-gem 'rsolr', github: 'rsolr/rsolr'
+gem 'rsolr', '~> 1.0.12'
 
 gem 'mods', '~> 2.0.1', github: 'jcoyne/mods', branch: 'commented_out_reused_codes'
 gem 'oargun', github: 'curationexperts/oargun'

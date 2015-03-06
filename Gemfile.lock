@@ -99,13 +99,6 @@ GIT
       hydra-core (= 9.0.1)
       rails (>= 3.2.6)
 
-GIT
-  remote: git://github.com/rsolr/rsolr.git
-  revision: 122a96de80f85aabe98db0a3dbcf281352b06434
-  specs:
-    rsolr (1.0.11)
-      builder (>= 2.1.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -410,6 +403,8 @@ GEM
       netrc (~> 0.7)
     riiif (0.0.10)
       rails (> 3.2.0)
+    rsolr (1.0.12)
+      builder (>= 2.1.2)
     rspec-activemodel-mocks (1.0.1)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
@@ -533,7 +528,7 @@ DEPENDENCIES
   rdf-marmotta!
   rdf-vocab
   riiif
-  rsolr!
+  rsolr (~> 1.0.12)
   rspec-activemodel-mocks
   rspec-rails
   sass-rails (~> 5.0)
