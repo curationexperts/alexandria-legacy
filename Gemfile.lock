@@ -62,23 +62,6 @@ GIT
       hydra-head (~> 9.0.1)
 
 GIT
-  remote: git://github.com/projecthydra/active_fedora.git
-  revision: 75b4afb248ee61d9edb56911b2ef51f30f1ce17f
-  branch: encapsulate_solr_escape
-  specs:
-    active-fedora (9.0.2)
-      active-triples (~> 0.6.0)
-      activesupport (>= 4.1.0)
-      deprecation
-      ldp (~> 0.2.1)
-      linkeddata
-      nom-xml (>= 0.5.1)
-      om (~> 3.1)
-      rdf-ldp
-      rdf-rdfxml (~> 1.1.0)
-      rsolr (~> 1.0.10)
-
-GIT
   remote: git://github.com/projecthydra/hydra-head.git
   revision: aea016175d2dc2c7cd57b280cc442547e999e8af
   branch: blacklight-5.10
@@ -121,6 +104,17 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    active-fedora (9.0.3)
+      active-triples (~> 0.6.0)
+      activesupport (>= 4.1.0)
+      deprecation
+      ldp (~> 0.2.1)
+      linkeddata
+      nom-xml (>= 0.5.1)
+      om (~> 3.1)
+      rdf-ldp
+      rdf-rdfxml (~> 1.1.0)
+      rsolr (~> 1.0.10)
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -498,7 +492,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active-fedora!
+  active-fedora (~> 9.0.3)
   active-triples!
   blacklight (~> 5.10.0)
   blacklight-gallery
