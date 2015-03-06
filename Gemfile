@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 #gem 'hydra-head', '~> 9.0.0'
-gem 'hydra-head', github: 'projecthydra/hydra-head', branch: 'blacklight-5.10'
+gem 'hydra-head', github: 'projecthydra/hydra-head', branch: 'mods_asset_loading'
 gem 'active-fedora', '~> 9.0.3'
 gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: 'dce-ucsb'
 gem 'hydra-editor', '~> 1.0.1'

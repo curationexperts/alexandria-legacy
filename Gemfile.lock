@@ -63,8 +63,8 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/hydra-head.git
-  revision: aea016175d2dc2c7cd57b280cc442547e999e8af
-  branch: blacklight-5.10
+  revision: 6017f0989ff646b9a4b78018fec36f91ded5a9a6
+  branch: mods_asset_loading
   specs:
     hydra-access-controls (9.0.1)
       active-fedora (~> 9.0.0)
