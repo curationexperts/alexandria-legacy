@@ -1,16 +1,4 @@
 GIT
-  remote: git://github.com/ActiveTriples/ActiveTriples.git
-  revision: b728c42fdcdf1a3338ad460c69298a88034ba73d
-  branch: no_reload_bnodes
-  specs:
-    active-triples (0.6.1)
-      activemodel (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      deprecation (~> 0.1)
-      linkeddata (~> 1.1)
-      rdf (~> 1.1)
-
-GIT
   remote: git://github.com/curationexperts/oargun.git
   revision: f67d9b401df37b7ff4cf83609059d335908f604e
   specs:
@@ -29,6 +17,18 @@ GIT
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+
+GIT
+  remote: git://github.com/jcoyne/ActiveTriples.git
+  revision: 33e1f2a41c2715d5e6fb477c439e3b4e3f827414
+  branch: dce-ucsb
+  specs:
+    active-triples (0.6.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      deprecation (~> 0.1)
+      linkeddata (~> 1.1)
+      rdf (~> 1.1)
 
 GIT
   remote: git://github.com/jcoyne/mods.git
