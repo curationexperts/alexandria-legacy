@@ -54,33 +54,13 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra-labs/hydra-collections.git
-  revision: 9de14ccffdc60d9fdf13bcdcbe135fc28304e5bc
+  revision: cedb85a6c057784cd269c957fc10b4569d0c0bb3
+  branch: hydra-head-9.1
   specs:
     hydra-collections (4.0.0)
-      blacklight (~> 5.10.0)
-      deprecation (~> 0.1.0)
-      hydra-head (~> 9.0.1)
-
-GIT
-  remote: git://github.com/projecthydra/hydra-head.git
-  revision: 6017f0989ff646b9a4b78018fec36f91ded5a9a6
-  branch: mods_asset_loading
-  specs:
-    hydra-access-controls (9.0.1)
-      active-fedora (~> 9.0.0)
-      activesupport (~> 4.0)
       blacklight (~> 5.10)
-      cancancan (~> 1.8)
       deprecation (~> 0.1)
-      sass-rails
-    hydra-core (9.0.1)
-      hydra-access-controls (= 9.0.1)
-      jettywrapper (>= 2.0.0)
-      rails (~> 4.0)
-    hydra-head (9.0.1)
-      hydra-access-controls (= 9.0.1)
-      hydra-core (= 9.0.1)
-      rails (>= 3.2.6)
+      hydra-head (~> 9.1)
 
 GEM
   remote: https://rubygems.org/
@@ -138,7 +118,7 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
-    blacklight (5.10.0)
+    blacklight (5.10.1)
       bootstrap-sass (~> 3.2)
       deprecation
       kaminari (~> 0.13)
@@ -191,7 +171,7 @@ GEM
     columnize (0.9.0)
     daemons (1.1.9)
     debugger-linecache (1.2.0)
-    deprecation (0.1.0)
+    deprecation (0.2.2)
       activesupport
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -227,11 +207,26 @@ GEM
     hike (1.2.3)
     htmlentities (4.3.3)
     http_logger (0.5.1)
+    hydra-access-controls (9.1.0)
+      active-fedora (~> 9.0.0)
+      activesupport (~> 4.0)
+      blacklight (~> 5.10)
+      cancancan (~> 1.8)
+      deprecation (~> 0.1)
+      sass-rails
+    hydra-core (9.1.0)
+      hydra-access-controls (= 9.1.0)
+      jettywrapper (>= 2.0.0)
+      rails (~> 4.0)
     hydra-editor (1.0.1)
       active-fedora (>= 9.0.0)
       cancancan (~> 1.8)
       rails (~> 4.1)
       simple_form (~> 3.1.0)
+    hydra-head (9.1.0)
+      hydra-access-controls (= 9.1.0)
+      hydra-core (= 9.1.0)
+      rails (>= 3.2.6)
     hydra-role-management (0.2.1)
       blacklight
       bootstrap_form
@@ -509,7 +504,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.4)
   hydra-collections!
   hydra-editor (~> 1.0.1)
-  hydra-head!
+  hydra-head (~> 9.1.0)
   hydra-role-management
   jbuilder (~> 2.0)
   jettywrapper

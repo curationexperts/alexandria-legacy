@@ -23,13 +23,12 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-#gem 'hydra-head', '~> 9.0.0'
-gem 'hydra-head', github: 'projecthydra/hydra-head', branch: 'mods_asset_loading'
+gem 'hydra-head', '~> 9.1.0'
 gem 'active-fedora', '~> 9.0.3'
 gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: 'dce-ucsb'
 gem 'hydra-editor', '~> 1.0.1'
 gem 'hydra-role-management'
-gem 'hydra-collections', github: 'projecthydra-labs/hydra-collections'
+gem 'hydra-collections', github: 'projecthydra-labs/hydra-collections', branch: 'hydra-head-9.1'
 gem 'rdf-vocab'
 gem 'rdf-marmotta', github: 'jcoyne/rdf-marmotta', branch: 'dce'
 gem 'blacklight', '~> 5.10.0'
