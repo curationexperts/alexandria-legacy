@@ -111,12 +111,6 @@ module Importer
       }
     end
 
-    def relations
-      Metadata::MARCREL.each_with_object({creator: creator}) do |(field, predicate), object|
-        object[field] = creator(predicate)
-      end
-    end
-
     def record_origin
       ro = []
       if mods.record_info && mods.record_info.respond_to?(:recordOrigin)
@@ -145,17 +139,24 @@ module Importer
       text.gsub("\n", " ").gsub("\t", "")
     end
 
-    def creator(role=CREATOR)
+    def relations
       name_nodes = mods.xpath('//mods:mods/mods:name'.freeze, NAMESPACES)
-      name_nodes.map do |node|
-        if node.role.roleTerm.valueURI == [role]
-          uri = node.attributes['valueURI']
-          name = node.namePart.text
-          uri.blank? ? { name: name, type: node.attributes['type'].value } : RDF::URI.new(uri)
+      property_name_for_uri = Metadata::MARCREL.invert
+      name_nodes.each_with_object({}) do |node, relations|
+        uri = node.attributes['valueURI']
+        property = if value_uri = node.role.roleTerm.valueURI.first
+          property_name_for_uri[RDF::URI(value_uri)]
         else
-          nil
+          $stderr.puts "no role was specified for name #{node.namePart.text}"
+          :contributor
         end
-      end.compact
+        unless property
+          property = :contributor
+          $stderr.puts "the specified role for name #{node.namePart.text} in not a valid marcrelator role"
+        end
+        relations[property] ||= []
+        relations[property] << (uri.blank? ? { name: node.namePart.text, type: node.attributes['type'].value } : RDF::URI.new(uri))
+      end
     end
 
     def issued
