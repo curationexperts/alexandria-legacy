@@ -48,6 +48,8 @@ describe Importer::ModsImporter do
 
       expect(reloaded.identifier.first).to match /^ark:\/99999\/fk4\w{7}$/
 
+      expect(reloaded.admin_policy).to be_kind_of Hydra::AdminPolicy
+
       coll = reloaded.collections.first
       expect(coll.accession_number).to eq ['SBHC Mss 36']
       expect(coll.title).to eq 'Santa Barbara picture postcards collection'

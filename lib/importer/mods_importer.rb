@@ -2,6 +2,7 @@ module Importer
   class ModsImporter
 
     def initialize(files_directory, metadata_directory=nil)
+      AdminPolicy.ensure_admin_policy_exists
       @files_directory = files_directory
       @metadata_directory = metadata_directory
     end
@@ -19,7 +20,7 @@ module Importer
     def import(file)
       puts "Importing: #{file}"
       parser = ModsParser.new(file)
-      create_fedora_objects(parser.model, parser.attributes)
+      create_fedora_objects(parser.model, parser.attributes.merge(admin_policy_id: AdminPolicy::PUBLIC_POLICY_ID))
     rescue Oargun::RDF::Controlled::ControlledVocabularyError => e
       puts "  Skipping, due to #{e.message}"
     end

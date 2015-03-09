@@ -11,7 +11,7 @@ class CatalogController < ApplicationController
   # before_filter :enforce_show_permissions, :only=>:show
   # This applies appropriate access controls to all solr queries
   # CatalogController.solr_search_params_logic += [:add_access_controls_to_solr_params]
-  CatalogController.search_params_logic += [:only_images_and_collections]
+  CatalogController.search_params_logic += [:add_access_controls_to_solr_params, :only_images_and_collections]
 
   add_show_tools_partial(:edit, partial: 'catalog/edit', if: :editor?)
   add_show_tools_partial(:download, partial: 'catalog/download')

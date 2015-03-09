@@ -139,6 +139,8 @@ module Metadata
     def self.contributor_fields
       RELATIONS.keys
     end
+
+    belongs_to :admin_policy, class_name: "Hydra::AdminPolicy", predicate: ActiveFedora::RDF::ProjectHydra.isGovernedBy
   end
 
   def controlled_properties

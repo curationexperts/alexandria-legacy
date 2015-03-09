@@ -4,9 +4,9 @@ describe CatalogController do
 
   describe "the search results" do
     let!(:generic_file) { GenericFile.create! }
-    let!(:image) { Image.create! }
+    let!(:image) { create(:public_image) }
 
-    it "only shows images (not GenericFiles" do
+    it "only shows images (not GenericFiles)" do
       get :index
       found = assigns[:document_list].map(&:id)
       expect(found).to include(image.id)
