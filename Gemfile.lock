@@ -390,7 +390,7 @@ GEM
     rest-client (1.7.3)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    riiif (0.0.10)
+    riiif (0.1.0)
       rails (> 3.2.0)
     rsolr (1.0.12)
       builder (>= 2.1.2)
@@ -516,7 +516,7 @@ DEPENDENCIES
   rails (= 4.2.0)
   rdf-marmotta!
   rdf-vocab
-  riiif
+  riiif (~> 0.1.0)
   rsolr (~> 1.0.12)
   rspec-activemodel-mocks
   rspec-rails

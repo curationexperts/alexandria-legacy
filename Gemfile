@@ -37,7 +37,7 @@ gem 'rsolr', '~> 1.0.12'
 gem 'mods', '~> 2.0.1', github: 'jcoyne/mods', branch: 'commented_out_reused_codes'
 gem 'oargun', github: 'curationexperts/oargun'
 gem 'blacklight-gallery'
-gem 'riiif'
+gem 'riiif', '~> 0.1.0'
 gem 'ezid-client', '~> 1.0'
 
 gem 'kaminari', github: 'harai/kaminari', branch: 'route_prefix_prototype', ref: '384fcb5d11b6'
