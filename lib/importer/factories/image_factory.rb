@@ -18,7 +18,7 @@ class ImageFactory < ObjectFactory
   end
 
   def create_attributes
-    attributes.except(:files, :collection)
+    transform_attributes.except(:files, :collection)
   end
 
   def create_file(image, file_name)
