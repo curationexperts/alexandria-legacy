@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+public_policy = Hydra::AdminPolicy.create(id: 'authorities/policies/public', title: ["Public Access"])
+public_policy.default_permissions.create(type: "group", name: "public", access: "read")
+public_policy.save!

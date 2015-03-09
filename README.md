@@ -40,6 +40,12 @@ brew install imagemagick --with-jp2 --with-libtiff --with-ghostscript
   * Make sure jetty is running
   * `bundle exec rake spec`
 
+### Seed the admin policies
+
+```
+rake db:seed
+```
+
 ### Import Data
 
 ```
