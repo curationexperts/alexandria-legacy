@@ -1,7 +1,6 @@
+require 'concerns/relators'
 module Metadata
   extend ActiveSupport::Concern
-
-  autoload :MARCREL, 'concerns/relators'
 
   RELATIONS = {
     contributor:         ::RDF::DC.contributor,
