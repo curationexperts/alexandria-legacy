@@ -37,6 +37,6 @@ class SolrDocument
   end
 
   def ark
-    self[Solrizer.solr_name('identifier', :displayable)].first
+    Array(self[Solrizer.solr_name('identifier', :displayable)]).first
   end
 end
