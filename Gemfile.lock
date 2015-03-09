@@ -54,8 +54,8 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra-labs/hydra-collections.git
-  revision: cedb85a6c057784cd269c957fc10b4569d0c0bb3
-  branch: hydra-head-9.1
+  revision: 228502b39b161d4d5124a669e8700a09b3232e9c
+  branch: index_page
   specs:
     hydra-collections (4.0.0)
       blacklight (~> 5.10)

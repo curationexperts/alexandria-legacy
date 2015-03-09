@@ -2,32 +2,14 @@ class CollectionsController < ApplicationController
   include Blacklight::Catalog
   include Hydra::CollectionsControllerBehavior
 
-  configure_blacklight do |config|
-    config.search_builder_class = CollectionSearchBuilder
-  end
-
-
-  # TODO move this to hydra-collections
-  def index
-    # run the solr query to find the collections
-    (@response, @document_list) = search_results(params, search_params_logic + [:only_collections] - [:include_collection_ids])
+  # TODO remove this when collections have access controls
+  def collection_search_params_logic
+    super - [:add_access_controls_to_solr_params]
   end
 
   def show
     super
     solr_resp, @document = fetch(@collection.id)
-  end
-
-  # Queries Solr for members of the collection.
-  # Populates @response and @member_docs similar to Blacklight Catalog#index populating @response and @documents
-  def query_collection_members
-    query = params[:cq]
-
-    #default the rows to 100 if not specified then merge in the user parameters and the attach the collection query
-    solr_params =  params.symbolize_keys.merge(q: query)
-
-    # run the solr query to find the collections
-    (@response, @member_docs) = search_results(solr_params, search_params_logic)
   end
 
   configure_blacklight do |config|
@@ -41,19 +23,6 @@ class CollectionsController < ApplicationController
 
 protected
 
-  # Override rails path for the views
-  # (Fixed a problem where the collection show page
-  # won't display the list of members because
-  # it can't find the partials.)
-  def _prefixes
-    @_prefixes ||= super + ['catalog']
-  end
-
-  # def include_collection_ids(*)
-  #   return if action_name == 'index'
-  #   super
-  # end
-
   # Override Blacklight method so that you can search and
   # facet within the current collection.
   def search_action_url(*args)
@@ -63,5 +32,4 @@ protected
       super(*args)
     end
   end
-
 end
