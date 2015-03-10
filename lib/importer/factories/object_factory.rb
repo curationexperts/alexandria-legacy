@@ -2,23 +2,27 @@ class ObjectFactory
 
   attr_reader :attributes, :files_directory
 
-  def initialize(attributes, files_dir)
+  def initialize(attributes, files_dir=nil)
     @files_directory = files_dir
     @attributes = attributes
   end
 
   def run
     if obj = find
-      obj.attributes = transform_attributes.except(:id)
-      before_save(obj)
-      obj.save!
-      puts "  Updated #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
+      update(obj)
     else
       obj = create
-      puts "  Created #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
     end
-    after_save(obj)
+    yield(obj) if block_given?
     obj
+  end
+
+  def update(obj)
+    obj.attributes = transform_attributes.except(:id)
+    before_save(obj)
+    obj.save!
+    after_save(obj)
+    puts "  Updated #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
   end
 
   # override after_save if you want to put something here.
@@ -49,8 +53,10 @@ class ObjectFactory
       before_save(obj)
       obj.save!
       after_create(obj)
+      after_save(obj)
       identifier.target = path_for(obj)
       identifier.save
+      puts "  Created #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
     end
   end
 

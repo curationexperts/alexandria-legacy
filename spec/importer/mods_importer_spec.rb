@@ -48,12 +48,13 @@ describe Importer::ModsImporter do
 
       expect(reloaded.identifier.first).to match /^ark:\/99999\/fk4\w{7}$/
 
-      expect(reloaded.admin_policy).to be_kind_of Hydra::AdminPolicy
+      expect(reloaded.admin_policy_id).to eq AdminPolicy::PUBLIC_POLICY_ID
 
       coll = reloaded.collections.first
       expect(coll.accession_number).to eq ['SBHC Mss 36']
       expect(coll.title).to eq 'Santa Barbara picture postcards collection'
       expect(coll.members).to eq [reloaded]
+      expect(coll.admin_policy_id).to eq AdminPolicy::PUBLIC_POLICY_ID
 
       solr_doc = ActiveFedora::SolrService.query("id:#{image.id}").first
       expect(solr_doc['collection_label_ssim']).to eq ['Santa Barbara picture postcards collection']

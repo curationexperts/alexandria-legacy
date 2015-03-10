@@ -4,17 +4,22 @@ RSpec.feature 'Collection show page:', :type => :feature do
 
   let(:red_attrs)  {{ title: 'Red',
                       publisher: ['Colors Pub', 'Red Pub'],
-                      identifier: ['ark:/99999/fk4zp46p1g'] }}
+                      identifier: ['ark:/99999/fk4zp46p1g'],
+                      admin_policy_id: AdminPolicy::PUBLIC_POLICY_ID }}
   let(:pink_attrs) {{ title: 'Pink',
                       publisher: ['Colors Pub', 'Pink Pub'],
-                      identifier: ['ark:/99999/fk4v989d9j'] }}
+                      identifier: ['ark:/99999/fk4v989d9j'],
+                      admin_policy_id: AdminPolicy::PUBLIC_POLICY_ID }}
 
-  let(:colors_attrs) {{ title: 'Colors', extent: ['7 photos'] }}
+  let(:colors_attrs) {{ title: 'Colors', extent: ['7 photos'],
+                        admin_policy_id: AdminPolicy::PUBLIC_POLICY_ID }}
+
   let(:colors) { create_collection_with_images(colors_attrs, [red_attrs, pink_attrs]) }
 
   let(:user) { create :user }
 
   before {
+    AdminPolicy.ensure_admin_policy_exists
     colors
     sign_in user
   }

@@ -12,14 +12,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   mount Hydra::RoleManagement::Engine => '/'
-
   mount Riiif::Engine => '/images'
   mount Qa::Engine => '/qa'
-
   mount HydraEditor::Engine => '/'
-
   mount Hydra::Collections::Engine => '/'
-
-  get 'collections', to: 'collections#index', as: 'collection_index'
-
 end

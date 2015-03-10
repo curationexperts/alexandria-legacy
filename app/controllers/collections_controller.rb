@@ -2,9 +2,16 @@ class CollectionsController < ApplicationController
   include Blacklight::Catalog
   include Hydra::CollectionsControllerBehavior
 
-  # TODO remove this when collections have access controls
-  def collection_search_params_logic
-    super - [:add_access_controls_to_solr_params]
+  def collections_search_builder_class
+    CollectionSearchBuilder
+  end
+
+  def collection_member_search_builder_class
+    CollectionSearchBuilder
+  end
+
+  def collection_member_search_logic
+    super + [:add_access_controls_to_solr_params]
   end
 
   def show
@@ -25,11 +32,14 @@ protected
 
   # Override Blacklight method so that you can search and
   # facet within the current collection.
-  def search_action_url(*args)
-    if action_name == 'show'
-      collections.collection_url(*args)
-    else
-      super(*args)
+  def search_action_url(options={})
+    case action_name
+      when 'show'
+        collections.collection_path(options.except('only_path'.freeze))
+      when 'index'
+        collections.collections_path(options)
+      else
+        super(*args)
     end
   end
 end

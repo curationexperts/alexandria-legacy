@@ -45,10 +45,10 @@ class ImageFactory < ObjectFactory
   end
 
   def add_image_to_collection(image, attrs)
-    id = attrs[:collection][:id]
-
-    coll = CollectionFactory.new(attrs[:collection], nil).run
-    image.collections << coll
+    collection_attrs = attrs[:collection].merge(admin_policy_id: attributes[:admin_policy_id])
+    CollectionFactory.new(collection_attrs).run do |coll|
+      image.collections << coll
+    end
     # save the image to trigger a reindex with the collection association
     image.save
   end
