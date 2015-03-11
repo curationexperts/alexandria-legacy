@@ -4,21 +4,22 @@
 (function($){
   $.fn.alexandriaSearchTypeAhead = function( options ) {
     $.each(this, function(){
-      addAutocompleteBehavior($(this));
+      addAutocompleteBehavior($(this), options);
     });
 
     function addAutocompleteBehavior( typeAheadInput, settings ) {
       var settings = $.extend({
         highlight: (typeAheadInput.data('autocomplete-highlight') || true),
         hint: (typeAheadInput.data('autocomplete-hint') || false),
-        autoselect: (typeAheadInput.data('autocomplete-autoselect') || true)
+        autoselect: (typeAheadInput.data('autocomplete-autoselect') || true),
+        path: '/'
       }, options);
 
       var results;
       if (settings.bloodhound) {
         results = settings.bloodhound();
       } else {
-        results = initBloodhound();
+        results = initBloodhound(settings.path);
       }
 
       typeAheadInput.typeahead(settings, {
@@ -30,13 +31,13 @@
   }
 })( jQuery );
 
-function initBloodhound() {
+function initBloodhound(path) {
   var results = new Bloodhound({
     datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.title); },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     limit: 10,
     remote: {
-      url: '/qa/search/loc/subjects?q=%QUERY',
+      url: path + '?q=%QUERY',
       filter: function(response) {
         return $.map(response, function(doc) {
           return doc;
@@ -48,8 +49,8 @@ function initBloodhound() {
   return results;
 }
 
-function addAutocompleteToEditor($field) {
-  $field.alexandriaSearchTypeAhead().on(
+function addAutocompleteToEditor($field, path) {
+  $field.alexandriaSearchTypeAhead({ path: path}).on(
       'typeahead:selected typeahead:autocompleted', function(e, data) {
     uri = data['id'].replace("info:lc", "http://id.loc.gov");
     $(this).closest('.field-wrapper').find('[data-id]').val(uri);
@@ -57,6 +58,7 @@ function addAutocompleteToEditor($field) {
 }
 
 Blacklight.onLoad(function(){
-  addAutocompleteToEditor($('input.image_lc_subject:not([readonly])'));
+  addAutocompleteToEditor($('input.image_lc_subject:not([readonly])'), '/qa/search/loc/subjects');
+  addAutocompleteToEditor($('input.image_location:not([readonly])'), '/qa/search/loc/names');
 });
 
