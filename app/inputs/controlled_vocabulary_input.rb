@@ -11,6 +11,8 @@ class ControlledVocabularyInput < MultiValueInput
       options = input_html_options.dup
 
       if value.respond_to? :rdf_label
+        options[:name] = name_for(attribute_name, index, 'hidden_label'.freeze)
+        options[:id] = id_for(attribute_name, index, 'hidden_label'.freeze)
         if value.node?
           build_options_for_new_row(attribute_name, index, options)
         else
@@ -40,24 +42,19 @@ class ControlledVocabularyInput < MultiValueInput
     end
 
     def hidden_id_field(value, index)
-      return if value.node?
       name = name_for(attribute_name, index, 'id'.freeze)
       id = id_for(attribute_name, index, 'id'.freeze)
-      value = value.rdf_subject
-      @builder.hidden_field(attribute_name, name: name, id: id, value: value)
+      hidden_value = value.node? ? '' : value.rdf_subject
+      @builder.hidden_field(attribute_name, name: name, id: id, value: hidden_value, data: { id: 'remote' })
     end
 
     def build_options_for_new_row(attribute_name, index, options)
-      options[:name] = name_for(attribute_name, index, 'id'.freeze)
       options[:value] = ''
-      options[:id] = id_for(attribute_name, index, 'id')
     end
 
     def build_options_for_existing_row(attribute_name, index, value, options)
       options[:value] = value.rdf_label.first || "Unable to fetch label for #{value.rdf_subject}"
       options[:readonly] = true
-      options[:name] = name_for(attribute_name, index, 'hidden_label'.freeze)
-      options[:id] = id_for(attribute_name, index, 'hidden_label'.freeze)
     end
 
     def name_for(attribute_name, index, field)

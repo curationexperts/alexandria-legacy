@@ -9,6 +9,18 @@ GIT
       rest-client (~> 1.7)
 
 GIT
+  remote: git://github.com/dpla/rdf-marmotta.git
+  revision: be82f07e21bceb852f250a82fe4cf90377b9b6aa
+  branch: develop
+  specs:
+    rdf-marmotta (0.0.6)
+      nokogiri
+      rake
+      rdf (~> 1.1)
+      rdf-rdfxml (~> 1.1)
+      sparql-client (~> 1.1.4)
+
+GIT
   remote: git://github.com/harai/kaminari.git
   revision: 384fcb5d11b66a0cc8fad030104bf80f82616355
   ref: 384fcb5d11b6
@@ -40,45 +52,6 @@ GIT
       nokogiri
       nom-xml (~> 0.5.2)
 
-GIT
-  remote: git://github.com/jcoyne/rdf-marmotta.git
-  revision: 868752179f3352b9185539da10186bcfb9cbd387
-  branch: dce
-  specs:
-    rdf-marmotta (0.0.6)
-      nokogiri
-      rake
-      rdf (~> 1.1)
-      rdf-rdfxml (~> 1.1)
-      sparql-client (~> 1.1, >= 1.1.4)
-
-GIT
-  remote: git://github.com/projecthydra-labs/hydra-collections.git
-  revision: 228502b39b161d4d5124a669e8700a09b3232e9c
-  branch: index_page
-  specs:
-    hydra-collections (4.0.0)
-      blacklight (~> 5.10)
-      deprecation (~> 0.1)
-      hydra-head (~> 9.1)
-
-GIT
-  remote: git://github.com/projecthydra/active_fedora.git
-  revision: 5df72e550f38760aebf08c2b5a3314551ddaf677
-  branch: add_id_setter
-  specs:
-    active-fedora (9.0.3)
-      active-triples (~> 0.6.0)
-      activesupport (>= 4.1.0)
-      deprecation
-      ldp (~> 0.2.1)
-      linkeddata
-      nom-xml (>= 0.5.1)
-      om (~> 3.1)
-      rdf-ldp
-      rdf-rdfxml (~> 1.1.0)
-      rsolr (~> 1.0.10)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -101,6 +74,17 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    active-fedora (9.0.4)
+      active-triples (~> 0.6.0)
+      activesupport (>= 4.1.0)
+      deprecation
+      ldp (~> 0.2.1)
+      linkeddata
+      nom-xml (>= 0.5.1)
+      om (~> 3.1)
+      rdf-ldp
+      rdf-rdfxml (~> 1.1.0)
+      rsolr (~> 1.0.10)
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -175,7 +159,7 @@ GEM
     coffee-script-source (1.9.1)
     colorize (0.7.5)
     columnize (0.9.0)
-    daemons (1.1.9)
+    daemons (1.2.1)
     debugger-linecache (1.2.0)
     deprecation (0.2.2)
       activesupport
@@ -220,11 +204,15 @@ GEM
       cancancan (~> 1.8)
       deprecation (~> 0.1)
       sass-rails
+    hydra-collections (5.0.1)
+      blacklight (~> 5.10)
+      deprecation (~> 0.1)
+      hydra-head (~> 9.1)
     hydra-core (9.1.1)
       hydra-access-controls (= 9.1.1)
       jettywrapper (>= 2.0.0)
       rails (~> 4.0)
-    hydra-editor (1.0.1)
+    hydra-editor (1.0.2)
       active-fedora (>= 9.0.0)
       cancancan (~> 1.8)
       rails (~> 4.1)
@@ -493,7 +481,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active-fedora!
+  active-fedora (~> 9.0.4)
   active-triples!
   blacklight (~> 5.10.0)
   blacklight-gallery
@@ -508,8 +496,8 @@ DEPENDENCIES
   devise-guests (~> 0.3)
   ezid-client (~> 1.0)
   factory_girl_rails (~> 4.4)
-  hydra-collections!
-  hydra-editor (~> 1.0.1)
+  hydra-collections (~> 5.0.1)
+  hydra-editor (~> 1.0.2)
   hydra-head (~> 9.1.1)
   hydra-role-management
   jbuilder (~> 2.0)

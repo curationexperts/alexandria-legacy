@@ -23,9 +23,9 @@ describe 'ControlledVocabularyInput', type: :input do
       let(:bar) { double('value 1', rdf_label: [], rdf_subject: '_:134', node?: true) }
       it 'renders multi-value' do
         expect(subject).to have_selector('input.image_creator.multi_value')
-        expect(subject).to have_field('image[creator_attributes][0][id]', with: '')
+        expect(subject).to have_selector('input[name="image[creator_attributes][0][id]"][value=""]')
         expect(subject).to have_selector('input[name="image[creator_attributes][0][_destroy]"]')
-        expect(subject).not_to have_selector('input[name="image[creator_attributes][0][hidden_label]"]')
+        expect(subject).to have_field('image[creator_attributes][0][hidden_label]', with: '')
 
       end
     end

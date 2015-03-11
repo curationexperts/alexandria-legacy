@@ -24,14 +24,13 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'hydra-head', '~> 9.1.1'
-#gem 'active-fedora', '~> 9.0.3'
-gem 'active-fedora', github: 'projecthydra/active_fedora', branch: 'add_id_setter'
+gem 'active-fedora', '~> 9.0.4'
 gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: 'dce-ucsb'
-gem 'hydra-editor', '~> 1.0.1'
+gem 'hydra-editor', '~> 1.0.2'
 gem 'hydra-role-management'
-gem 'hydra-collections', github: 'projecthydra-labs/hydra-collections', branch: 'index_page'
+gem 'hydra-collections', '~> 5.0.1'
 gem 'rdf-vocab'
-gem 'rdf-marmotta', github: 'jcoyne/rdf-marmotta', branch: 'dce'
+gem 'rdf-marmotta', github: 'dpla/rdf-marmotta', branch: 'develop'
 gem 'blacklight', '~> 5.10.0'
 gem 'rsolr', '~> 1.0.12'
 

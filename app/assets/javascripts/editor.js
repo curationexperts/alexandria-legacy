@@ -1,23 +1,31 @@
 //= require hydra-editor/hydra-editor
+//= require handlebars-v3.0.0.js
 
 (function($) {
+    var source = "<li class=\"field-wrapper input-group input-append\">" +
+      "<input class=\"string controlled_vocabulary optional form-control image_{{name}} form-control multi-text-field\" name=\"image[{{name}}_attributes][{{index}}][hidden_label]\" value=\"\" id=\"image_{{name}}_attributes_{{index}}_hidden_label\" type=\"text\">" +
+      "<input name=\"image[{{name}}_attributes][{{index}}][id]\" value=\"\" id=\"image_{{name}}_attributes_{{index}}_id\" type=\"hidden\" data-id=\"remote\">" +
+      "<input name=\"image[{{name}}_attributes][{{index}}][_destroy]\" id=\"image_{{name}}_attributes_{{index}}__destroy\" value=\"\" data-destroy=\"true\" type=\"hidden\"><span class=\"input-group-btn field-controls\"><button class=\"btn btn-success add\"><i class=\"icon-white glyphicon-plus\"></i><span>Add</span></button></span></li>";
+
+    var template = Handlebars.compile(source);
+
     var ControlledVocabFieldManager = function(element, options) {
         var that = this;
         var basic_manager = new HydraEditor.FieldManager(element, options);
         basic_manager.createNewField = function($activeField) {
               var new_index = $activeField.siblings().size() + 1;
-              $newField = $activeField.clone();
-              $newChildren = $newField.children('input');
-              that.updateName($newChildren, new_index);
-              $newChildren.val('').removeProp('required');
-              $newChildren.first().focus();
-              this.element.trigger("managed_field:add", $newChildren.first());
+              // TODO it's always subject
+              $newField = $(template({ "name": "lc_subject", "index": new_index }));
+              $newInput = $('input.multi-text-field', $newField);
+              $newInput.focus();
+              addAutocompleteToEditor($newInput);
+              this.element.trigger("managed_field:add", $newInput);
               return $newField
         };
 
         // Instead of removing the line, we override this method to add a
         // '_destroy' hidden parameter
-        basic_manager.remove_from_list = function( event ) {
+        basic_manager.removeFromList = function( event ) {
           event.preventDefault();
           var field = $(event.target).parents(this.fieldWrapperClass);
           field.find('[data-destroy]').val('true')
@@ -26,18 +34,6 @@
         }
 
         return basic_manager;
-    }
-
-    ControlledVocabFieldManager.prototype = {
-        updateName: function ($newChildren, new_index) {
-            var re = /\[\d+\]/
-            $newChildren.each(function() {
-              var $child = $(this);
-              var new_name = $child.attr('name').split(re).join('[' + new_index + ']');
-              $child.attr('name', new_name);
-            });
-
-        }
     }
 
     $.fn.manage_controlled_vocab_fields = function(option) {
