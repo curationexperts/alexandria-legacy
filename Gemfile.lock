@@ -43,6 +43,18 @@ GIT
       rdf (~> 1.1)
 
 GIT
+  remote: git://github.com/projecthydra-labs/questioning_authority.git
+  revision: 984bf390757999f2d6f9117a34af5d9a11872e87
+  branch: dce_test
+  specs:
+    qa (0.4.0)
+      activerecord-import
+      deprecation
+      nokogiri (~> 1.6.0)
+      rails (>= 3.2.13, < 5.0)
+      rest-client
+
+GIT
   remote: git://github.com/sul-dlss/mods.git
   revision: 1dced900b2cae1e84c6c7db7879a29b17805b7b4
   specs:
@@ -297,12 +309,6 @@ GEM
       rails (> 3.2.0)
     orm_adapter (0.5.0)
     pg (0.18.1)
-    qa (0.4.0)
-      activerecord-import
-      deprecation
-      nokogiri (~> 1.6.0)
-      rails (>= 3.2.13, < 5.0)
-      rest-client
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -506,6 +512,7 @@ DEPENDENCIES
   mods (~> 2.0.1)!
   oargun!
   pg
+  qa!
   rails (= 4.2.0)
   rdf-marmotta!
   rdf-vocab

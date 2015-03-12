@@ -60,5 +60,6 @@ function addAutocompleteToEditor($field, path) {
 Blacklight.onLoad(function(){
   addAutocompleteToEditor($('input.image_lc_subject:not([readonly])'), '/qa/search/loc/subjects');
   addAutocompleteToEditor($('input.image_location:not([readonly])'), '/qa/search/loc/names');
+  addAutocompleteToEditor($('input.image_form_of_work:not([readonly])'), '/qa/search/getty/aat');
 });
 
