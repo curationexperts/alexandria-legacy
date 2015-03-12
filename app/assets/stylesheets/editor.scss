@@ -1,3 +1,7 @@
 .controlled_vocabulary {
   @extend .multi_value;
 }
+
+input.string {
+  max-width: 40em;
+}
