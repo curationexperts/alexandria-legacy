@@ -28,7 +28,7 @@ class CatalogController < ApplicationController
     # config.show.partials.insert(1, :openseadragon)
 
     config.default_solr_params = {
-      qf: 'title_tesim lc_subject_label_tesim',
+      qf: 'title_tesim lc_subject_label_tesim accession_number_tesim',
       wt: 'json',
       qt: 'search',
       rows: 10
@@ -134,6 +134,13 @@ class CatalogController < ApplicationController
     # Now we see how to over-ride Solr request handler defaults, in this
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields.
+
+    config.add_search_field('accession_number') do |field|
+      field.solr_local_parameters = {
+        :qf => 'accession_number_tesim',
+        :pf => 'accession_number_tesim'
+      }
+    end
 
     config.add_search_field('title') do |field|
       field.solr_local_parameters = {
