@@ -135,12 +135,6 @@ class CatalogController < ApplicationController
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields.
 
-    config.add_search_field('accession_number') do |field|
-      field.solr_local_parameters = {
-        :qf => 'accession_number_tesim',
-        :pf => 'accession_number_tesim'
-      }
-    end
 
     config.add_search_field('title') do |field|
       field.solr_local_parameters = {
@@ -153,6 +147,13 @@ class CatalogController < ApplicationController
       field.solr_local_parameters = {
         qf: 'lc_subject_label_tesim',
         pf: 'lc_subject_label_tesim'
+      }
+    end
+
+    config.add_search_field('accession_number') do |field|
+      field.solr_local_parameters = {
+        :qf => 'accession_number_tesim',
+        :pf => 'accession_number_tesim'
       }
     end
 
