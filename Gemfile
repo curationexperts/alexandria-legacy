@@ -34,7 +34,7 @@ gem 'rdf-marmotta', github: 'dpla/rdf-marmotta', branch: 'develop'
 gem 'blacklight', '~> 5.10.0'
 gem 'rsolr', '~> 1.0.12'
 
-gem 'mods', '~> 2.0.1', github: 'jcoyne/mods', branch: 'commented_out_reused_codes'
+gem 'mods', '~> 2.0.1', github: 'sul-dlss/mods'
 gem 'oargun', github: 'curationexperts/oargun'
 gem 'blacklight-gallery'
 gem 'riiif', '~> 0.1.0'

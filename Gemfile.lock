@@ -43,9 +43,8 @@ GIT
       rdf (~> 1.1)
 
 GIT
-  remote: git://github.com/jcoyne/mods.git
-  revision: 995c126ecd0921194b6f77d4d8817e6af633806c
-  branch: commented_out_reused_codes
+  remote: git://github.com/sul-dlss/mods.git
+  revision: 1dced900b2cae1e84c6c7db7879a29b17805b7b4
   specs:
     mods (2.0.2)
       iso-639
@@ -462,7 +461,7 @@ GEM
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
-    thread_safe (0.3.4)
+    thread_safe (0.3.5)
     tilt (1.4.1)
     turbolinks (2.5.3)
       coffee-rails
