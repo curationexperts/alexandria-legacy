@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/dpla/rdf-marmotta.git
-  revision: be82f07e21bceb852f250a82fe4cf90377b9b6aa
+  revision: 4dd6511a99a5333bed3d2571b58caec9d0baa975
   branch: develop
   specs:
     rdf-marmotta (0.0.6)
