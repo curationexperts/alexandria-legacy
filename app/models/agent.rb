@@ -8,4 +8,8 @@ class Agent < ActiveFedora::Base
     index.as :stored_searchable
   end
 
+  def rdf_label
+    Array(foaf_name)
+  end
+
 end

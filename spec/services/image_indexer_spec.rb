@@ -100,14 +100,21 @@ describe ImageIndexer do
     end
   end
 
-  context "with creator" do
+  context "with many types of creator/contributors" do
     let(:creator) { [RDF::URI.new("http://id.loc.gov/authorities/names/n87914041")] }
-    let(:image) { Image.new(creator: creator) }
+    let(:singer) { [RDF::URI.new("http://id.loc.gov/authorities/names/n81053687")] }
+    let(:person) { Person.create(foaf_name: 'Valerie') }
+    let(:photographer) { [RDF::URI.new(person.uri)] }
+    let(:image) { Image.new(creator: creator, singer: singer, photographer: photographer) }
 
     it "should have a creator" do
       expect(subject['creator_tesim']).to eq ['http://id.loc.gov/authorities/names/n87914041']
       expect(subject['creator_label_tesim']).to eq ["American Film Manufacturing Company"]
       expect(subject['creator_label_si']).to eq "American Film Manufacturing Company"
+    end
+
+    it "has contributors" do
+      expect(subject['contributor_label_tesim']).to eq ["American Film Manufacturing Company", "Valerie", "Haggard, Merle"]
     end
   end
 

@@ -79,9 +79,8 @@ class ObjectFactory
           if value.is_a?(RDF::URI)
             contributors[field] << value
           elsif value.is_a?(Hash)
-            contributor = contributor_classes[value[:type]].where(foaf_name: value[:name]).first
-            contributor ||= contributor_classes[value[:type]].create(foaf_name: value[:name])
-            contributors[field] << RDF::URI.new(contributor.uri)
+            contributor = find_or_create_local_contributor(value.fetch(:type), value.fetch(:name))
+            contributors[field] << contributor
           end
         end
       end
@@ -89,6 +88,12 @@ class ObjectFactory
   end
 
   private
+
+    def find_or_create_local_contributor(type, name)
+      klass = contributor_classes[type]
+      contributor = klass.where(foaf_name: name).first || klass.create(foaf_name: name)
+      RDF::URI.new(contributor.uri)
+    end
 
     def host
       Rails.application.config.host_name
@@ -103,7 +108,8 @@ class ObjectFactory
     # <mods:name type="personal">
     # A name with type="personal" should map to the Person model
     def contributor_classes
-      { 'personal' => Person,
+      @contributor_classes ||= {
+        'personal' => Person,
         'corporate' => Organization,
         'conference' => Group,
         'family' => Group }

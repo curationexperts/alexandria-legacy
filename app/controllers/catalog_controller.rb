@@ -80,11 +80,11 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field solr_name('location_label', :stored_searchable), label: 'Location'
     config.add_index_field solr_name('lc_subject_label', :stored_searchable), label: 'Subject'
-    config.add_index_field solr_name('publisher', :stored_searchable), label: 'Publisher'
-    config.add_index_field solr_name('creator_label', :stored_searchable), label: 'Creator'
+    config.add_index_field ImageIndexer::CONTRIBUTOR_LABEL, label: 'Creators / Contributors'
     config.add_index_field solr_name('form_of_work_label', :stored_searchable), label: 'Type'
+    config.add_index_field solr_name('publisher', :stored_searchable), label: 'Publisher'
+    config.add_index_field solr_name('location_label', :stored_searchable), label: 'Location'
     config.add_index_field solr_name('language', :stored_searchable, type: :string), label: 'Language'
 
 

@@ -12,9 +12,10 @@ class ImageIndexer < ActiveFedora::IndexingService
   FACETABLE_YEAR = 'year_iim'
   COLLECTION_LABEL = Solrizer.solr_name('collection_label', :symbol)
   COLLECTION = Solrizer.solr_name('collection', :symbol)
+  CONTRIBUTOR_LABEL = Solrizer.solr_name('contributor_label', :stored_searchable)
 
   def generate_solr_document
-    super.tap do |solr_doc|
+    super do |solr_doc|
       solr_doc[COLLECTION] = object.collection_ids
       # TODO if we need to optimize, we could pull this from solr
       solr_doc[COLLECTION_LABEL] = object.collections.map &:title
@@ -24,10 +25,19 @@ class ImageIndexer < ActiveFedora::IndexingService
       solr_doc[SORTABLE_CREATOR] = sortable_creator(solr_doc)
       solr_doc[SORTABLE_DATE] = sortable_date(solr_doc)
       solr_doc[FACETABLE_YEAR] = facetable_year(solr_doc)
+      solr_doc[CONTRIBUTOR_LABEL] = contributors
     end
   end
 
   private
+
+    def contributors
+      Metadata::MARCREL.keys.each_with_object([]) do |field, list|
+        next if object[field].empty?
+        list.push *object[field].map { |val|
+          val.respond_to?(:rdf_label) && val.rdf_label.first }
+      end
+    end
 
     # Create a creator field suitable for sorting on
     def sortable_creator(solr_doc)

@@ -18,10 +18,11 @@ class RDF::DeepIndexingService < ActiveFedora::RDF::IndexingService
       object[property].each do |value|
         resource = value.respond_to?(:resource) ? value.resource : value
         next unless resource.kind_of?(ActiveTriples::Resource)
+        next if value.kind_of?(ActiveFedora::Base)
         old_label = resource.rdf_label.first
         next unless old_label == resource.rdf_subject.to_s || old_label.nil?
         fetch_value(resource) if resource.kind_of? ActiveTriples::Resource
-        if !value.kind_of?(ActiveFedora::Base) && old_label != resource.rdf_label.first && resource.rdf_label.first != resource.rdf_subject.to_s
+        if old_label != resource.rdf_label.first && resource.rdf_label.first != resource.rdf_subject.to_s
           resource.persist! # Stores the fetched values into our RDF::Solr repository
         end
       end
