@@ -87,12 +87,29 @@ class ObjectFactory
     end
   end
 
+  def find_or_create_rights_holders(attrs)
+    rights_holders = attrs.fetch(:rights_holder, []).map do |value|
+      if value.is_a?(RDF::URI)
+        value
+      else
+        find_or_create_local_rights_holder(value)
+      end
+    end
+    rights_holders.blank? ? {} : { rights_holder: rights_holders }
+  end
+
   private
 
     def find_or_create_local_contributor(type, name)
       klass = contributor_classes[type]
-      contributor = klass.where(foaf_name: name).first || klass.create(foaf_name: name)
+      contributor = klass.where(foaf_name_ssim: name).first || klass.create(foaf_name: name)
       RDF::URI.new(contributor.uri)
+    end
+
+    def find_or_create_local_rights_holder(name)
+      rights_holder = Agent.where(foaf_name_ssim: name, has_model_ssim: 'Agent').first
+      rights_holder ||= Agent.create(foaf_name: name)
+      RDF::URI.new(rights_holder.uri)
     end
 
     def host
@@ -117,7 +134,8 @@ class ObjectFactory
 
     def transform_attributes
       contributors = find_or_create_contributors(klass.contributor_fields, attributes)
-      attributes.merge(contributors)
+      rights_holders = find_or_create_rights_holders(attributes)
+      attributes.merge(contributors).merge(rights_holders)
     end
 
 end

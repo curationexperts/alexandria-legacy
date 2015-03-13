@@ -138,6 +138,14 @@ describe Importer::ModsParser do
         expect(attributes[:alternative]).to eq ['Lotusland']
       end
     end
+
+    context 'with a file that has copyrightHolder' do
+      let(:file) { 'spec/fixtures/mods/cusbmss228-p00001.xml' }
+
+      it 'finds the rights holder' do
+        expect(attributes[:rights_holder]).to eq ["http://id.loc.gov/authorities/names/n85088322", "University of California (System). Regents"]
+      end
+    end
   end
 
 

@@ -82,6 +82,7 @@ module Importer
     def rights
       {
         use_restrictions: mods.xpath('/m:mods/m:accessCondition[@type="use and reproduction"]', 'm' => Mods::MODS_NS).map {|node| strip_whitespace(node.text) },
+        rights_holder: rights_holder
       }
     end
 
@@ -159,6 +160,7 @@ module Importer
       end
     end
 
+
     def issued
       # Use a string because it may be any ISO8601 format.
       # Looking for any dateIssued without a point attribute
@@ -235,5 +237,13 @@ module Importer
         end
       end
 
+      def rights_holder
+        nodes = mods.extension.xpath('./copyrightHolder')
+        nodes.map do |node|
+          uri = node.attributes['valueURI']
+          text = node.text
+          uri.blank? ? strip_whitespace(text) : RDF::URI.new(uri)
+        end
+      end
   end
 end

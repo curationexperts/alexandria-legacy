@@ -5,7 +5,7 @@
 class Agent < ActiveFedora::Base
 
   property :foaf_name, predicate: ::RDF::FOAF.name, multiple: false do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :symbol  # Need :symbol for exact match for ObjectFactory find_or_create_* methods.
   end
 
   def rdf_label
