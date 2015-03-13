@@ -33,11 +33,12 @@ protected
   # Override Blacklight method so that you can search and
   # facet within the current collection.
   def search_action_url(options={})
+    clean_options = options.except(:only_path)
     case action_name
       when 'show'
-        collections.collection_path(options.except('only_path'.freeze))
+        collections.collection_path(clean_options)
       when 'index'
-        collections.collections_path(options)
+        collections.collections_path(clean_options)
       else
         super(*args)
     end
