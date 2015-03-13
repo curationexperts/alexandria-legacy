@@ -88,7 +88,8 @@ module Importer
     def locations
       {
         location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
-        sub_location: mods.location.holdingSimple.xpath('./mods:copyInformation/mods:subLocation', NAMESPACES).map(&:text)
+        sub_location: mods.location.holdingSimple.xpath('./mods:copyInformation/mods:subLocation', NAMESPACES).map(&:text),
+        place_of_publication: mods.origin_info.place.placeTerm.map(&:text)
       }.merge(coordinates)
     end
 
