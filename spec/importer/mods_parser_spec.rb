@@ -138,6 +138,13 @@ describe Importer::ModsParser do
         expect(attributes[:alternative]).to eq ['Lotusland']
       end
     end
+
+    context "with a file that has placeTerm" do
+      let(:file) { 'spec/fixtures/mods/cusbspcmss36_110089.xml' }
+      it 'reads the place' do
+        expect(attributes[:place_of_publication]). to eq ['Santa Barbara, California']
+      end
+    end
   end
 
 
