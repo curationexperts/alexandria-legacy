@@ -69,6 +69,7 @@ module Metadata
     end
 
     property :rights_holder, predicate: RDF::URI('http://opaquenamespace.org/rights/rightsHolder')
+    property :copyright_status, predicate: RDF::Vocab::PREMIS::V1.hasCopyrightStatus
 
     property :work_type, predicate: RDF::DC.type do |index|
       index.as :stored_searchable

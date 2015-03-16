@@ -81,8 +81,9 @@ module Importer
 
     def rights
       {
-        use_restrictions: mods.xpath('/m:mods/m:accessCondition[@type="use and reproduction"]', 'm' => Mods::MODS_NS).map {|node| strip_whitespace(node.text) },
-        rights_holder: rights_holder
+        use_restrictions: mods.xpath('/mods:mods/mods:accessCondition[@type="use and reproduction"]', NAMESPACES).map {|node| strip_whitespace(node.text) },
+        rights_holder: rights_holder,
+        copyright_status: mods.xpath('//mods:extension/copyrightStatus/@valueURI', NAMESPACES).map(&:value)
       }
     end
 
@@ -223,7 +224,7 @@ module Importer
       end
 
       def untyped_title
-        mods.xpath('/m:mods/m:titleInfo[not(@type)]/m:title/text()', 'm' => Mods::MODS_NS).to_s
+        mods.xpath('/mods:mods/mods:titleInfo[not(@type)]/mods:title/text()', NAMESPACES).to_s
       end
 
       def alt_title

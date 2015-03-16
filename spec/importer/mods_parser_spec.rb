@@ -46,6 +46,7 @@ describe Importer::ModsParser do
       expect(attributes[:description_standard]).to eq ['local']
       expect(attributes[:series_name]).to eq ['Series 4: Glass Negatives']
       expect(attributes[:use_restrictions]).to eq ['Use governed by the UCSB Special Collections policy.']
+      expect(attributes[:copyright_status]).to eq ['http://id.loc.gov/vocabulary/preservation/copyrightStatus/unk']
     end
 
     context "with a file that has a general (untyped) note" do
