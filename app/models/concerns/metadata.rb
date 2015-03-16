@@ -68,6 +68,8 @@ module Metadata
       index.as :stored_searchable, :facetable
     end
 
+    property :rights_holder, predicate: RDF::URI('http://opaquenamespace.org/rights/rightsHolder')
+
     property :work_type, predicate: RDF::DC.type do |index|
       index.as :stored_searchable
     end

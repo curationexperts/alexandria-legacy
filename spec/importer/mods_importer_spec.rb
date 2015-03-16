@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'importer'
+require 'importer/mods_parser'
 
 describe Importer::ModsImporter do
 
@@ -113,11 +114,6 @@ describe Importer::ModsImporter do
         expect(coll.title).to eq 'Joel Conway / Flying A Studio photograph collection'
       end
     end
-  end
-
-
-  describe 'contributors that have Strings instead of URIs' do
-    let(:file) { 'spec/fixtures/mods/sbhcmss78_FlyingAStudios_collection.xml' }
 
     context 'when the person already exists' do
       let!(:existing) { Person.create(foaf_name: 'Conway, Joel') }
@@ -133,6 +129,34 @@ describe Importer::ModsImporter do
         uri = coll.collector.first.rdf_subject.value
         collector = Person.find(Person.uri_to_id(uri))
         expect(collector.id).to eq existing.id
+      end
+    end
+  end
+
+  describe 'fields that have Strings instead of URIs' do
+    let(:file) { 'spec/fixtures/mods/sbhcmss78_FlyingAStudios_collection.xml' }
+
+    let(:frodo) { 'Frodo Baggins' }
+    let(:bilbo) { 'Bilbo Baggins' }
+    let(:pippin) { RDF::URI.new('http://example.com/pippin') }
+
+    context 'when rights_holder has strings or uris' do
+      before do
+        Agent.delete_all
+        Agent.create(foaf_name: frodo)  # existing rights holder
+        allow_any_instance_of(Importer::ModsParser).to receive(:rights_holder) { [frodo, bilbo, pippin] }
+      end
+
+      it 'finds or creates the rights holders' do
+        expect {
+          coll = importer.import(file)
+        }.to change { Agent.where(has_model_ssim: 'Agent').count }.by(1)
+        # We are adding the has_model_ssim constraint instead
+        # of just Agent.count because Agent.count also picks
+        # up entries for the sub-class Person.
+
+        rights_holders = Agent.where(has_model_ssim: 'Agent')
+        expect(rights_holders.map(&:foaf_name).sort).to eq [bilbo, frodo]
       end
     end
   end

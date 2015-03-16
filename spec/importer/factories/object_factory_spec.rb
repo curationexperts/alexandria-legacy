@@ -3,6 +3,62 @@ require 'importer'
 
 describe ObjectFactory do
 
+  describe '#find_or_create_rights_holders' do
+    let(:regents_uri) { "http://id.loc.gov/authorities/names/n85088322" }
+    let(:regents_string) { "Regents of the Univ." }
+    let(:attributes) {{ rights_holder: [RDF::URI.new(regents_uri), regents_string] }}
+
+    subject { CollectionFactory.new(attributes, './tmp') }
+
+    context "when local rights holder doesn't exist" do
+      it 'creates a rights holder' do
+        expect(Agent.count).to eq 0
+        rh = nil
+        expect {
+          rh = subject.find_or_create_rights_holders(attributes)
+        }.to change { Agent.count }.by(1)
+        expect(rh.fetch(:rights_holder).map(&:class).uniq).to eq [RDF::URI]
+        local_rights_holder = Agent.first
+        expect(local_rights_holder.foaf_name).to eq regents_string
+        expect(rh.fetch(:rights_holder)).to eq [regents_uri, local_rights_holder.uri]
+      end
+    end
+
+    context "when existing local rights holder" do
+      let!(:existing_rh) { Agent.create(foaf_name: regents_string) }
+      it "finds the existing rights holder" do
+        rh = nil
+        expect {
+          rh = subject.find_or_create_rights_holders(attributes)
+        }.to change { Agent.count }.by(0)
+        expect(rh.fetch(:rights_holder)).to eq [regents_uri, existing_rh.uri]
+      end
+    end
+
+    context "when similar name" do
+      let!(:frodo) { Agent.create(foaf_name: 'Frodo Baggins') }
+      let(:attributes) {{ rights_holder: ['Bilbo Baggins'] }}
+
+      it "only finds exact name matches" do
+        expect {
+          subject.find_or_create_rights_holders(attributes)
+        }.to change { Agent.count }.by(1)
+        expect(Agent.all.map(&:foaf_name).sort).to eq ['Bilbo Baggins', 'Frodo Baggins']
+      end
+    end
+
+    context "when name matches, but model is wrong" do
+      let!(:frodo) { Person.create(foaf_name: 'Frodo Baggins') }
+      let(:attributes) {{ rights_holder: ['Frodo Baggins'] }}
+
+      it "only matches exact model" do
+        expect {
+          subject.find_or_create_rights_holders(attributes)
+        }.to change { Agent.count }.by(1)
+      end
+    end
+  end
+
   describe '#find_or_create_contributors' do
     let(:fields) { [:creator, :collector, :contributor] }
     let(:afmc) { 'http://id.loc.gov/authorities/names/n87914041' }
@@ -54,6 +110,18 @@ describe ObjectFactory do
         expect(contributors[:contributor].map(&:class).uniq).to eq [RDF::URI]
         expect(contributors[:contributor]).to include afmc
         expect(contributors[:contributor]).to include person.uri
+      end
+    end
+
+    context "when similar name" do
+      let!(:frodo) { Person.create(foaf_name: 'Frodo Baggins') }
+      let(:attributes) {{ creator: [{ name: 'Bilbo Baggins', type: 'personal'}] }}
+
+      it "only finds exact name matches" do
+        expect {
+          subject.find_or_create_contributors([:creator], attributes)
+        }.to change { Person.count }.by(1)
+        expect(Person.all.map(&:foaf_name).sort).to eq ['Bilbo Baggins', 'Frodo Baggins']
       end
     end
   end
