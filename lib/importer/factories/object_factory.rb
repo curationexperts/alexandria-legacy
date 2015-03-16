@@ -95,6 +95,7 @@ class ObjectFactory
         find_or_create_local_rights_holder(value)
       end
     end
+
     rights_holders.blank? ? {} : { rights_holder: rights_holders }
   end
 
@@ -107,7 +108,7 @@ class ObjectFactory
     end
 
     def find_or_create_local_rights_holder(name)
-      rights_holder = Agent.where(foaf_name_ssim: name, has_model_ssim: 'Agent').first
+      rights_holder = Agent.exact_model.where(foaf_name_ssim: name).first
       rights_holder ||= Agent.create(foaf_name: name)
       RDF::URI.new(rights_holder.uri)
     end

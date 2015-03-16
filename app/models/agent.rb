@@ -8,6 +8,13 @@ class Agent < ActiveFedora::Base
     index.as :stored_searchable, :symbol  # Need :symbol for exact match for ObjectFactory find_or_create_* methods.
   end
 
+  # This allows us to scope queries directly against a specific subclass,
+  # Otherwise, "Agent.all" would return instances of any subclass of Agent
+  # (e.g. Person)
+  def self.exact_model
+    where(has_model_ssim: self.to_s)
+  end
+
   def rdf_label
     Array(foaf_name)
   end

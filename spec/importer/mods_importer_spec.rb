@@ -150,12 +150,9 @@ describe Importer::ModsImporter do
       it 'finds or creates the rights holders' do
         expect {
           coll = importer.import(file)
-        }.to change { Agent.where(has_model_ssim: 'Agent').count }.by(1)
-        # We are adding the has_model_ssim constraint instead
-        # of just Agent.count because Agent.count also picks
-        # up entries for the sub-class Person.
+        }.to change { Agent.exact_model.count }.by(1)
 
-        rights_holders = Agent.where(has_model_ssim: 'Agent')
+        rights_holders = Agent.exact_model
         expect(rights_holders.map(&:foaf_name).sort).to eq [bilbo, frodo]
       end
     end

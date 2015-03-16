@@ -26,12 +26,14 @@ describe ObjectFactory do
 
     context "when existing local rights holder" do
       let!(:existing_rh) { Agent.create(foaf_name: regents_string) }
+
       it "finds the existing rights holder" do
         rh = nil
         expect {
           rh = subject.find_or_create_rights_holders(attributes)
-        }.to change { Agent.count }.by(0)
-        expect(rh.fetch(:rights_holder)).to eq [regents_uri, existing_rh.uri]
+        }.to change { Agent.exact_model.count }.by(0)
+
+        expect(rh.fetch(:rights_holder).map(&:to_s)).to eq [regents_uri, existing_rh.uri]
       end
     end
 
