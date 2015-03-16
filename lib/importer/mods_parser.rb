@@ -188,10 +188,14 @@ module Importer
     end
 
     def note
-      mods.xpath('//mods:note[@type!="preferred citation"]'.freeze, NAMESPACES).map do |node|
-        node.text.gsub(/\n\s+/, "\n")
+      preferred_citation = 'preferred citation'.freeze
+      mods.note.each_with_object([]) do |node, list|
+        next if node.attributes.has_key? preferred_citation
+        hash = { value: node.text.gsub(/\n\s+/, "\n") }
+        type_attr = node.attributes['type'.freeze].try(:text)
+        hash[:note_type] = type_attr if type_attr
+        list << hash
       end
-
     end
 
     private

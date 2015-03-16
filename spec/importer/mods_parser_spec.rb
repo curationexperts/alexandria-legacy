@@ -39,11 +39,21 @@ describe Importer::ModsParser do
       expect(attributes[:accession_number]).to eq ['cusbspcsbhc78_100239']
       expect(attributes[:sub_location]).to eq ['Department of Special Collections']
       expect(attributes[:citation]).to eq ["[Identification of Item], Joel Conway / Flying A Studio\nPhotograph Collection. SBHC Mss 78. Department of Special Collections, UC Santa Barbara\nLibrary, University of California, Santa Barbara."]
-      expect(attributes[:note]).to eq ["Gift from Pat Eagle-Schnetzer and Ronald Conway, and purchase\nfrom Joan Cota (Conway children), 2009."]
+      acquisition_note = attributes[:note].first
+      expect(acquisition_note[:note_type]).to eq 'acquisition'
+      expect(acquisition_note[:value]).to eq "Gift from Pat Eagle-Schnetzer and Ronald Conway, and purchase\nfrom Joan Cota (Conway children), 2009."
       expect(attributes[:record_origin]).to eq ['Converted from CSV to MODS 3.4 using local mapping.', Importer::ModsParser::ORIGIN_TEXT]
       expect(attributes[:description_standard]).to eq ['local']
       expect(attributes[:series_name]).to eq ['Series 4: Glass Negatives']
       expect(attributes[:use_restrictions]).to eq ['Use governed by the UCSB Special Collections policy.']
+    end
+
+    context "with a file that has a general (untyped) note" do
+      let(:file) { 'spec/fixtures/mods/cusbspcmss36_110108.xml' }
+      it 'imports notes' do
+        expect(attributes[:note].first[:value]).to eq 'Title from item.'
+        expect(attributes[:note].second[:value]).to eq 'Postcard caption: 60. Arlington Hotel, Sta. Barbara Quake 6-29-25.'
+      end
     end
 
     context "with a file that has a publisher" do

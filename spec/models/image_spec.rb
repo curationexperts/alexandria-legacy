@@ -58,6 +58,15 @@ describe Image do
         expect(subject.form_of_work.size).to eq 1
       end
     end
+
+    context "for notes" do
+      before do
+        subject.notes_attributes=[{:value=>"Title from item."}, {:value=>"Postcard caption: 25. Light-House Tower Sta. Barbara Earth Quake.\n6-29-25."}, {:value=>"[Identification of Item], Santa Barbara picture\npostcards collection. SBHC Mss 36. Department of Special Collections, UC Santa Barbara\nLibrary, University of California, Santa Barbara.", :note_type=>"preferred citation"}]
+      end
+      it "has notes" do
+        expect(subject.notes.size).to eq 3
+      end
+    end
   end
 
   describe "#to_solr" do

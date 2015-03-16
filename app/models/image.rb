@@ -31,7 +31,7 @@ class Image < ActiveFedora::Base
     ImageIndexer
   end
 
-  # override the accessor to cast local objects to AF::Base
+  # override the hash accessor to cast local objects to AF::Base
   # TODO move this into Oargun using the casting functionality of ActiveTriples
   def [](arg)
     Array(super).map do |item|

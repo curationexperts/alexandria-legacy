@@ -113,7 +113,6 @@ module Metadata
     # MODS
     property :digital_origin, predicate: RDF::Vocab::MODS.digitalOrigin
 
-    property :note, predicate: RDF::Vocab::MODS.note
 
     property :description_standard, predicate: RDF::Vocab::MODS.recordDescriptionStandard
 
@@ -129,6 +128,8 @@ module Metadata
 
     property :use_restrictions, predicate: RDF::Vocab::MODS.accessCondition
 
+    has_and_belongs_to_many :notes, predicate: RDF::Vocab::MODS.note
+
     id_blank = proc { |attributes| attributes[:id].blank? }
 
     RELATIONS.keys.each do |relation|
@@ -137,6 +138,7 @@ module Metadata
     accepts_nested_attributes_for :location, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :lc_subject, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :form_of_work, reject_if: id_blank, allow_destroy: true
+    accepts_nested_attributes_for :notes, reject_if: :all_blank, allow_destroy: true
 
     def self.contributor_fields
       RELATIONS.keys
