@@ -21,3 +21,5 @@
 config/secrets.yml
 config/smtp.yml
 config/ezid.yml
+
+tags
