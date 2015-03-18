@@ -54,7 +54,7 @@
     </mods:titleInfo>
   </mods:relatedItem>
   <mods:location>
-    <mods:physicalLocation>University of California, Santa Barbara</mods:physicalLocation>
+    <mods:physicalLocation valueURI="http://id.loc.gov/vocabulary/organizations/cusb">University of California, Santa Barbara</mods:physicalLocation>
     <mods:holdingSimple>
       <mods:copyInformation>
         <mods:subLocation>Department of Special Collections</mods:subLocation>
