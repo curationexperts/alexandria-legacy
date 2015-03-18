@@ -109,6 +109,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('language', :stored_searchable, type: :string), label: 'Language'
     config.add_show_field solr_name('latitude', :displayable, type: :string), label: 'Latitude'
     config.add_show_field solr_name('longitude', :displayable, type: :string), label: 'Longitude'
+    config.add_show_field solr_name('institution', :stored_searchable), label: 'Contributing Institution'
     config.add_show_field solr_name('sub_location', :displayable, type: :string), label: 'Holding Sub-location'
     config.add_show_field solr_name('license_label', :stored_searchable), label: 'License'
     config.add_show_field solr_name('rights_holder_label', :stored_searchable), label: 'Copyright Holder'
