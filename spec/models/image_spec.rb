@@ -67,6 +67,18 @@ describe Image do
         expect(subject.notes.size).to eq 3
       end
     end
+
+    describe "dates" do
+      context "created" do
+        before do
+          subject.created_attributes=[{ start: ["1940"], finish: ["1959"] }]
+        end
+        it "has date_created" do
+          expect(subject.created.first.start).to eq ['1940']
+          expect(subject.created.first.finish).to eq ['1959']
+        end
+      end
+    end
   end
 
   describe "#to_solr" do
@@ -82,26 +94,24 @@ describe Image do
 
     describe "ranges" do
       before do
-        image.created_start = ['1911']
-        image.created_end = ['1912']
-        image.issued_start = ['1913']
-        image.issued_end = ['1917']
+        image.created.build(start: ['1911'], finish: ['1912'])
+        image.issued.build(start: ['1913'], finish: ['1917'])
       end
 
       it "stores them" do
-        expect(image.created_start).to eq ['1911']
-        expect(image.created_end).to eq ['1912']
-        expect(image.issued_start).to eq ['1913']
-        expect(image.issued_end).to eq ['1917']
+        expect(image.created.first.start).to eq ['1911']
+        expect(image.created.first.finish).to eq ['1912']
+        expect(image.issued.first.start).to eq ['1913']
+        expect(image.issued.first.finish).to eq ['1917']
       end
     end
 
     describe "points" do
       before do
-        image.issued = ['1913']
+        image.issued.build(start: ['1913'])
       end
       it "stores them" do
-        expect(image.issued).to eq ['1913']
+        expect(image.issued.first.start).to eq ['1913']
       end
     end
   end

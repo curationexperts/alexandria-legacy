@@ -39,32 +39,4 @@ describe ApplicationHelper do
     subject { helper.link_to_collection(value: ['collection title'], document: document) }
     it { is_expected.to eq '<a href="/collections/1234">collection title</a>' }
   end
-
-  describe '#display_date_created' do
-    let(:earliest) { '1910' }
-    let(:latest)   { '1919' }
-
-    subject { helper.display_dates(field: field, document: solr_doc) }
-
-    context 'with issued_start_ssm and issued_end_ssm' do
-      let(:field) { 'issued_start_ssm' }
-      let(:solr_doc) { SolrDocument.new(issued_start_ssm: [earliest], issued_end_ssm: [latest]) }
-
-      it { is_expected.to eq "#{earliest}-#{latest}" }
-    end
-
-    context 'with issued_start_ssm and issued_end_ssm' do
-      let(:field) { 'created_start_ssm' }
-      let(:solr_doc) { SolrDocument.new(created_start_ssm: [earliest], created_end_ssm: [latest]) }
-
-      it { is_expected.to eq "#{earliest}-#{latest}" }
-    end
-
-    context 'without issued_start_ssm' do
-      let(:field) { 'issued_start_ssm' }
-      let(:solr_doc) { SolrDocument.new(issued_ssm: [earliest]) }
-
-      it { is_expected.to be_nil }
-    end
-  end  #  '#display_date_created'
 end

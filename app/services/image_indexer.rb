@@ -3,16 +3,17 @@ class ImageIndexer < ActiveFedora::IndexingService
     RDF::DeepIndexingService
   end
 
-  CREATOR_MULTIPLE = Solrizer.solr_name('creator_label', :stored_searchable)
   ISSUED = Solrizer.solr_name('issued', :displayable)
-  ISSUED_START = Solrizer.solr_name('issued_start', :displayable)
-  CREATED_START = Solrizer.solr_name('created_start', :displayable)
-  SORTABLE_CREATOR = Solrizer.solr_name('creator_label', :sortable)
+  CREATED = Solrizer.solr_name('created', :displayable)
   SORTABLE_DATE = Solrizer.solr_name('date', :sortable)
   FACETABLE_YEAR = 'year_iim'
+
+  CREATOR_MULTIPLE = Solrizer.solr_name('creator_label', :stored_searchable)
+  SORTABLE_CREATOR = Solrizer.solr_name('creator_label', :sortable)
+  CONTRIBUTOR_LABEL = Solrizer.solr_name('contributor_label', :stored_searchable)
+
   COLLECTION_LABEL = Solrizer.solr_name('collection_label', :symbol)
   COLLECTION = Solrizer.solr_name('collection', :symbol)
-  CONTRIBUTOR_LABEL = Solrizer.solr_name('contributor_label', :stored_searchable)
 
   def generate_solr_document
     super do |solr_doc|
@@ -23,13 +24,25 @@ class ImageIndexer < ActiveFedora::IndexingService
       solr_doc['image_url_ssm'.freeze] = generic_file_images
       solr_doc['large_image_url_ssm'.freeze] = generic_file_large_images
       solr_doc[SORTABLE_CREATOR] = sortable_creator(solr_doc)
-      solr_doc[SORTABLE_DATE] = sortable_date(solr_doc)
-      solr_doc[FACETABLE_YEAR] = facetable_year(solr_doc)
+      solr_doc[ISSUED] = issued
+      solr_doc[CREATED] = created
+      solr_doc[SORTABLE_DATE] = sortable_date
+      solr_doc[FACETABLE_YEAR] = facetable_year
       solr_doc[CONTRIBUTOR_LABEL] = contributors
     end
   end
 
   private
+
+    def created
+      return unless object.created.present?
+      object.created.first.display_label
+    end
+
+    def issued
+      return unless object.issued.present?
+      object.issued.first.display_label
+    end
 
     def contributors
       Metadata::MARCREL.keys.each_with_object([]) do |field, list|
@@ -45,28 +58,20 @@ class ImageIndexer < ActiveFedora::IndexingService
     end
 
     # Create a date field for sorting on
-    def sortable_date(solr_doc)
-      if solr_doc.key? ISSUED
-        solr_doc.fetch(ISSUED).first
-      elsif solr_doc.key? ISSUED_START
-        solr_doc.fetch(ISSUED_START).first
-      elsif solr_doc.key? CREATED_START
-        solr_doc.fetch(CREATED_START).first
-      end
+    def sortable_date
+      key_date.try(:sortable)
     end
 
     # Create a year field (integer, multiple) for faceting on
-    def facetable_year(solr_doc)
-      if object.issued_start.present?
-        start = extract_year(object.issued_start.first)
-        stop = extract_year(object.issued_end.first)
-        (start..stop).to_a
-      elsif object.issued.present?
-        object.issued.map { |date| extract_year(date) }
-      elsif object.created_start.present?
-        start = extract_year(object.created_start.first)
-        stop = extract_year(object.created_end.first)
-        (start..stop).to_a
+    def facetable_year
+      key_date.try(:facetable)
+    end
+
+    def key_date
+      if object.issued.present?
+        object.issued.first
+      elsif object.created.present?
+        object.created.first
       end
     end
 
@@ -91,14 +96,4 @@ class ImageIndexer < ActiveFedora::IndexingService
         raise "host_name is not configured"
       end
 
-      def extract_year(date)
-        # Date.iso8601 doesn't support YYYY dates
-        if /^\d{4}$/ =~ date
-          date.to_i
-        else
-          Date.iso8601(date).year
-        end
-      rescue ArgumentError
-        raise "Invalid date: #{date.inspect} in #{object.id}"
-      end
 end

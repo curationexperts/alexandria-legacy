@@ -96,12 +96,9 @@ module Importer
 
     def dates
       {
-        issued_start: issued_start,
-        issued_end: issued_end,
-        issued: issued,
-        created_start: created_start,
-        created_end: created_end,
-        date_other: mods.origin_info.dateOther.map(&:text)
+        issued_attributes: build_date(mods.origin_info.dateIssued),
+        created_attributes: build_date(mods.origin_info.dateCreated),
+        date_other_attributes: build_date(mods.origin_info.dateOther)
       }
     end
 
@@ -161,13 +158,6 @@ module Importer
       end
     end
 
-
-    def issued
-      # Use a string because it may be any ISO8601 format.
-      # Looking for any dateIssued without a point attribute
-      mods.origin_info.dateIssued.css(":not([point])").map(&:text)
-    end
-
     def persistent_id(raw_id)
       raw_id.downcase.gsub(/\s*/, '')
     end
@@ -200,27 +190,28 @@ module Importer
     end
 
     private
-      def created_end
-        created_range_limit('end'.freeze)
+      def build_date(node)
+        finish = finish_point(node)
+        start = start_point(node)
+        [{ start: start.map(&:text), finish: finish.map(&:text), label: date_label(node),
+           start_qualifier: qualifier(start), finish_qualifier: qualifier(finish)
+        }]
       end
 
-      def created_start
-        created_range_limit('start'.freeze)
+      def qualifier(nodes)
+        nodes.map { |node| node.attributes['qualifier'].try(:value) }.compact
       end
 
-      def created_range_limit(point)
-        mods.origin_info.dateCreated.css("[point=\"#{point}\"]").map(&:text)
+      def finish_point(node)
+        node.css("[point=\"end\"]")
       end
 
-      def issued_end
-        issued_range_limit('end'.freeze)
+      def start_point(node)
+        node.css("[encoding]:not([point='end'])".freeze)
       end
 
-      def issued_start
-        issued_range_limit('start'.freeze)
-      end
-      def issued_range_limit(point)
-        mods.origin_info.dateIssued.css("[point=\"#{point}\"]").map(&:text)
+      def date_label(node)
+        node.css(":not([encoding])".freeze).map(&:text)
       end
 
       def untyped_title

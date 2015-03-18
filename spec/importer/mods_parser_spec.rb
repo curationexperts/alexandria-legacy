@@ -97,13 +97,6 @@ describe Importer::ModsParser do
       end
     end
 
-    context "with a file that has dateOther" do
-      let(:file) { 'spec/fixtures/mods/cusbspcmss36_110089.xml' }
-      it "imports date_other" do
-        expect(attributes[:date_other]).to eq ['undated']
-      end
-    end
-
     it 'finds metadata for the collection' do
       expect(attributes[:collection][:id]).to eq 'sbhcmss78'
       expect(attributes[:collection][:accession_number]).to eq ['SBHC Mss 78']
@@ -111,34 +104,22 @@ describe Importer::ModsParser do
     end
 
     context "with a range of dateCreated" do
-      it "imports created_start" do
-        expect(attributes[:created_start]).to eq ['1910']
-      end
-
-      it "imports created_end" do
-        expect(attributes[:created_end]).to eq ['1919']
+      it "imports created" do
+        expect(attributes[:created_attributes]).to eq [{ start: ['1910'], finish: ['1919'], label: ["circa 1910s"], start_qualifier: ["approximate"], finish_qualifier: ["approximate"] }]
       end
     end
 
     context "with a file that has a range of dateIssued" do
       let(:file) { 'spec/fixtures/mods/cusbspcmss36_110089.xml' }
       it "imports issued" do
-        expect(attributes[:issued]).to eq []
-      end
-
-      it "imports issued_start" do
-        expect(attributes[:issued_start]).to eq ['1900']
-      end
-
-      it "imports issued_end" do
-        expect(attributes[:issued_end]).to eq ['1959']
+        expect(attributes[:issued_attributes]).to eq [{ start: ['1900'], finish: ['1959'], label: ["circa 1900s-1950s"], start_qualifier: ["approximate"], finish_qualifier: ["approximate"] }]
       end
     end
 
     context "with a file that has a single dateIssued" do
       let(:file) { 'spec/fixtures/mods/cusbspcmss36_110108.xml' }
       it "imports issued" do
-        expect(attributes[:issued]).to eq ['1925']
+        expect(attributes[:issued_attributes]).to eq [{ start: ['1925'], finish: [], label: [], start_qualifier: [], finish_qualifier: [] }]
       end
     end
 
@@ -154,7 +135,7 @@ describe Importer::ModsParser do
       let(:file) { 'spec/fixtures/mods/cusbmss228-p00001.xml' }
 
       it 'finds the rights holder' do
-        expect(attributes[:rights_holder]).to eq ["http://id.loc.gov/authorities/names/n85088322", "University of California (System). Regents"]
+        expect(attributes[:rights_holder]).to eq ["http://id.loc.gov/authorities/names/n85088322"]
       end
     end
   end
@@ -170,8 +151,7 @@ describe Importer::ModsParser do
       expect(attributes[:creator]).to be_nil
       expect(attributes[:collector]).to eq [{name: 'Conway, Joel', type: 'personal'}]
       expect(attributes[:description]).to eq ['Black and white photographs relating to the Flying A Studios (aka American Film Manufacturing Company), a film company that operated in Santa Barbara (1912-1920).']
-      expect(attributes[:created_start]).to eq ['1910']
-      expect(attributes[:created_end]).to eq ['1919']
+      expect(attributes[:created_attributes]).to eq [{ start: ['1910'], finish: ['1919'], label: ["circa 1910s"], start_qualifier: ["approximate"], finish_qualifier: ["approximate"] }]
       expect(attributes[:extent]).to eq ['702 digital objects']
       expect(attributes[:lc_subject]).to eq ["http://id.loc.gov/authorities/subjects/sh85088047", "http://id.loc.gov/authorities/subjects/sh99005024"]
       expect(attributes[:form_of_work]).to eq ["http://vocab.getty.edu/aat/300046300", "http://vocab.getty.edu/aat/300128343"]

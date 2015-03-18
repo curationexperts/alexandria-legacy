@@ -80,27 +80,30 @@ module Metadata
     end
 
     # Dates
-    property :issued, predicate: RDF::DC.issued do |index|
-      index.as :displayable
-    end
+    # property :issued, predicate: RDF::DC.issued do |index|
+    #   index.as :displayable
+    # end
 
-    property :issued_start, predicate: RDF::URI('http://www.loc.gov/mods/rdf/v1#dateIssuedStart') do |index|
-      index.as :displayable
-    end
+    has_and_belongs_to_many :created, predicate: RDF::DC.created, class_name: 'TimeSpan'
+    has_and_belongs_to_many :issued, predicate: RDF::DC.issued, class_name: 'TimeSpan'
+    has_and_belongs_to_many :date_other, predicate: RDF::DC.date, class_name: 'TimeSpan'
+    # property :issued_start, predicate: RDF::URI('http://www.loc.gov/mods/rdf/v1#dateIssuedStart') do |index|
+    #   index.as :displayable
+    # end
 
-    property :issued_end, predicate: RDF::URI('http://www.loc.gov/mods/rdf/v1#dateIssuedEnd') do |index|
-      index.as :displayable
-    end
+    # property :issued_end, predicate: RDF::URI('http://www.loc.gov/mods/rdf/v1#dateIssuedEnd') do |index|
+    #   index.as :displayable
+    # end
 
-    property :created_start, predicate: RDF::Vocab::MODS.dateCreatedStart do |index|
-      index.as :displayable
-    end
+    # property :created_start, predicate: RDF::Vocab::MODS.dateCreatedStart do |index|
+    #   index.as :displayable
+    # end
 
-    property :created_end, predicate: RDF::Vocab::MODS.dateCreatedEnd do |index|
-      index.as :displayable
-    end
+    # property :created_end, predicate: RDF::Vocab::MODS.dateCreatedEnd do |index|
+    #   index.as :displayable
+    # end
 
-    property :date_other, predicate: RDF::DC.date
+    # property :date_other, predicate: RDF::DC.date
 
 
     # RDA
@@ -140,6 +143,9 @@ module Metadata
     accepts_nested_attributes_for :lc_subject, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :form_of_work, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :notes, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :created, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :issued, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :date_other, reject_if: :all_blank, allow_destroy: true
 
     def self.contributor_fields
       RELATIONS.keys

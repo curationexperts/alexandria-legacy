@@ -2,7 +2,7 @@ class ImageForm
   include HydraEditor::Form
   self.model_class = Image
   self.terms = [:title, :creator, :contributor, :description, :location, :lc_subject,
-                :publisher, :work_type, :form_of_work, :issued_start, :issued_end, :issued, :created_start, :created_end, :date_other ]
+                :publisher, :work_type, :form_of_work ]
   self.required_fields = [] # Required fields
 
   protected
@@ -32,6 +32,9 @@ class ImageForm
       permitted << { creator_attributes: [:id, :_destroy] }
       permitted << { location_attributes: [:id, :_destroy] }
       permitted << { lc_subject_attributes: [:id, :_destroy] }
+      permitted << { issued_attributes: [:id, :start, :finish, :label, :note, :_destroy] }
+      permitted << { created_attributes: [:id, :start, :finish, :label, :note, :_destroy] }
+      permitted << { other_date_attributes: [:id, :start, :finish, :label, :note, :_destroy] }
       permitted << { form_of_work_attributes: [:id, :_destroy] }
       permitted
     end
