@@ -9,6 +9,14 @@ GIT
       rest-client (~> 1.7)
 
 GIT
+  remote: git://github.com/curationexperts/rdf-vocab.git
+  revision: 9291984ea75183d1fff8ca737998e19c4833e385
+  branch: iana
+  specs:
+    rdf-vocab (0.6.0)
+      linkeddata
+
+GIT
   remote: git://github.com/dpla/rdf-marmotta.git
   revision: 4dd6511a99a5333bed3d2571b58caec9d0baa975
   branch: develop
@@ -41,13 +49,6 @@ GIT
       deprecation (~> 0.1)
       linkeddata (~> 1.1)
       rdf (~> 1.1)
-
-GIT
-  remote: git://github.com/projecthydra-labs/rdf-vocab.git
-  revision: cd82d6c36951409eaa644ef4750a26f05910c0c6
-  specs:
-    rdf-vocab (0.6.0)
-      linkeddata
 
 GIT
   remote: git://github.com/sul-dlss/mods.git

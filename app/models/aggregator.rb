@@ -1,9 +1,7 @@
-require 'rdf/iana'
-
 class Aggregator < ActiveFedora::Base
   has_many :proxies
-  belongs_to :head, predicate: ::RDF::IANA['first'], class_name: 'Proxy'
-  belongs_to :tail, predicate: ::RDF::IANA.last, class_name: 'Proxy'
+  belongs_to :head, predicate: ::RDF::Vocab::IANA['first'], class_name: 'Proxy'
+  belongs_to :tail, predicate: ::RDF::Vocab::IANA.last, class_name: 'Proxy'
 
   def first
     head.target
