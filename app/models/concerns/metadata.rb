@@ -25,15 +25,15 @@ module Metadata
       index.as :stored_searchable
     end
 
-    # property :creator, predicate: ::RDF::DC.creator, class_name: Oargun::ControlledVocabularies::Creator do |index|
-    #   index.as :stored_searchable, :facetable
-    # end
     RELATIONS.each do |field_name, predicate|
       property field_name, predicate: predicate, class_name: Oargun::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
     end
 
+    # property :creator, predicate: ::RDF::DC.creator, class_name: Oargun::ControlledVocabularies::Creator do |index|
+    #   index.as :stored_searchable, :facetable
+    # end
     # property :contributor, predicate: ::RDF::DC.contributor do |index|
     #   index.as :stored_searchable
     # end
@@ -70,6 +70,7 @@ module Metadata
 
     property :rights_holder, predicate: RDF::URI('http://opaquenamespace.org/rights/rightsHolder')
     property :copyright_status, predicate: RDF::Vocab::PREMIS::V1.hasCopyrightStatus
+    property :license, predicate: RDF::DC.rights
 
     property :work_type, predicate: RDF::DC.type do |index|
       index.as :stored_searchable
