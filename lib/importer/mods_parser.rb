@@ -92,7 +92,7 @@ module Importer
       {
         location: mods.subject.geographic.valueURI.map { |uri| RDF::URI.new(uri) },
         sub_location: mods.location.holdingSimple.xpath('./mods:copyInformation/mods:subLocation', NAMESPACES).map(&:text),
-        institution: mods.location.xpath('./mods:physicalLocation/@valueURI', NAMESPACES).map { |uri| RDF::URI.new(uri.value) }
+        institution: mods.location.physicalLocation.valueURI.map { |uri| RDF::URI.new(uri) }
       }.merge(coordinates)
     end
 
