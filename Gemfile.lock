@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: 41141879b574499970251854232ff4d3724d532b
+  revision: 330b8a59c49d9a14b661bf8a4375943124ba1fba
   specs:
     oargun (0.0.1)
       active-triples (~> 0.6.0)
@@ -180,7 +180,7 @@ GEM
     devise-guests (0.3.3)
       devise
     diff-lcs (1.2.5)
-    ebnf (0.3.6)
+    ebnf (0.3.7)
       haml (~> 4.0)
       rdf (~> 1.1)
       sxp (~> 0.1, >= 0.1.3)
@@ -327,11 +327,11 @@ GEM
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.5)
+    rails-dom-testing (1.0.6)
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
-    rails-html-sanitizer (1.0.1)
+    rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
     railties (4.2.0)
       actionpack (= 4.2.0)

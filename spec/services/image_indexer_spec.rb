@@ -3,6 +3,17 @@ require 'rails_helper'
 describe ImageIndexer do
   subject { ImageIndexer.new(image).generate_solr_document }
 
+  context "with rights" do
+    let(:pd_uri) { RDF::URI.new('http://creativecommons.org/publicdomain/mark/1.0/') }
+    let(:by_uri) { RDF::URI.new('http://creativecommons.org/licenses/by/4.0/') }
+    let(:image) { Image.new(license: [pd_uri, by_uri]) }
+
+    it 'indexes with a label' do
+      expect(subject['license_tesim']).to eq [pd_uri.to_s, by_uri.to_s]
+      expect(subject['license_label_tesim']).to eq ["Public Domain Mark 1.0", "Attribution 4.0 International"]
+    end
+  end
+
   context "with an ark" do
     let(:image) { Image.new(identifier: ['ark:/99999/fk4123456']) }
     it "indexes dates for display" do

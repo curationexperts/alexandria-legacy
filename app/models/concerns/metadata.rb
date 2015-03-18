@@ -70,7 +70,10 @@ module Metadata
 
     property :rights_holder, predicate: RDF::URI('http://opaquenamespace.org/rights/rightsHolder')
     property :copyright_status, predicate: RDF::Vocab::PREMIS::V1.hasCopyrightStatus
-    property :license, predicate: RDF::DC.rights
+
+    property :license, predicate: RDF::DC.rights, class_name: Oargun::ControlledVocabularies::RightsStatement do |index|
+      index.as :stored_searchable
+    end
 
     property :work_type, predicate: RDF::DC.type do |index|
       index.as :stored_searchable
