@@ -64,6 +64,10 @@ module Metadata
       index.as :stored_searchable, :facetable
     end
 
+    property :institution, predicate: RDF::URI('http://opaquenamespace.org/ns/contributingInstitution') do |index|
+      index.as :stored_searchable
+    end
+
     property :publisher, predicate: RDF::DC.publisher do |index|
       index.as :stored_searchable, :facetable
     end
