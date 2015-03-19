@@ -2,7 +2,7 @@ require 'active_fedora/aggregation'
 class Image < ActiveFedora::Base
   include Metadata
   include Hydra::Collections::Collectible
-  include ActiveFedora::Aggregation::Builder
+  aggregates :generic_files
 
   def self.indexer
     ImageIndexer

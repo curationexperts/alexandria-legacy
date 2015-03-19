@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/activefedora-aggregation.git
-  revision: 77ed51da1fe94b28c91749a0237c857037ccc876
+  revision: 520deffc0325e9a33219db334ea8f1e908964419
   specs:
     activefedora-aggregation (0.1.0)
       active-fedora
