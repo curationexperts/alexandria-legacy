@@ -60,7 +60,9 @@ module Metadata
         index.as :stored_searchable, :facetable
     end
 
-    property :place_of_publication, predicate: Oargun::Vocabularies::MARCREL.pup
+    property :place_of_publication, predicate: Oargun::Vocabularies::MARCREL.pup do |index|
+      index.as :stored_searchable
+    end
 
     property :lc_subject, predicate: RDF::DC.subject, class_name: Oargun::ControlledVocabularies::Subject do |index|
       index.as :stored_searchable, :facetable
