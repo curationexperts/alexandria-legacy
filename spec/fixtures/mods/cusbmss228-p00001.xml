@@ -61,7 +61,7 @@
   <mods:extension>
     <fileName>cusb-mss228-p00001-a.tif</fileName>
     <copyrightStatus valueURI="http://id.loc.gov/vocabulary/preservation/copyrightStatus/cpr">Copyrighted</copyrightStatus>
-    <copyrightStatement valueURI="http://opaquenamespace.org/rights/educational/">Educational use only</copyrightStatement>
+    <copyrightStatement valueURI="http://opaquenamespace.org/ns/rights/educational/">Educational use only</copyrightStatement>
     <copyrightHolder valueURI="http://id.loc.gov/authorities/names/n85088322">University of
 				California (System). Regents</copyrightHolder>
   </mods:extension>

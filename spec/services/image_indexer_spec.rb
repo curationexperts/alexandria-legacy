@@ -6,11 +6,12 @@ describe ImageIndexer do
   context "with rights" do
     let(:pd_uri) { RDF::URI.new('http://creativecommons.org/publicdomain/mark/1.0/') }
     let(:by_uri) { RDF::URI.new('http://creativecommons.org/licenses/by/4.0/') }
-    let(:image) { Image.new(license: [pd_uri, by_uri]) }
+    let(:edu_uri) { RDF::URI.new('http://opaquenamespace.org/ns/rights/educational/') }
+    let(:image) { Image.new(license: [pd_uri, by_uri, edu_uri]) }
 
     it 'indexes with a label' do
-      expect(subject['license_tesim']).to eq [pd_uri.to_s, by_uri.to_s]
-      expect(subject['license_label_tesim']).to eq ["Public Domain Mark 1.0", "Attribution 4.0 International"]
+      expect(subject['license_tesim']).to eq [pd_uri.to_s, by_uri.to_s, edu_uri.to_s]
+      expect(subject['license_label_tesim']).to eq ["Public Domain Mark 1.0", "Attribution 4.0 International", "Educational Use Permitted"]
     end
   end
 
