@@ -1,13 +1,4 @@
 GIT
-  remote: git://github.com/curationexperts/activefedora-aggregation.git
-  revision: 520deffc0325e9a33219db334ea8f1e908964419
-  specs:
-    activefedora-aggregation (0.1.0)
-      active-fedora
-      activesupport
-      rdf-vocab
-
-GIT
   remote: git://github.com/curationexperts/oargun.git
   revision: 7aca4f260274832f70f3f5d94b63521b64810734
   specs:
@@ -101,6 +92,10 @@ GEM
       rdf-ldp
       rdf-rdfxml (~> 1.1.0)
       rsolr (~> 1.0.10)
+    activefedora-aggregation (0.1.0)
+      active-fedora
+      activesupport
+      rdf-vocab
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -497,7 +492,7 @@ PLATFORMS
 DEPENDENCIES
   active-fedora (~> 9.0.4)
   active-triples!
-  activefedora-aggregation!
+  activefedora-aggregation (~> 0.1.0)
   blacklight (~> 5.10.0)
   blacklight-gallery
   byebug
