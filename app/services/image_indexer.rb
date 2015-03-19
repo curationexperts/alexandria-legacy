@@ -14,7 +14,6 @@ class ImageIndexer < ActiveFedora::IndexingService
 
   COLLECTION_LABEL = Solrizer.solr_name('collection_label', :symbol)
   COLLECTION = Solrizer.solr_name('collection', :symbol)
-  INSTITUTION = Solrizer.solr_name('institution', :stored_searchable)
 
   def generate_solr_document
     super do |solr_doc|
@@ -30,16 +29,10 @@ class ImageIndexer < ActiveFedora::IndexingService
       solr_doc[SORTABLE_DATE] = sortable_date
       solr_doc[FACETABLE_YEAR] = facetable_year
       solr_doc[CONTRIBUTOR_LABEL] = contributors
-      solr_doc[INSTITUTION] = institution
     end
   end
 
   private
-
-    def institution
-      return unless object.institution.present?
-      object.institution.first.display_label
-    end
 
     def created
       return unless object.created.present?
@@ -96,10 +89,11 @@ class ImageIndexer < ActiveFedora::IndexingService
       end
     end
 
-    def host
-      Rails.application.config.host_name
-    rescue NoMethodError
-      raise "host_name is not configured"
-    end
+    private
+      def host
+        Rails.application.config.host_name
+      rescue NoMethodError
+        raise "host_name is not configured"
+      end
 
 end
