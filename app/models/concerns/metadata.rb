@@ -64,7 +64,7 @@ module Metadata
       index.as :stored_searchable, :facetable
     end
 
-    property :institution, predicate: RDF::URI('http://opaquenamespace.org/ns/contributingInstitution') do |index|
+    property :institution, :predicate => Oargun::Vocabularies::OARGUN.contributingInstitution, :class_name => Oargun::ControlledVocabularies::Organization do |index|
       index.as :stored_searchable
     end
 
