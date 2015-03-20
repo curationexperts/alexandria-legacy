@@ -116,9 +116,9 @@ module Importer
     def record_origin
       ro = []
       if mods.record_info && mods.record_info.respond_to?(:recordOrigin)
-        ro += mods.record_info.recordOrigin.map {|node| strip_whitespace(node.text) }
+        ro += mods.record_info.recordOrigin.map { |node| prepend_timestamp(strip_whitespace(node.text)) }
       end
-      ro << ORIGIN_TEXT
+      ro << prepend_timestamp(ORIGIN_TEXT)
     end
 
     # returns a hash with :latitude and :longitude
@@ -135,10 +135,6 @@ module Importer
 
     def mods_description
       mods.abstract.map{|e| strip_whitespace(e.text) }
-    end
-
-    def strip_whitespace(text)
-      text.gsub("\n", " ").gsub("\t", "")
     end
 
     def relations
@@ -244,5 +240,14 @@ module Importer
           uri.blank? ? strip_whitespace(text) : RDF::URI.new(uri)
         end
       end
+
+      def prepend_timestamp(text)
+        "#{Time.now.utc.to_s(:iso8601)} #{text}"
+      end
+
+      def strip_whitespace(text)
+        text.gsub("\n", " ").gsub("\t", "")
+      end
+
   end
 end
