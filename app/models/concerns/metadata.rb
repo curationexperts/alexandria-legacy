@@ -152,6 +152,8 @@ module Metadata
     accepts_nested_attributes_for :created, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :issued, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :date_other, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :date_copyrighted, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :date_valid, reject_if: :all_blank, allow_destroy: true
 
     def self.contributor_fields
       RELATIONS.keys
