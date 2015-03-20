@@ -1,7 +1,5 @@
 module Importer
   class ModsParser
-    attr_reader :mods, :model
-
     CREATOR = "http://id.loc.gov/vocabulary/relators/cre".freeze
 
     ORIGIN_TEXT = 'Converted from MODS 3.4 to local RDF profile by ADRL'.freeze
@@ -9,12 +7,19 @@ module Importer
     NAMESPACES = { 'mods'.freeze => Mods::MODS_NS }
 
     def initialize(file)
-      @mods = Mods::Record.new.from_file(file)
-      @model = if collection?
-                 Collection
-               elsif image?
-                 Image
-               end
+      @file = file
+    end
+
+    def model
+      @model ||= if collection?
+                   Collection
+                 elsif image?
+                   Image
+                 end
+    end
+
+    def mods
+      @mods ||= Mods::Record.new.from_file(@file)
     end
 
     def collection?
@@ -101,7 +106,9 @@ module Importer
       {
         issued_attributes: build_date(mods.origin_info.dateIssued),
         created_attributes: build_date(mods.origin_info.dateCreated),
-        date_other_attributes: build_date(mods.origin_info.dateOther)
+        date_other_attributes: build_date(mods.origin_info.dateOther),
+        date_copyrighted_attributes: build_date(mods.origin_info.copyrightDate),
+        date_valid_attributes: build_date(mods.origin_info.dateValid)
       }
     end
 
@@ -158,16 +165,28 @@ module Importer
     end
 
     def persistent_id(raw_id)
+      return unless raw_id
       raw_id.downcase.gsub(/\s*/, '')
     end
 
     def collection
-      human_readable_id = Array(mods.related_item.at_xpath('mods:identifier[@type="local"]'.freeze, NAMESPACES).text)
 
       { id: persistent_id(human_readable_id.first),
         accession_number: human_readable_id,
-        title: mods.at_xpath("//mods:relatedItem[@type='host']".freeze, NAMESPACES).titleInfo.title.text.strip
+        title: collection_name
       }
+    end
+
+    def collection_name
+       node_set = mods.at_xpath("//mods:relatedItem[@type='host']".freeze, NAMESPACES)
+       return unless node_set
+       node_set.titleInfo.title.text.strip
+    end
+
+    def human_readable_id
+      node_set = mods.related_item.at_xpath('mods:identifier[@type="local"]'.freeze, NAMESPACES)
+      return [] unless node_set
+      Array(node_set.text)
     end
 
     # Remove multiple whitespace

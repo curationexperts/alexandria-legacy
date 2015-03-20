@@ -135,6 +135,28 @@ describe Importer::ModsParser do
       end
     end
 
+    context "with date_copyrighted" do
+      let(:ns_decl) {  "xmlns='#{Mods::MODS_NS}'" }
+      let(:parser) { Importer::ModsParser.new(nil) }
+      let(:xml) { "<mods #{ns_decl}><originInfo><copyrightDate encoding=\"w3cdtf\">1985-12-01</copyrightDate></originInfo></mods>" }
+      before { allow(parser).to receive(:mods).and_return(Mods::Record.new.from_str(xml)) }
+      it "imports date_copyrighted" do
+        expect(attributes[:date_copyrighted_attributes]).to eq [{ start: ['1985-12-01'], finish: [], label: [], start_qualifier: [], finish_qualifier: [] }]
+      end
+
+    end
+
+    context "with dateValid" do
+      let(:ns_decl) { "xmlns='#{Mods::MODS_NS}'" }
+      let(:parser) { Importer::ModsParser.new(nil) }
+      let(:xml) { "<mods #{ns_decl}><originInfo><dateValid encoding=\"w3cdtf\">1989-12-01</dateValid></originInfo></mods>" }
+      before { allow(parser).to receive(:mods).and_return(Mods::Record.new.from_str(xml)) }
+      it "imports date_valid" do
+        expect(attributes[:date_valid_attributes]).to eq [{ start: ['1989-12-01'], finish: [], label: [], start_qualifier: [], finish_qualifier: [] }]
+      end
+
+    end
+
     context "with a file that has an alternative title" do
       let(:file) { 'spec/fixtures/mods/cusbspcmss36_110089.xml' }
       it "distinguishes between title and alternative title" do

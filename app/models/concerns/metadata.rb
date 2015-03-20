@@ -102,23 +102,12 @@ module Metadata
     has_and_belongs_to_many :created, predicate: RDF::DC.created, class_name: 'TimeSpan'
     has_and_belongs_to_many :issued, predicate: RDF::DC.issued, class_name: 'TimeSpan'
     has_and_belongs_to_many :date_other, predicate: RDF::DC.date, class_name: 'TimeSpan'
-    # property :issued_start, predicate: RDF::URI('http://www.loc.gov/mods/rdf/v1#dateIssuedStart') do |index|
-    #   index.as :displayable
-    # end
+    has_and_belongs_to_many :date_copyrighted, predicate: RDF::DC.dateCopyrighted, class_name: 'TimeSpan'
+    has_and_belongs_to_many :date_valid, predicate: RDF::DC.valid, class_name: 'TimeSpan'
 
-    # property :issued_end, predicate: RDF::URI('http://www.loc.gov/mods/rdf/v1#dateIssuedEnd') do |index|
-    #   index.as :displayable
-    # end
-
-    # property :created_start, predicate: RDF::Vocab::MODS.dateCreatedStart do |index|
-    #   index.as :displayable
-    # end
-
-    # property :created_end, predicate: RDF::Vocab::MODS.dateCreatedEnd do |index|
-    #   index.as :displayable
-    # end
-
-    # property :date_other, predicate: RDF::DC.date
+    # Not tackling these now. No demonstrated need yet.
+    # has_and_belongs_to_many :date_accepted, predicate: RDF::DC.dateAccepted, class_name: 'TimeSpan'
+    # has_and_belongs_to_many :date_submitted, predicate: RDF::DC.dateSubmitted, class_name: 'TimeSpan'
 
 
     # RDA
