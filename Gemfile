@@ -31,7 +31,7 @@ gem 'hydra-role-management'
 gem 'hydra-collections', '~> 5.0.1'
 gem 'rdf-vocab', github: 'curationexperts/rdf-vocab', branch: 'iana'
 gem 'rdf-marmotta', github: 'dpla/rdf-marmotta', branch: 'develop'
-gem 'blacklight', '~> 5.10.0'
+gem 'blacklight', '~> 5.11.2'
 gem 'rsolr', '~> 1.0.12'
 gem 'activefedora-aggregation', '~> 0.1.0'
 

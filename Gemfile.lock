@@ -115,11 +115,11 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.0)
-    autoprefixer-rails (5.1.7)
+    autoprefixer-rails (5.1.7.1)
       execjs
       json
     bcrypt (3.1.10)
-    blacklight (5.10.2)
+    blacklight (5.11.2)
       bootstrap-sass (~> 3.2)
       deprecation
       kaminari (~> 0.13)
@@ -131,7 +131,7 @@ GEM
       bootstrap-sass (~> 3.0)
       openseadragon (>= 0.0.9)
       rails
-    bootstrap-sass (3.3.3)
+    bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     bootstrap_form (2.3.0)
@@ -493,7 +493,7 @@ DEPENDENCIES
   active-fedora (~> 9.0.4)
   active-triples!
   activefedora-aggregation (~> 0.1.0)
-  blacklight (~> 5.10.0)
+  blacklight (~> 5.11.2)
   blacklight-gallery
   byebug
   capistrano
