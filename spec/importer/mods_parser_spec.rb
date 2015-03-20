@@ -42,13 +42,23 @@ describe Importer::ModsParser do
       acquisition_note = attributes[:note].first
       expect(acquisition_note[:note_type]).to eq 'acquisition'
       expect(acquisition_note[:value]).to eq "Gift from Pat Eagle-Schnetzer and Ronald Conway, and purchase from Joan Cota (Conway children), 2009."
-      expect(attributes[:record_origin]).to eq ['Converted from CSV to MODS 3.4 using local mapping.', Importer::ModsParser::ORIGIN_TEXT]
       expect(attributes[:description_standard]).to eq ['local']
       expect(attributes[:series_name]).to eq ['Series 4: Glass Negatives']
       expect(attributes[:use_restrictions]).to eq ['Use governed by the UCSB Special Collections policy.']
       expect(attributes[:copyright_status]).to eq ['http://id.loc.gov/vocabulary/preservation/copyrightStatus/unk']
       expect(attributes[:license]).to eq ["http://www.europeana.eu/rights/unknown/"]
       expect(attributes[:institution]).to eq ["http://id.loc.gov/vocabulary/organizations/cusb"]
+    end
+
+    context "importing record origin" do
+      it "correctly formats the record origin including the timestamp" do
+        date = Time.utc(2014, 5, 20, 11, 34, 23)
+        formatted_date = date.to_s(:iso8601)
+
+        Timecop.freeze(date) do
+          expect(attributes[:record_origin]).to eq ["#{formatted_date} Converted from CSV to MODS 3.4 using local mapping.", "#{formatted_date} #{Importer::ModsParser::ORIGIN_TEXT}"]
+        end
+      end
     end
 
     context "with a file that has a general (untyped) note" do
@@ -167,12 +177,22 @@ describe Importer::ModsParser do
       expect(attributes[:language]).to eq ['http://id.loc.gov/vocabulary/iso639-2/zxx']
       expect(attributes[:work_type]).to eq ['still image']
       expect(attributes[:sub_location]).to eq ['Department of Special Collections']
-      expect(attributes[:record_origin]).to eq ['Human created', Importer::ModsParser::ORIGIN_TEXT ]
 
       # TODO: There is another location in the fixture file
       # that doesn't have a valueURI.  How should that be
       # handled?
       expect(attributes[:location]).to eq ["http://id.loc.gov/authorities/names/n79041717"]
+    end
+
+    context "importing record origin" do
+      it "correctly formats the record origin including the timestamp" do
+        date = Time.utc(2014, 5, 20, 11, 34, 23)
+        formatted_date = date.to_s(:iso8601)
+
+        Timecop.freeze(date) do
+          expect(attributes[:record_origin]).to eq ["#{formatted_date} Human created", "#{formatted_date} #{Importer::ModsParser::ORIGIN_TEXT}"]
+        end
+      end
     end
   end
 

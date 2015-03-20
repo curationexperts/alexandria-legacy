@@ -59,6 +59,10 @@ group :development, :test do
   gem 'spring'
 end
 
+group :test do
+  gem 'timecop', '0.7.3'
+end
+
 group :development do
   gem 'capistrano'
   gem 'capistrano-rails'
