@@ -38,10 +38,10 @@ describe Importer::ModsParser do
       expect(attributes[:extent]).to eq ['1 photograph : glass plate negative ; 13 x 18 cm (5 x 7 format)']
       expect(attributes[:accession_number]).to eq ['cusbspcsbhc78_100239']
       expect(attributes[:sub_location]).to eq ['Department of Special Collections']
-      expect(attributes[:citation]).to eq ["[Identification of Item], Joel Conway / Flying A Studio\nPhotograph Collection. SBHC Mss 78. Department of Special Collections, UC Santa Barbara\nLibrary, University of California, Santa Barbara."]
+      expect(attributes[:citation]).to eq ["[Identification of Item], Joel Conway / Flying A Studio Photograph Collection. SBHC Mss 78. Department of Special Collections, UC Santa Barbara Library, University of California, Santa Barbara."]
       acquisition_note = attributes[:note].first
       expect(acquisition_note[:note_type]).to eq 'acquisition'
-      expect(acquisition_note[:value]).to eq "Gift from Pat Eagle-Schnetzer and Ronald Conway, and purchase\nfrom Joan Cota (Conway children), 2009."
+      expect(acquisition_note[:value]).to eq "Gift from Pat Eagle-Schnetzer and Ronald Conway, and purchase from Joan Cota (Conway children), 2009."
       expect(attributes[:record_origin]).to eq ['Converted from CSV to MODS 3.4 using local mapping.', Importer::ModsParser::ORIGIN_TEXT]
       expect(attributes[:description_standard]).to eq ['local']
       expect(attributes[:series_name]).to eq ['Series 4: Glass Negatives']

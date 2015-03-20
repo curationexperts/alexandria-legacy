@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mods:mods xmlns:mods="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd">
+<?xml version="1.0" encoding="utf-8"?>
+<mods:mods xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink">
   <mods:titleInfo usage="primary">
     <mods:title>Joel Conway / Flying A Studio photograph collection</mods:title>
   </mods:titleInfo>
@@ -24,9 +24,7 @@
   <mods:physicalDescription>
     <mods:extent>702 digital objects</mods:extent>
   </mods:physicalDescription>
-  <mods:abstract>Black and white photographs relating to the Flying A Studios (aka American Film
-		Manufacturing Company), a film company that operated in Santa Barbara
-		(1912-1920).</mods:abstract>
+  <mods:abstract>Black and white photographs relating to the Flying A Studios (aka American Film Manufacturing Company), a film company that operated in Santa Barbara (1912-1920).</mods:abstract>
   <!-- Include note when collection contains items with access restrictions? Any other notes? -->
   <mods:subject>
     <mods:name type="corporate" authority="naf" authorityURI="http://id.loc.gov/authorities/names" valueURI="http://id.loc.gov/authorities/names/n87914041">
@@ -34,16 +32,14 @@
     </mods:name>
   </mods:subject>
   <mods:subject authority="lcsh" authorityURI="http://id.loc.gov/authorities/subjects">
-    <mods:topic valueURI="http://id.loc.gov/authorities/subjects/sh85088047">Motion picture
-			industry</mods:topic>
+    <mods:topic valueURI="http://id.loc.gov/authorities/subjects/sh85088047">Motion picture industry</mods:topic>
     <mods:geographic valueURI="http://id.loc.gov/authorities/names/n79041717">California</mods:geographic>
     <mods:geographic>Santa Barbara</mods:geographic>
     <mods:topic valueURI="http://id.loc.gov/authorities/subjects/sh99005024">History</mods:topic>
   </mods:subject>
   <!-- Okay? -->
   <mods:relatedItem type="original">
-    <mods:note>From the Joel Conway / Flying A Studio photograph collection, SBHC Mss
-			78.</mods:note>
+    <mods:note>From the Joel Conway / Flying A Studio photograph collection, SBHC Mss 78.</mods:note>
     <mods:location>
       <mods:url note="Finding aid">http://www.oac.cdlib.org/findaid/ark:/13030/kt1j49r67t</mods:url>
     </mods:location>

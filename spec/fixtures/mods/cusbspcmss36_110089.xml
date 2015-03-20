@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <mods:mods xmlns:mods="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd">
   <mods:titleInfo usage="primary">
     <mods:title>Patio, Gavit residence</mods:title>
@@ -27,18 +27,14 @@
     <mods:extent>1 print ; 9 x 14 cm (postcard format)</mods:extent>
   </mods:physicalDescription>
   <mods:note>Title from item.</mods:note>
-  <mods:note>Postcard caption: Patio, E. P. Gavit Residence, Montecito, Santa Barbara,
-			California.</mods:note>
-  <mods:note type="preferred citation">[Identification of Item], Santa Barbara picture
-			postcards collection. SBHC Mss 36. Department of Special Collections, UC Santa Barbara
-			Library, University of California, Santa Barbara.</mods:note>
+  <mods:note>Postcard caption: Patio, E. P. Gavit Residence, Montecito, Santa Barbara, California.</mods:note>
+  <mods:note type="preferred citation">[Identification of Item], Santa Barbara picture postcards collection. SBHC Mss 36. Department of Special Collections, UC Santa Barbara Library, University of California, Santa Barbara.</mods:note>
   <mods:subject authority="lcsh" authorityURI="http://id.loc.gov/authorities/subjects">
     <mods:topic valueURI="http://id.loc.gov/authorities/subjects/sh86003042">Mansions</mods:topic>
     <mods:geographic valueURI="http://id.loc.gov/authorities/names/n79041717">California</mods:geographic>
   </mods:subject>
   <mods:subject authority="lcsh" authorityURI="http://id.loc.gov/authorities/subjects">
-    <mods:geographic valueURI="http://id.loc.gov/authorities/names/n84112002">Montecito
-				(Calif.)</mods:geographic>
+    <mods:geographic valueURI="http://id.loc.gov/authorities/names/n84112002">Montecito (Calif.)</mods:geographic>
   </mods:subject>
   <mods:subject>
     <mods:cartographics>
@@ -52,15 +48,14 @@
     <mods:identifier type="local">SBHC Mss 36</mods:identifier>
   </mods:relatedItem>
   <mods:location>
-    <mods:physicalLocation>University of California, Santa Barbara</mods:physicalLocation>
+    <mods:physicalLocation valueURI="http://id.loc.gov/vocabulary/organizations/cusb">University of California, Santa Barbara</mods:physicalLocation>
     <mods:holdingSimple>
       <mods:copyInformation>
         <mods:subLocation>Department of Special Collections</mods:subLocation>
       </mods:copyInformation>
     </mods:holdingSimple>
   </mods:location>
-  <mods:accessCondition type="use and reproduction">Use governed by the UCSB Special
-			Collections policy.</mods:accessCondition>
+  <mods:accessCondition type="use and reproduction">Use governed by the UCSB Special Collections policy.</mods:accessCondition>
   <mods:extension>
     <fileName order="1" label="Front">cusbspcmss36_110089_1_a.tif</fileName>
     <fileName order="2" label="Back">cusbspcmss36_110089_2_a.tif</fileName>
@@ -73,7 +68,6 @@
     <mods:languageOfCataloging usage="primary">
       <mods:languageTerm type="code" authority="iso639-2b" authorityURI="http://id.loc.gov/vocabulary/iso639-2" valueURI="http://id.loc.gov/vocabulary/iso639-2/eng">eng</mods:languageTerm>
     </mods:languageOfCataloging>
-    <mods:recordOrigin>Converted from CSV to MODS 3.4 using local
-				mapping.</mods:recordOrigin>
+    <mods:recordOrigin>Converted from CSV to MODS 3.4 using local mapping.</mods:recordOrigin>
   </mods:recordInfo>
 </mods:mods>

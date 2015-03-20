@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mods:mods xmlns:mods="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd">
+<?xml version="1.0" encoding="utf-8"?>
+<mods:mods xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink">
   <mods:titleInfo usage="primary">
     <mods:title>John S. Kiewit photography collection</mods:title>
   </mods:titleInfo>
@@ -17,27 +17,19 @@
   <mods:physicalDescription>
     <mods:extent>1,557 digital objects</mods:extent>
   </mods:physicalDescription>
-  <mods:abstract>The images reflect what Kiewit saw on his travels throughout California and the
-		West, as well as trips to other parts of the U.S. and the world. Prominent places and themes
-		include Baja, barns and farms, Big Sur, buildings and building elements (doors and windows),
-		Carmel [CA], Central Coast [CA], Channel Islands, Death Valley, fences, ghost towns, Hawaii,
-		Hollister Ranch [CA], landscapes, Malibu [CA], Marin County [CA], New England, New Mexico,
-		ocean views, Oregon, Oxnard [CA], rock formations, signs, surfing, trees, Utah, wildflowers,
-		Wyoming, and Yosemite. Other countries represented in the collection include Cook Island,
-		Costa Rica, El Salvador, England, France, Guatemala, Marques and Tahiti Islands, Mexico,
-		Micronesia, and New Zealand. Most of the images were taken from the 1970s to the
-		1990s.</mods:abstract>
+  <mods:abstract>The images reflect what Kiewit saw on his travels throughout California and the West, as well as trips to other parts of the U.S. and the world. Prominent places and themes include Baja, barns and farms, Big Sur, buildings and building elements (doors and windows), Carmel [CA], Central Coast [CA], Channel Islands, Death Valley, fences, ghost towns, Hawaii, Hollister Ranch [CA], landscapes, Malibu [CA], Marin County [CA], New England, New Mexico, ocean views, Oregon, Oxnard
+  [CA], rock formations, signs, surfing, trees, Utah, wildflowers, Wyoming, and Yosemite. Other countries represented in the collection include Cook Island, Costa Rica, El Salvador, England, France, Guatemala, Marques and Tahiti Islands, Mexico, Micronesia, and New Zealand. Most of the images were taken from the 1970s to the 1990s.</mods:abstract>
   <!-- Include note when collection contains items with access restrictions? Any other notes? -->
   <!-- Okay? -->
   <mods:relatedItem type="original">
     <mods:note>From the John S. Kiewit photography collection, Mss 228.</mods:note>
     <!-- This collection does not yet have a finding aid on OAC, only a brief collection record.
-		<mods:location>
-			<mods:url note="Finding aid"></mods:url>
-		</mods:location>-->
+                <mods:location>
+                        <mods:url note="Finding aid"></mods:url>
+                </mods:location>-->
   </mods:relatedItem>
   <mods:location>
-    <mods:physicalLocation>http://id.loc.gov/vocabulary/organizations/cusb</mods:physicalLocation>
+    <mods:physicalLocation valueURI="http://id.loc.gov/vocabulary/organizations/cusb">University of California, Santa Barbara</mods:physicalLocation>
     <mods:holdingSimple>
       <mods:copyInformation>
         <mods:subLocation>Department of Special Collections</mods:subLocation>
