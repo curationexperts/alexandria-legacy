@@ -9,14 +9,6 @@ GIT
       rest-client (~> 1.7)
 
 GIT
-  remote: git://github.com/curationexperts/rdf-vocab.git
-  revision: 9291984ea75183d1fff8ca737998e19c4833e385
-  branch: iana
-  specs:
-    rdf-vocab (0.6.0)
-      linkeddata
-
-GIT
   remote: git://github.com/dpla/rdf-marmotta.git
   revision: 4dd6511a99a5333bed3d2571b58caec9d0baa975
   branch: develop
@@ -384,6 +376,8 @@ GEM
     rdf-turtle (1.1.5)
       ebnf (~> 0.3, >= 0.3.6)
       rdf (~> 1.1, >= 1.1.4)
+    rdf-vocab (0.7.0)
+      linkeddata
     rdf-xsd (1.1.3)
       rdf (~> 1.1, >= 1.1.9)
     rdoc (4.2.0)
@@ -521,7 +515,7 @@ DEPENDENCIES
   qa (~> 0.4.1)
   rails (= 4.2.1)
   rdf-marmotta!
-  rdf-vocab!
+  rdf-vocab (~> 0.7.0)
   riiif (~> 0.1.0)
   rsolr (~> 1.0.12)
   rspec-activemodel-mocks
