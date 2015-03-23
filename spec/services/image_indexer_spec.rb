@@ -3,6 +3,19 @@ require 'rails_helper'
 describe ImageIndexer do
   subject { ImageIndexer.new(image).generate_solr_document }
 
+  context 'with local and LOC rights holders' do
+    let(:regents_uri) { RDF::URI.new("http://id.loc.gov/authorities/names/n85088322") }
+    let(:valerie) { Agent.create(foaf_name: 'Valerie') }
+    let(:valerie_uri) { RDF::URI.new(valerie.uri) }
+
+    let(:image) { Image.new(rights_holder: [valerie_uri, regents_uri]) }
+
+    it 'indexes with a label' do
+      expect(subject['rights_holder_ssim']).to eq [valerie_uri, regents_uri]
+      expect(subject['rights_holder_label_tesim']).to eq ['Valerie', 'University of California (System). Regents']
+    end
+  end
+
   context "with rights" do
     let(:pd_uri) { RDF::URI.new('http://creativecommons.org/publicdomain/mark/1.0/') }
     let(:by_uri) { RDF::URI.new('http://creativecommons.org/licenses/by/4.0/') }

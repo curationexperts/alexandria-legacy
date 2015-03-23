@@ -77,7 +77,7 @@ module Metadata
     end
 
     property :rights_holder, :predicate => ::RDF::URI('http://opaquenamespace.org/rights/rightsHolder'), class_name: Oargun::ControlledVocabularies::Creator do |index|
-      index.as :stored_searchable
+      index.as :symbol
     end
 
     property :copyright_status, predicate: RDF::Vocab::PREMIS::V1.hasCopyrightStatus

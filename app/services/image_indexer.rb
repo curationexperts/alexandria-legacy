@@ -1,4 +1,5 @@
 class ImageIndexer < ActiveFedora::IndexingService
+
   def rdf_service
     RDF::DeepIndexingService
   end
@@ -29,6 +30,7 @@ class ImageIndexer < ActiveFedora::IndexingService
       solr_doc[SORTABLE_DATE] = sortable_date
       solr_doc[FACETABLE_YEAR] = facetable_year
       solr_doc[CONTRIBUTOR_LABEL] = contributors
+      solr_doc['rights_holder_label_tesim'] = object['rights_holder'].flat_map(&:rdf_label)
     end
   end
 
@@ -89,11 +91,10 @@ class ImageIndexer < ActiveFedora::IndexingService
       end
     end
 
-    private
-      def host
-        Rails.application.config.host_name
-      rescue NoMethodError
-        raise "host_name is not configured"
-      end
+    def host
+      Rails.application.config.host_name
+    rescue NoMethodError
+      raise "host_name is not configured"
+    end
 
 end
