@@ -9,18 +9,6 @@ GIT
       rest-client (~> 1.7)
 
 GIT
-  remote: git://github.com/dpla/rdf-marmotta.git
-  revision: 4dd6511a99a5333bed3d2571b58caec9d0baa975
-  branch: develop
-  specs:
-    rdf-marmotta (0.0.6)
-      nokogiri
-      rake
-      rdf (~> 1.1)
-      rdf-rdfxml (~> 1.1)
-      sparql-client (~> 1.1.4)
-
-GIT
   remote: git://github.com/harai/kaminari.git
   revision: 384fcb5d11b66a0cc8fad030104bf80f82616355
   ref: 384fcb5d11b6
@@ -345,6 +333,12 @@ GEM
       rdf (~> 1.1)
     rdf-ldp (0.0.4)
       rdf
+    rdf-marmotta (0.0.8)
+      nokogiri
+      rake
+      rdf (~> 1.1)
+      rdf-rdfxml (~> 1.1)
+      sparql-client (~> 1.1.4)
     rdf-microdata (2.0)
       htmlentities (~> 4.3)
       nokogiri (~> 1.6)
@@ -514,7 +508,7 @@ DEPENDENCIES
   pg
   qa (~> 0.4.1)
   rails (= 4.2.1)
-  rdf-marmotta!
+  rdf-marmotta (~> 0.0.8)
   rdf-vocab (~> 0.7.0)
   riiif (~> 0.1.0)
   rsolr (~> 1.0.12)
