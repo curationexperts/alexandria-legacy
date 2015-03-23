@@ -3,6 +3,62 @@ require 'rails_helper'
 describe ImageIndexer do
   subject { ImageIndexer.new(image).generate_solr_document }
 
+  describe 'Indexing dates' do
+
+    context "with an issued date" do
+      let(:image) { Image.new(issued_attributes: [{ start: ['1925-11'] }]) }
+
+      it "indexes dates for display" do
+        expect(subject['issued_ssm']).to eq "1925-11"
+      end
+
+      it "makes a sortable date field" do
+        expect(subject['date_si']).to eq '1925-11'
+      end
+
+      it "makes a facetable year field" do
+        expect(subject['year_iim']).to eq 1925
+      end
+    end
+
+    context "with issued.start and issued.finish" do
+      let(:issued_start) { ['1917'] }
+      let(:issued_end) { ['1923'] }
+      let(:image) { Image.new(issued_attributes: [{ start: issued_start, finish: issued_end}]) }
+
+      it "indexes dates for display" do
+        expect(subject['issued_ssm']).to eq "1917-1923"
+      end
+
+      it "makes a sortable date field" do
+        expect(subject['date_si']).to eq "1917"
+      end
+
+      it "makes a facetable year field" do
+        expect(subject['year_iim']).to eq [1917, 1918, 1919, 1920, 1921, 1922, 1923]
+      end
+    end
+
+    context "with created.start and created.finish" do
+      let(:created_start) { ['1917'] }
+      let(:created_end) { ['1923'] }
+      let(:image) { Image.new(created_attributes: [{ start: created_start, finish: created_end}]) }
+
+      it "indexes dates for display" do
+        expect(subject['created_ssm']).to eq "1917-1923"
+      end
+
+      it "makes a sortable date field" do
+        expect(subject['date_si']).to eq "1917"
+      end
+
+      it "makes a facetable year field" do
+        expect(subject['year_iim']).to eq [1917, 1918, 1919, 1920, 1921, 1922, 1923]
+      end
+    end
+  end  # Indexing dates
+
+
   context 'with local and LOC rights holders' do
     let(:regents_uri) { RDF::URI.new("http://id.loc.gov/authorities/names/n85088322") }
     let(:valerie) { Agent.create(foaf_name: 'Valerie') }
@@ -30,60 +86,8 @@ describe ImageIndexer do
 
   context "with an ark" do
     let(:image) { Image.new(identifier: ['ark:/99999/fk4123456']) }
-    it "indexes dates for display" do
+    it "indexes ark for display" do
       expect(subject['identifier_ssm']).to eq ['ark:/99999/fk4123456']
-    end
-  end
-
-  context "with an issued date" do
-    let(:image) { Image.new(issued_attributes: [{ start: ['1925-11'] }]) }
-
-    it "indexes dates for display" do
-      expect(subject['issued_ssm']).to eq "1925-11"
-    end
-
-    it "makes a sortable date field" do
-      expect(subject['date_si']).to eq '1925-11'
-    end
-
-    it "makes a facetable year field" do
-      expect(subject['year_iim']).to eq 1925
-    end
-  end
-
-  context "with issued.start and issued.finish" do
-    let(:issued_start) { ['1917'] }
-    let(:issued_end) { ['1923'] }
-    let(:image) { Image.new(issued_attributes: [{ start: issued_start, finish: issued_end}]) }
-
-    it "indexes dates for display" do
-      expect(subject['issued_ssm']).to eq "1917-1923"
-    end
-
-    it "makes a sortable date field" do
-      expect(subject['date_si']).to eq "1917"
-    end
-
-    it "makes a facetable year field" do
-      expect(subject['year_iim']).to eq [1917, 1918, 1919, 1920, 1921, 1922, 1923]
-    end
-  end
-
-  context "with created.start and created.finish" do
-    let(:created_start) { ['1917'] }
-    let(:created_end) { ['1923'] }
-    let(:image) { Image.new(created_attributes: [{ start: created_start, finish: created_end}]) }
-
-    it "indexes dates for display" do
-      expect(subject['created_ssm']).to eq "1917-1923"
-    end
-
-    it "makes a sortable date field" do
-      expect(subject['date_si']).to eq "1917"
-    end
-
-    it "makes a facetable year field" do
-      expect(subject['year_iim']).to eq [1917, 1918, 1919, 1920, 1921, 1922, 1923]
     end
   end
 
