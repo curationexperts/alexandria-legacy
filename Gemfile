@@ -35,7 +35,7 @@ gem 'blacklight', '~> 5.11.2'
 gem 'rsolr', '~> 1.0.12'
 gem 'activefedora-aggregation', '~> 0.1.0'
 
-gem 'mods', '~> 2.0.1', github: 'sul-dlss/mods'
+gem 'mods', '~> 2.0.3'
 gem 'oargun', github: 'curationexperts/oargun'
 gem 'blacklight-gallery'
 gem 'riiif', '~> 0.1.0'
