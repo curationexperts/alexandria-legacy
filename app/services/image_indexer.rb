@@ -61,20 +61,27 @@ class ImageIndexer < ActiveFedora::IndexingService
 
     # Create a date field for sorting on
     def sortable_date
-      key_date.try(:sortable)
+      Array(key_date).first.try(:sortable)
     end
 
     # Create a year field (integer, multiple) for faceting on
     def facetable_year
-      key_date.try(:facetable)
+      Array(key_date).flat_map{ |d| d.try(:facetable) }
     end
 
     def key_date
-      if object.issued.present?
-        object.issued.first
-      elsif object.created.present?
-        object.created.first
+      # Look through all the dates in order of importance, and
+      # find the first one that has a value assigned.
+      date_names = [:created, :issued, :date_copyrighted, :date_other, :date_valid]
+
+      date = nil
+      date_names.each do |date_name|
+        if object[date_name].present?
+          date = object[date_name].sort{ |a,b| a.earliest_year <=> b.earliest_year }
+          break
+        end
       end
+      date
     end
 
     def generic_file_thumbnails
