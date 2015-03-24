@@ -1,0 +1,61 @@
+{{! Caution!! }}
+{{! This markup is also duplicated in app/inputs/time_span/input.rb }}
+{{! Any changes made in either place MUST be included in the other! }}
+<li class='time-span field-wrapper input-group input-append'>
+  
+  <div class='row'>
+    <div class='col-md-1'>
+      <label for='image_{{name}}_attributes_{{index}}_start_'>Start</label>
+    </div>
+    <div class='col-md-2'>
+      <input class='string time_span optional form-control image_{{name}} form-control multi-text-field' name='image[{{name}}_attributes][{{index}}][start][]' aria-labelledby='image_{{name}}_label' type='text' placeholder="YYYY-MM-DD" id='image_{{name}}_image[{{name}}_attributes][{{index}}][start][]'>
+    </div>
+    <div class='col-md-3'>
+      <select name='image[{{name}}_attributes][{{index}}][start_qualifier][]' id='image_{{name}}_attributes_{{index}}_start_qualifier_' label='' class='select form-control'>
+        <option value=''> </option>
+        <option value='approximate'>approximate</option>
+        <option value='inferred'>inferred</option>
+        <option value='questionable'>questionable</option>
+      </select>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-1'>
+      <label for='image_{{name}}_attributes_{{index}}_finish_'>Finish</label>
+    </div>
+    <div class='col-md-2'>
+      <input class='string time_span optional form-control image_{{name}} form-control multi-text-field' name='image[{{name}}_attributes][{{index}}][finish][]' aria-labelledby='image_{{name}}_label' type='text' placeholder="YYYY-MM-DD" id='image_{{name}}_image[{{name}}_attributes][{{index}}][finish][]'>
+    </div>
+    <div class='col-md-3'>
+      <select name='image[{{name}}_attributes][{{index}}][finish_qualifier][]' id='image_{{name}}_attributes_{{index}}_finish_qualifier_' label='' class='select form-control'>
+        <option value=''> </option>
+        <option value='approximate'>approximate</option>
+        <option value='inferred'>inferred</option>
+        <option value='questionable'>questionable</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class='row'>
+    <div class='col-md-1'>
+      <label for='image_{{name}}_attributes_{{index}}_label_'>Label</label>
+    </div>
+    <div class='col-md-5'>
+      <input class='string time_span optional form-control image_{{name}} form-control multi-text-field' name='image[{{name}}_attributes][{{index}}][label][]' aria-labelledby='image_{{name}}_label' type='text' id='image_{{name}}_image[{{name}}_attributes][{{index}}][label][]'>
+    </div>
+  </div>
+  
+  <div class='row'>
+    <div class='col-md-1'>
+      <label for='image_{{name}}_attributes_{{index}}_note_'>Note</label>
+    </div>
+    <div class='col-md-5'>
+      <input class='string time_span optional form-control image_{{name}} form-control multi-text-field' name='image[{{name}}_attributes][{{index}}][note][]' aria-labelledby='image_{{name}}_label' type='text' id='image_{{name}}_image[{{name}}_attributes][{{index}}][note][]'>
+    </div>
+  </div>
+
+  <span class='input-group-btn field-controls'>
+    <button class='btn btn-success add'><i class='icon-white glyphicon-plus'> </i><span>Add</span></button>
+  </span>
+</li>

@@ -6,14 +6,27 @@ class TimeSpan < ActiveFedora::Base
   property :label, predicate: ::RDF::SKOS.prefLabel
   property :note, predicate: ::RDF::SKOS.note
 
+  # temp fix for https://github.com/projecthydra/active_fedora/issues/752 
+  has_many :images, predicate: ::RDF::DC.created, inverse_of: :created
+
   # MODS date qualifiers
   APPROX = "approximate"
   INFERRED = "inferred"
   QUESTIONABLE = "questionable"
 
-  def range?
-    start.present? && finish.present?
+  QUALIFIERS = [APPROX, INFERRED, QUESTIONABLE]
+
+  def self.qualifiers
+    QUALIFIERS
   end
+
+  def range?
+    start.any?(&:present?) && finish.any?(&:present?)
+  end
+
+  #def node?
+  #  false
+  #end
 
   # Return a string for display of this record
   def display_label
@@ -49,7 +62,7 @@ class TimeSpan < ActiveFedora::Base
   end
 
   def earliest_year
-    start.sort { |a,b| extract_year(a) <=> extract_year(b) }.first
+    start.sort { |a, b| extract_year(a) <=> extract_year(b) }.first
   end
 
   private
@@ -61,6 +74,6 @@ class TimeSpan < ActiveFedora::Base
         Date.iso8601(date).year
       end
     rescue ArgumentError
-      raise "Invalid date: #{date.inspect} in #{object.id}"
+      raise "Invalid date: #{date.inspect} in #{self.inspect}"
     end
 end

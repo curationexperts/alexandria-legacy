@@ -35,7 +35,7 @@ GIT
 
 GIT
   remote: git://github.com/no-reply/linked_vocabs.git
-  revision: bdd55673b17fed3d30410a0bfba53eb5bea91901
+  revision: f96779ca0af28534ecf2315c1df7015fa5e9c89f
   specs:
     linked_vocabs (0.2.0)
       active-triples (>= 0.6.0)
@@ -71,6 +71,17 @@ GIT
       rdf-ldp
       rdf-rdfxml (~> 1.1.0)
       rsolr (~> 1.0.10)
+
+GIT
+  remote: git://github.com/projecthydra/hydra-editor.git
+  revision: b96002529928be4738fec01391b72fe1fe6bcb1a
+  branch: master
+  specs:
+    hydra-editor (1.0.2)
+      active-fedora (>= 9.0.0)
+      cancancan (~> 1.8)
+      rails (~> 4.1)
+      simple_form (~> 3.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -117,31 +128,30 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.0)
-    autoprefixer-rails (5.1.7.1)
+    autoprefixer-rails (5.1.8)
       execjs
       json
+    awesome_print (1.6.1)
     bcrypt (3.1.10)
-    blacklight (5.11.2)
+    blacklight (5.11.3)
       bootstrap-sass (~> 3.2)
       deprecation
       kaminari (~> 0.13)
       nokogiri (~> 1.6)
       rails (>= 3.2.6, < 5)
       rsolr (~> 1.0.11)
-    blacklight-gallery (0.2.0)
+    blacklight-gallery (0.3.0)
       blacklight (~> 5.0)
       bootstrap-sass (~> 3.0)
-      openseadragon (>= 0.0.9)
+      openseadragon (>= 0.2.0)
       rails
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     bootstrap_form (2.3.0)
     builder (3.2.2)
-    byebug (3.5.1)
-      columnize (~> 0.8)
-      debugger-linecache (~> 1.2)
-      slop (~> 3.6)
+    byebug (4.0.5)
+      columnize (= 0.9.0)
     cancancan (1.10.1)
     capistrano (3.4.0)
       i18n
@@ -150,7 +160,7 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-passenger (0.0.2)
+    capistrano-passenger (0.0.4)
       capistrano (~> 3.0)
     capistrano-rails (1.1.2)
       capistrano (~> 3.1)
@@ -173,7 +183,6 @@ GEM
     colorize (0.7.5)
     columnize (0.9.0)
     daemons (1.2.2)
-    debugger-linecache (1.2.0)
     deprecation (0.2.2)
       activesupport
     devise (3.4.1)
@@ -196,7 +205,7 @@ GEM
       nokogiri (>= 1.4.3)
     erubis (2.7.0)
     execjs (2.4.0)
-    ezid-client (1.0.1)
+    ezid-client (1.1.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.5.0)
@@ -204,39 +213,39 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.6)
+    ffi (1.9.8)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
     haml (4.0.6)
       tilt
+    handlebars_assets (0.20.1)
+      execjs (~> 2.0)
+      multi_json (~> 1.0)
+      sprockets (~> 2.0)
+      tilt (~> 1.2)
     hike (1.2.3)
     htmlentities (4.3.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     http_logger (0.5.1)
-    hydra-access-controls (9.1.1)
+    hydra-access-controls (9.1.2)
       active-fedora (~> 9.0.0)
       activesupport (~> 4.0)
       blacklight (~> 5.10)
       cancancan (~> 1.8)
       deprecation (~> 0.1)
       sass-rails
-    hydra-collections (5.0.1)
+    hydra-collections (5.0.2)
       blacklight (~> 5.10)
       deprecation (~> 0.1)
       hydra-head (~> 9.1)
-    hydra-core (9.1.1)
-      hydra-access-controls (= 9.1.1)
+    hydra-core (9.1.2)
+      hydra-access-controls (= 9.1.2)
       jettywrapper (>= 2.0.0)
       rails (~> 4.0)
-    hydra-editor (1.0.2)
-      active-fedora (>= 9.0.0)
-      cancancan (~> 1.8)
-      rails (~> 4.1)
-      simple_form (~> 3.1.0)
-    hydra-head (9.1.1)
-      hydra-access-controls (= 9.1.1)
-      hydra-core (= 9.1.1)
+    hydra-head (9.1.2)
+      hydra-access-controls (= 9.1.2)
+      hydra-core (= 9.1.2)
       rails (>= 3.2.6)
     hydra-role-management (0.2.1)
       blacklight
@@ -244,7 +253,7 @@ GEM
       cancancan
     i18n (0.7.0)
     iso-639 (0.2.5)
-    jbuilder (2.2.9)
+    jbuilder (2.2.12)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jettywrapper (2.0.3)
@@ -315,7 +324,7 @@ GEM
       activesupport
       nokogiri (>= 1.4.2)
       solrizer (~> 3.3)
-    openseadragon (0.1.0)
+    openseadragon (0.2.0)
       rails (> 3.2.0)
     orm_adapter (0.5.0)
     pg (0.18.1)
@@ -414,7 +423,7 @@ GEM
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       rspec-mocks (>= 2.99, < 4.0)
-    rspec-core (3.2.1)
+    rspec-core (3.2.2)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -433,7 +442,7 @@ GEM
     rspec-support (3.2.2)
     rubyzip (1.1.7)
     sass (3.4.13)
-    sass-rails (5.0.1)
+    sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
@@ -445,7 +454,7 @@ GEM
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
-    slop (3.6.0)
+    slop (4.0.0)
     solrizer (3.3.0)
       activesupport
       daemons
@@ -510,6 +519,7 @@ DEPENDENCIES
   active-fedora!
   active-triples!
   activefedora-aggregation (~> 0.2.0)
+  awesome_print
   blacklight (~> 5.11.2)
   blacklight-gallery
   byebug
@@ -523,8 +533,9 @@ DEPENDENCIES
   devise-guests (~> 0.3)
   ezid-client (~> 1.0)
   factory_girl_rails (~> 4.4)
+  handlebars_assets (= 0.20.1)
   hydra-collections (~> 5.0.1)
-  hydra-editor (~> 1.0.2)
+  hydra-editor!
   hydra-head (~> 9.1.1)
   hydra-role-management
   jbuilder (~> 2.0)

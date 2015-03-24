@@ -28,7 +28,7 @@ gem 'hydra-head', '~> 9.1.1'
 # https://github.com/projecthydra/active_fedora/pull/747
 gem 'active-fedora', github: 'projecthydra/active_fedora'
 gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: 'dce-ucsb'
-gem 'hydra-editor', '~> 1.0.2'
+gem 'hydra-editor', github: 'projecthydra/hydra-editor', branch: 'master'
 gem 'hydra-role-management'
 gem 'hydra-collections', '~> 5.0.1'
 gem 'rdf-vocab', '~> 0.7.0'
@@ -50,6 +50,9 @@ gem 'kaminari', github: 'harai/kaminari', branch: 'route_prefix_prototype', ref:
 
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
+
+gem "handlebars_assets", "0.20.1"
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-activemodel-mocks'
@@ -61,6 +64,7 @@ group :development, :test do
   gem 'sqlite3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'awesome_print'
 end
 
 group :test do
