@@ -24,7 +24,7 @@ class TimeSpan < ActiveFedora::Base
 
   # return a string suitable for sorting in Solr.
   def sortable
-    start.first
+    earliest_year
   end
 
   # Return an array of years, for faceting in Solr.
@@ -34,6 +34,10 @@ class TimeSpan < ActiveFedora::Base
     else
       extract_year(start.first)
     end
+  end
+
+  def earliest_year
+    start.sort { |a,b| extract_year(a) <=> extract_year(b) }.first
   end
 
   private

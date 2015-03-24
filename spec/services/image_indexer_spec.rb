@@ -4,7 +4,6 @@ describe ImageIndexer do
   subject { ImageIndexer.new(image).generate_solr_document }
 
   describe 'Indexing dates' do
-
     context "with an issued date" do
       let(:image) { Image.new(issued_attributes: [{ start: ['1925-11'] }]) }
 
@@ -17,7 +16,7 @@ describe ImageIndexer do
       end
 
       it "makes a facetable year field" do
-        expect(subject['year_iim']).to eq 1925
+        expect(subject['year_iim']).to eq [1925]
       end
     end
 
@@ -56,6 +55,82 @@ describe ImageIndexer do
         expect(subject['year_iim']).to eq [1917, 1918, 1919, 1920, 1921, 1922, 1923]
       end
     end
+
+    describe "with multiple types of dates" do
+      let(:created) { ['1911'] }
+      let(:issued) { ['1912'] }
+      let(:copyrighted) { ['1913'] }
+      let(:other) { ['1914'] }
+      let(:valid) { ['1915'] }
+
+      let(:image) do
+        Image.new(created_attributes: [{ start: created }],
+                  issued_attributes:  [{ start: issued  }],
+                  date_copyrighted_attributes: [{ start: copyrighted }],
+                  date_other_attributes: [{ start: other }],
+                  date_valid_attributes: [{ start: valid }])
+      end
+
+      context "with both issued and created dates" do
+        it "chooses 'created' date for sort/facet date" do
+          expect(subject[ImageIndexer::SORTABLE_DATE]).to eq created.first
+          expect(subject[ImageIndexer::FACETABLE_YEAR]).to eq created.map(&:to_i)
+        end
+      end
+
+      context "with issued date, but not created date" do
+        let(:created) { nil }
+
+        it "chooses 'issued' date for sort/facet date" do
+          expect(subject[ImageIndexer::SORTABLE_DATE]).to eq issued.first
+          expect(subject[ImageIndexer::FACETABLE_YEAR]).to eq issued.map(&:to_i)
+        end
+      end
+
+      context "with neither created nor issued date" do
+        let(:created) { nil }
+        let(:issued) { nil }
+
+        it "chooses 'copyrighted' date for sort/facet date" do
+          expect(subject[ImageIndexer::SORTABLE_DATE]).to eq copyrighted.first
+          expect(subject[ImageIndexer::FACETABLE_YEAR]).to eq copyrighted.map(&:to_i)
+        end
+      end
+
+      context "with only date_other or date_valid" do
+        let(:created) { nil }
+        let(:issued) { nil }
+        let(:copyrighted) { nil }
+
+        it "chooses 'date_other' date for sort/facet date" do
+          expect(subject[ImageIndexer::SORTABLE_DATE]).to eq other.first
+          expect(subject[ImageIndexer::FACETABLE_YEAR]).to eq other.map(&:to_i)
+        end
+      end
+    end
+
+    context "with multiple created dates" do
+      let(:earliest) { ['1915'] }
+      let(:mid_1)    { ['1917'] }
+      let(:mid_2)    { ['1921'] }
+      let(:latest)   { ['1923'] }
+
+      let(:image) do
+        Image.new(created_attributes: [
+          { start: mid_2, finish: latest },
+          { start: earliest, finish: mid_1 },
+        ])
+      end
+
+      it "makes a sortable date field" do
+        expect(subject['date_si']).to eq earliest.first
+      end
+
+      it "makes a facetable year field" do
+        expect(subject['year_iim']).to eq [1915, 1916, 1917, 1921, 1922, 1923]
+      end
+    end
+
   end  # Indexing dates
 
 
