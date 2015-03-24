@@ -38,6 +38,7 @@ brew install imagemagick --with-jp2 --with-libtiff --with-ghostscript
 ### Run the test suite
 
   * Make sure jetty is running
+  * Make sure marmotta is running, or CI environment variable is set to bypass marmotta
   * `bundle exec rake spec`
 
 ### Import Data
