@@ -6,6 +6,10 @@ class ImageIndexer < ActiveFedora::IndexingService
 
   ISSUED = Solrizer.solr_name('issued', :displayable)
   CREATED = Solrizer.solr_name('created', :displayable)
+  COPYRIGHTED = Solrizer.solr_name('date_copyrighted', :displayable)
+  VALID = Solrizer.solr_name('date_valid', :displayable)
+  OTHER = Solrizer.solr_name('date_other', :displayable)
+
   SORTABLE_DATE = Solrizer.solr_name('date', :sortable)
   FACETABLE_YEAR = 'year_iim'
 
@@ -24,17 +28,26 @@ class ImageIndexer < ActiveFedora::IndexingService
       solr_doc['thumbnail_url_ssm'.freeze] = generic_file_thumbnails
       solr_doc['image_url_ssm'.freeze] = generic_file_images
       solr_doc['large_image_url_ssm'.freeze] = generic_file_large_images
-      solr_doc[SORTABLE_CREATOR] = sortable_creator(solr_doc)
+
       solr_doc[ISSUED] = issued
       solr_doc[CREATED] = created
+      solr_doc[COPYRIGHTED] = display_date('date_copyrighted')
+      solr_doc[OTHER] = display_date('date_other')
+      solr_doc[VALID] = display_date('date_valid')
       solr_doc[SORTABLE_DATE] = sortable_date
       solr_doc[FACETABLE_YEAR] = facetable_year
+
+      solr_doc[SORTABLE_CREATOR] = sortable_creator(solr_doc)
       solr_doc[CONTRIBUTOR_LABEL] = contributors
       solr_doc['rights_holder_label_tesim'] = object['rights_holder'].flat_map(&:rdf_label)
     end
   end
 
   private
+
+    def display_date(date_name)
+      Array(object[date_name]).map(&:display_label)
+    end
 
     def created
       return unless object.created.present?

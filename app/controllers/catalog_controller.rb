@@ -105,6 +105,9 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('publisher', :stored_searchable), label: 'Publisher'
     config.add_show_field solr_name('created', :displayable), label: 'Creation Date'
     config.add_show_field solr_name('issued', :displayable), label: 'Issued Date'
+    config.add_show_field solr_name('date_copyrighted', :displayable), label: 'Copyright Date'
+    config.add_show_field solr_name('date_valid', :displayable), label: 'Valid Dates'
+    config.add_show_field solr_name('date_other', :displayable), label: 'Other Dates'
     config.add_show_field solr_name('creator_label', :stored_searchable), label: 'Creator'
     config.add_show_field solr_name('collector', :displayable), label: 'Collector', helper_method: :display_collector
     config.add_show_field solr_name('language', :stored_searchable, type: :string), label: 'Language'

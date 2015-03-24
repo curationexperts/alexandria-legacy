@@ -71,6 +71,12 @@ describe ImageIndexer do
                   date_valid_attributes: [{ start: valid }])
       end
 
+      it 'indexes dates for display' do
+        expect(subject['date_copyrighted_ssm']).to eq copyrighted
+        expect(subject['date_other_ssm']).to eq other
+        expect(subject['date_valid_ssm']).to eq valid
+      end
+
       context "with both issued and created dates" do
         it "chooses 'created' date for sort/facet date" do
           expect(subject[ImageIndexer::SORTABLE_DATE]).to eq created.first
