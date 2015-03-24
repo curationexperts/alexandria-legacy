@@ -108,8 +108,11 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('date_copyrighted', :displayable), label: 'Copyright Date'
     config.add_show_field solr_name('date_valid', :displayable), label: 'Valid Dates'
     config.add_show_field solr_name('date_other', :displayable), label: 'Other Dates'
-    config.add_show_field solr_name('creator_label', :stored_searchable), label: 'Creator'
-    config.add_show_field solr_name('collector', :displayable), label: 'Collector', helper_method: :display_collector
+
+    Image::RELATIONS.each do |key, value|
+      config.add_show_field solr_name("#{key}_label", :stored_searchable), label: key.to_s.titleize
+    end
+
     config.add_show_field solr_name('language', :stored_searchable, type: :string), label: 'Language'
     config.add_show_field solr_name('latitude', :displayable, type: :string), label: 'Latitude'
     config.add_show_field solr_name('longitude', :displayable, type: :string), label: 'Longitude'

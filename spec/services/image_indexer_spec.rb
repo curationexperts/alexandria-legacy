@@ -222,6 +222,8 @@ describe ImageIndexer do
 
     it "has contributors" do
       expect(subject['contributor_label_tesim']).to eq ["American Film Manufacturing Company", "Valerie", "Haggard, Merle"]
+      expect(subject['photographer_label_tesim']).to eq ["Valerie"]
+      expect(subject['singer_label_tesim']).to eq ["Haggard, Merle"]
     end
   end
 

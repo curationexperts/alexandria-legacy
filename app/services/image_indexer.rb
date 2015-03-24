@@ -37,8 +37,7 @@ class ImageIndexer < ActiveFedora::IndexingService
       solr_doc[SORTABLE_DATE] = sortable_date
       solr_doc[FACETABLE_YEAR] = facetable_year
 
-      solr_doc[SORTABLE_CREATOR] = sortable_creator(solr_doc)
-      solr_doc[CONTRIBUTOR_LABEL] = contributors
+      index_contributors(solr_doc)
       solr_doc['rights_holder_label_tesim'] = object['rights_holder'].flat_map(&:rdf_label)
     end
   end
@@ -57,6 +56,16 @@ class ImageIndexer < ActiveFedora::IndexingService
     def issued
       return unless object.issued.present?
       object.issued.first.display_label
+    end
+
+    def index_contributors(solr_doc)
+      Image::RELATIONS.each do |key, value|
+        solr_field_name = Solrizer.solr_name("#{key}_label", :stored_searchable)
+        solr_doc[solr_field_name] = object[key].flat_map(&:rdf_label)
+      end
+
+      solr_doc[SORTABLE_CREATOR] = sortable_creator(solr_doc)
+      solr_doc[CONTRIBUTOR_LABEL] = contributors
     end
 
     def contributors
