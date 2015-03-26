@@ -18,7 +18,7 @@ module ApplicationHelper
   end
 
   def display_notes(data)
-    ActiveSupport::SafeBuffer.new(Array(data[:value]).join('<br/>'))
+    safe_join(Array(data[:value]), '<br/>'.html_safe)
   end
 
 end
