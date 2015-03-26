@@ -17,4 +17,8 @@ module ApplicationHelper
     link_to stuff.fetch(:value).first, collections.collection_path(stuff.fetch(:document)[ImageIndexer::COLLECTION].first)
   end
 
+  def display_notes(data)
+    ActiveSupport::SafeBuffer.new(Array(data[:value]).join('<br/>'))
+  end
+
 end

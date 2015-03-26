@@ -121,6 +121,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('license_label', :stored_searchable), label: 'License'
     config.add_show_field solr_name('rights_holder_label', :stored_searchable), label: 'Copyright Holder'
     config.add_show_field solr_name('use_restrictions', :stored_searchable), label: 'Use Restrictions'
+    config.add_show_field solr_name('note_label', :stored_searchable), label: 'Notes', helper_method: :display_notes
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields

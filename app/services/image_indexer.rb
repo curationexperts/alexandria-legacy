@@ -39,6 +39,7 @@ class ImageIndexer < ActiveFedora::IndexingService
 
       index_contributors(solr_doc)
       solr_doc['rights_holder_label_tesim'] = object['rights_holder'].flat_map(&:rdf_label)
+      solr_doc['note_label_tesim'] = object.notes.map(&:value)
     end
   end
 
