@@ -15,8 +15,13 @@ class CollectionsController < ApplicationController
   end
 
   def show
-    super
-    solr_resp, @document = fetch(@collection.id)
+    if params[:q].present?
+      # A normal catalog search
+      redirect_to catalog_index_path(q: params[:q])
+    else
+      super
+      solr_resp, @document = fetch(@collection.id)
+    end
   end
 
   configure_blacklight do |config|
