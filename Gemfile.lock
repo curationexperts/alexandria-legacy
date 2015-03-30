@@ -1,11 +1,15 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: 7aca4f260274832f70f3f5d94b63521b64810734
+  revision: 2f600e0aeef1511b1f5315d72b360760075b36c3
+  branch: linked_vocabs
   specs:
     oargun (0.0.1)
+      active-fedora (~> 9.0.0)
       active-triples (~> 0.6.0)
       activesupport (~> 4.0)
+      linked_vocabs (~> 0.2)
       qa (~> 0.4.0)
+      rdf-vocab (~> 0.6)
       rest-client (~> 1.7)
 
 GIT
@@ -29,6 +33,18 @@ GIT
       deprecation (~> 0.1)
       linkeddata (~> 1.1)
       rdf (~> 1.1)
+
+GIT
+  remote: git://github.com/jcoyne/linked_vocabs.git
+  revision: 524d255436ee72515d768c3892477bf29e7e2ce4
+  branch: fix_in_vocab
+  specs:
+    linked_vocabs (0.2.0)
+      active-triples (>= 0.6.0)
+      rake
+      rdf (>= 1.1.2.1)
+      sparql
+      sparql-client
 
 GEM
   remote: https://rubygems.org/
@@ -155,6 +171,8 @@ GEM
     devise-guests (0.3.3)
       devise
     diff-lcs (1.2.5)
+    domain_name (0.5.23)
+      unf (>= 0.0.5, < 1.0.0)
     ebnf (0.3.7)
       haml (~> 4.0)
       rdf (~> 1.1)
@@ -178,6 +196,8 @@ GEM
       tilt
     hike (1.2.3)
     htmlentities (4.3.3)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     http_logger (0.5.1)
     hydra-access-controls (9.1.1)
       active-fedora (~> 9.0.0)
@@ -373,7 +393,8 @@ GEM
     ref (1.0.5)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
-    rest-client (1.7.3)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     riiif (0.1.0)
@@ -464,6 +485,9 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.6)
     warden (1.2.3)
       rack (>= 1.0)
     xml-simple (1.1.5)
@@ -498,6 +522,7 @@ DEPENDENCIES
   jettywrapper
   jquery-rails
   kaminari!
+  linked_vocabs!
   mods (~> 2.0.3)
   oargun!
   pg

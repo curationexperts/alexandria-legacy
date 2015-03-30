@@ -36,7 +36,9 @@ gem 'rsolr', '~> 1.0.12'
 gem 'activefedora-aggregation', '~> 0.2.0'
 
 gem 'mods', '~> 2.0.3'
-gem 'oargun', github: 'curationexperts/oargun'
+gem 'oargun', github: 'curationexperts/oargun', branch: 'linked_vocabs'
+# Use a patched version until https://github.com/no-reply/linked_vocabs/pull/4 is closed
+gem 'linked_vocabs', github: 'jcoyne/linked_vocabs', branch: 'fix_in_vocab'
 gem 'blacklight-gallery'
 gem 'riiif', '~> 0.1.0'
 gem 'ezid-client', '~> 1.0'
