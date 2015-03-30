@@ -45,7 +45,7 @@ describe Importer::ModsImporter do
       # Image.reload doesn't clear @file_association
       reloaded = Image.find(image.id)
       expect(reloaded.generic_files.first).not_to be_nil
-      expect(reloaded.generic_files.aggregation.head.next).not_to be_nil
+      expect(reloaded.head.next).not_to be_nil
 
       expect(reloaded.identifier.first).to match /^ark:\/99999\/fk4\w{7}$/
 
