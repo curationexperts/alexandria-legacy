@@ -26,7 +26,7 @@ describe ImageIndexer do
       let(:image) { Image.new(issued_attributes: [{ start: issued_start, finish: issued_end}]) }
 
       it "indexes dates for display" do
-        expect(subject['issued_ssm']).to eq "1917-1923"
+        expect(subject['issued_ssm']).to eq "1917 - 1923"
       end
 
       it "makes a sortable date field" do
@@ -44,7 +44,7 @@ describe ImageIndexer do
       let(:image) { Image.new(created_attributes: [{ start: created_start, finish: created_end}]) }
 
       it "indexes dates for display" do
-        expect(subject['created_ssm']).to eq "1917-1923"
+        expect(subject['created_ssm']).to eq "1917 - 1923"
       end
 
       it "makes a sortable date field" do

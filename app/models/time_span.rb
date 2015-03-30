@@ -6,19 +6,31 @@ class TimeSpan < ActiveFedora::Base
   property :label, predicate: ::RDF::SKOS.prefLabel
   property :note, predicate: ::RDF::SKOS.note
 
+  # MODS date qualifiers
+  APPROX = "approximate"
+  INFERRED = "inferred"
+  QUESTIONABLE = "questionable"
+
   def range?
     start.present? && finish.present?
   end
-
 
   # Return a string for display of this record
   def display_label
     if label.present?
       label.first
-    elsif range?
-      "#{start.first}-#{finish.first}"
     else
-      start.first
+      start_string = qualified_date(start, start_qualifier)
+      finish_string = qualified_date(finish, finish_qualifier)
+      [start_string, finish_string].compact.join(' - ')
+    end
+  end
+
+  def qualified_date(date, qualifier)
+    if qualifier.include?(APPROX) || qualifier.include?(QUESTIONABLE)
+      "ca. #{date.first}"
+    else
+      date.first
     end
   end
 
