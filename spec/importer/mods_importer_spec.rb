@@ -93,6 +93,7 @@ describe Importer::ModsImporter do
       expect(coll.id).to match /^fk4\w{7}$/
       expect(coll.accession_number).to eq ['SBHC Mss 78']
       expect(coll.title).to eq 'Joel Conway / Flying A Studio photograph collection'
+      expect(coll.admin_policy_id).to eq AdminPolicy::PUBLIC_POLICY_ID
 
       expect(coll.collector.count).to eq 1
       uri = coll.collector.first.rdf_subject.value
