@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: 9df274390d17a28b86549abbb6ceb613edfa601a
+  revision: 9be10ce8054dfbcec4351d163d068ff7e413b909
   branch: linked_vocabs
   specs:
     oargun (0.0.1)

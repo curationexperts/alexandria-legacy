@@ -119,6 +119,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('institution_label', :stored_searchable), label: 'Contributing Institution'
     config.add_show_field solr_name('sub_location', :displayable, type: :string), label: 'Holding Sub-location'
     config.add_show_field solr_name('license_label', :stored_searchable), label: 'License'
+    config.add_show_field solr_name('copyright_status_label', :stored_searchable), label: 'Copyright Status'
     config.add_show_field solr_name('rights_holder_label', :stored_searchable), label: 'Copyright Holder'
     config.add_show_field solr_name('use_restrictions', :stored_searchable), label: 'Use Restrictions'
     config.add_show_field solr_name('note_label', :stored_searchable), label: 'Notes', helper_method: :display_notes

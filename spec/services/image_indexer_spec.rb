@@ -165,6 +165,19 @@ describe ImageIndexer do
     end
   end
 
+  context "with copyright_status" do
+    let(:public_domain_uri) { RDF::URI.new('http://id.loc.gov/vocabulary/preservation/copyrightStatus/pub') }
+    let(:copyright_uri) { RDF::URI.new('http://id.loc.gov/vocabulary/preservation/copyrightStatus/cpr') }
+    let(:unknown_uri) { RDF::URI.new('http://id.loc.gov/vocabulary/preservation/copyrightStatus/unk') }
+
+    let(:image) { Image.new(copyright_status: [public_domain_uri, copyright_uri, unknown_uri]) }
+
+    it 'indexes with a label' do
+      expect(subject['copyright_status_tesim']).to eq [public_domain_uri, copyright_uri, unknown_uri]
+      expect(subject['copyright_status_label_tesim']).to eq ["public domain", "copyrighted", "unknown"]
+    end
+  end
+
   context "with an ark" do
     let(:image) { Image.new(identifier: ['ark:/99999/fk4123456']) }
     it "indexes ark for display" do

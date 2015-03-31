@@ -80,7 +80,9 @@ module Metadata
       index.as :symbol
     end
 
-    property :copyright_status, predicate: RDF::Vocab::PREMIS::V1.hasCopyrightStatus
+    property :copyright_status, predicate: RDF::Vocab::PREMIS::V1.hasCopyrightStatus, class_name: Oargun::ControlledVocabularies::CopyrightStatus do |index|
+      index.as :stored_searchable
+    end
 
     property :license, predicate: RDF::DC.rights, class_name: Oargun::ControlledVocabularies::RightsStatement do |index|
       index.as :stored_searchable
@@ -95,15 +97,15 @@ module Metadata
     end
 
     # Dates
-    # property :issued, predicate: RDF::DC.issued do |index|
-    #   index.as :displayable
-    # end
-
     has_and_belongs_to_many :created, predicate: RDF::DC.created, class_name: 'TimeSpan'
     has_and_belongs_to_many :issued, predicate: RDF::DC.issued, class_name: 'TimeSpan'
     has_and_belongs_to_many :date_other, predicate: RDF::DC.date, class_name: 'TimeSpan'
     has_and_belongs_to_many :date_copyrighted, predicate: RDF::DC.dateCopyrighted, class_name: 'TimeSpan'
     has_and_belongs_to_many :date_valid, predicate: RDF::DC.valid, class_name: 'TimeSpan'
+
+    # property :issued, predicate: RDF::DC.issued do |index|
+    #   index.as :displayable
+    # end
 
     # Not tackling these now. No demonstrated need yet.
     # has_and_belongs_to_many :date_accepted, predicate: RDF::DC.dateAccepted, class_name: 'TimeSpan'
