@@ -1,7 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: 9be10ce8054dfbcec4351d163d068ff7e413b909
-  branch: linked_vocabs
+  revision: 50c4b8521c36285decd9b701496a679de788590f
   specs:
     oargun (0.0.1)
       active-fedora (~> 9.0.0)
