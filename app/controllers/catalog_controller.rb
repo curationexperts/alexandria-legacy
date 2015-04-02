@@ -117,7 +117,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('latitude', :displayable, type: :string), label: 'Latitude'
     config.add_show_field solr_name('longitude', :displayable, type: :string), label: 'Longitude'
     config.add_show_field solr_name('institution_label', :stored_searchable), label: 'Contributing Institution'
-    config.add_show_field solr_name('sub_location', :displayable, type: :string), label: 'Holding Sub-location'
+    config.add_show_field solr_name('sub_location', :displayable, type: :string), label: I18n.t('simple_form.labels.image.sub_location')
     config.add_show_field solr_name('license_label', :stored_searchable), label: 'License'
     config.add_show_field solr_name('copyright_status_label', :stored_searchable), label: 'Copyright Status'
     config.add_show_field solr_name('rights_holder_label', :stored_searchable), label: 'Copyright Holder'
