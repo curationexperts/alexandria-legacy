@@ -45,6 +45,23 @@ GIT
       sparql
       sparql-client
 
+GIT
+  remote: git://github.com/projecthydra/active_fedora.git
+  revision: 9e2f1c3e7eaaf75198408998830263e68be77067
+  branch: rdf_label
+  specs:
+    active-fedora (9.0.6)
+      active-triples (~> 0.6.0)
+      activesupport (>= 4.1.0)
+      deprecation
+      ldp (~> 0.2.1)
+      linkeddata
+      nom-xml (>= 0.5.1)
+      om (~> 3.1)
+      rdf-ldp
+      rdf-rdfxml (~> 1.1.0)
+      rsolr (~> 1.0.10)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -67,17 +84,6 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    active-fedora (9.0.6)
-      active-triples (~> 0.6.0)
-      activesupport (>= 4.1.0)
-      deprecation
-      ldp (~> 0.2.1)
-      linkeddata
-      nom-xml (>= 0.5.1)
-      om (~> 3.1)
-      rdf-ldp
-      rdf-rdfxml (~> 1.1.0)
-      rsolr (~> 1.0.10)
     activefedora-aggregation (0.2.0)
       active-fedora
       activesupport
@@ -497,7 +503,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active-fedora (~> 9.0.4)
+  active-fedora!
   active-triples!
   activefedora-aggregation (~> 0.2.0)
   blacklight (~> 5.11.2)

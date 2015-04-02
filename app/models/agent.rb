@@ -4,6 +4,7 @@
 
 class Agent < ActiveFedora::Base
 
+  rdf_label ::RDF::FOAF.name
   property :foaf_name, predicate: ::RDF::FOAF.name, multiple: false do |index|
     index.as :stored_searchable, :symbol  # Need :symbol for exact match for ObjectFactory find_or_create_* methods.
   end
@@ -13,10 +14,6 @@ class Agent < ActiveFedora::Base
   # (e.g. Person)
   def self.exact_model
     where(has_model_ssim: self.to_s)
-  end
-
-  def rdf_label
-    Array(foaf_name)
   end
 
 end

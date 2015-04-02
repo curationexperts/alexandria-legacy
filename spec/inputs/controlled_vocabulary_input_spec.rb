@@ -17,10 +17,10 @@ describe 'ControlledVocabularyInput', type: :input do
   end
 
   describe '#build_field' do
-    subject { input.send(:build_field, bar, 0) }
+    subject { input.send(:build_field, value, 0) }
 
     context "for a b-node" do
-      let(:bar) { double('value 1', rdf_label: [], rdf_subject: '_:134', node?: true) }
+      let(:value) { double('value 1', rdf_label: [], rdf_subject: '_:134', node?: true) }
       it 'renders multi-value' do
         expect(subject).to have_selector('input.image_creator.multi_value')
         expect(subject).to have_selector('input[name="image[creator_attributes][0][id]"][value=""]')
@@ -31,15 +31,23 @@ describe 'ControlledVocabularyInput', type: :input do
     end
 
     context "for a resource" do
-      let(:bar) { double('value 1', rdf_label: ['Item 1'], rdf_subject: 'http://example.org/1', node?: false) }
+      let(:value) { double('value 1', rdf_label: ['Item 1'], rdf_subject: 'http://example.org/1', node?: false) }
       it 'renders multi-value' do
         expect(subject).to have_selector('input.image_creator.multi_value')
         expect(subject).to have_field('image[creator_attributes][0][hidden_label]', with: 'Item 1')
         expect(subject).to have_selector('input[name="image[creator_attributes][0][id]"][value="http://example.org/1"]')
         expect(subject).to have_selector('input[name="image[creator_attributes][0][_destroy]"][value=""][data-destroy]')
-
       end
+    end
 
+    context "for an ActiveFedora object" do
+      let(:value) { Person.new(id: 'ff/ff/ff/ffffff', foaf_name: 'Item 1') }
+      it 'renders multi-value' do
+        expect(subject).to have_selector('input.image_creator.multi_value')
+        expect(subject).to have_field('image[creator_attributes][0][hidden_label]', with: 'Item 1')
+        expect(subject).to have_selector('input[name="image[creator_attributes][0][id]"][value="http://localhost:8983/fedora/rest/test/ff/ff/ff/ffffff"]')
+        expect(subject).to have_selector('input[name="image[creator_attributes][0][_destroy]"][value=""][data-destroy]')
+      end
     end
   end
 end

@@ -9,6 +9,7 @@ class ControlledVocabularyInput < MultiValueInput
 
     def build_field(value, index)
       options = input_html_options.dup
+      value = value.resource if value.kind_of? ActiveFedora::Base
 
       if value.respond_to? :rdf_label
         options[:name] = name_for(attribute_name, index, 'hidden_label'.freeze)
