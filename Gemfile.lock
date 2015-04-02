@@ -35,8 +35,8 @@ GIT
 
 GIT
   remote: git://github.com/jcoyne/linked_vocabs.git
-  revision: 524d255436ee72515d768c3892477bf29e7e2ce4
-  branch: fix_in_vocab
+  revision: 5c9da4f9005b4056e2a5fc0e2e0c9c1a47b4405b
+  branch: prefer_english_labels
   specs:
     linked_vocabs (0.2.0)
       active-triples (>= 0.6.0)
