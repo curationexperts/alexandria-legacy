@@ -20,6 +20,8 @@ describe ImageForm do
       expect(subject).to include(extent: [])
       expect(subject).to include(digital_origin: [])
       expect(subject).to include(alternative: [])
+      expect(subject).to include(latitude: [])
+      expect(subject).to include(longitude: [])
     end
   end
 end
