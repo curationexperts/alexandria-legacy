@@ -34,9 +34,8 @@ GIT
       rdf (~> 1.1)
 
 GIT
-  remote: git://github.com/jcoyne/linked_vocabs.git
-  revision: 5c9da4f9005b4056e2a5fc0e2e0c9c1a47b4405b
-  branch: prefer_english_labels
+  remote: git://github.com/no-reply/linked_vocabs.git
+  revision: bdd55673b17fed3d30410a0bfba53eb5bea91901
   specs:
     linked_vocabs (0.2.0)
       active-triples (>= 0.6.0)
