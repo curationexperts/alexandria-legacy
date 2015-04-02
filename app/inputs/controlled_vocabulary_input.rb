@@ -13,6 +13,7 @@ class ControlledVocabularyInput < MultiValueInput
 
       if value.respond_to? :rdf_label
         options[:name] = name_for(attribute_name, index, 'hidden_label'.freeze)
+        options[:data] = { attribute: attribute_name }
         options[:id] = id_for(attribute_name, index, 'hidden_label'.freeze)
         if value.node?
           build_options_for_new_row(attribute_name, index, options)

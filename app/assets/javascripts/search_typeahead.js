@@ -11,15 +11,25 @@
       var settings = $.extend({
         highlight: (typeAheadInput.data('autocomplete-highlight') || true),
         hint: (typeAheadInput.data('autocomplete-hint') || false),
-        autoselect: (typeAheadInput.data('autocomplete-autoselect') || true),
-        path: '/'
+        autoselect: (typeAheadInput.data('autocomplete-autoselect') || true)
       }, options);
+
+      var controlledVocabMap = {
+        'form_of_work': '/qa/search/getty/aat',
+        'location':     '/qa/search/loc/names',
+        'lc_subject':   '/qa/search/loc/subjects',
+      };
+
+      function qaPathForField(input) {
+        fieldName = input.data('attribute');
+        return controlledVocabMap[fieldName];
+      }
 
       var results;
       if (settings.bloodhound) {
         results = settings.bloodhound();
       } else {
-        results = initBloodhound(settings.path);
+        results = initBloodhound(qaPathForField(typeAheadInput));
       }
 
       typeAheadInput.typeahead(settings, {
@@ -27,6 +37,7 @@
         source: results.ttAdapter()
       })
     }
+
     return this;
   }
 })( jQuery );
@@ -49,17 +60,33 @@ function initBloodhound(path) {
   return results;
 }
 
-function addAutocompleteToEditor($field, path) {
-  $field.alexandriaSearchTypeAhead({ path: path}).on(
-      'typeahead:selected typeahead:autocompleted', function(e, data) {
+function storeControlledVocabularyData(input, data) {
     uri = data['id'].replace("info:lc", "http://id.loc.gov");
-    $(this).closest('.field-wrapper').find('[data-id]').val(uri);
-  });
+    input.closest('.field-wrapper').find('[data-id]').val(uri);
+}
+
+function lockControlledVocabularyFields(input) {
+   input.typeahead("destroy");
+   input.attr("readonly", "readonly");
+}
+
+function addAnotherField(input) {
+  input.closest('.form-group').find('.add').click();
+  addAutocompleteToEditor($("[data-attribute="+input.data('attribute')+"]:not([readonly])"));
+}
+
+function addAutocompleteToEditor($field, path) {
+    $field.alexandriaSearchTypeAhead().on(
+        'typeahead:selected typeahead:autocompleted', function(e, data) {
+            storeControlledVocabularyData($(this), data);
+            lockControlledVocabularyFields($(this));
+            addAnotherField($(this));
+    });
 }
 
 Blacklight.onLoad(function(){
-  addAutocompleteToEditor($('input.image_lc_subject:not([readonly])'), '/qa/search/loc/subjects');
-  addAutocompleteToEditor($('input.image_location:not([readonly])'), '/qa/search/loc/names');
-  addAutocompleteToEditor($('input.image_form_of_work:not([readonly])'), '/qa/search/getty/aat');
+  addAutocompleteToEditor($('input.image_lc_subject:not([readonly])'));
+  addAutocompleteToEditor($('input.image_location:not([readonly])'));
+  addAutocompleteToEditor($('input.image_form_of_work:not([readonly])'));
 });
 
