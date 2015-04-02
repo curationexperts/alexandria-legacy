@@ -10,6 +10,7 @@ describe ImageForm do
       expect(subject).to include(lc_subject_attributes: [:id, :_destroy])
       expect(subject).to include(form_of_work_attributes: [:id, :_destroy])
       expect(subject).to include(sub_location: [])
+      expect(subject).to include(use_restrictions: [])
     end
   end
 end
