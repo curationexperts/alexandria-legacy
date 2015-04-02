@@ -81,6 +81,10 @@ function addAutocompleteToEditor($field, path) {
             storeControlledVocabularyData($(this), data);
             lockControlledVocabularyFields($(this));
             addAnotherField($(this));
+    }).on(
+    'change', function(e) {
+      // They didn't select anything. Clear the field.
+      $(this).typeahead('val', '');
     });
 }
 
