@@ -12,6 +12,7 @@ describe ImageForm do
     end
 
     it "should include simple fields" do
+      expect(subject).to include(accession_number: [])
       expect(subject).to include(sub_location: [])
       expect(subject).to include(use_restrictions: [])
       expect(subject).to include(series_name: [])
