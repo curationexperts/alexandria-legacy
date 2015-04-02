@@ -263,4 +263,13 @@ describe ImageIndexer do
     end
   end
 
+  context 'with digital origin' do
+    let(:dig_orig) { 'origin' }
+    let(:image) { Image.create(digital_origin: [dig_orig]) }
+
+    it 'indexes' do
+      expect(subject['digital_origin_tesim']).to eq [dig_orig]
+    end
+  end
+
 end

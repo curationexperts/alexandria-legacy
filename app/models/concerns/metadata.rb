@@ -121,8 +121,9 @@ module Metadata
     property :citation, predicate: RDF::URI('http://www.rdaregistry.info/Elements/u/#preferredCitation.en')
 
     # MODS
-    property :digital_origin, predicate: RDF::Vocab::MODS.digitalOrigin
-
+    property :digital_origin, predicate: RDF::Vocab::MODS.digitalOrigin do |index|
+      index.as :stored_searchable
+    end
 
     property :description_standard, predicate: RDF::Vocab::MODS.recordDescriptionStandard
 

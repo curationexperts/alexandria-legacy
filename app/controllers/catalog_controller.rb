@@ -108,6 +108,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('date_copyrighted', :displayable), label: 'Copyright Date'
     config.add_show_field solr_name('date_valid', :displayable), label: 'Valid Dates'
     config.add_show_field solr_name('date_other', :displayable), label: 'Other Dates'
+    config.add_show_field solr_name('digital_origin', :stored_searchable), label: 'Digital Origin'
 
     Image::RELATIONS.each do |key, value|
       config.add_show_field solr_name("#{key}_label", :stored_searchable), label: key.to_s.titleize
