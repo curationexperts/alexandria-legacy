@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: acbfcd50f7a99be98dd060240a20309f3cf34d96
+  revision: 74a7acb9cb6c0fda6be23b116919466deb56b730
   specs:
     oargun (0.0.1)
       active-fedora (~> 9.0.0)
