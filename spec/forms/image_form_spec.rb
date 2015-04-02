@@ -17,6 +17,7 @@ describe ImageForm do
       expect(subject).to include(use_restrictions: [])
       expect(subject).to include(series_name: [])
       expect(subject).to include(place_of_publication: [])
+      expect(subject).to include(extent: [])
     end
   end
 end
