@@ -76,7 +76,7 @@ module Metadata
       index.as :stored_searchable, :facetable
     end
 
-    property :rights_holder, :predicate => ::RDF::URI('http://opaquenamespace.org/rights/rightsHolder'), class_name: Oargun::ControlledVocabularies::Creator do |index|
+    property :rights_holder, :predicate => RDF::DC.rightsHolder, class_name: Oargun::ControlledVocabularies::Creator do |index|
       index.as :symbol
     end
 
