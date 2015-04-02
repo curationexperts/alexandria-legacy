@@ -26,7 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'hydra-head', '~> 9.1.1'
 # gem 'active-fedora', '~> 9.0.4'
 # https://github.com/projecthydra/active_fedora/pull/747
-gem 'active-fedora', github: 'projecthydra/active_fedora', branch: 'rdf_label'
+gem 'active-fedora', github: 'projecthydra/active_fedora', branch: 'dce_test'
 gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: 'dce-ucsb'
 gem 'hydra-editor', '~> 1.0.2'
 gem 'hydra-role-management'

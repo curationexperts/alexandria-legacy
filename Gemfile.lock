@@ -47,8 +47,8 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/active_fedora.git
-  revision: 9e2f1c3e7eaaf75198408998830263e68be77067
-  branch: rdf_label
+  revision: a2f05fe48fa06985b83a6a866472a83eca5e027c
+  branch: dce_test
   specs:
     active-fedora (9.0.6)
       active-triples (~> 0.6.0)
