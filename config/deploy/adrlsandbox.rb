@@ -3,10 +3,9 @@
 # Supports bulk-adding hosts to roles, the primary server in each group
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
-set :stage, :vagrant
+set :stage, :adrlsandbox
 set :rails_env, 'production'
-set :ssh_options, {port: 2222, keys: ['~/.vagrant.d/insecure_private_key']}
-server 'localhost', user: 'vagrant', roles: [:web, :app, :db]
+server '10.3.60.167', user: 'adrl', roles: [:web, :app, :db]
 
 # Extended Server Syntax
 # ======================
