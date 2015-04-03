@@ -2,12 +2,17 @@
 
 ## Developer Setup Notes
 
-### Configuration
+### Dev/Test Configuration
+  * Copy `config/blacklight.yml.template` to `config/blacklight.yml`
+  * Copy `config/database.yml.template` to `config/database.yml`
+  * Copy `config/fedora.yml.template` to `config/fedora.yml`
   * Copy `config/ezid.yml.template` to `config/ezid.yml`
   * Copy `config/secrets.yml.template` to `config/secrets.yml`
   * Edit `config/secrets.yml` and paste in a new secret key
   * update the host\_name in `config/environments/{environment}.rb`
-  * Copy `config/smtp.yml.template` to `config/smtp.yml` and edit the file
+  * Copy `config/smtp.yml.template` to `config/smtp.yml` 
+  * Edit `config/smtp.yml` and add fake email settings
+  * Copy `config/solr.yml.template` to `config/solr.yml`
 
 ### Set up Jetty
 
