@@ -7,7 +7,7 @@
   * Copy `config/secrets.yml.template` to `config/secrets.yml`
   * Edit `config/secrets.yml` and paste in a new secret key
   * update the host\_name in `config/environments/{environment}.rb`
-  * Copy `config/smtp.yml.template` to `smtp/secrets.yml` and edit the file
+  * Copy `config/smtp.yml.template` to `config/smtp.yml` and edit the file
 
 ### Set up Jetty
 
