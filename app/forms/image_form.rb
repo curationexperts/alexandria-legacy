@@ -5,6 +5,16 @@ class ImageForm
   self.terms = [:title, :accession_number, :alternative, :description, :series_name, :work_type, :form_of_work, :extent, :place_of_publication, :location, :lc_subject, :publisher, :creator, :contributor, :latitude, :longitude, :digital_origin, :sub_location, :use_restrictions]
   self.required_fields = [] # Required fields
 
+  # ARK is a read only value on the form.
+  def ark
+    model.ark
+  end
+
+  # record_origin is a read only value on the form.
+  def record_origin
+    model.record_origin
+  end
+
   protected
     def initialize_fields
       # we're making a local copy of the attributes that we can modify.

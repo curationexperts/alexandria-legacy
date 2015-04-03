@@ -24,4 +24,19 @@ describe ImageForm do
       expect(subject).to include(longitude: [])
     end
   end
+
+  describe "an instance" do
+    let(:image) { Image.new(identifier: ['ark:/99999/fk4f76j320'], record_origin: ["This is the origin"] ) }
+    let(:instance) { described_class.new image }
+
+    describe "#ark" do
+      subject { instance.ark }
+      it { is_expected.to eq 'ark:/99999/fk4f76j320' }
+    end
+
+    describe "#record_origin" do
+      subject { instance.record_origin }
+      it { is_expected.to eq ['This is the origin'] }
+    end
+  end
 end

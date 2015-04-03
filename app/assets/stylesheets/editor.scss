@@ -2,6 +2,13 @@
   @extend .multi_value;
 }
 
+.multi_value_readonly {
+  @extend .multi_value;
+  .listing > li {
+    list-style-type: none;
+  }
+}
+
 input.string {
   max-width: 40em;
 }
