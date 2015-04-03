@@ -3,6 +3,8 @@
 ## Developer Setup Notes
 
 ### Configuration
+  * Copy `config/blacklight.yml.template` to `config/blacklight.yml`
+  * Copy `config/database.yml.template` to `config/database.yml`
   * Copy `config/ezid.yml.template` to `config/ezid.yml`
   * Copy `config/secrets.yml.template` to `config/secrets.yml`
   * Edit `config/secrets.yml` and paste in a new secret key
