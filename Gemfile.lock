@@ -308,7 +308,7 @@ GEM
       rails (> 3.2.0)
     orm_adapter (0.5.0)
     pg (0.18.1)
-    qa (0.4.1)
+    qa (0.4.2)
       activerecord-import
       deprecation
       nokogiri (~> 1.6.0)
@@ -530,7 +530,7 @@ DEPENDENCIES
   mods (~> 2.0.3)
   oargun!
   pg
-  qa (~> 0.4.1)
+  qa (~> 0.4.2)
   rails (= 4.2.1)
   rdf-marmotta (~> 0.0.8)
   rdf-vocab (~> 0.7.0)
