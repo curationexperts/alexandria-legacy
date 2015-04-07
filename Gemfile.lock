@@ -227,7 +227,7 @@ GEM
       hydra-access-controls (= 9.1.2)
       jettywrapper (>= 2.0.0)
       rails (~> 4.0)
-    hydra-editor (1.0.2)
+    hydra-editor (1.0.3)
       active-fedora (>= 9.0.0)
       cancancan (~> 1.8)
       rails (~> 4.1)
@@ -524,7 +524,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.4)
   handlebars_assets (= 0.20.1)
   hydra-collections (~> 5.0.1)
-  hydra-editor (~> 1.0.2)
+  hydra-editor (~> 1.0.3)
   hydra-head (~> 9.1.1)
   hydra-role-management
   jbuilder (~> 2.0)
