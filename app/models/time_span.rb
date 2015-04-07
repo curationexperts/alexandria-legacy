@@ -7,7 +7,7 @@ class TimeSpan < ActiveFedora::Base
   property :note, predicate: ::RDF::SKOS.note
 
   # temp fix for https://github.com/projecthydra/active_fedora/issues/752 
-  has_many :created_images, inverse_of: :created
+  has_many :images, inverse_of: :created
   has_many :issued_images, inverse_of: :issued
   has_many :date_other_images, inverse_of: :date_other
   has_many :date_valid_images, inverse_of: :date_valid
