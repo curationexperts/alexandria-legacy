@@ -18,6 +18,7 @@
         'form_of_work': '/qa/search/getty/aat',
         'location':     '/qa/search/loc/names',
         'lc_subject':   '/qa/search/loc/subjects',
+        'license':      '/qa/search/local/license',
       };
 
       function qaPathForField(input) {
@@ -92,5 +93,6 @@ Blacklight.onLoad(function(){
   addAutocompleteToEditor($('input.image_lc_subject:not([readonly])'));
   addAutocompleteToEditor($('input.image_location:not([readonly])'));
   addAutocompleteToEditor($('input.image_form_of_work:not([readonly])'));
+  addAutocompleteToEditor($('input.image_license:not([readonly])'));
 });
 

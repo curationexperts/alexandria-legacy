@@ -9,6 +9,7 @@ describe ImageForm do
       expect(subject).to include(location_attributes: [:id, :_destroy])
       expect(subject).to include(lc_subject_attributes: [:id, :_destroy])
       expect(subject).to include(form_of_work_attributes: [:id, :_destroy])
+      expect(subject).to include(license_attributes: [:id, :_destroy])
     end
 
     it "should include simple fields" do

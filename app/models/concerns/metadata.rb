@@ -149,6 +149,7 @@ module Metadata
       accepts_nested_attributes_for relation, reject_if: id_blank, allow_destroy: true
     end
     accepts_nested_attributes_for :location, reject_if: id_blank, allow_destroy: true
+    accepts_nested_attributes_for :license, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :lc_subject, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :form_of_work, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :notes, reject_if: :all_blank, allow_destroy: true

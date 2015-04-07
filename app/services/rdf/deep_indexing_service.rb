@@ -23,7 +23,7 @@ class RDF::DeepIndexingService < ActiveFedora::RDF::IndexingService
         next unless old_label == resource.rdf_subject.to_s || old_label.nil?
         fetch_value(resource) if resource.kind_of? ActiveTriples::Resource
         if old_label != resource.rdf_label.first && resource.rdf_label.first != resource.rdf_subject.to_s
-          resource.persist! # Stores the fetched values into our RDF::Solr repository
+          resource.persist! # Stores the fetched values into our marmotta triplestore
         end
       end
     end

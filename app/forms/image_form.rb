@@ -2,7 +2,12 @@ class ImageForm
   include HydraEditor::Form
   self.model_class = Image
 
-  self.terms = [:title, :accession_number, :alternative, :description, :series_name, :work_type, :form_of_work, :extent, :place_of_publication, :location, :lc_subject, :publisher, :creator, :contributor, :latitude, :longitude, :digital_origin, :sub_location, :use_restrictions]
+  self.terms = [:title, :accession_number, :alternative, :description,
+                :series_name, :work_type, :form_of_work, :extent,
+                :place_of_publication, :location, :lc_subject, :publisher,
+                :creator, :contributor, :latitude, :longitude, :digital_origin,
+                :sub_location, :use_restrictions, :license]
+
   self.required_fields = [] # Required fields
 
   # ARK is a read only value on the form.
@@ -39,6 +44,7 @@ class ImageForm
       permitted.delete(location: [])
       permitted.delete(lc_subject: [])
       permitted.delete(form_of_work: [])
+      permitted.delete(license: [])
       permitted << { creator_attributes: [:id, :_destroy] }
       permitted << { location_attributes: [:id, :_destroy] }
       permitted << { lc_subject_attributes: [:id, :_destroy] }
@@ -46,6 +52,7 @@ class ImageForm
       permitted << { created_attributes: [:id, :start, :finish, :label, :note, :_destroy] }
       permitted << { other_date_attributes: [:id, :start, :finish, :label, :note, :_destroy] }
       permitted << { form_of_work_attributes: [:id, :_destroy] }
+      permitted << { license_attributes: [:id, :_destroy] }
       permitted
     end
 end
