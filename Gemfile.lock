@@ -58,7 +58,7 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/active_fedora.git
-  revision: 14566e3e435ac0d10ee1f0ab002cfec62fcc561f
+  revision: fbfd541bf327e4e44b9a97ef7a8f45d0ef5fca55
   specs:
     active-fedora (9.0.6)
       active-triples (~> 0.6.0)
@@ -71,17 +71,6 @@ GIT
       rdf-ldp
       rdf-rdfxml (~> 1.1.0)
       rsolr (~> 1.0.10)
-
-GIT
-  remote: git://github.com/projecthydra/hydra-editor.git
-  revision: b96002529928be4738fec01391b72fe1fe6bcb1a
-  branch: master
-  specs:
-    hydra-editor (1.0.2)
-      active-fedora (>= 9.0.0)
-      cancancan (~> 1.8)
-      rails (~> 4.1)
-      simple_form (~> 3.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -243,6 +232,11 @@ GEM
       hydra-access-controls (= 9.1.2)
       jettywrapper (>= 2.0.0)
       rails (~> 4.0)
+    hydra-editor (1.0.2)
+      active-fedora (>= 9.0.0)
+      cancancan (~> 1.8)
+      rails (~> 4.1)
+      simple_form (~> 3.1.0)
     hydra-head (9.1.2)
       hydra-access-controls (= 9.1.2)
       hydra-core (= 9.1.2)
@@ -535,7 +529,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.4)
   handlebars_assets (= 0.20.1)
   hydra-collections (~> 5.0.1)
-  hydra-editor!
+  hydra-editor (~> 1.0.2)
   hydra-head (~> 9.1.1)
   hydra-role-management
   jbuilder (~> 2.0)

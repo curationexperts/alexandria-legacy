@@ -28,7 +28,7 @@ gem 'hydra-head', '~> 9.1.1'
 # https://github.com/projecthydra/active_fedora/pull/747
 gem 'active-fedora', github: 'projecthydra/active_fedora'
 gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: 'dce-ucsb'
-gem 'hydra-editor', github: 'projecthydra/hydra-editor', branch: 'master'
+gem 'hydra-editor', '~> 1.0.2'
 gem 'hydra-role-management'
 gem 'hydra-collections', '~> 5.0.1'
 gem 'rdf-vocab', '~> 0.7.0'
