@@ -24,9 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'hydra-head', '~> 9.1.1'
-# gem 'active-fedora', '~> 9.0.4'
-# https://github.com/projecthydra/active_fedora/pull/747
-gem 'active-fedora', github: 'projecthydra/active_fedora', ref: '14566e3e435ac0d10ee1f0ab002cfec62fcc561f'
+gem 'active-fedora', '~> 9.0.7'
 gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: 'dce-ucsb'
 gem 'hydra-editor', '~> 1.0.2'
 gem 'hydra-role-management'

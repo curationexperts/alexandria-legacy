@@ -56,23 +56,6 @@ GIT
       rails (>= 3.2.13, < 5.0)
       rest-client
 
-GIT
-  remote: git://github.com/projecthydra/active_fedora.git
-  revision: 14566e3e435ac0d10ee1f0ab002cfec62fcc561f
-  ref: 14566e3e435ac0d10ee1f0ab002cfec62fcc561f
-  specs:
-    active-fedora (9.0.6)
-      active-triples (~> 0.6.0)
-      activesupport (>= 4.1.0)
-      deprecation
-      ldp (~> 0.3.0)
-      linkeddata
-      nom-xml (>= 0.5.1)
-      om (~> 3.1)
-      rdf-ldp
-      rdf-rdfxml (~> 1.1.0)
-      rsolr (~> 1.0.10)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -95,6 +78,17 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    active-fedora (9.0.7)
+      active-triples (~> 0.6.0)
+      activesupport (>= 4.1.0)
+      deprecation
+      ldp (~> 0.2.1)
+      linkeddata
+      nom-xml (>= 0.5.1)
+      om (~> 3.1)
+      rdf-ldp
+      rdf-rdfxml (~> 1.1.0)
+      rsolr (~> 1.0.10)
     activefedora-aggregation (0.2.0)
       active-fedora
       activesupport
@@ -264,7 +258,7 @@ GEM
     json (1.8.2)
     json-ld (1.1.8)
       rdf (~> 1.1, >= 1.1.7)
-    ldp (0.3.0)
+    ldp (0.2.3)
       faraday
       http_logger
       linkeddata (>= 1.1)
@@ -511,7 +505,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active-fedora!
+  active-fedora (~> 9.0.7)
   active-triples!
   activefedora-aggregation (~> 0.2.0)
   awesome_print
