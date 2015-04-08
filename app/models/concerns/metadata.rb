@@ -148,6 +148,7 @@ module Metadata
     accepts_nested_attributes_for :license, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :lc_subject, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :form_of_work, reject_if: id_blank, allow_destroy: true
+    accepts_nested_attributes_for :copyright_status, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :notes, reject_if: :all_blank, allow_destroy: true
 
     # dates

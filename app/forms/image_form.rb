@@ -7,7 +7,7 @@ class ImageForm
                 :place_of_publication, :location, :lc_subject, :publisher,
                 :creator, :contributor, :latitude, :longitude, :digital_origin,
                 :sub_location, :use_restrictions, :license, :created, :issued,
-                :date_valid, :date_other, :date_copyrighted ]
+                :date_valid, :date_other, :date_copyrighted, :copyright_status ]
 
   self.required_fields = [] # Required fields
 
@@ -81,7 +81,7 @@ class ImageForm
     end
 
     def self.permitted_time_span_params
-      [ :id, 
+      [ :id,
         :_destroy,
         {
           :start            => [],
@@ -101,6 +101,7 @@ class ImageForm
       permitted.delete(lc_subject: [])
       permitted.delete(form_of_work: [])
       permitted.delete(license: [])
+      permitted.delete(copyright_status: [])
       permitted << { creator_attributes: [:id, :_destroy] }
       permitted << { location_attributes: [:id, :_destroy] }
       permitted << { lc_subject_attributes: [:id, :_destroy] }
@@ -114,6 +115,7 @@ class ImageForm
 
       permitted << { form_of_work_attributes: [:id, :_destroy] }
       permitted << { license_attributes: [:id, :_destroy] }
+      permitted << { copyright_status_attributes: [:id, :_destroy] }
       permitted
     end
 end
