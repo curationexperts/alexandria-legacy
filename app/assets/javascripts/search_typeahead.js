@@ -21,6 +21,7 @@
         'license':          '/qa/search/local/license',
         'copyright_status': '/qa/search/loc/copyrightStatus',
         'language':         '/qa/search/loc/iso639-2',
+        'sub_location': '/qa/search/local/sub_location',
       };
 
       function qaPathForField(input) {
@@ -93,6 +94,7 @@ function addAutocompleteToEditor($field, path) {
 Blacklight.onLoad(function(){
   addAutocompleteToEditor($('input.image_lc_subject:not([readonly])'));
   addAutocompleteToEditor($('input.image_location:not([readonly])'));
+  addAutocompleteToEditor($('input.image_sub_location:not([readonly])'));
   addAutocompleteToEditor($('input.image_form_of_work:not([readonly])'));
   addAutocompleteToEditor($('input.image_license:not([readonly])'));
   addAutocompleteToEditor($('input.image_copyright_status:not([readonly])'));

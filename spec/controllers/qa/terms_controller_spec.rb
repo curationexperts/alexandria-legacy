@@ -9,4 +9,11 @@ describe Qa::TermsController do
       expect(response).to be_success
     end
   end
+
+  describe "sub_location vocabulary" do
+    it "returns terms" do
+      get :search, vocab: 'local', sub_authority: 'sub_location', q: 'ND'
+      expect(response).to be_success
+    end
+  end
 end
