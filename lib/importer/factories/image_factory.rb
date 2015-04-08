@@ -6,7 +6,7 @@ class ImageFactory < ObjectFactory
     Image
   end
 
-  def before_save(image)
+  def after_save(image)
     add_image_to_collection(image, attributes)
   end
 
@@ -47,10 +47,12 @@ class ImageFactory < ObjectFactory
   def add_image_to_collection(image, attrs)
     collection_attrs = attrs[:collection].merge(admin_policy_id: attributes[:admin_policy_id])
     CollectionFactory.new(collection_attrs).run do |coll|
-      image.collections << coll
+      coll.members << image
+      coll.save!
     end
-    # save the image to trigger a reindex with the collection association
-    image.save
+    # reload the collectoin association so we can reindex with the collection
+    image.association(:collections).reload
+    image.update_index
   end
 
 end

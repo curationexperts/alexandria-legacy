@@ -21,8 +21,6 @@ module Importer
       puts "Importing: #{file}"
       parser = ModsParser.new(file)
       create_fedora_objects(parser.model, parser.attributes.merge(admin_policy_id: AdminPolicy::PUBLIC_POLICY_ID))
-    # rescue Oargun::RDF::Controlled::ControlledVocabularyError => e
-    #   puts "  Skipping, due to #{e.message}"
     end
 
     # Select a factory to create the objects in fedora.

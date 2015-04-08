@@ -1,0 +1,38 @@
+<div class="date-time-fields" role="tabpanel">
+
+  <h3>Dates &amp; Times</h3>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#created" aria-controls="created" role="tab" data-toggle="tab">Date Created</a></li>
+    <li role="presentation"><a href="#issued" aria-controls="issued" role="tab" data-toggle="tab">Issued</a></li>
+    <li role="presentation"><a href="#other" aria-controls="other" role="tab" data-toggle="tab">Other</a></li>
+    <li role="presentation"><a href="#copyrighted" aria-controls="copyrighted" role="tab" data-toggle="tab">Copyrighted</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="created">
+      <div class="dateEditor">
+        <%= f.input :created, as: :time_span, wrapper_html: {class: 'time-span form-group', data: {name: :created}}, input_html: { class: 'form-control' }, required: f.object.required?(:created) %>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="issued">
+      <div class="dateEditor">
+        <%= f.input :issued, as: :time_span, wrapper_html: {class: 'time-span form-group', data: {name: :issued}}, input_html: { class: 'form-control' }, required: f.object.required?(:issued) %>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="other">
+      <div class="dateEditor">
+        <%= f.input :date_other, as: :time_span, wrapper_html: {class: 'time-span form-group', data: {name: :date_other}}, input_html: { class: 'form-control' }, required: f.object.required?(:date_other) %>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="copyrighted">
+      <div class="dateEditor">
+        <%= f.input :date_copyrighted, as: :time_span, wrapper_html: {class: 'time-span form-group', data: {name: :date_copyrighted}}, input_html: { class: 'form-control' }, required: f.object.required?(:date_copyrighted) %>
+      </div>
+    </div>
+  </div>
+
+</div>
+

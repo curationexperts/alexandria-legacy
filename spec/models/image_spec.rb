@@ -59,11 +59,33 @@ describe Image do
       end
     end
 
+    context "for date created" do
+      it "should allow blank ids" do
+        subject.save!
+        subject.reload
+
+
+        subject.attributes= {
+          created_attributes: {
+            "0" => {
+              :start => ["2014"]
+            }
+          }
+        }
+
+        subject.save!
+        expect(subject.reload.created.size).to eq(1)
+        expect(subject).to be_valid
+      end
+    end
+
     context "for notes" do
       before do
         subject.notes_attributes=[{:value=>"Title from item."}, {:value=>"Postcard caption: 25. Light-House Tower Sta. Barbara Earth Quake.\n6-29-25."}, {:value=>"[Identification of Item], Santa Barbara picture\npostcards collection. SBHC Mss 36. Department of Special Collections, UC Santa Barbara\nLibrary, University of California, Santa Barbara.", :note_type=>"preferred citation"}]
       end
       it "has notes" do
+        subject.save!
+        subject.reload
         expect(subject.notes.size).to eq 3
       end
     end

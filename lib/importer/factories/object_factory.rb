@@ -19,7 +19,6 @@ class ObjectFactory
 
   def update(obj)
     obj.attributes = transform_attributes.except(:id)
-    before_save(obj)
     obj.save!
     after_save(obj)
     puts "  Updated #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
@@ -27,10 +26,6 @@ class ObjectFactory
 
   # override after_save if you want to put something here.
   def after_save(obj)
-  end
-
-  # override before_save if you want to put something here.
-  def before_save(obj)
   end
 
   # override after_create if you want to put something here.
@@ -50,7 +45,6 @@ class ObjectFactory
     identifier = mint_ark
     attrs.merge!(identifier: [identifier.id], id: identifier.id.split(/\//).last)
     klass.new(attrs) do |obj|
-      before_save(obj)
       obj.save!
       after_create(obj)
       after_save(obj)

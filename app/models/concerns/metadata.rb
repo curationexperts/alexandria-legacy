@@ -97,15 +97,11 @@ module Metadata
     end
 
     # Dates
-    has_and_belongs_to_many :created, predicate: RDF::DC.created, class_name: 'TimeSpan'
-    has_and_belongs_to_many :issued, predicate: RDF::DC.issued, class_name: 'TimeSpan'
-    has_and_belongs_to_many :date_other, predicate: RDF::DC.date, class_name: 'TimeSpan'
-    has_and_belongs_to_many :date_copyrighted, predicate: RDF::DC.dateCopyrighted, class_name: 'TimeSpan'
-    has_and_belongs_to_many :date_valid, predicate: RDF::DC.valid, class_name: 'TimeSpan'
-
-    # property :issued, predicate: RDF::DC.issued do |index|
-    #   index.as :displayable
-    # end
+    has_and_belongs_to_many :created, predicate: RDF::DC.created, class_name: 'TimeSpan', inverse_of: :images
+    has_and_belongs_to_many :issued, predicate: RDF::DC.issued, class_name: 'TimeSpan', inverse_of: :issued_images
+    has_and_belongs_to_many :date_other, predicate: RDF::DC.date, class_name: 'TimeSpan', inverse_of: :date_other_images
+    has_and_belongs_to_many :date_copyrighted, predicate: RDF::DC.dateCopyrighted, class_name: 'TimeSpan', inverse_of: :date_copyrighted_images
+    has_and_belongs_to_many :date_valid, predicate: RDF::DC.valid, class_name: 'TimeSpan', inverse_of: :date_valid_images
 
     # Not tackling these now. No demonstrated need yet.
     # has_and_belongs_to_many :date_accepted, predicate: RDF::DC.dateAccepted, class_name: 'TimeSpan'
@@ -153,17 +149,29 @@ module Metadata
     accepts_nested_attributes_for :lc_subject, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :form_of_work, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :notes, reject_if: :all_blank, allow_destroy: true
-    accepts_nested_attributes_for :created, reject_if: :all_blank, allow_destroy: true
-    accepts_nested_attributes_for :issued, reject_if: :all_blank, allow_destroy: true
-    accepts_nested_attributes_for :date_other, reject_if: :all_blank, allow_destroy: true
-    accepts_nested_attributes_for :date_copyrighted, reject_if: :all_blank, allow_destroy: true
-    accepts_nested_attributes_for :date_valid, reject_if: :all_blank, allow_destroy: true
+
+    # dates
+    accepts_nested_attributes_for :created, reject_if: :time_span_blank, allow_destroy: true
+    accepts_nested_attributes_for :issued, reject_if: :time_span_blank, allow_destroy: true
+    accepts_nested_attributes_for :date_other, reject_if: :time_span_blank, allow_destroy: true
+    accepts_nested_attributes_for :date_copyrighted, reject_if: :time_span_blank, allow_destroy: true
+    accepts_nested_attributes_for :date_valid, reject_if: :time_span_blank, allow_destroy: true
 
     def self.contributor_fields
       RELATIONS.keys
     end
 
     belongs_to :admin_policy, class_name: "Hydra::AdminPolicy", predicate: ActiveFedora::RDF::ProjectHydra.isGovernedBy
+  end
+
+  def time_span_blank(attributes)
+    time_span_attributes.all? do |key|
+      Array(attributes[key]).all?(&:blank?)
+    end
+  end
+
+  def time_span_attributes
+    [:start, :start_qualifier, :finish, :finish_qualifier, :label, :note]
   end
 
   def controlled_properties
