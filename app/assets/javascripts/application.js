@@ -16,5 +16,4 @@
 //
 //= require blacklight/blacklight
 //
-//= require_tree ./templates
 //= require_tree .
