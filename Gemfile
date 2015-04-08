@@ -33,7 +33,11 @@ gem 'hydra-role-management'
 gem 'hydra-collections', '~> 5.0.1'
 gem 'rdf-vocab', '~> 0.7.0'
 gem 'rdf-marmotta', '~> 0.0.8'
-gem 'blacklight', '~> 5.11.2'
+
+# Blacklight 5.11.3 causes a bug on the show collections page.
+# Shouldn't be too hard to work through, but no time now.
+gem 'blacklight', '5.11.2'
+
 gem 'rsolr', '~> 1.0.12'
 gem 'activefedora-aggregation', '~> 0.2.0'
 
