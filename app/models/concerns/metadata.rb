@@ -150,6 +150,7 @@ module Metadata
     accepts_nested_attributes_for :form_of_work, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :copyright_status, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :notes, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :language, reject_if: :all_blank, allow_destroy: true
 
     # dates
     accepts_nested_attributes_for :created, reject_if: :time_span_blank, allow_destroy: true
