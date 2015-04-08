@@ -78,7 +78,7 @@ module Importer
         form_of_work: mods.genre.valueURI.map { |uri| RDF::URI.new(uri) },
         work_type: mods.typeOfResource.map(&:text),
         citation: citation,
-        note: note,
+        notes_attributes: notes,
         record_origin: record_origin,
         description_standard: mods.record_info.descriptionStandard.map(&:text)
       }
@@ -196,7 +196,7 @@ module Importer
       end
     end
 
-    def note
+    def notes
       preferred_citation = 'preferred citation'.freeze
       mods.note.each_with_object([]) do |node, list|
         next if node.attributes.has_key? preferred_citation
