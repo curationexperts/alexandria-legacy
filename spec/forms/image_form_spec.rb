@@ -25,7 +25,6 @@ describe ImageForm do
       expect(subject).to include(form_of_work_attributes: [:id, :_destroy])
       expect(subject).to include(license_attributes: [:id, :_destroy])
       expect(subject).to include(created_attributes: time_span_params)
-      expect(subject).to include(created_attributes: time_span_params)
       expect(subject).to include(issued_attributes: time_span_params)
       expect(subject).to include(date_other_attributes: time_span_params)
       expect(subject).to include(date_valid_attributes: time_span_params)
