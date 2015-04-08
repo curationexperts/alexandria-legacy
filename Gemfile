@@ -51,8 +51,6 @@ gem 'kaminari', github: 'harai/kaminari', branch: 'route_prefix_prototype', ref:
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
 
-gem "handlebars_assets", "0.20.1"
-
 group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-activemodel-mocks'

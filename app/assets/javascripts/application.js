@@ -15,7 +15,6 @@
 //= require turbolinks
 //
 //= require blacklight/blacklight
-//= require handlebars.runtime
 //
 //= require_tree ./templates
 //= require_tree .

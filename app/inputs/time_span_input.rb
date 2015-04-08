@@ -39,7 +39,6 @@ class TimeSpanInput < MultiValueInput
       out = ''
       out << build_components(attribute_name, value, index, options)
       out << hidden_id_field(value, index) unless value.new_record?
-      out << destroy_widget(attribute_name, index)
       out
     end
 
@@ -100,6 +99,12 @@ class TimeSpanInput < MultiValueInput
       out << template.select_tag(field_name, template.options_for_select(time_span_qualifier_options, field_value), {include_blank: true, label: "", class: "select form-control" })
       out << "  </div>"
 
+      # delete checkbox
+      out << "  <div class='col-md-2'>"
+      out << destroy_widget(attribute_name, index)
+      out << "  </div>"
+
+
       out << "</div>" # class=row
 
       out << "<div class='row'>"
@@ -139,11 +144,12 @@ class TimeSpanInput < MultiValueInput
 
     def destroy_widget(attribute_name, index)
       out = ''
+      field_name = destroy_name_for(attribute_name, index)
       out << @builder.check_box(attribute_name,
-                            name: destroy_name_for(attribute_name, index),
+                            name: field_name,
                             id: id_for(attribute_name, index, '_destroy'.freeze),
                             value: "true", data: { destroy: true })
-      out << template.label_tag("Delete", "Delete")
+      out << template.label_tag(field_name, "Remove", class: "remove_time_span")
       out
     end
 
