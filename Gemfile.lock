@@ -306,7 +306,7 @@ GEM
       rails (> 3.2.0)
     orm_adapter (0.5.0)
     pg (0.18.1)
-    qa (0.4.2)
+    qa (0.4.3)
       activerecord-import
       deprecation
       nokogiri (~> 1.6.0)
