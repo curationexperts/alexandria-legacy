@@ -7,6 +7,10 @@ module OptionsHelper
     local_string_options('description_standard')
   end
 
+  def sub_location_options
+    local_string_options('sub_location')
+  end
+
   private
     def local_string_options(field)
       Qa::Authorities::Local.new(field).all.map { |t| t['label'.freeze] }

@@ -15,13 +15,13 @@
       }, options);
 
       var controlledVocabMap = {
-        'form_of_work': '/qa/search/getty/aat',
-        'location':     '/qa/search/loc/names',
-        'lc_subject':   '/qa/search/loc/subjects',
+        'form_of_work':     '/qa/search/getty/aat',
+        'location':         '/qa/search/loc/names',
+        'sub_location':     '/qa/search/local/sub_location',
+        'lc_subject':       '/qa/search/loc/subjects',
         'license':          '/qa/search/local/license',
         'copyright_status': '/qa/search/loc/copyrightStatus',
-        'language':         '/qa/search/loc/iso639-2',
-        'sub_location': '/qa/search/local/sub_location',
+        'language':         '/qa/search/loc/iso639-2'
       };
 
       function qaPathForField(input) {

@@ -10,4 +10,9 @@ describe OptionsHelper do
     subject { helper.description_standard_options }
     it { is_expected.to eq ['aacr', 'rda', 'dacs', 'dcrmg', 'fgdc', 'iso19115', 'local', 'none'] }
   end
+
+  describe "#sub_location_options" do
+    subject { helper.sub_location_options }
+    it { is_expected.to eq ["Department of Special Collections", "Main Library", "Map & Imagery Laboratory"] }
+  end
 end
