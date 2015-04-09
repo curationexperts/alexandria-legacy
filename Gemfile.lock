@@ -46,8 +46,7 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra-labs/questioning_authority.git
-  revision: 467f812e99bb0f618ac7e5774aeb4533ed709b9e
-  branch: log_authority_not_found
+  revision: 967f60e6bff65b672cd7a7c8c96f1bdcff1fda72
   specs:
     qa (0.4.2)
       activerecord-import

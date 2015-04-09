@@ -48,7 +48,7 @@ gem 'blacklight-gallery'
 gem 'riiif', '~> 0.1.0'
 gem 'ezid-client', '~> 1.0'
 #gem 'qa', '~> 0.4.2'
-gem 'qa', github: 'projecthydra-labs/questioning_authority', branch: 'log_authority_not_found'
+gem 'qa', github: 'projecthydra-labs/questioning_authority'
 
 gem 'kaminari', github: 'harai/kaminari', branch: 'route_prefix_prototype', ref: '384fcb5d11b6'
 
