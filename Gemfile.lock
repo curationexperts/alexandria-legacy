@@ -45,17 +45,6 @@ GIT
       sparql-client
 
 GIT
-  remote: git://github.com/projecthydra-labs/questioning_authority.git
-  revision: 967f60e6bff65b672cd7a7c8c96f1bdcff1fda72
-  specs:
-    qa (0.4.2)
-      activerecord-import
-      deprecation
-      nokogiri (~> 1.6.0)
-      rails (>= 3.2.13, < 5.0)
-      rest-client
-
-GIT
   remote: git://github.com/projecthydra/active_fedora.git
   revision: adcb8dbf3b6e59e8ab3aa9065b36a40876e201db
   branch: fix_inverse_of_has_many
@@ -317,6 +306,12 @@ GEM
       rails (> 3.2.0)
     orm_adapter (0.5.0)
     pg (0.18.1)
+    qa (0.4.2)
+      activerecord-import
+      deprecation
+      nokogiri (~> 1.6.0)
+      rails (>= 3.2.13, < 5.0)
+      rest-client
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -534,7 +529,7 @@ DEPENDENCIES
   mods (~> 2.0.3)
   oargun!
   pg
-  qa!
+  qa (~> 0.4.2)
   rails (= 4.2.1)
   rdf-marmotta (~> 0.0.8)
   rdf-vocab (~> 0.7.0)
