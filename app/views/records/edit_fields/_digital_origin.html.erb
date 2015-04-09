@@ -1,3 +1,4 @@
 <%= f.input key, as: :multi_value_select, collection: digital_origin_options,
-  input_html: { class: 'form-control' }, multiple: 'true', required: f.object.required?(key) %>
+  input_html: { class: 'form-control' }, multiple: 'true', include_blank: true,
+  required: f.object.required?(key) %>
 
