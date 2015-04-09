@@ -47,7 +47,8 @@ gem 'linked_vocabs', github: 'no-reply/linked_vocabs' # Waiting on 0.3.0
 gem 'blacklight-gallery'
 gem 'riiif', '~> 0.1.0'
 gem 'ezid-client', '~> 1.0'
-gem 'qa', '~> 0.4.2'
+# This stuff is pre 0.5.0
+gem 'qa', github: 'projecthydra-labs/questioning_authority', branch: 'sub_authorities_to_classes'
 
 gem 'kaminari', github: 'harai/kaminari', branch: 'route_prefix_prototype', ref: '384fcb5d11b6'
 

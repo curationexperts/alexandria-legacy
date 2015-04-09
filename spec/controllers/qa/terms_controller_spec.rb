@@ -19,12 +19,13 @@ describe Qa::TermsController do
 
   describe "local names" do
     before do
-      Agent.create(foaf_name: 'Frodo Baggins')
+      Agent.create(id: 'fr0d0', foaf_name: 'Frodo Baggins')
     end
 
     it "returns terms" do
       get :search, vocab: 'local', sub_authority: 'names', q: 'Baggins'
       expect(response).to be_success
+      expect(response.body).to eq "[{\"id\":\"http://localhost:8983/fedora/rest/test/fr0d0\",\"label\":\"Frodo Baggins\"}]"
     end
   end
 end
