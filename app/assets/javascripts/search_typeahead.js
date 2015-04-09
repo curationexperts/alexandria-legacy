@@ -75,7 +75,6 @@ function lockControlledVocabularyFields(input) {
 
 function addAnotherField(input) {
   input.closest('.form-group').find('.add').click();
-  addAutocompleteToEditor($("[data-attribute="+input.data('attribute')+"]:not([readonly])"));
 }
 
 function addAutocompleteToEditor($field, path) {
