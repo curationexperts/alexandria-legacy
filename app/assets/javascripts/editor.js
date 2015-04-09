@@ -13,14 +13,18 @@
         var that = this;
         var basic_manager = new HydraEditor.FieldManager(element, options);
         basic_manager.createNewField = function($activeField) {
-              var new_index = $activeField.siblings().size() + 1;
-              // TODO it's always subject
-              $newField = $(template({ "name": "lc_subject", "index": new_index }));
+              var fieldName = $activeField.find('input').data('attribute');
+              var index = $activeField.siblings().size() + 1;
+              $newField = $(template({ "name": fieldName, "index": index }));
+              this.addBehaviorsToInput($newField)
+              return $newField
+        };
+
+        basic_manager.addBehaviorsToInput = function($newField) {
               $newInput = $('input.multi-text-field', $newField);
               $newInput.focus();
               addAutocompleteToEditor($newInput);
               this.element.trigger("managed_field:add", $newInput);
-              return $newField
         };
 
         // Instead of removing the line, we override this method to add a
