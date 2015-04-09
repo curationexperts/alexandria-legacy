@@ -44,6 +44,7 @@ describe ImageForm do
       expect(subject).to include(alternative: [])
       expect(subject).to include(latitude: [])
       expect(subject).to include(longitude: [])
+      expect(subject).to include(description_standard: [])
     end
   end
 

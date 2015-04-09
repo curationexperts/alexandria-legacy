@@ -8,7 +8,7 @@ class ImageForm
                 :creator, :contributor, :latitude, :longitude, :digital_origin,
                 :sub_location, :use_restrictions, :license, :created, :issued,
                 :date_valid, :date_other, :date_copyrighted, :copyright_status,
-                :language]
+                :language, :description_standard]
 
   self.required_fields = [] # Required fields
 
