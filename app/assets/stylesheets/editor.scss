@@ -9,8 +9,10 @@
   }
 }
 
-input.string {
-  max-width: 40em;
+select, input {
+  &.form-control {
+    max-width: 40em;
+  }
 }
 
 .debug {
