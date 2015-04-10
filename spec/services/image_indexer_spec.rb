@@ -148,8 +148,10 @@ describe ImageIndexer do
     let(:image) { Image.new(rights_holder: [valerie_uri, regents_uri]) }
 
     it 'indexes with a label' do
-      expect(subject['rights_holder_ssim']).to eq [valerie_uri, regents_uri]
-      expect(subject['rights_holder_label_tesim']).to eq ['Valerie', 'University of California (System). Regents']
+      VCR.use_cassette('rights_holder') do
+        expect(subject['rights_holder_ssim']).to eq [valerie_uri, regents_uri]
+        expect(subject['rights_holder_label_tesim']).to eq ['Valerie', 'University of California (System). Regents']
+      end
     end
   end
 
@@ -160,8 +162,10 @@ describe ImageIndexer do
     let(:image) { Image.new(license: [pd_uri, by_uri, edu_uri]) }
 
     it 'indexes with a label' do
-      expect(subject['license_tesim']).to eq [pd_uri.to_s, by_uri.to_s, edu_uri.to_s]
-      expect(subject['license_label_tesim']).to eq ["Public Domain Mark 1.0", "Attribution 4.0 International", "Educational Use Permitted"]
+      VCR.use_cassette('creative_commons') do
+        expect(subject['license_tesim']).to eq [pd_uri.to_s, by_uri.to_s, edu_uri.to_s]
+        expect(subject['license_label_tesim']).to eq ["Public Domain Mark 1.0", "Attribution 4.0 International", "Educational Use Permitted"]
+      end
     end
   end
 
@@ -173,8 +177,10 @@ describe ImageIndexer do
     let(:image) { Image.new(copyright_status: [public_domain_uri, copyright_uri, unknown_uri]) }
 
     it 'indexes with a label' do
-      expect(subject['copyright_status_tesim']).to eq [public_domain_uri, copyright_uri, unknown_uri]
-      expect(subject['copyright_status_label_tesim']).to eq ["public domain", "copyrighted", "unknown"]
+      VCR.use_cassette('copyright_status') do
+        expect(subject['copyright_status_tesim']).to eq [public_domain_uri, copyright_uri, unknown_uri]
+        expect(subject['copyright_status_label_tesim']).to eq ["public domain", "copyrighted", "unknown"]
+      end
     end
   end
 
@@ -215,8 +221,10 @@ describe ImageIndexer do
     let(:image) { Image.new(lc_subject: lc_subject) }
 
     it "should have a subject" do
-      expect(subject['lc_subject_tesim']).to eq ['http://id.loc.gov/authorities/subjects/sh85062487']
-      expect(subject['lc_subject_label_tesim']).to eq ['Hotels']
+      VCR.use_cassette('lc_subject_hotels') do
+        expect(subject['lc_subject_tesim']).to eq ['http://id.loc.gov/authorities/subjects/sh85062487']
+        expect(subject['lc_subject_label_tesim']).to eq ['Hotels']
+      end
     end
   end
 
@@ -228,15 +236,19 @@ describe ImageIndexer do
     let(:image) { Image.new(creator: creator, singer: singer, photographer: photographer) }
 
     it "should have a creator" do
-      expect(subject['creator_tesim']).to eq ['http://id.loc.gov/authorities/names/n87914041']
-      expect(subject['creator_label_tesim']).to eq ["American Film Manufacturing Company"]
-      expect(subject['creator_label_si']).to eq "American Film Manufacturing Company"
+      VCR.use_cassette('lc_names_american_film') do
+        expect(subject['creator_tesim']).to eq ['http://id.loc.gov/authorities/names/n87914041']
+        expect(subject['creator_label_tesim']).to eq ["American Film Manufacturing Company"]
+        expect(subject['creator_label_si']).to eq "American Film Manufacturing Company"
+      end
     end
 
     it "has contributors" do
-      expect(subject['contributor_label_tesim']).to eq ["American Film Manufacturing Company", "Valerie", "Haggard, Merle"]
-      expect(subject['photographer_label_tesim']).to eq ["Valerie"]
-      expect(subject['singer_label_tesim']).to eq ["Haggard, Merle"]
+      VCR.use_cassette('lc_names_american_film') do
+        expect(subject['contributor_label_tesim']).to eq ["American Film Manufacturing Company", "Valerie", "Haggard, Merle"]
+        expect(subject['photographer_label_tesim']).to eq ["Valerie"]
+        expect(subject['singer_label_tesim']).to eq ["Haggard, Merle"]
+      end
     end
   end
 
