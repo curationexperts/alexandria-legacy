@@ -72,7 +72,9 @@ describe Importer::ModsImporter do
         expect(coll.members.count).to eq 0
 
         expect {
-          importer.import(file)
+          VCR.use_cassette('ezid') do
+            importer.import(file)
+          end
         }.to change { Collection.count }.by(0)
 
         expect(coll.reload.members.count).to eq 1
@@ -86,7 +88,9 @@ describe Importer::ModsImporter do
     it 'creates a collection' do
       coll = nil
       expect {
-        coll = importer.import(file)
+        VCR.use_cassette('ezid') do
+          coll = importer.import(file)
+        end
       }.to change { Collection.count }.by(1).and change {
                     Person.count }.by(1)
 
@@ -122,7 +126,9 @@ describe Importer::ModsImporter do
       it "doesn't create another person" do
         coll = nil
         expect {
-          coll = importer.import(file)
+          VCR.use_cassette('ezid') do
+            coll = importer.import(file)
+          end
         }.to change { Collection.count }.by(1).and change {
                       Person.count }.by(0)
 
@@ -150,7 +156,9 @@ describe Importer::ModsImporter do
 
       it 'finds or creates the rights holders' do
         expect {
-          coll = importer.import(file)
+          VCR.use_cassette('ezid') do
+            coll = importer.import(file)
+          end
         }.to change { Agent.exact_model.count }.by(1)
 
         rights_holders = Agent.exact_model

@@ -71,6 +71,8 @@ end
 
 group :test do
   gem 'timecop', '0.7.3'
+  gem 'webmock', require: false
+  gem 'vcr'
 end
 
 group :development do

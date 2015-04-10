@@ -21,7 +21,9 @@ describe ImageFactory do
     it "should not create a new collection" do
       expect(coll.members.count).to eq 0
       expect {
-        factory.run
+        VCR.use_cassette('ezid') do
+          factory.run
+        end
       }.to change { Collection.count }.by(0)
       expect(coll.reload.members.count).to eq 1
     end
