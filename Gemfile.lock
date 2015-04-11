@@ -73,6 +73,17 @@ GIT
       rdf-rdfxml (~> 1.1.0)
       rsolr (~> 1.0.10)
 
+GIT
+  remote: git://github.com/projecthydra/hydra-editor.git
+  revision: ee107308dd6b66fa37f33d4e8d45426c61405aa9
+  branch: refactor_for_reuse
+  specs:
+    hydra-editor (1.0.3)
+      active-fedora (>= 9.0.0)
+      cancancan (~> 1.8)
+      rails (~> 4.1)
+      simple_form (~> 3.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -231,11 +242,6 @@ GEM
       hydra-access-controls (= 9.1.1)
       jettywrapper (>= 2.0.0)
       rails (~> 4.0)
-    hydra-editor (1.0.3)
-      active-fedora (>= 9.0.0)
-      cancancan (~> 1.8)
-      rails (~> 4.1)
-      simple_form (~> 3.1.0)
     hydra-head (9.1.1)
       hydra-access-controls (= 9.1.1)
       hydra-core (= 9.1.1)
@@ -532,7 +538,7 @@ DEPENDENCIES
   ezid-client (~> 1.0)
   factory_girl_rails (~> 4.4)
   hydra-collections (~> 5.0.1)
-  hydra-editor (~> 1.0.3)
+  hydra-editor!
   hydra-head (= 9.1.1)
   hydra-role-management
   jbuilder (~> 2.0)

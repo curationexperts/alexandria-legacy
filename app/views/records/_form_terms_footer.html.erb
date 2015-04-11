@@ -13,22 +13,22 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="created">
-      <div class="dateEditor">
+      <div class="date-editor">
         <%= f.input :created, as: :time_span, wrapper_html: {class: 'time-span form-group', data: {name: :created}}, input_html: { class: 'form-control' }, required: f.object.required?(:created) %>
       </div>
     </div>
     <div role="tabpanel" class="tab-pane" id="issued">
-      <div class="dateEditor">
+      <div class="date-editor">
         <%= f.input :issued, as: :time_span, wrapper_html: {class: 'time-span form-group', data: {name: :issued}}, input_html: { class: 'form-control' }, required: f.object.required?(:issued) %>
       </div>
     </div>
     <div role="tabpanel" class="tab-pane" id="other">
-      <div class="dateEditor">
+      <div class="date-editor">
         <%= f.input :date_other, as: :time_span, wrapper_html: {class: 'time-span form-group', data: {name: :date_other}}, input_html: { class: 'form-control' }, required: f.object.required?(:date_other) %>
       </div>
     </div>
     <div role="tabpanel" class="tab-pane" id="copyrighted">
-      <div class="dateEditor">
+      <div class="date-editor">
         <%= f.input :date_copyrighted, as: :time_span, wrapper_html: {class: 'time-span form-group', data: {name: :date_copyrighted}}, input_html: { class: 'form-control' }, required: f.object.required?(:date_copyrighted) %>
       </div>
     </div>

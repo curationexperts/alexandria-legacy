@@ -2,6 +2,10 @@
   @extend .multi_value;
 }
 
+.controlled_vocabulary_select {
+  @extend .multi_value;
+}
+
 .multi_value_readonly {
   @extend .multi_value;
   .listing > li {
@@ -27,6 +31,9 @@ label.remove_time_span {
   margin-left: 1em;
 }
 
-.dateEditor .form-group div ul.listing li {
-  list-style-type: none;
+.date-editor {
+  .form-group div ul.listing li {
+    list-style-type: none;
+  }
 }
+
