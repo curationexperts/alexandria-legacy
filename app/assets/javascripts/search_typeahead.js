@@ -87,13 +87,14 @@ function switchControlledVocabularyFields(input) {
     var target = $('#'+input.data('target'));
     target.typeahead('val', '');
     target.typeahead("destroy");
-    addAutocompleteToEditor(target, { searchPath: searchUris[input.val()] });
+    target.alexandriaSearchTypeAhead({ searchPath: searchUris[input.val()] })
 }
 
 function addAnotherField(input) {
   input.closest('.form-group').find('.add').click();
 }
 
+/* Only call this once per field or the bindings' callbacks will be run more than once */
 function addAutocompleteToEditor($field, options) {
     $field.alexandriaSearchTypeAhead(options).on(
         'typeahead:selected typeahead:autocompleted', function(e, data) {
