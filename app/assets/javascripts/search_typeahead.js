@@ -24,6 +24,25 @@ var searchUris = {
     return defaultSearchForField[fieldName];
   }
 
+  function initBloodhound(path) {
+    var results = new Bloodhound({
+      datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.title); },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      limit: 10,
+      remote: {
+        url: path + '?q=%QUERY',
+        filter: function(response) {
+          return $.map(response, function(doc) {
+            return doc;
+          })
+        }
+      }
+    });
+    results.initialize();
+    return results;
+  }
+
+
   $.fn.alexandriaSearchTypeAhead = function( options ) {
     $.each(this, function(){
         options = $.extend({ searchPath: qaPathForField($(this)) }, options);
@@ -54,24 +73,6 @@ var searchUris = {
   }
 })( jQuery );
 
-
-function initBloodhound(path) {
-  var results = new Bloodhound({
-    datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.title); },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    limit: 10,
-    remote: {
-      url: path + '?q=%QUERY',
-      filter: function(response) {
-        return $.map(response, function(doc) {
-          return doc;
-        })
-      }
-    }
-  });
-  results.initialize();
-  return results;
-}
 
 function storeControlledVocabularyData(input, data) {
     uri = data['id'].replace("info:lc", "http://id.loc.gov");
