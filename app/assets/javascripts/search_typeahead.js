@@ -83,13 +83,6 @@ function lockControlledVocabularyFields(input) {
    input.attr("readonly", "readonly");
 }
 
-function switchControlledVocabularyFields(input) {
-    var target = $('#'+input.data('target'));
-    target.typeahead('val', '');
-    target.typeahead("destroy");
-    target.alexandriaSearchTypeAhead({ searchPath: searchUris[input.val()] })
-}
-
 function addAnotherField(input) {
   input.closest('.form-group').find('.add').click();
 }
@@ -116,11 +109,6 @@ Blacklight.onLoad(function(){
   addAutocompleteToEditor($('input.image_license:not([readonly])'));
   addAutocompleteToEditor($('input.image_copyright_status:not([readonly])'));
   addAutocompleteToEditor($('input.image_language:not([readonly])'));
-
-  $('[data-behavior=change-vocabulary]').on('change', function() {
-    switchControlledVocabularyFields($(this));
-  });
-
 
 });
 

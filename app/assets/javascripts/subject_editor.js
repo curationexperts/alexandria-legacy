@@ -2,7 +2,10 @@
 var subject_manager_fields = "<input class=\"string {{class}} optional form-control image_{{name}} form-control multi-text-field\" name=\"image[{{name}}_attributes][{{index}}][hidden_label]\" value=\"\" id=\"image_{{name}}_attributes_{{index}}_hidden_label\" data-attribute=\"{{name}}\" type=\"text\">" +
   "<input name=\"image[{{name}}_attributes][{{index}}][id]\" value=\"\" id=\"image_{{name}}_attributes_{{index}}_id\" type=\"hidden\" data-id=\"remote\">" +
   "<input name=\"image[{{name}}_attributes][{{index}}][_destroy]\" id=\"image_{{name}}_attributes_{{index}}__destroy\" value=\"\" data-destroy=\"true\" type=\"hidden\"><span class=\"input-group-btn field-controls\"><button class=\"btn btn-success add\"><i class=\"icon-white glyphicon-plus\"></i><span>Add</span></button></span>";
-var select_manager_select = "<select name=\"vocab\" id=\"vocab\" class=\"form-control\"><option value=\"lcsh\">LC Subject Headings</option><option value=\"tgm\">Graphic Materials</option></select>"
+
+/* TODo need target and behavior */
+var select_manager_select = "<select name=\"vocab\" id=\"vocab\" class=\"form-control\" data-behavior=\"change-vocabulary\" data-target=\"image_{{name}}_attributes_{{index}}_hidden_label\">" +
+  "<option value=\"lcsh\">LC Subject Headings</option><option value=\"lcnames\">LC Names</option><option value=\"tgm\">Graphic Materials</option></select>"
 
 var subject_manager_wrapper = "<li class=\"field-wrapper row\">"+
   "<div class=\"col-md-4\">"+select_manager_select+"</div>" +
@@ -11,40 +14,91 @@ var subject_manager_wrapper = "<li class=\"field-wrapper row\">"+
   "</li>";
 
 var subject_manager_template = Handlebars.compile(subject_manager_wrapper);
+
 function SubjectManager(element, options) {
+    this.fieldName = options.fieldName;
     ControlledVocabFieldManager.call(this, element, options);
 }
 
 SubjectManager.prototype = Object.create(ControlledVocabFieldManager.prototype, {
-    /* TODO hook up other vocabs */
-    _addInitialClasses: { value: function () {
-          this.element.addClass("managed");
+    _addInitialClasses: {
+        value: function () {
+            this.element.addClass("managed");
+            $(this.fieldWrapperClass, this.element).addClass("input-group input-append");
     }},
 
+    /* This gives the index for the editor */
+    maxIndex: {
+        value: function() {
+            return $(this.fieldWrapperClass, this.element).size();
+    }},
+
+    editorTemplate: {
+        value: function() {
+            return $(subject_manager_template({ "name": this.fieldName, "index": this.maxIndex(), "class": "controlled_vocabulary_select" }));
+
+    }},
+
+    displayEditor: {
+        value: function() {
+            var tmpl = this.editorTemplate();
+            $(this.listClass, this.element).append(tmpl);
+            this.addBehaviorsToInput(tmpl);
+            _this = this;
+            $('select', tmpl).on('change', function() {
+                _this.switchControlledVocabularyFields($(this));
+            });
+    }},
+
+    switchControlledVocabularyFields: {
+        value: function(input) {
+            var target = $('#'+input.data('target'));
+            target.typeahead('val', '');
+            target.typeahead("destroy");
+            target.alexandriaSearchTypeAhead({ searchPath: searchUris[input.val()] });
+
+    }},
+
+    addToExisting: {
+        value: function($editor) {
+            this._changeControlsToRemove($editor);
+            var elements = $('.input-group-append > *', $editor).detach();
+            $editor.addClass('input-group input-append').removeClass('row')
+            $editor.empty();
+            $editor.append(elements);
+    }},
+
+    /* Overriding this to clear out the select options */
+    addToList: {
+        value: function(event) {
+            event.preventDefault();
+            var $activeField = $(event.target).parents(this.fieldWrapperClass)
+
+            if (this.inputIsEmpty($activeField)) {
+                this.displayEmptyWarning();
+            } else {
+                this.clearEmptyWarning();
+                this.addToExisting($activeField);
+                this.displayEditor();
+            }
+    }},
+
+    /* Override so that all controls are just remove and wrapped in a col-md-8 */
     _appendControls: {
         value: function() {
-            $.each($(this.fieldWrapperClass + ' .col-md-8', this.element), function() {
-                wrapper = "<div class=\"input-group input-group-append\"></div>"
-                $(this).children().wrapAll(wrapper);
-            });
-            $(this.fieldWrapperClass + ' .input-group-append', this.element).append(this.controls);
-            $('.field-controls:not(:last)', this.element).append(this.remover);
-            $('.field-controls:last', this.element).append(this.adder);
+            $(this.fieldWrapperClass, this.element).append(this.controls);
+            $('.field-controls', this.element).append(this.remover);
+            this.displayEditor();
         }
     },
 
-    _changeControlsToRemove: { value: function($activeField) {
-          var $removeControl = this.remover.clone();
-          $activeFieldControls = $('.field-controls', $activeField);
-          $('.add', $activeFieldControls).remove();
-          $activeFieldControls.prepend($removeControl);
+    _changeControlsToRemove: {
+        value: function($activeField) {
+            var $removeControl = this.remover.clone();
+            $activeFieldControls = $('.field-controls', $activeField);
+            $('.add', $activeFieldControls).remove();
+            $activeFieldControls.prepend($removeControl);
     }},
-
-    newFieldTemplate: {
-        value: function(fieldName, index) {
-            return $(subject_manager_template({ "name": fieldName, "index": index, "class": "controlled_vocabulary_select" }));
-        }
-    },
 })
 
 SubjectManager.prototype.constructor = SubjectManager;
@@ -60,7 +114,7 @@ $.fn.manage_subject_fields = function(option) {
 }
 
 Blacklight.onLoad(function() {
-  $('.controlled_vocabulary_select.form-group').manage_subject_fields();
+  $('.controlled_vocabulary_select.form-group').manage_subject_fields({ fieldName: 'lc_subject' });
 });
 
 

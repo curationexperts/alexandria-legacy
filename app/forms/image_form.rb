@@ -34,6 +34,7 @@ class ImageForm
 
     # Refactor this to call super when this PR is merged: https://github.com/projecthydra-labs/hydra-editor/pull/60
     def initialize_field(key)
+      return if [:lc_subject].include?(key)
       if reflection = model_class.reflect_on_association(key)
         if reflection.collection?
           association = model.send(key)

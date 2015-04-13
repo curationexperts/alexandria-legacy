@@ -70,4 +70,8 @@ class ControlledVocabularyInput < MultiValueInput
     def id_for(attribute_name, index, field)
       [@builder.object_name, "#{attribute_name}_attributes", index, field].join('_'.freeze)
     end
+
+    def collection
+      @collection ||= Array.wrap(object[attribute_name]).reject { |value| value.to_s.strip.blank? }
+    end
 end

@@ -93,4 +93,19 @@ describe ImageForm do
       end
     end
   end
+
+  describe "initialize_field" do
+    let(:form) { described_class.new(model) }
+    let(:model) { Image.new(attributes) }
+    subject { form.initialize_field(field) }
+
+    context "for lc_subject" do
+      let(:attributes) { {lc_subject: ['one']} }
+      let(:field) { :lc_subject }
+
+      it "should not add anything to lc_subject" do
+        expect(form.lc_subject).to eq ['one']
+      end
+    end
+  end
 end

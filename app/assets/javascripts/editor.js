@@ -14,28 +14,28 @@ function ControlledVocabFieldManager(element, options) {
 
 ControlledVocabFieldManager.prototype = Object.create(HydraEditor.FieldManager.prototype,
     {
-      createNewField: { value: function($activeField) {
-              var fieldName = $activeField.find('input').data('attribute');
-              var index = $activeField.siblings().size() + 1;
-              $newField = this.newFieldTemplate(fieldName, index);
-              this.addBehaviorsToInput($newField)
-              return $newField
+        createNewField: { value: function($activeField) {
+            var fieldName = $activeField.find('input').data('attribute');
+            $newField = this.newFieldTemplate(fieldName);
+            this.addBehaviorsToInput($newField)
+            return $newField
         }},
 
-        newFieldTemplate: function(fieldName, index) {
+        newFieldTemplate: function(fieldName) {
+            var index = $activeField.siblings().size() + 1;
             return $(template({ "name": fieldName, "index": index, "class": "controlled_vocabulary" }));
         },
 
         addBehaviorsToInput: { value: function($newField) {
-              $newInput = $('input.multi-text-field', $newField);
-              $newInput.focus();
-              addAutocompleteToEditor($newInput);
-              this.element.trigger("managed_field:add", $newInput);
+            $newInput = $('input.multi-text-field', $newField);
+            $newInput.focus();
+            addAutocompleteToEditor($newInput);
+            this.element.trigger("managed_field:add", $newInput);
         }},
 
         // Instead of removing the line, we override this method to add a
         // '_destroy' hidden parameter
-      removeFromList: { value: function( event ) {
+        removeFromList: { value: function( event ) {
             event.preventDefault();
             var field = $(event.target).parents(this.fieldWrapperClass);
             field.find('[data-destroy]').val('true')
