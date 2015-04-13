@@ -1,10 +1,33 @@
 //= require typeahead.bundle.js
 // require handlebars-v1.3.0.js
+//
+var searchUris = {
+  'lcnames': '/qa/search/loc/names',
+  'lcsh':    '/qa/search/loc/subjects',
+  'tgm':     '/qa/search/loc/graphicMaterials',
+};
+
 
 (function($){
+  var defaultSearchForField = {
+    'form_of_work':     '/qa/search/getty/aat',
+    'location':         searchUris['lcnames'],
+    'sub_location':     '/qa/search/local/sub_location',
+    'lc_subject':       searchUris['lcsh'],
+    'license':          '/qa/search/local/license',
+    'copyright_status': '/qa/search/loc/copyrightStatus',
+    'language':         '/qa/search/loc/iso639-2'
+  };
+
+  function qaPathForField(input) {
+    fieldName = input.data('attribute');
+    return defaultSearchForField[fieldName];
+  }
+
   $.fn.alexandriaSearchTypeAhead = function( options ) {
     $.each(this, function(){
-      addAutocompleteBehavior($(this), options);
+        options = $.extend({ searchPath: qaPathForField($(this)) }, options);
+        addAutocompleteBehavior($(this), options);
     });
 
     function addAutocompleteBehavior( typeAheadInput, settings ) {
@@ -12,28 +35,13 @@
         highlight: (typeAheadInput.data('autocomplete-highlight') || true),
         hint: (typeAheadInput.data('autocomplete-hint') || false),
         autoselect: (typeAheadInput.data('autocomplete-autoselect') || true)
-      }, options);
-
-      var controlledVocabMap = {
-        'form_of_work':     '/qa/search/getty/aat',
-        'location':         '/qa/search/loc/names',
-        'sub_location':     '/qa/search/local/sub_location',
-        'lc_subject':       '/qa/search/loc/subjects',
-        'license':          '/qa/search/local/license',
-        'copyright_status': '/qa/search/loc/copyrightStatus',
-        'language':         '/qa/search/loc/iso639-2'
-      };
-
-      function qaPathForField(input) {
-        fieldName = input.data('attribute');
-        return controlledVocabMap[fieldName];
-      }
+      }, settings);
 
       var results;
       if (settings.bloodhound) {
         results = settings.bloodhound();
       } else {
-        results = initBloodhound(qaPathForField(typeAheadInput));
+        results = initBloodhound(settings.searchPath);
       }
 
       typeAheadInput.typeahead(settings, {
@@ -45,6 +53,7 @@
     return this;
   }
 })( jQuery );
+
 
 function initBloodhound(path) {
   var results = new Bloodhound({
@@ -74,12 +83,19 @@ function lockControlledVocabularyFields(input) {
    input.attr("readonly", "readonly");
 }
 
+function switchControlledVocabularyFields(input) {
+    var target = $('#'+input.data('target'));
+    target.typeahead('val', '');
+    target.typeahead("destroy");
+    addAutocompleteToEditor(target, { searchPath: searchUris[input.val()] });
+}
+
 function addAnotherField(input) {
   input.closest('.form-group').find('.add').click();
 }
 
-function addAutocompleteToEditor($field, path) {
-    $field.alexandriaSearchTypeAhead().on(
+function addAutocompleteToEditor($field, options) {
+    $field.alexandriaSearchTypeAhead(options).on(
         'typeahead:selected typeahead:autocompleted', function(e, data) {
             storeControlledVocabularyData($(this), data);
             lockControlledVocabularyFields($(this));
@@ -99,5 +115,11 @@ Blacklight.onLoad(function(){
   addAutocompleteToEditor($('input.image_license:not([readonly])'));
   addAutocompleteToEditor($('input.image_copyright_status:not([readonly])'));
   addAutocompleteToEditor($('input.image_language:not([readonly])'));
+
+  $('[data-behavior=change-vocabulary]').on('change', function() {
+    switchControlledVocabularyFields($(this));
+  });
+
+
 });
 

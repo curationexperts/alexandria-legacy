@@ -14,7 +14,7 @@ class ControlledVocabularyInput < MultiValueInput
       if value.respond_to? :rdf_label
         options[:name] = name_for(attribute_name, index, 'hidden_label'.freeze)
         options[:data] = { attribute: attribute_name }
-        options[:id] = id_for(attribute_name, index, 'hidden_label'.freeze)
+        options[:id] = id_for_hidden_label(index)
         if value.node?
           build_options_for_new_row(attribute_name, index, options)
         else
@@ -34,6 +34,10 @@ class ControlledVocabularyInput < MultiValueInput
         @builder.text_field(attribute_name, options)
       end
       text_field + hidden_id_field(value, index) + destroy_widget(attribute_name, index)
+    end
+
+    def id_for_hidden_label(index)
+      id_for(attribute_name, index, 'hidden_label'.freeze)
     end
 
     def destroy_widget(attribute_name, index)
