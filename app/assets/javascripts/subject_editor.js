@@ -3,9 +3,7 @@ var subject_manager_fields = "<input class=\"string {{class}} optional form-cont
   "<input name=\"image[{{name}}_attributes][{{index}}][id]\" value=\"\" id=\"image_{{name}}_attributes_{{index}}_id\" type=\"hidden\" data-id=\"remote\">" +
   "<input name=\"image[{{name}}_attributes][{{index}}][_destroy]\" id=\"image_{{name}}_attributes_{{index}}__destroy\" value=\"\" data-destroy=\"true\" type=\"hidden\"><span class=\"input-group-btn field-controls\"><button class=\"btn btn-success add\"><i class=\"icon-white glyphicon-plus\"></i><span>Add</span></button></span>";
 
-/* TODo need target and behavior */
-var select_manager_select = "<select name=\"vocab\" id=\"vocab\" class=\"form-control\" data-behavior=\"change-vocabulary\" data-target=\"image_{{name}}_attributes_{{index}}_hidden_label\">" +
-  "<option value=\"lcsh\">LC Subject Headings</option><option value=\"lcnames\">LC Names</option><option value=\"tgm\">Graphic Materials</option></select>"
+var select_manager_select = "<select name=\"vocab\" id=\"vocab\" class=\"form-control\" data-behavior=\"change-vocabulary\" data-target=\"image_{{name}}_attributes_{{index}}_hidden_label\">{{optionsForSelect}}</select>"
 
 var subject_manager_wrapper = "<li class=\"field-wrapper row\">"+
   "<div class=\"col-md-4\">"+select_manager_select+"</div>" +
@@ -19,6 +17,15 @@ function SubjectManager(element, options) {
     this.fieldName = options.fieldName;
     ControlledVocabFieldManager.call(this, element, options);
 }
+
+var label_for = {
+    lcnames: "LC Names",
+    lcsh: "LC Subject Headings",
+    tgm: "Graphic Materials",
+    aat: "Art & Architecture Thesaurus",
+    local_names: 'Local Names',
+    local_subjects: 'Local Subjects'
+};
 
 SubjectManager.prototype = Object.create(ControlledVocabFieldManager.prototype, {
     _addInitialClasses: {
@@ -35,8 +42,16 @@ SubjectManager.prototype = Object.create(ControlledVocabFieldManager.prototype, 
 
     editorTemplate: {
         value: function() {
-            return $(subject_manager_template({ "name": this.fieldName, "index": this.maxIndex(), "class": "controlled_vocabulary_select" }));
+            return $(subject_manager_template({ "name": this.fieldName, "index": this.maxIndex(), "class": "controlled_vocabulary_select", "optionsForSelect": this.buildOptions() }));
 
+    }},
+
+    buildOptions: {
+        value: function() {
+            buff = $.map(this.options.vocabularies, function (key) {
+              return "<option value=\"" + key + "\">" + label_for[key] + "</option>";
+            }).join('');
+            return new Handlebars.SafeString(buff);
     }},
 
     displayEditor: {
@@ -114,7 +129,8 @@ $.fn.manage_subject_fields = function(option) {
 }
 
 Blacklight.onLoad(function() {
-  $('.controlled_vocabulary_select.form-group').manage_subject_fields({ fieldName: 'lc_subject' });
+  $('.form-group.image_lc_subject').manage_subject_fields({ fieldName: 'lc_subject', vocabularies: ['lcnames', 'lcsh', 'tgm', 'local_subjects', 'local_names'] });
+  $('.form-group.image_form_of_work').manage_subject_fields({ fieldName: 'form_of_work', vocabularies: ['aat', 'tgm'] });
 });
 
 

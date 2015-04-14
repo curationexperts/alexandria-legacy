@@ -24,6 +24,7 @@ en:
   simple_form:
     labels:
       image:
+        form_of_work: Genre
         sub_location: 'Holding Sub-location'
         location: 'Subject (location)'
         lc_subject: 'Subject (topic/name)'

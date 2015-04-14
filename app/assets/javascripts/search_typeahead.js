@@ -2,15 +2,18 @@
 // require handlebars-v1.3.0.js
 //
 var searchUris = {
-  'lcnames': '/qa/search/loc/names',
-  'lcsh':    '/qa/search/loc/subjects',
-  'tgm':     '/qa/search/loc/graphicMaterials',
+  'lcnames':        '/qa/search/loc/names',
+  'lcsh':           '/qa/search/loc/subjects',
+  'tgm':            '/qa/search/loc/graphicMaterials',
+  'aat':            '/qa/search/getty/aat',
+  'local_subjects': '/qa/search/local/subjects',
+  'local_names':    '/qa/search/local/names'
 };
 
 
 (function($){
   var defaultSearchForField = {
-    'form_of_work':     '/qa/search/getty/aat',
+    'form_of_work':     searchUris['aat'],
     'location':         searchUris['lcnames'],
     'sub_location':     '/qa/search/local/sub_location',
     'lc_subject':       searchUris['lcsh'],

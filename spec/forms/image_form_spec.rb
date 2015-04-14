@@ -107,5 +107,14 @@ describe ImageForm do
         expect(form.lc_subject).to eq ['one']
       end
     end
+
+    context "for form_of_work" do
+      let(:attributes) { {form_of_work: ['one']} }
+      let(:field) { :form_of_work }
+
+      it "should not add anything to lc_subject" do
+        expect(form.form_of_work).to eq ['one']
+      end
+    end
   end
 end
