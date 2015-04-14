@@ -5,14 +5,14 @@ describe Qa::TermsController do
 
   describe "license vocabulary" do
     it "returns terms" do
-      get :search, vocab: 'local', sub_authority: 'license', q: 'ND'
+      get :search, vocab: 'local', subauthority: 'license', q: 'ND'
       expect(response).to be_success
     end
   end
 
   describe "sub_location vocabulary" do
     it "returns terms" do
-      get :search, vocab: 'local', sub_authority: 'sub_location', q: 'ND'
+      get :search, vocab: 'local', subauthority: 'sub_location', q: 'ND'
       expect(response).to be_success
     end
   end
@@ -23,7 +23,7 @@ describe Qa::TermsController do
     end
 
     it "returns terms" do
-      get :search, vocab: 'local', sub_authority: 'names', q: 'Baggins'
+      get :search, vocab: 'local', subauthority: 'names', q: 'Baggins'
       expect(response).to be_success
       expect(response.body).to eq "[{\"id\":\"http://localhost:8983/fedora/rest/test/fr0d0\",\"label\":\"Frodo Baggins\"}]"
     end
