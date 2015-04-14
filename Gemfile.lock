@@ -46,7 +46,7 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra-labs/questioning_authority.git
-  revision: 92b79fb4c66880f45844c4bd6a57dcf1a63832d8
+  revision: 4915fcbd1e5ac2bbe2faa3feeaf590d186f7d040
   branch: sub_authorities_to_classes
   specs:
     qa (0.4.3)
@@ -222,7 +222,6 @@ GEM
       activesupport (>= 4.1.0)
     haml (4.0.6)
       tilt
-    hike (1.2.3)
     htmlentities (4.3.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -300,7 +299,7 @@ GEM
       mime-types (>= 1.16, < 3)
     mime-types (2.4.3)
     mini_portile (0.6.2)
-    minitest (5.5.1)
+    minitest (5.6.0)
     mods (2.0.3)
       iso-639
       nokogiri
@@ -473,11 +472,8 @@ GEM
       net-http-persistent (~> 2.9)
       rdf (~> 1.1)
     spring (1.3.4)
-    sprockets (2.12.3)
-      hike (~> 1.2)
-      multi_json (~> 1.0)
+    sprockets (3.0.0)
       rack (~> 1.0)
-      tilt (~> 1.1, != 1.3.0)
     sprockets-rails (2.2.4)
       actionpack (>= 3.0)
       activesupport (>= 3.0)

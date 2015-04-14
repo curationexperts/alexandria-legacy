@@ -1,2 +1,2 @@
-Qa::Authorities::Local.register_factory('names', 'LocalNames')
-Qa::Authorities::Local.register_factory('subjects', 'LocalSubjects')
+Qa::Authorities::Local.register_subauthority('names', 'LocalNames')
+Qa::Authorities::Local.register_subauthority('subjects', 'LocalSubjects')

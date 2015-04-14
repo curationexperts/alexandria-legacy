@@ -13,6 +13,6 @@ module OptionsHelper
 
   private
     def local_string_options(field)
-      Qa::Authorities::Local.factory(field).all.map { |t| t['label'.freeze] }
+      Qa::Authorities::Local.subauthority_for(field).all.map { |t| t['label'.freeze] }
     end
 end
