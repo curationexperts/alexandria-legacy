@@ -17,6 +17,7 @@ var searchUris = {
     'location':         searchUris['lcnames'],
     'sub_location':     '/qa/search/local/sub_location',
     'lc_subject':       searchUris['lcsh'],
+    'rights_holder':    searchUris['local_names'],
     'license':          '/qa/search/local/license',
     'copyright_status': '/qa/search/loc/copyrightStatus',
     'language':         '/qa/search/loc/iso639-2'
@@ -105,14 +106,11 @@ function addAutocompleteToEditor($field, options) {
     });
 }
 
-Blacklight.onLoad(function(){
-  addAutocompleteToEditor($('input.image_lc_subject:not([readonly])'));
-  addAutocompleteToEditor($('input.image_location:not([readonly])'));
-  addAutocompleteToEditor($('input.image_sub_location:not([readonly])'));
-  addAutocompleteToEditor($('input.image_form_of_work:not([readonly])'));
-  addAutocompleteToEditor($('input.image_license:not([readonly])'));
-  addAutocompleteToEditor($('input.image_copyright_status:not([readonly])'));
-  addAutocompleteToEditor($('input.image_language:not([readonly])'));
-
+Blacklight.onLoad(function() {
+  var fields = ['lc_subject', 'location', 'sub_location', 'form_of_work', 'license',
+                'copyright_status', 'language', 'rights_holder'];
+  $.each(fields, function(i, value) {
+    addAutocompleteToEditor($('input.image_'+value+':not([readonly])'));
+  });
 });
 

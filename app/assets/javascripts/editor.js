@@ -21,10 +21,16 @@ ControlledVocabFieldManager.prototype = Object.create(HydraEditor.FieldManager.p
             return $newField
         }},
 
-        newFieldTemplate: function(fieldName) {
-            var index = $activeField.siblings().size() + 1;
+        /* This gives the index for the editor */
+        maxIndex: {
+            value: function() {
+                return $(this.fieldWrapperClass, this.element).size();
+        }},
+
+        newFieldTemplate: { value: function(fieldName) {
+            var index = this.maxIndex();
             return $(template({ "name": fieldName, "index": index, "class": "controlled_vocabulary" }));
-        },
+        }},
 
         addBehaviorsToInput: { value: function($newField) {
             $newInput = $('input.multi-text-field', $newField);

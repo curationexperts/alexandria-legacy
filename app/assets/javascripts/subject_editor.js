@@ -34,12 +34,6 @@ SubjectManager.prototype = Object.create(ControlledVocabFieldManager.prototype, 
             $(this.fieldWrapperClass, this.element).addClass("input-group input-append");
     }},
 
-    /* This gives the index for the editor */
-    maxIndex: {
-        value: function() {
-            return $(this.fieldWrapperClass, this.element).size();
-    }},
-
     editorTemplate: {
         value: function() {
             return $(subject_manager_template({ "name": this.fieldName, "index": this.maxIndex(), "class": "controlled_vocabulary_select", "optionsForSelect": this.buildOptions() }));

@@ -76,7 +76,7 @@ module Metadata
       index.as :stored_searchable, :facetable
     end
 
-    property :rights_holder, :predicate => RDF::DC.rightsHolder, class_name: Oargun::ControlledVocabularies::Creator do |index|
+    property :rights_holder, predicate: RDF::DC.rightsHolder, class_name: Oargun::ControlledVocabularies::Creator do |index|
       index.as :symbol
     end
 
@@ -149,8 +149,10 @@ module Metadata
     accepts_nested_attributes_for :lc_subject, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :form_of_work, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :copyright_status, reject_if: id_blank, allow_destroy: true
+    accepts_nested_attributes_for :language, reject_if: id_blank, allow_destroy: true
+    accepts_nested_attributes_for :rights_holder, reject_if: id_blank, allow_destroy: true
+
     accepts_nested_attributes_for :notes, reject_if: :all_blank, allow_destroy: true
-    accepts_nested_attributes_for :language, reject_if: :all_blank, allow_destroy: true
 
     # dates
     accepts_nested_attributes_for :created, reject_if: :time_span_blank, allow_destroy: true
