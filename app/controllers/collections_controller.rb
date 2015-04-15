@@ -1,5 +1,5 @@
 class CollectionsController < ApplicationController
-  include Blacklight::Catalog
+  include Hydra::Catalog
   include Hydra::CollectionsControllerBehavior
 
   def collections_search_builder_class
