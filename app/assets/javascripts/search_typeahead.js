@@ -18,6 +18,7 @@ var searchUris = {
     'sub_location':     '/qa/search/local/sub_location',
     'lc_subject':       searchUris['lcsh'],
     'rights_holder':    searchUris['local_names'],
+    'contributor':      searchUris['lcnames'],
     'license':          '/qa/search/local/license',
     'copyright_status': '/qa/search/loc/copyrightStatus',
     'language':         '/qa/search/loc/iso639-2'

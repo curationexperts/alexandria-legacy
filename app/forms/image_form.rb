@@ -5,7 +5,7 @@ class ImageForm
   self.terms = [:title, :accession_number, :alternative, :description,
                 :series_name, :work_type, :form_of_work, :extent,
                 :place_of_publication, :location, :lc_subject, :publisher,
-                :creator, :contributor, :latitude, :longitude, :digital_origin,
+                :contributor, :latitude, :longitude, :digital_origin,
                 :sub_location, :use_restrictions, :license, :created, :issued,
                 :date_valid, :date_other, :date_copyrighted, :copyright_status,
                 :language, :description_standard, :rights_holder]
@@ -35,7 +35,9 @@ class ImageForm
     # Refactor this to call super when this PR is merged: https://github.com/projecthydra-labs/hydra-editor/pull/60
     def initialize_field(key)
       return if [:lc_subject, :form_of_work].include?(key)
-      if reflection = model_class.reflect_on_association(key)
+      if key == :contributor
+        self[key] = multiplex_contributors
+      elsif reflection = model_class.reflect_on_association(key)
         if reflection.collection?
           association = model.send(key)
 
@@ -48,6 +50,7 @@ class ImageForm
           raise ArgumentError, "Association ''#{key}'' is not a collection"
         end
       elsif class_name = model_class.properties[key.to_s].class_name
+        # TODO I suspect this is dead code
         self[key] += [class_name.new]
       elsif self.class.multiple?(key)
         self[key] = Array.wrap(self[key]) + ['']
@@ -56,9 +59,24 @@ class ImageForm
       end
     end
 
-    def self.model_attributes(form_params)
-      clean_params = super
+    class Contributor < Oargun::ControlledVocabularies::Creator
+      attr_reader :predicate
+      def initialize(id=nil, predicate=nil)
+        super(id)
+        @predicate = predicate
+      end
+    end
 
+    def multiplex_contributors
+      Metadata::RELATIONS.keys.flat_map do |relation_type|
+        model[relation_type].map { |i| Contributor.new(i.id, relation_type) }
+      end
+    end
+
+    def self.model_attributes(form_params)
+      clean_params = demultiplex_contributors(super)
+
+      # TODO put this chunk in a method
       NESTED_ASSOCIATIONS.each do |assoc|
         Array(clean_params["#{assoc}_attributes"]).each do |index, attrs|
           strip_active_fedora_prefix!(attrs)
@@ -66,6 +84,24 @@ class ImageForm
       end
 
       clean_params
+    end
+
+    def self.demultiplex_contributors(attrs)
+      attributes_collection = attrs[:contributor_attributes]
+      return attrs unless attributes_collection
+
+      if attributes_collection.is_a? Hash
+         attributes_collection =
+           attributes_collection.sort_by { |i, _| i.to_i }.map { |_, attributes| attributes }
+      end
+      attrs.except(:contributor_attributes).merge(
+        attributes_collection.each_with_object({}.with_indifferent_access) do |row, relations|
+          next unless row[:predicate]
+          attr_key = "#{row.delete(:predicate)}_attributes"
+          relations[attr_key] ||= []
+          relations[attr_key] << row.with_indifferent_access
+        end
+      )
     end
 
     def self.strip_active_fedora_prefix!(model_attributes)
@@ -98,7 +134,7 @@ class ImageForm
 
     def self.build_permitted_params
       permitted = super
-      permitted.delete(creator: [])
+      permitted.delete(contributor: [])
       permitted.delete(location: [])
       permitted.delete(lc_subject: [])
       permitted.delete(form_of_work: [])
@@ -107,7 +143,8 @@ class ImageForm
       permitted.delete(language: [])
       permitted.delete(rights_holder: [])
 
-      permitted << { creator_attributes: [:id, :_destroy] }
+      permitted << { contributor_attributes: [:id, :predicate, :_destroy] }
+
       permitted << { location_attributes: [:id, :_destroy] }
       permitted << { lc_subject_attributes: [:id, :_destroy] }
       permitted << { form_of_work_attributes: [:id, :_destroy] }

@@ -1,2 +1,4 @@
-<%= f.input key, as: :controlled_vocabulary, input_html: { class: 'form-control' }, required: f.object.required?(key) %>
-
+<div class="contributor-editor">
+  <script>var relators = <%= Metadata.relators_json.html_safe %>;</script>
+  <%= f.input key, as: :controlled_vocabulary_select, input_html: { class: 'form-control' }, required: f.object.required?(key) %>
+</div>

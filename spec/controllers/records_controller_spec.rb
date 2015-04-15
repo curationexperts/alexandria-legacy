@@ -13,16 +13,17 @@ describe RecordsController do
 
     context "Adding new creators" do
       let(:initial_creators) { [{id: "http://id.loc.gov/authorities/names/n87914041"}] }
-      let(:creator_attributes) { { "0" => { "id"=>"http://id.loc.gov/authorities/names/n87914041",
+      let(:contributor_attributes) { { "0" => { "id"=>"http://id.loc.gov/authorities/names/n87914041",
                                  "hidden_label"=>"http://id.loc.gov/authorities/names/n87914041"},
                         "1" => { "id"=>"http://id.loc.gov/authorities/names/n87141298",
+                                 'predicate' => 'creator',
                                  "hidden_label"=>"http://dummynamespace.org/creator/"},
                         "2" => { "id"=>"",
                                  "hidden_label"=>"http://dummynamespace.org/creator/"},
                         } }
 
       it "adds creators" do
-        patch :update, id: image, image: { creator_attributes: creator_attributes }
+        patch :update, id: image, image: { contributor_attributes: contributor_attributes }
         expect(image.reload.creator_ids).to eq ["http://id.loc.gov/authorities/names/n87914041",
                                               "http://id.loc.gov/authorities/names/n87141298"]
       end
@@ -35,16 +36,16 @@ describe RecordsController do
          { id: "http://id.loc.gov/authorities/names/n81019162" }]
       end
 
-      let(:creator_attributes) do
+      let(:contributor_attributes) do
         {
           "0"=>{ "id"=>"http://id.loc.gov/authorities/names/n87914041", "_destroy"=>"" },
-          "1"=>{ "id"=>"http://id.loc.gov/authorities/names/n81019162", "_destroy"=>"true" },
+          "1"=>{ "id"=>"http://id.loc.gov/authorities/names/n81019162", predicate: 'creator', "_destroy"=>"true" },
           "2"=>{ "id"=>"", "_destroy"=>"" }
         }
       end
 
       it "removes creators" do
-        patch :update, id: image, image: { creator_attributes: creator_attributes }
+        patch :update, id: image, image: { contributor_attributes: contributor_attributes }
         expect(image.reload.creator_ids).to eq ["http://id.loc.gov/authorities/names/n87914041"]
       end
     end
@@ -61,9 +62,7 @@ describe RecordsController do
         }
       }
 
-      let(:time_span) {
-        TimeSpan.new(ts_attributes)
-      }
+      let(:time_span) { TimeSpan.new(ts_attributes) }
 
       let(:initial_creators) { [{id: "http://id.loc.gov/authorities/names/n87914041"}] }
 
@@ -127,10 +126,8 @@ describe RecordsController do
             expect(created_date.start).to eq(["1337"])
             expect(created_date.start_qualifier).to eq(["approximate"])
           end
-
         end
       end
     end
   end
-
 end

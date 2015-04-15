@@ -109,4 +109,8 @@ module Metadata
       distributor:                           Oargun::Vocabularies::MARCREL.dst,
       # publisher:                             Oargun::Vocabularies::MARCREL.pbl
     }
+
+  def self.relators_json
+    MARCREL.keys.each_with_object({}) { |key, h| h[key] = key.to_s.humanize }.to_json
+  end
 end

@@ -37,3 +37,31 @@ label.remove_time_span {
   }
 }
 
+.contributor-editor {
+  .new {
+    .role{
+      @extend .col-md-4;
+    }
+    .vocabulary {
+      @extend .col-md-3;
+    }
+    .text {
+      @extend .col-md-5;
+    }
+  }
+  .existing {
+    .role {
+      @extend .col-md-3;
+      .predicate {
+        height: 34px;
+        padding: 6px 12px;
+        font-weight: bold;
+        display: inline-block;
+      }
+    }
+    .text {
+      @extend .col-md-9;
+    }
+  }
+}
+
