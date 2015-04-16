@@ -2,13 +2,13 @@ class ImageForm
   include HydraEditor::Form
   self.model_class = Image
 
-  self.terms = [:title, :accession_number, :alternative, :description,
+  self.terms = [:title, :alternative, :accession_number, :description,
                 :series_name, :work_type, :form_of_work, :extent,
                 :place_of_publication, :location, :lc_subject, :publisher,
                 :contributor, :latitude, :longitude, :digital_origin, :institution,
-                :sub_location, :use_restrictions, :license, :created, :issued,
-                :date_valid, :date_other, :date_copyrighted, :copyright_status,
-                :language, :description_standard, :rights_holder]
+                :sub_location, :use_restrictions, :created, :issued, :date_valid,
+                :date_other, :date_copyrighted, :language, :description_standard,
+                :copyright_status, :license, :rights_holder]
 
   self.required_fields = [] # Required fields
 

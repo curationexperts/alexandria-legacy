@@ -25,6 +25,9 @@ en:
     labels:
       image:
         form_of_work: Genre
+        alternative: Alternative Title
+        created: Date Created
+        issued: Date Issued
         sub_location: 'Holding Sub-location'
         location: 'Subject (location)'
         lc_subject: 'Subject (topic/name)'

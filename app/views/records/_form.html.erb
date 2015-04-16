@@ -3,8 +3,9 @@
     <%= render 'records/form_header' %>
     <div class="well">
       <%= render_edit_field_partial(:title, f: f) %>
+      <%= render_edit_field_partial(:alternative, f: f) %>
       <%= f.input :ark, disabled: true %>
-      <% (f.object.terms - [:title]).each do |term| %>
+      <% (f.object.terms - [:title, :alternative]).each do |term| %>
         <%= render_edit_field_partial(term, f: f) %>
       <% end %>
       <%= f.input :record_origin, disabled: true, as: :multi_value_readonly %>
