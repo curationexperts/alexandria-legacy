@@ -29,7 +29,11 @@ var searchUris = {
     return defaultSearchForField[fieldName];
   }
 
-  function initBloodhound(path) {
+  function initBloodhound(path, selector_proxy) {
+    function tt_hint_node() {
+      return selector_proxy.parent().find('.tt-hint')
+    }
+
     var results = new Bloodhound({
       datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.title); },
       queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -37,7 +41,7 @@ var searchUris = {
       remote: {
         url: path + '?q=%QUERY',
         filter: function(response) {
-          $('.tt-hint').removeClass('loading');
+          tt_hint_node().removeClass('loading');
           return $.map(response, function(doc) {
             return doc;
           })
@@ -47,7 +51,7 @@ var searchUris = {
         // typeahead:asynccancel
         // typeahead:asyncreceive
         replace: function(url, query){
-            $('.tt-hint').addClass('loading');
+            tt_hint_node().addClass('loading');
             return url.replace(this.wildcard, encodeURIComponent(query));
         }
       }
@@ -55,7 +59,6 @@ var searchUris = {
     results.initialize();
     return results;
   }
-
 
   $.fn.alexandriaSearchTypeAhead = function( options ) {
     $.each(this, function(){
@@ -74,13 +77,14 @@ var searchUris = {
       if (settings.bloodhound) {
         results = settings.bloodhound();
       } else {
-        results = initBloodhound(settings.searchPath);
+        results = initBloodhound(settings.searchPath, typeAheadInput);
       }
 
       typeAheadInput.typeahead(settings, {
         displayKey: 'label',
         source: results.ttAdapter()
       })
+
     }
 
     return this;
