@@ -33,8 +33,7 @@ gem 'hydra-head', github: 'projecthydra/hydra-head', branch: 'loosen_version_loc
 gem 'active-fedora', '~> 9.1.0.rc1'
 
 gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: 'dce-ucsb'
-#gem 'hydra-editor', '~> 1.0.3'
-gem 'hydra-editor', github: 'projecthydra/hydra-editor', branch: 'refactor_for_reuse'
+gem 'hydra-editor', '~> 1.0.4'
 gem 'hydra-role-management'
 gem 'hydra-collections', '~> 5.0.1'
 gem 'rdf-vocab', '~> 0.7.0'

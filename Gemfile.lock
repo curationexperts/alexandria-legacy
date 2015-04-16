@@ -58,17 +58,6 @@ GIT
       rest-client
 
 GIT
-  remote: git://github.com/projecthydra/hydra-editor.git
-  revision: ee107308dd6b66fa37f33d4e8d45426c61405aa9
-  branch: refactor_for_reuse
-  specs:
-    hydra-editor (1.0.3)
-      active-fedora (>= 9.0.0)
-      cancancan (~> 1.8)
-      rails (~> 4.1)
-      simple_form (~> 3.1.0)
-
-GIT
   remote: git://github.com/projecthydra/hydra-head.git
   revision: f0c8aa30b6201e93d1253cc85d40380e16cb9142
   branch: loosen_version_lock
@@ -247,6 +236,11 @@ GEM
       blacklight (~> 5.10)
       deprecation (~> 0.1)
       hydra-head (~> 9.1)
+    hydra-editor (1.0.4)
+      active-fedora (>= 9.0.0)
+      cancancan (~> 1.8)
+      rails (~> 4.1)
+      simple_form (~> 3.1.0)
     hydra-role-management (0.2.1)
       blacklight
       bootstrap_form
@@ -539,7 +533,7 @@ DEPENDENCIES
   ezid-client (~> 1.0)
   factory_girl_rails (~> 4.4)
   hydra-collections (~> 5.0.1)
-  hydra-editor!
+  hydra-editor (~> 1.0.4)
   hydra-head!
   hydra-role-management
   jbuilder (~> 2.0)
