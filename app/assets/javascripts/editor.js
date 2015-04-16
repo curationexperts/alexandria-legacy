@@ -27,6 +27,13 @@ ControlledVocabFieldManager.prototype = Object.create(HydraEditor.FieldManager.p
                 return $(this.fieldWrapperClass, this.element).size();
         }},
 
+        // Overridden because the input is not a direct child of activeField
+        inputIsEmpty: {
+            value: function(activeField) {
+              return activeField.find('input.multi-text-field').val() === '';
+
+        }},
+
         newFieldTemplate: { value: function(fieldName) {
             var index = this.maxIndex();
             return $(template({ "name": fieldName, "index": index, "class": "controlled_vocabulary" }));
