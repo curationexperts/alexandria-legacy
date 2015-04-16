@@ -123,7 +123,7 @@ function addAutocompleteToEditor($field, options) {
 Blacklight.onLoad(function() {
   // Only simple autocomplete here. Complex have it added by their editor.
   var fields = ['location', 'sub_location', 'license',
-                'copyright_status', 'language', 'rights_holder'];
+                'copyright_status', 'language'];
   $.each(fields, function(i, value) {
       addAutocompleteToEditor($('input.image_'+value+':not([readonly])'));
   });

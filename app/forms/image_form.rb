@@ -34,7 +34,9 @@ class ImageForm
 
     # Refactor this to call super when this PR is merged: https://github.com/projecthydra-labs/hydra-editor/pull/60
     def initialize_field(key)
-      return if [:lc_subject, :form_of_work].include?(key)
+      # Don't initialize fields that use the SubjectManager
+      return if [:lc_subject, :form_of_work, :rights_holder].include?(key)
+
       if key == :contributor
         self[key] = multiplex_contributors
       elsif reflection = model_class.reflect_on_association(key)
