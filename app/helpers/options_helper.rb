@@ -20,6 +20,13 @@ module OptionsHelper
     local_uri_options('license')
   end
 
+  # @return Hash of relators in JSON with creator and contributor at the top.
+  def relators_json
+    rels = { creator: 'Creator', contributor: 'Contributor' }
+    keys = Metadata::MARCREL.keys - [:creator, :contributor]
+    keys.each_with_object(rels) { |key, h| h[key] = key.to_s.humanize }.to_json.html_safe
+  end
+
   private
     def local_uri_options(field)
       Qa::Authorities::Local.subauthority_for(field).all.each_with_object({}) do |t, h|
