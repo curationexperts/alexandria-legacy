@@ -84,12 +84,12 @@ class ImageIndexer < ActiveFedora::IndexingService
 
     # Create a date field for sorting on
     def sortable_date
-      Array(key_date).first.try(:sortable)
+      Array(key_date).first.try(:earliest_year)
     end
 
     # Create a year field (integer, multiple) for faceting on
     def facetable_year
-      Array(key_date).flat_map{ |d| d.try(:facetable) }
+      Array(key_date).flat_map{ |d| d.try(:to_a) }
     end
 
     def key_date
