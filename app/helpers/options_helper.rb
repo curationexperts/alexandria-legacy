@@ -11,7 +11,22 @@ module OptionsHelper
     local_string_options('sub_location')
   end
 
+  # this is a local cache of LOC copyrightStatus
+  def copyright_status_options
+    local_uri_options('copyright_status')
+  end
+
+  def license_options
+    local_uri_options('license')
+  end
+
   private
+    def local_uri_options(field)
+      Qa::Authorities::Local.subauthority_for(field).all.each_with_object({}) do |t, h|
+        h[t['label'.freeze]] = t['id'.freeze]
+      end
+    end
+
     def local_string_options(field)
       Qa::Authorities::Local.subauthority_for(field).all.map { |t| t['label'.freeze] }
     end

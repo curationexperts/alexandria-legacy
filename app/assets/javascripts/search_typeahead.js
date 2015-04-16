@@ -20,8 +20,6 @@ var searchUris = {
     'rights_holder':    searchUris['local_names'],
     'contributor':      searchUris['lcnames'],
     'institution':      searchUris['lcnames'],
-    'license':          '/qa/search/local/license',
-    'copyright_status': '/qa/search/loc/copyrightStatus',
     'language':         '/qa/search/loc/iso639-2'
   };
 
@@ -123,8 +121,7 @@ function addAutocompleteToEditor($field, options) {
 
 Blacklight.onLoad(function() {
   // Only simple autocomplete here. Complex have it added by their editor.
-  var fields = ['location', 'sub_location', 'license',
-                'copyright_status', 'language'];
+  var fields = ['location', 'sub_location', 'language'];
   $.each(fields, function(i, value) {
       addAutocompleteToEditor($('input.image_'+value+':not([readonly])'));
   });

@@ -1,0 +1,7 @@
+terms:
+  - term: "public domain"
+    id: "http://id.loc.gov/vocabulary/preservation/copyrightStatus/pub"
+  - term: "copyrighted"
+    id: "http://id.loc.gov/vocabulary/preservation/copyrightStatus/cpr"
+  - term: "unknown"
+    id: "http://id.loc.gov/vocabulary/preservation/copyrightStatus/unk"

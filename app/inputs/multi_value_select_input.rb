@@ -5,6 +5,12 @@ class MultiValueSelectInput < MultiValueInput
     'multi_value'.freeze
   end
 
+  protected
+    # Delegate this completely to the form.
+    def collection
+      @collection ||= object[attribute_name]
+    end
+
   private
     def select_options
       @select_options ||= begin
@@ -28,8 +34,9 @@ class MultiValueSelectInput < MultiValueInput
       html_options.delete(:multiple)
       @rendered_first_element = true
 
-      html_options.merge!(options.slice(:include_blank))
-      template.select_tag(attribute_name, template.options_for_select(select_options, value), html_options)
+      selected_option = value.respond_to?(:id) ? value.id : value
+      html_options.merge!(prompt: '') if selected_option.blank?
+      template.select_tag(attribute_name, template.options_for_select(select_options, selected_option), html_options)
     end
 
 end
