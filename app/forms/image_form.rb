@@ -5,7 +5,7 @@ class ImageForm
   self.terms = [:title, :accession_number, :alternative, :description,
                 :series_name, :work_type, :form_of_work, :extent,
                 :place_of_publication, :location, :lc_subject, :publisher,
-                :contributor, :latitude, :longitude, :digital_origin,
+                :contributor, :latitude, :longitude, :digital_origin, :institution,
                 :sub_location, :use_restrictions, :license, :created, :issued,
                 :date_valid, :date_other, :date_copyrighted, :copyright_status,
                 :language, :description_standard, :rights_holder]
@@ -35,7 +35,7 @@ class ImageForm
     # Refactor this to call super when this PR is merged: https://github.com/projecthydra-labs/hydra-editor/pull/60
     def initialize_field(key)
       # Don't initialize fields that use the SubjectManager
-      return if [:lc_subject, :form_of_work, :rights_holder].include?(key)
+      return if [:lc_subject, :form_of_work, :rights_holder, :institution].include?(key)
 
       if key == :contributor
         self[key] = multiplex_contributors
@@ -144,6 +144,7 @@ class ImageForm
       permitted.delete(copyright_status: [])
       permitted.delete(language: [])
       permitted.delete(rights_holder: [])
+      permitted.delete(institution: [])
 
       permitted << { contributor_attributes: [:id, :predicate, :_destroy] }
 
@@ -154,6 +155,7 @@ class ImageForm
       permitted << { copyright_status_attributes: [:id, :_destroy] }
       permitted << { language_attributes: [:id, :_destroy] }
       permitted << { rights_holder_attributes: [:id, :_destroy] }
+      permitted << { institution_attributes: [:id, :_destroy] }
 
       # Time spans
       permitted << { created_attributes: permitted_time_span_params }

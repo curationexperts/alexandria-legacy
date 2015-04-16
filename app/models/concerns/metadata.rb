@@ -3,25 +3,25 @@ module Metadata
   extend ActiveSupport::Concern
 
   RELATIONS = {
-    contributor:         ::RDF::DC.contributor,
-    creator:             ::RDF::DC.creator,
+    contributor:         RDF::DC.contributor,
+    creator:             RDF::DC.creator,
   }.merge(MARCREL)
 
   included do
     # For ARKs
-    property :identifier, predicate: ::RDF::DC.identifier do |index|
+    property :identifier, predicate: RDF::DC.identifier do |index|
       index.as :displayable
     end
 
-    property :accession_number, predicate: ::RDF::URI('http://opaquenamespace.org/ns/cco/accessionNumber') do |index|
+    property :accession_number, predicate: RDF::URI('http://opaquenamespace.org/ns/cco/accessionNumber') do |index|
       index.as :symbol, :stored_searchable # symbol is needed for exact match search in the CollectionFactory
     end
 
-    property :title, predicate: ::RDF::DC.title, multiple: false do |index|
+    property :title, predicate: RDF::DC.title, multiple: false do |index|
       index.as :stored_searchable
     end
 
-    property :alternative, predicate: ::RDF::DC.alternative do |index|
+    property :alternative, predicate: RDF::DC.alternative do |index|
       index.as :stored_searchable
     end
 
@@ -38,7 +38,7 @@ module Metadata
     #   index.as :stored_searchable
     # end
 
-    property :description, predicate: ::RDF::DC.description do |index|
+    property :description, predicate: RDF::DC.description do |index|
       index.as :stored_searchable
     end
 
@@ -68,7 +68,7 @@ module Metadata
       index.as :stored_searchable, :facetable
     end
 
-    property :institution, :predicate => Oargun::Vocabularies::OARGUN.contributingInstitution, :class_name => Oargun::ControlledVocabularies::Organization do |index|
+    property :institution, predicate: Oargun::Vocabularies::OARGUN.contributingInstitution, class_name: Oargun::ControlledVocabularies::Organization do |index|
       index.as :stored_searchable
     end
 
@@ -92,7 +92,7 @@ module Metadata
       index.as :stored_searchable
     end
 
-    property :series_name, predicate: ::RDF::URI('http://opaquenamespace.org/ns/seriesName') do |index|
+    property :series_name, predicate: RDF::URI('http://opaquenamespace.org/ns/seriesName') do |index|
       index.as :displayable
     end
 
@@ -151,6 +151,7 @@ module Metadata
     accepts_nested_attributes_for :copyright_status, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :language, reject_if: id_blank, allow_destroy: true
     accepts_nested_attributes_for :rights_holder, reject_if: id_blank, allow_destroy: true
+    accepts_nested_attributes_for :institution, reject_if: id_blank, allow_destroy: true
 
     accepts_nested_attributes_for :notes, reject_if: :all_blank, allow_destroy: true
 
