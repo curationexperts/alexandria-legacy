@@ -33,13 +33,22 @@ var searchUris = {
     var results = new Bloodhound({
       datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.title); },
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      limit: 10,
+      limit: 15,
       remote: {
         url: path + '?q=%QUERY',
         filter: function(response) {
+          $('.tt-hint').removeClass('loading');
           return $.map(response, function(doc) {
             return doc;
           })
+        },
+        // If Bloodhound 0.11.0 is released we can remove this and use the callbacks:
+        // typeahead:asyncrequest
+        // typeahead:asynccancel
+        // typeahead:asyncreceive
+        replace: function(url, query){
+            $('.tt-hint').addClass('loading');
+            return url.replace(this.wildcard, encodeURIComponent(query));
         }
       }
     });
@@ -57,7 +66,7 @@ var searchUris = {
     function addAutocompleteBehavior( typeAheadInput, settings ) {
       var settings = $.extend({
         highlight: (typeAheadInput.data('autocomplete-highlight') || true),
-        hint: (typeAheadInput.data('autocomplete-hint') || false),
+        hint: true,
         autoselect: (typeAheadInput.data('autocomplete-autoselect') || true)
       }, settings);
 
@@ -108,10 +117,11 @@ function addAutocompleteToEditor($field, options) {
 }
 
 Blacklight.onLoad(function() {
-  var fields = ['lc_subject', 'location', 'sub_location', 'form_of_work', 'license',
+  // Only simple autocomplete here. Complex have it added by their editor.
+  var fields = ['location', 'sub_location', 'license',
                 'copyright_status', 'language', 'rights_holder'];
   $.each(fields, function(i, value) {
-    addAutocompleteToEditor($('input.image_'+value+':not([readonly])'));
+      addAutocompleteToEditor($('input.image_'+value+':not([readonly])'));
   });
 });
 

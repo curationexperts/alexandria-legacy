@@ -1,3 +1,22 @@
+.typeahead, .tt-query, .tt-hint {
+  /* font-size: 14px !important; */
+}
+
+.input-group {
+  .form-control {
+    &.tt-hint, &.tt-input {
+      border-top-left-radius: 4px !important;
+      border-bottom-left-radius: 4px !important;
+    }
+  }
+  .tt-hint {
+    background: white !important;
+    &.loading {
+      background: url("/assets/ajax-loader.gif") no-repeat right center !important;
+    }
+  }
+}
+
 .controlled_vocabulary {
   @extend .multi_value;
 }
