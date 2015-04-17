@@ -128,13 +128,13 @@ describe ImageForm do
     let(:form) { described_class.new(model) }
     let(:model) { Image.new(attributes) }
     let(:attributes) do
-      { photographer: [RDF::URI.new("http://id.loc.gov/authorities/names/n87914041")] }
+      { photographer: [RDF::URI.new("http://id.loc.gov/authorities/names/n87914041"), Agent.create] }
     end
 
     subject { form.send :multiplex_contributors }
 
     it "has one element" do
-      expect(subject.size).to eq 1
+      expect(subject.size).to eq 2
     end
   end
 

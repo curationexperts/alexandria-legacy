@@ -61,17 +61,30 @@ class ImageForm
       end
     end
 
-    class Contributor < Oargun::ControlledVocabularies::Creator
-      attr_reader :predicate
-      def initialize(id=nil, predicate=nil)
-        super(id)
+    class Contributor
+      attr_reader :predicate, :model
+      # @param [Oregon::ControlledVocabulary::Creator, Agent] model
+      def initialize(model, predicate=nil)
+        @model = model
         @predicate = predicate
+      end
+
+      def rdf_subject
+        @model.rdf_subject
+      end
+
+      def rdf_label
+        @model.rdf_label
+      end
+
+      def node?
+        @model.respond_to?(:node?) ? @model.node? : false
       end
     end
 
     def multiplex_contributors
       Metadata::RELATIONS.keys.flat_map do |relation_type|
-        model[relation_type].map { |i| Contributor.new(i.id, relation_type) }
+        model[relation_type].map { |i| Contributor.new(i, relation_type) }
       end
     end
 
