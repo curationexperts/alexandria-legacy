@@ -43,7 +43,7 @@ class ObjectFactory
   def create
     attrs = create_attributes
     identifier = mint_ark
-    attrs.merge!(identifier: [identifier.id], id: identifier.id.split(/\//).last)
+    attrs.merge!(identifier: [identifier.id], id: Identifier.treeify(identifier.id.split(/\//).last))
     klass.new(attrs) do |obj|
       obj.save!
       after_create(obj)

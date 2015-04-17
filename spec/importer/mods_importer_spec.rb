@@ -94,7 +94,7 @@ describe Importer::ModsImporter do
       }.to change { Collection.count }.by(1).and change {
                     Person.count }.by(1)
 
-      expect(coll.id).to match /^fk4\w{7}$/
+      expect(coll.id).to match /^fk\/4\w\/\w{2}\/\w{2}\/fk4\w{7}$/
       expect(coll.accession_number).to eq ['SBHC Mss 78']
       expect(coll.title).to eq 'Joel Conway / Flying A Studio photograph collection'
       expect(coll.admin_policy_id).to eq AdminPolicy::PUBLIC_POLICY_ID

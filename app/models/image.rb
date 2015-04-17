@@ -8,6 +8,10 @@ class Image < ActiveFedora::Base
     ImageIndexer
   end
 
+  def to_param
+    Identifier.noidify(id)
+  end
+
   # override the hash accessor to cast local objects to AF::Base
   # TODO move this into Oargun using the casting functionality of ActiveTriples
   def [](arg)
@@ -25,5 +29,4 @@ class Image < ActiveFedora::Base
       super
     end
   end
-
 end

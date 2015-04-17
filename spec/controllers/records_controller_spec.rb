@@ -9,7 +9,7 @@ describe RecordsController do
   before { allow_any_instance_of(Image).to receive(:update_index) }
 
   describe "#update" do
-    let(:image) { Image.create!(id: '7', creator_attributes: initial_creators) }
+    let(:image) { Image.create!(id: 'fk/4d/n4/9s/fk4dn49s80', creator_attributes: initial_creators) }
 
     context "Adding new creators" do
       let(:initial_creators) { [{id: "http://id.loc.gov/authorities/names/n87914041"}] }

@@ -36,6 +36,14 @@ class SolrDocument
     end
   end
 
+  def to_param
+    if n = Identifier.ark_to_noid(ark)
+      n
+    else
+      super
+    end
+  end
+
   def ark
     Array(self[Solrizer.solr_name('identifier', :displayable)]).first
   end

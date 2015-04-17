@@ -188,8 +188,11 @@ class CatalogController < ApplicationController
   private
 
     def convert_ark_to_id
-      if matches = /^ark:\/\d{5}\/(\w{10})$/.match(params[:id])
-        params[:id] = matches[1]
+      puts "params #{params[:id]}"
+      if id = Identifier.ark_to_id(params[:id])
+        params[:id] = id
+      elsif id = Identifier.treeify(params[:id])
+        params[:id] = id
       end
     end
 end
