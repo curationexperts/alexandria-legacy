@@ -57,6 +57,27 @@ GIT
       rails (>= 3.2.13, < 5.0)
       rest-client
 
+GIT
+  remote: git://github.com/projecthydra/hydra-head.git
+  revision: 2bf81d8adc0e93e9fc7046ece99f8f64fe73d465
+  branch: persist_admin_policies
+  specs:
+    hydra-access-controls (9.1.3)
+      active-fedora (~> 9.0)
+      activesupport (~> 4.0)
+      blacklight (~> 5.10)
+      cancancan (~> 1.8)
+      deprecation (~> 0.1)
+      sass-rails
+    hydra-core (9.1.3)
+      hydra-access-controls (= 9.1.3)
+      jettywrapper (>= 2.0.0)
+      rails (~> 4.0)
+    hydra-head (9.1.3)
+      hydra-access-controls (= 9.1.3)
+      hydra-core (= 9.1.3)
+      rails (>= 3.2.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -211,30 +232,15 @@ GEM
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     http_logger (0.5.1)
-    hydra-access-controls (9.1.3)
-      active-fedora (~> 9.0)
-      activesupport (~> 4.0)
-      blacklight (~> 5.10)
-      cancancan (~> 1.8)
-      deprecation (~> 0.1)
-      sass-rails
     hydra-collections (5.0.2)
       blacklight (~> 5.10)
       deprecation (~> 0.1)
       hydra-head (~> 9.1)
-    hydra-core (9.1.3)
-      hydra-access-controls (= 9.1.3)
-      jettywrapper (>= 2.0.0)
-      rails (~> 4.0)
     hydra-editor (1.0.4)
       active-fedora (>= 9.0.0)
       cancancan (~> 1.8)
       rails (~> 4.1)
       simple_form (~> 3.1.0)
-    hydra-head (9.1.3)
-      hydra-access-controls (= 9.1.3)
-      hydra-core (= 9.1.3)
-      rails (>= 3.2.6)
     hydra-role-management (0.2.1)
       blacklight
       bootstrap_form
@@ -528,7 +534,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.4)
   hydra-collections (~> 5.0.1)
   hydra-editor (~> 1.0.4)
-  hydra-head (~> 9.1.3)
+  hydra-head!
   hydra-role-management
   jbuilder (~> 2.0)
   jettywrapper
