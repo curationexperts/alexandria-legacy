@@ -28,9 +28,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-#gem 'hydra-head', '~> 9.1.3'
-gem 'hydra-head', github: 'projecthydra/hydra-head', branch: 'persist_admin_policies'
-gem 'active-fedora', '~> 9.1.0.rc1'
+gem 'hydra-head', '~> 9.1.4'
+gem 'active-fedora', '~> 9.1.1'
 
 gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: 'dce-ucsb'
 gem 'hydra-editor', '~> 1.0.4'
@@ -47,13 +46,12 @@ gem 'rsolr', '~> 1.0.12'
 gem 'activefedora-aggregation', '~> 0.2.0'
 
 gem 'mods', '~> 2.0.3'
-gem 'oargun', github: 'curationexperts/oargun', ref: '7838809'
+gem 'oargun', github: 'curationexperts/oargun', ref: '9371ceb'
 gem 'linked_vocabs', github: 'no-reply/linked_vocabs' # Waiting on 0.3.0
 gem 'blacklight-gallery'
 gem 'riiif', '~> 0.1.0'
 gem 'ezid-client', '~> 1.0'
-# This stuff is pre 0.5.0
-gem 'qa', github: 'projecthydra-labs/questioning_authority', branch: 'sub_authorities_to_classes'
+gem 'qa', '~> 0.5.0'
 
 gem 'kaminari', github: 'harai/kaminari', branch: 'route_prefix_prototype', ref: '384fcb5d11b6'
 

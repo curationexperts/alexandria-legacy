@@ -1,14 +1,13 @@
 GIT
   remote: git://github.com/curationexperts/oargun.git
-  revision: 7838809055b00adc4b50685efb99fa651dfb38e2
-  ref: 7838809
+  revision: 9371ceb4fdc22d60fb33013240b6db1281e2a6b9
+  ref: 9371ceb
   specs:
     oargun (0.0.1)
       active-fedora (~> 9.0)
       active-triples (~> 0.6.0)
       activesupport (~> 4.0)
       linked_vocabs (~> 0.2)
-      qa (~> 0.4.0)
       rdf-vocab (~> 0.6)
       rest-client (~> 1.7)
 
@@ -45,39 +44,6 @@ GIT
       sparql
       sparql-client
 
-GIT
-  remote: git://github.com/projecthydra-labs/questioning_authority.git
-  revision: 4915fcbd1e5ac2bbe2faa3feeaf590d186f7d040
-  branch: sub_authorities_to_classes
-  specs:
-    qa (0.4.3)
-      activerecord-import
-      deprecation
-      nokogiri (~> 1.6.0)
-      rails (>= 3.2.13, < 5.0)
-      rest-client
-
-GIT
-  remote: git://github.com/projecthydra/hydra-head.git
-  revision: 2bf81d8adc0e93e9fc7046ece99f8f64fe73d465
-  branch: persist_admin_policies
-  specs:
-    hydra-access-controls (9.1.3)
-      active-fedora (~> 9.0)
-      activesupport (~> 4.0)
-      blacklight (~> 5.10)
-      cancancan (~> 1.8)
-      deprecation (~> 0.1)
-      sass-rails
-    hydra-core (9.1.3)
-      hydra-access-controls (= 9.1.3)
-      jettywrapper (>= 2.0.0)
-      rails (~> 4.0)
-    hydra-head (9.1.3)
-      hydra-access-controls (= 9.1.3)
-      hydra-core (= 9.1.3)
-      rails (>= 3.2.6)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -100,7 +66,7 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    active-fedora (9.1.0.rc1)
+    active-fedora (9.1.1)
       active-triples (~> 0.6.0)
       activesupport (>= 4.1.0)
       deprecation
@@ -204,7 +170,7 @@ GEM
     devise-guests (0.3.3)
       devise
     diff-lcs (1.2.5)
-    domain_name (0.5.23)
+    domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     ebnf (0.3.7)
       haml (~> 4.0)
@@ -232,15 +198,30 @@ GEM
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     http_logger (0.5.1)
+    hydra-access-controls (9.1.4)
+      active-fedora (~> 9.0)
+      activesupport (~> 4.0)
+      blacklight (~> 5.10)
+      cancancan (~> 1.8)
+      deprecation (~> 0.1)
+      sass-rails
     hydra-collections (5.0.2)
       blacklight (~> 5.10)
       deprecation (~> 0.1)
       hydra-head (~> 9.1)
+    hydra-core (9.1.4)
+      hydra-access-controls (= 9.1.4)
+      jettywrapper (>= 2.0.0)
+      rails (~> 4.0)
     hydra-editor (1.0.4)
       active-fedora (>= 9.0.0)
       cancancan (~> 1.8)
       rails (~> 4.1)
       simple_form (~> 3.1.0)
+    hydra-head (9.1.4)
+      hydra-access-controls (= 9.1.4)
+      hydra-core (= 9.1.4)
+      rails (>= 3.2.6)
     hydra-role-management (0.2.1)
       blacklight
       bootstrap_form
@@ -322,6 +303,12 @@ GEM
       rails (> 3.2.0)
     orm_adapter (0.5.0)
     pg (0.18.1)
+    qa (0.5.0)
+      activerecord-import
+      deprecation
+      nokogiri (~> 1.6.0)
+      rails (>= 3.2.13, < 5.0)
+      rest-client
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -371,13 +358,13 @@ GEM
       nokogiri (~> 1.6)
       rdf (~> 1.1)
       rdf-xsd (~> 1.1)
-    rdf-n3 (1.1.2)
+    rdf-n3 (1.1.3)
       rdf (~> 1.1, >= 1.1.5)
-    rdf-rdfa (1.1.5)
+    rdf-rdfa (1.1.6)
       haml (~> 4.0)
       htmlentities (~> 4.3)
       rdf (~> 1.1, >= 1.1.6)
-      rdf-aggregate-repo
+      rdf-aggregate-repo (~> 1.1)
       rdf-xsd (~> 1.1)
     rdf-rdfxml (1.1.4)
       htmlentities (~> 4.3)
@@ -388,10 +375,10 @@ GEM
       rdf (~> 1.1, >= 1.1.4.2)
       rdf-turtle (~> 1.1)
       rdf-xsd (~> 1.1)
-    rdf-trig (1.1.3.1)
-      ebnf (~> 0.3, >= 0.3.5)
-      rdf (~> 1.1, >= 1.1.2.1)
-      rdf-turtle (~> 1.1, >= 1.1.3)
+    rdf-trig (1.1.4)
+      ebnf (~> 0.3, >= 0.3.7)
+      rdf (~> 1.1, >= 1.1.11)
+      rdf-turtle (~> 1.1, >= 1.1.6)
     rdf-trix (1.1.0)
       rdf (>= 1.1)
     rdf-turtle (1.1.6)
@@ -456,7 +443,7 @@ GEM
       nokogiri
       stomp
       xml-simple
-    sparql (1.1.4)
+    sparql (1.1.5)
       builder (~> 3.0)
       ebnf (~> 0.3, >= 0.3.5)
       rdf (~> 1.1, >= 1.1.4)
@@ -500,7 +487,7 @@ GEM
       json (>= 1.8.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.6)
+    unf_ext (0.0.7.1)
     vcr (2.9.3)
     warden (1.2.3)
       rack (>= 1.0)
@@ -515,7 +502,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active-fedora (~> 9.1.0.rc1)
+  active-fedora (~> 9.1.1)
   active-triples!
   activefedora-aggregation (~> 0.2.0)
   awesome_print
@@ -534,7 +521,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.4)
   hydra-collections (~> 5.0.1)
   hydra-editor (~> 1.0.4)
-  hydra-head!
+  hydra-head (~> 9.1.4)
   hydra-role-management
   jbuilder (~> 2.0)
   jettywrapper
@@ -544,7 +531,7 @@ DEPENDENCIES
   mods (~> 2.0.3)
   oargun!
   pg
-  qa!
+  qa (~> 0.5.0)
   rails (= 4.2.1)
   rdf-marmotta (~> 0.0.8)
   rdf-vocab (~> 0.7.0)
