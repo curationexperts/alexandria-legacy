@@ -12,16 +12,6 @@ GIT
       rest-client (~> 1.7)
 
 GIT
-  remote: git://github.com/harai/kaminari.git
-  revision: 384fcb5d11b66a0cc8fad030104bf80f82616355
-  ref: 384fcb5d11b6
-  branch: route_prefix_prototype
-  specs:
-    kaminari (0.14.1)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
-
-GIT
   remote: git://github.com/jcoyne/ActiveTriples.git
   revision: 33e1f2a41c2715d5e6fb477c439e3b4e3f827414
   branch: dce-ucsb
@@ -32,6 +22,15 @@ GIT
       deprecation (~> 0.1)
       linkeddata (~> 1.1)
       rdf (~> 1.1)
+
+GIT
+  remote: git://github.com/jcoyne/kaminari.git
+  revision: 7f7108e12bdd64eb5a76177633768feb14df5453
+  branch: sufia
+  specs:
+    kaminari (1.0.0.alpha)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
 
 GIT
   remote: git://github.com/no-reply/linked_vocabs.git
@@ -101,15 +100,15 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.8)
     arel (6.0.0)
-    autoprefixer-rails (5.1.8)
+    autoprefixer-rails (5.1.10)
       execjs
       json
     awesome_print (1.6.1)
     bcrypt (3.1.10)
-    blacklight (5.11.2)
+    blacklight (5.13.1)
       bootstrap-sass (~> 3.2)
       deprecation
-      kaminari (~> 0.13)
+      kaminari (>= 0.15)
       nokogiri (~> 1.6)
       rails (>= 3.2.6, < 5)
       rsolr (~> 1.0.11)
@@ -179,7 +178,7 @@ GEM
     equivalent-xml (0.5.1)
       nokogiri (>= 1.4.3)
     erubis (2.7.0)
-    execjs (2.5.0)
+    execjs (2.5.2)
     ezid-client (1.1.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -506,7 +505,7 @@ DEPENDENCIES
   active-triples!
   activefedora-aggregation (~> 0.2.0)
   awesome_print
-  blacklight (= 5.11.2)
+  blacklight (= 5.13.1)
   blacklight-gallery
   byebug
   capistrano

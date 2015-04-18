@@ -38,9 +38,7 @@ gem 'hydra-collections', '~> 5.0.1'
 gem 'rdf-vocab', '~> 0.7.0'
 gem 'rdf-marmotta', '~> 0.0.8'
 
-# Blacklight 5.11.3 causes a bug on the show collections page.
-# Shouldn't be too hard to work through, but no time now.
-gem 'blacklight', '5.11.2'
+gem 'blacklight', '5.13.1'
 
 gem 'rsolr', '~> 1.0.12'
 gem 'activefedora-aggregation', '~> 0.2.0'
@@ -53,7 +51,7 @@ gem 'riiif', '~> 0.1.0'
 gem 'ezid-client', '~> 1.0'
 gem 'qa', '~> 0.5.0'
 
-gem 'kaminari', github: 'harai/kaminari', branch: 'route_prefix_prototype', ref: '384fcb5d11b6'
+gem 'kaminari', github: 'jcoyne/kaminari', branch: 'sufia'
 
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
