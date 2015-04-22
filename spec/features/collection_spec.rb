@@ -11,7 +11,7 @@ RSpec.feature 'Collection show page:', :type => :feature do
                       identifier: ['ark:/99999/fk4v989d9j'],
                       admin_policy_id: AdminPolicy::PUBLIC_POLICY_ID }}
 
-  let(:colors_attrs) {{ title: 'Colors', extent: ['7 photos'],
+  let(:colors_attrs) {{ title: 'Colors',
                         admin_policy_id: AdminPolicy::PUBLIC_POLICY_ID }}
 
   let(:colors) { create_collection_with_images(colors_attrs, [red_attrs, pink_attrs]) }
@@ -41,11 +41,4 @@ RSpec.feature 'Collection show page:', :type => :feature do
     expect(page).to_not have_content red_attrs[:title]
     expect(page).to     have_content pink_attrs[:title]
   end
-
-  scenario 'View collection metadata' do
-    visit collections.collection_path(colors)
-    expect(page).to have_content colors_attrs[:title]
-    expect(page).to have_content colors_attrs[:extent].first
-  end
-
 end

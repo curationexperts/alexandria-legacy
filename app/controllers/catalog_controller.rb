@@ -188,7 +188,6 @@ class CatalogController < ApplicationController
   private
 
     def convert_ark_to_id
-      puts "params #{params[:id]}"
       if id = Identifier.ark_to_id(params[:id])
         params[:id] = id
       elsif id = Identifier.treeify(params[:id])

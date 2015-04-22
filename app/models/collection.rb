@@ -10,4 +10,8 @@ class Collection < ActiveFedora::Base
     CollectionIndexer
   end
 
+  def to_param
+    Identifier.noidify(id)
+  end
+
 end

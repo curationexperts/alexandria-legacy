@@ -4,7 +4,7 @@ module BlacklightUrlHelper
   def url_for_document doc, options = {}
     return unless doc
     if doc['has_model_ssim'] == ['Collection']
-      collections.collection_path(doc.id)
+      collections.collection_path(doc)
     else
       ark_path(doc.ark.html_safe)
     end

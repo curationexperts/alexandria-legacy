@@ -1,6 +1,8 @@
 class CollectionsController < ApplicationController
+  before_action :treeify_id, only: :show
   include Hydra::Catalog
   include Hydra::CollectionsControllerBehavior
+
 
   def collections_search_builder_class
     CollectionSearchBuilder
@@ -33,19 +35,26 @@ class CollectionsController < ApplicationController
     config.index_fields.clear
   end
 
-protected
-
-  # Override Blacklight method so that you can search and
-  # facet within the current collection.
-  def search_action_url(options={})
-    clean_options = options.except(:only_path)
-    case action_name
-      when 'show'
-        collections.collection_path(clean_options)
-      when 'index'
-        collections.collections_path(clean_options)
-      else
-        super(*args)
+  protected
+    # Override Blacklight method so that you can search and
+    # facet within the current collection.
+    def search_action_url(options={})
+      clean_options = options.except(:only_path)
+      case action_name
+        when 'show'
+          collections.collection_path(clean_options)
+        when 'index'
+          collections.collections_path(clean_options)
+        else
+          super(*args)
+      end
     end
-  end
+
+  private
+
+    def treeify_id
+      if id = Identifier.treeify(params[:id])
+        params[:id] = id
+      end
+    end
 end

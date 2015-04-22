@@ -32,7 +32,7 @@ describe CollectionsController do
   end
 
   describe "#show" do
-    let(:collection) { create :public_collection, members: [image] }
+    let(:collection) { create :public_collection, id: 'fk/4v/98/9d/fk4v989d9j', members: [image], identifier: ['ark:/99999/fk4v989d9j'] }
     context "with private images" do
       let!(:image) { create :image }
 

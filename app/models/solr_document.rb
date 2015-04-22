@@ -37,11 +37,7 @@ class SolrDocument
   end
 
   def to_param
-    if n = Identifier.ark_to_noid(ark)
-      n
-    else
-      super
-    end
+    Identifier.ark_to_noid(ark) || super
   end
 
   def ark

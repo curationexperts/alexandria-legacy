@@ -11,14 +11,22 @@ feature 'Collection search page' do
 
   context "with collections" do
     let!(:collection1) { create(:public_collection, title: 'Red') }
-    let!(:collection2) { create(:public_collection, title: 'Pink') }
+    let!(:collection2) { create(:public_collection, title: 'Pink',
+                                  id: 'fk/4v/98/9d/fk4v989d9j',
+                                  identifier: ['ark:/99999/fk4v989d9j'],
+                                  extent: ['7 photos']) }
     scenario 'Search for a collection' do
       visit collections.collections_path
 
       fill_in 'q', with: "Pink"
       click_button 'Search'
-      expect(page).to have_content "Pink"
       expect(page).not_to have_content "Red"
+      click_link "Pink"
+
+      # View collection metadata
+      expect(page).to have_content 'Pink'
+      expect(page).to have_content '7 photos'
+
     end
   end
 
