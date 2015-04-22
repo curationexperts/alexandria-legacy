@@ -64,7 +64,9 @@ $.fn.manage_contributor_fields = function(option) {
 Blacklight.onLoad(function() {
   // This script depends on setting a global variable `relators` that holds the values for
   // the predicate options
-  $('.form-group.image_contributor').manage_contributor_fields({ fieldName: 'contributor', vocabularies: ['lcnames', 'local_names'], relators: relators });
+  if (typeof(relators) !== 'undefined') {
+    $('.form-group.image_contributor').manage_contributor_fields({ fieldName: 'contributor', vocabularies: ['lcnames', 'local_names'], relators: relators });
+  }
 });
 
 
