@@ -130,7 +130,6 @@ class ObjectFactory
     def transform_attributes
       contributors = find_or_create_contributors(klass.contributor_fields, attributes)
       rights_holders = find_or_create_rights_holders(attributes)
-      attributes.except(:note).merge(contributors).merge(rights_holders).
-        merge(notes_attributes: Array(attributes[:note]))
+      attributes.merge(contributors).merge(rights_holders)
     end
 end
