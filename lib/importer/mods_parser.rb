@@ -199,7 +199,7 @@ module Importer
     def notes
       preferred_citation = 'preferred citation'.freeze
       mods.note.each_with_object([]) do |node, list|
-        next if node.attributes.has_key? preferred_citation
+        next if node.attributes.key?('type') && node.attributes['type'].value == preferred_citation
         hash = { value: node.text.gsub(/\n\s+/, "\n") }
         type_attr = node.attributes['type'.freeze].try(:text)
         hash[:note_type] = type_attr if type_attr
