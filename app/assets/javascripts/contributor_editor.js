@@ -27,15 +27,28 @@ function ContributorManager(element, options) {
 }
 
 ContributorManager.prototype = Object.create(SubjectManager.prototype, {
+    _addInitialClasses: {
+        value: function () {
+            this.element.addClass("managed");
+    }},
+
     editorTemplate: {
         value: function() {
             return $(contributor_manager_template({ "name": this.fieldName, "index": this.maxIndex(), "class": "controlled_vocabulary_select", "optionsForSelect": this.buildOptions(), "relatorOptions": this.relatorOptions }));
     }},
 
+    /* Override so that all controls are injected into the .text node */
+    _appendControls: {
+        value: function() {
+            $(this.fieldWrapperClass + ' > .text > .input-group', this.element).append(this.controls);
+            $('.field-controls', this.element).append(this.remover);
+            this.displayEditor();
+        }
+    },
+
     addToExisting: {
         value: function($editor) {
             this._changeControlsToRemove($editor);
-            console.log($editor);
             var selector = $('[name="role"]', $editor);
             var label = $('option:selected', selector).text();
             var newContent = hidden_role_template(

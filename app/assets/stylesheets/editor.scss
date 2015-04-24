@@ -25,6 +25,10 @@
   @extend .multi_value;
 }
 
+.relator {
+  @extend .multi_value;
+}
+
 .multi_value_readonly {
   @extend .multi_value;
   .listing > li {
