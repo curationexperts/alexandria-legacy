@@ -6,7 +6,7 @@ class ImageForm
                 :series_name, :work_type, :form_of_work, :extent,
                 :place_of_publication, :location, :lc_subject, :publisher,
                 :contributor, :latitude, :longitude, :digital_origin, :institution,
-                :sub_location, :use_restrictions, :created, :issued, :date_valid,
+                :sub_location, :use_restrictions, :created, :issued,
                 :date_other, :date_copyrighted, :language, :description_standard,
                 :copyright_status, :license, :rights_holder]
 
