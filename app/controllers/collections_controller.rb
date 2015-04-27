@@ -1,5 +1,5 @@
 class CollectionsController < ApplicationController
-  before_action :treeify_id, only: :show
+  before_action :find_collection_by_treeifed_id, only: :show
   include Hydra::Catalog
   include Hydra::CollectionsControllerBehavior
 
@@ -52,9 +52,11 @@ class CollectionsController < ApplicationController
 
   private
 
-    def treeify_id
+    # Don't mutate the params hash, because that will screw up the kaminari pagination links
+    # cancan's load_resource method is skipped if the @collection is already loaded as happens here:
+    def find_collection_by_treeifed_id
       if id = Identifier.treeify(params[:id])
-        params[:id] = id
+        @collection = Collection.find(id)
       end
     end
 end
