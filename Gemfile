@@ -25,13 +25,12 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'hydra-head', '~> 9.1.4'
-gem 'active-fedora', '~> 9.1.1'
+gem 'active-fedora', '~> 9.1.2'
 
 gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: 'dce-ucsb'
 gem 'hydra-editor', '~> 1.0.4'
 gem 'hydra-role-management'
 gem 'hydra-collections', '~> 5.0.1'
-gem 'rdf-vocab', '~> 0.7.0'
 gem 'rdf-marmotta', '~> 0.0.8'
 
 gem 'blacklight', '5.13.1'
@@ -40,7 +39,7 @@ gem 'rsolr', '~> 1.0.12'
 gem 'activefedora-aggregation', '~> 0.2.0'
 
 gem 'mods', '~> 2.0.3'
-gem 'oargun', github: 'curationexperts/oargun', ref: '9371ceb'
+gem 'oargun', github: 'curationexperts/oargun', ref: 'ee9f79d'
 gem 'linked_vocabs', github: 'no-reply/linked_vocabs' # Waiting on 0.3.0
 gem 'blacklight-gallery'
 gem 'riiif', '~> 0.1.0'

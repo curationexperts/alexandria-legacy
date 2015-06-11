@@ -80,7 +80,7 @@ module Metadata
       index.as :symbol
     end
 
-    property :copyright_status, predicate: RDF::Vocab::PREMIS::V1.hasCopyrightStatus, class_name: Oargun::ControlledVocabularies::CopyrightStatus do |index|
+    property :copyright_status, predicate: RDF::Vocab::PREMIS.hasCopyrightStatus, class_name: Oargun::ControlledVocabularies::CopyrightStatus do |index|
       index.as :stored_searchable
     end
 

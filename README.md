@@ -10,7 +10,7 @@
   * Copy `config/secrets.yml.template` to `config/secrets.yml`
   * Edit `config/secrets.yml` and paste in a new secret key
   * update the host\_name in `config/environments/{environment}.rb`
-  * Copy `config/smtp.yml.template` to `config/smtp.yml` 
+  * Copy `config/smtp.yml.template` to `config/smtp.yml`
   * Edit `config/smtp.yml` and add fake email settings
   * Copy `config/solr.yml.template` to `config/solr.yml`
 
