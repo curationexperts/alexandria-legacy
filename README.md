@@ -48,6 +48,7 @@ brew install imagemagick --with-jp2 --with-libtiff --with-ghostscript
 
 ### Import Data
 
+#### MODS records
 ```
 script/import_mods_records ../mods-for-adrl/mods_demo_set/demo_sbhcmss36_SantaBarbaraPicturePostcards ../alexandria-images/special_collections/mss36-sb-postcards/tiff-a16
 
@@ -59,4 +60,10 @@ script/import_mods_records ../mods-for-adrl/mods_demo_set/collection_records ./t
 The first argument to the script is the directory that contains the MODS files.  The second argument is the directory that contains supporting files, such as image files.
 
 Note:  When importing collections, the 2nd argument won't actually be used, so you can set it to any valid directory.
+
+#### MARC records (ETDs)
+
+```
+bundle exec traject -c traject_config.rb spec/fixtures/marc/adrl_etd_sample.mrc
+```
 

@@ -8,7 +8,7 @@ module Identifier
   end
 
   def self.ark_to_noid(ark)
-    if matches = /^ark:\/\d{5}\/(\w{10})$/.match(ark)
+    if matches = /^ark:\/\d{5}\/(f\w{7,9})$/.match(ark)
       matches[1]
     end
   end

@@ -10,7 +10,6 @@ class CatalogController < ApplicationController
   # These before_filters apply the hydra access controls
   # before_filter :enforce_show_permissions, :only=>:show
   # This applies appropriate access controls to all solr queries
-  # CatalogController.solr_search_params_logic += [:add_access_controls_to_solr_params]
   CatalogController.search_params_logic += [:add_access_controls_to_solr_params, :only_images_and_collections]
 
   add_show_tools_partial(:edit, partial: 'catalog/edit', if: :editor?)
@@ -61,7 +60,7 @@ class CatalogController < ApplicationController
     #
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
-    config.add_facet_field 'active_fedora_model_ssi', :label => 'Format'
+    config.add_facet_field 'active_fedora_model_ssi', label: 'Format'
     config.add_facet_field solr_name('location_label', :facetable), label: 'Location'
     config.add_facet_field solr_name('creator_label', :facetable), label: 'Creator'
     config.add_facet_field solr_name('lc_subject_label', :facetable), label: 'Subject'
@@ -82,8 +81,11 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field solr_name('lc_subject_label', :stored_searchable), label: 'Subject'
     config.add_index_field ImageIndexer::CONTRIBUTOR_LABEL, label: 'Creators / Contributors'
-    config.add_index_field solr_name('form_of_work_label', :stored_searchable), label: 'Type'
     config.add_index_field solr_name('publisher', :stored_searchable), label: 'Publisher'
+    config.add_index_field solr_name('author', :stored_searchable), label: 'Author'
+    config.add_index_field 'published_ss', label: 'Published'
+    config.add_index_field 'date_created_ss', label: 'Date Created'
+    config.add_index_field solr_name('form_of_work_label', :stored_searchable), label: 'Type'
     config.add_index_field solr_name('location_label', :stored_searchable), label: 'Location'
     config.add_index_field solr_name('language', :stored_searchable, type: :string), label: 'Language'
 
