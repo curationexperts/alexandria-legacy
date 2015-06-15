@@ -3,6 +3,6 @@ class SearchBuilder < Hydra::SearchBuilder
 
   def only_images_and_collections(solr_parameters)
     solr_parameters[:fq] ||= []
-    solr_parameters[:fq] << "{!terms f=has_model_ssim}#{Image.to_class_uri},#{Etd.to_class_uri}"
+    solr_parameters[:fq] << "{!terms f=has_model_ssim}#{Image.to_class_uri},Etd"
   end
 end
