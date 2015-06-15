@@ -64,6 +64,6 @@ Note:  When importing collections, the 2nd argument won't actually be used, so y
 #### MARC records (ETDs)
 
 ```
-bundle exec traject -c traject_config.rb spec/fixtures/marc/adrl_etd_sample.mrc
+bundle exec traject -c traject_config.rb spec/fixtures/marc/adrl_etd_sample.mrc -s solr.url=http://somehere:8983/solr
 ```
 
