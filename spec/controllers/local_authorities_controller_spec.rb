@@ -5,6 +5,7 @@ describe LocalAuthoritiesController do
   let(:group) { create(:group) }
   let(:org) { create(:org) }
   let(:agent) { create(:agent) }
+  let(:topic) { Topic.create!(label: ['A Local Subject']) }
 
 
   describe 'logged in as admin user' do
@@ -16,7 +17,7 @@ describe LocalAuthoritiesController do
 
       before do
         ActiveFedora::Cleaner.clean!
-        [person, group, org, agent, image] # create the objects
+        [person, group, org, agent, image, topic] # create the objects
         get :index 
       end
 
@@ -27,6 +28,7 @@ describe LocalAuthoritiesController do
         expect(doc_ids).to     include(org.id)
         expect(doc_ids).to     include(agent.id)
         expect(doc_ids).to_not include(image.id)
+        expect(doc_ids).to     include(topic.id)
       end
     end
 

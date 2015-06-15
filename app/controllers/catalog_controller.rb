@@ -93,11 +93,11 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the show (single result) view
     # The ordering of the field names is the order of the display
     config.add_show_field 'foaf_name_tesim', label: 'FOAF Name'
+    config.add_show_field 'label_tesim', label: 'Label'
     config.add_show_field solr_name('author', :stored_searchable), label: 'Author'
     config.add_show_field 'published_ss', label: 'Published'
     config.add_show_field 'date_created_ss', label: 'Date Created'
     config.add_show_field solr_name('form_of_work_label', :stored_searchable), label: 'Form of Resource'
-
     config.add_show_field solr_name('accession_number', :symbol), label: 'Accession Number'
     config.add_show_field solr_name('alternative', :stored_searchable), label: 'Alternative Title'
     config.add_show_field 'description_ssim', label: 'Description'
