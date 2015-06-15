@@ -93,13 +93,22 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the show (single result) view
     # The ordering of the field names is the order of the display
     config.add_show_field 'foaf_name_tesim', label: 'FOAF Name'
+    config.add_show_field solr_name('author', :stored_searchable), label: 'Author'
+    config.add_show_field 'published_ss', label: 'Published'
+    config.add_show_field 'date_created_ss', label: 'Date Created'
+    config.add_show_field solr_name('form_of_work_label', :stored_searchable), label: 'Form of Resource'
+
     config.add_show_field solr_name('accession_number', :symbol), label: 'Accession Number'
     config.add_show_field solr_name('alternative', :stored_searchable), label: 'Alternative Title'
+    config.add_show_field 'description_ssim', label: 'Description'
+    config.add_show_field 'advisor_ssim', label: 'Notes'
     config.add_show_field solr_name('description', :stored_searchable), label: 'Description'
+    config.add_show_field solr_name('summary', :stored_searchable), label: 'Summary'
+    config.add_show_field 'genre_ssim', label: 'Genre'
+    config.add_show_field 'keyword_ssim', label: 'Keywords'
     config.add_show_field solr_name('collection_label', :symbol), label: 'Collection', helper_method: :link_to_collection
     config.add_show_field solr_name('series_name', :displayable), label: 'Series'
     config.add_show_field solr_name('work_type', :stored_searchable), label: 'Type of Resource'
-    config.add_show_field solr_name('form_of_work_label', :stored_searchable), label: 'Form of Resource'
     config.add_show_field solr_name('extent', :displayable), label: 'Extent'
     config.add_show_field solr_name('identifier', :displayable), label: 'ARK'
     config.add_show_field solr_name('place_of_publication', :stored_searchable), label: 'Place of Publication'
