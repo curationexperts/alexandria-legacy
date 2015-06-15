@@ -18,6 +18,9 @@ settings do
   provide "solr_writer.commit_on_close", "true"
 end
 
+# These are the tags in the file
+#["005", "006", "007", "008", "020", "035", "040", "100", "245", "264", "300", "336", "337", "338", "500", "502", "520", "546", "653", "650", "655", "710", "720", "791", "792", "856", "852", "946", "947", "948", "956", "001"]
+
 # see http://alexandria.ucsb.edu/catalog/adrl:f3000017
 # to_field 'last_transaction_datetime', extract_marc("005")
 # to_field 'Fixed-Length Data Elements', extract_marc("006")
@@ -54,14 +57,14 @@ to_field 'active_fedora_model_ssi', literal("Thesis or dissertation")
 to_field 'form_of_work_label_tesim', literal("Thesis or dissertation")
 to_field 'has_model_ssim', literal("Etd")
 
-to_field 'title_tesim',       marc_sortable_title
+to_field 'title_tesim', extract_marc("245a", trim_punctuation: true)
 # to_field 'broad_subject',     marc_lcc_to_broad_category
 # to_field "geographic_facet",  marc_geo_facet
 #
 to_field 'author_tesim', extract_marc("100a", trim_punctuation: true)
 # to_field 'title', extract_marc("245") # also has statement of responsibility, needs to strip type
 # to_field 'filing_version', extract_marc_filing_version # title with statement of responsibility stripped, but still has colin and slashes
-to_field 'published_ss', extract_marc("260")
+to_field 'published_ss', extract_marc("264", trim_punctuation: true)
 to_field 'description_ssim', extract_marc("300")
 to_field 'advisor_tesim', extract_marc("500") # and committee members
 to_field 'dissertation_ssim', extract_marc("502")
