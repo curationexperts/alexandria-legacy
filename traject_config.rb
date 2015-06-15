@@ -6,6 +6,11 @@ require_relative 'app/utils/identifier'
 extend Traject::Macros::Marc21Semantics
 extend Traject::Macros::MarcFormats
 
+def ark_from_alexandria_uri(uri)
+  md = /http:\/\/alexandria\.ucsb\.edu\/lib\/(ark:\/\d{5}\/.*)/.match(uri)
+  md[1] if md
+end
+
 settings do
   # provide "writer_class_name", "Traject::JsonWriter"
   # TODO use the solr.yml
@@ -25,16 +30,23 @@ to_field "date_created_ss", marc_publication_date
 
 to_field 'isbn_ssim', extract_marc("020")
 
-to_field 'id', lambda { |record, accumulator|
-  # Making the oclc stretch to 10 digits. TODO remove when we have real arks
-  num = oclcnum.call(record, []).first
-  accumulator << Identifier.treeify(sprintf("f%09d", num))
+extractor = MarcExtractor.new("856u", :separator => nil)
+IDENTIFIER = Solrizer.solr_name('identifier', :displayable)
+
+to_field IDENTIFIER, lambda { |record, accumulator, context|
+  fields = extractor.extract(record).map do |field|
+    ark_from_alexandria_uri(field)
+  end.compact
+  if fields.empty?
+    context.skip! # TODO mint an ark instead of skiping the record
+  else
+    # TODO update ARK to point at alexandria-v2?
+    accumulator << fields.first
+  end
 }
 
-to_field Solrizer.solr_name('identifier', :displayable), lambda { |record, accumulator|
-  # Making a fake ark out of the OCLC number -- TODO use a real ark
-  num = oclcnum.call(record, []).first
-  accumulator << sprintf("ark:/11111/f%09d", num)
+to_field 'id', lambda { |record, accumulator, context|
+  accumulator << Identifier.ark_to_id(context.output_hash[IDENTIFIER].first)
 }
 
 # to_field "format_s", marc_formats
