@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: git://github.com/jcoyne/traject.git
-  revision: b0692d4de4fe5bba28a9a5add530291390f35de8
+  revision: dcd1e0008dad6367ef223a8b5a7dc884497409a3
   branch: writer
   specs:
     traject (2.0.2)
