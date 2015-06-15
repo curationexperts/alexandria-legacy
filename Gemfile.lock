@@ -33,21 +33,6 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
-  remote: git://github.com/jcoyne/traject.git
-  revision: dcd1e0008dad6367ef223a8b5a7dc884497409a3
-  branch: writer
-  specs:
-    traject (2.0.2)
-      concurrent-ruby (>= 0.8.0)
-      dot-properties (>= 0.1.1)
-      hashie (~> 3.1)
-      httpclient (~> 2.5)
-      marc (~> 1.0)
-      marc-fastxmlwriter (~> 1.0)
-      slop (>= 3.4.5, < 4.0)
-      yell
-
-GIT
   remote: git://github.com/no-reply/linked_vocabs.git
   revision: f96779ca0af28534ecf2315c1df7015fa5e9c89f
   specs:
@@ -507,6 +492,15 @@ GEM
     thread_safe (0.3.5)
     tilt (1.4.1)
     timecop (0.7.3)
+    traject (2.0.2)
+      concurrent-ruby (>= 0.8.0)
+      dot-properties (>= 0.1.1)
+      hashie (~> 3.1)
+      httpclient (~> 2.5)
+      marc (~> 1.0)
+      marc-fastxmlwriter (~> 1.0)
+      slop (>= 3.4.5, < 4.0)
+      yell
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
@@ -574,7 +568,7 @@ DEPENDENCIES
   sqlite3
   therubyracer
   timecop (= 0.7.3)
-  traject!
+  traject
   turbolinks
   uglifier (>= 1.3.0)
   vcr
