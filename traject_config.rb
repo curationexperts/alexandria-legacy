@@ -58,7 +58,7 @@ to_field 'title_tesim',       marc_sortable_title
 # to_field 'broad_subject',     marc_lcc_to_broad_category
 # to_field "geographic_facet",  marc_geo_facet
 #
-to_field 'author_tesim', extract_marc("100")
+to_field 'author_tesim', extract_marc("100a", trim_punctuation: true)
 # to_field 'title', extract_marc("245") # also has statement of responsibility, needs to strip type
 # to_field 'filing_version', extract_marc_filing_version # title with statement of responsibility stripped, but still has colin and slashes
 to_field 'published_ss', extract_marc("260")
