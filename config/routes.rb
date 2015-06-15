@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'lib/:id' => 'catalog#show',
     constraints: { id: /ark:\/99999\/fk4\w{7}/ }
 
+  resources :local_authorities, only: :index
+
   devise_for :users
   mount Hydra::RoleManagement::Engine => '/'
   mount Riiif::Engine => '/images'

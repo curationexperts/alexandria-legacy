@@ -5,8 +5,10 @@ module BlacklightUrlHelper
     return unless doc
     if doc['has_model_ssim'] == ['Collection']
       collections.collection_path(doc)
-    else
+    elsif doc.ark
       ark_path(doc.ark.html_safe)
+    else
+      super
     end
   end
 

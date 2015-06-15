@@ -90,6 +90,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     # The ordering of the field names is the order of the display
+    config.add_show_field 'foaf_name_tesim', label: 'FOAF Name'
     config.add_show_field solr_name('accession_number', :symbol), label: 'Accession Number'
     config.add_show_field solr_name('alternative', :stored_searchable), label: 'Alternative Title'
     config.add_show_field solr_name('description', :stored_searchable), label: 'Description'
@@ -190,8 +191,7 @@ class CatalogController < ApplicationController
     def convert_ark_to_id
       if id = Identifier.ark_to_id(params[:id])
         params[:id] = id
-      elsif id = Identifier.treeify(params[:id])
-        params[:id] = id
       end
     end
+
 end

@@ -1,0 +1,35 @@
+require 'rails_helper'
+
+describe LocalAuthoritiesController do
+  let(:person) { create(:person) }
+  let(:group) { create(:group) }
+  let(:org) { create(:org) }
+  let(:agent) { create(:agent) }
+
+
+  describe 'logged in as admin user' do
+    let(:admin) { create :admin }
+    before { sign_in admin }
+
+    describe 'get index' do
+      let(:image) { create(:public_image) }
+
+      before do
+        ActiveFedora::Cleaner.clean!
+        [person, group, org, agent, image] # create the objects
+        get :index 
+      end
+
+      it 'only shows the models for local authorities' do
+        doc_ids = assigns[:document_list].map(&:id)
+        expect(doc_ids).to     include(person.id)
+        expect(doc_ids).to     include(group.id)
+        expect(doc_ids).to     include(org.id)
+        expect(doc_ids).to     include(agent.id)
+        expect(doc_ids).to_not include(image.id)
+      end
+    end
+
+  end  # logged in as admin
+
+end
