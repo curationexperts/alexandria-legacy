@@ -106,6 +106,10 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('summary', :stored_searchable), label: 'Summary'
     config.add_show_field 'genre_ssim', label: 'Genre'
     config.add_show_field 'keyword_ssim', label: 'Keywords'
+    config.add_show_field 'degree_grantor_ssm', label: 'Degree grantor'
+    config.add_show_field 'discipline_ssm', label: 'Discipine'
+    config.add_show_field 'language_ssim', label: 'Language'
+    config.add_show_field 'isbn_ssim', label: 'ISBN'
     config.add_show_field solr_name('collection_label', :symbol), label: 'Collection', helper_method: :link_to_collection
     config.add_show_field solr_name('series_name', :displayable), label: 'Series'
     config.add_show_field solr_name('work_type', :stored_searchable), label: 'Type of Resource'
@@ -126,7 +130,6 @@ class CatalogController < ApplicationController
       config.add_show_field solr_name("#{key}_label", :stored_searchable), label: key.to_s.titleize
     end
 
-    config.add_show_field solr_name('language', :stored_searchable, type: :string), label: 'Language'
     config.add_show_field solr_name('latitude', :displayable, type: :string), label: 'Latitude'
     config.add_show_field solr_name('longitude', :displayable, type: :string), label: 'Longitude'
     config.add_show_field solr_name('institution_label', :stored_searchable), label: 'Contributing Institution'

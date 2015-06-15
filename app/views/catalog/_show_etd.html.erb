@@ -1,0 +1,23 @@
+<%= render 'show_default', document: document %>
+
+<% if document.key?('filename_ssim') %>
+  <table class="table table-bordered" id="downloads">
+    <thead>
+      <tr>
+        <th>File (Download)</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% document.fetch('filename_ssim').each do |filename| %>
+      <tr>
+        <td class="access_row" colspan="2">Access: UC Santa Barbara Only</td>
+      </tr>
+      <tr>
+        <td class="col_1"><span id="thumbnail_image"><%= image_tag "pdf_32x.png" %></span><%=filename %><span id="file_size"> (???) </span></td>
+        <td class="col_2">Full-text thesis or dissertation</td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

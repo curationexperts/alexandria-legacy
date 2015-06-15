@@ -94,7 +94,8 @@ to_field "genre_ssim", lambda { |record, accumulator|
   accumulator << values.join(' -- ')
 }
 
-# to_field 'degree_grantor', extract_marc("710")
+to_field 'degree_grantor_ssm', extract_marc("710ab")
+to_field 'discipline_ssm', extract_marc('650')
 to_field 'fulltext_link_ssim', extract_marc("856u")
 # to_field 'f948', extract_marc("948")
 to_field 'filename_ssim', extract_marc("956f")
