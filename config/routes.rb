@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   blacklight_for :catalog
   get 'lib/:id' => 'catalog#show',
-    constraints: { id: /ark:\/99999\/fk4\w{7}/ }
+    constraints: { id: /ark:\/\d{5}\/f\w{7,9}/ }
 
   resources :local_authorities, only: :index
 

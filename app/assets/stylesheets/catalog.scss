@@ -5,3 +5,21 @@
 select.search_field.form-control {
 	width: 19%;
 }
+
+table#downloads {
+  &.table-bordered {
+    > thead > tr > th, > tbody > tr > td {
+      border-left: 0;
+      border-right: 0;
+    }
+  }
+
+  thead {
+    background-color: #EEE;
+  }
+
+  .access_row {
+    color: #FFF;
+    background-color: #9E280E;
+  }
+}

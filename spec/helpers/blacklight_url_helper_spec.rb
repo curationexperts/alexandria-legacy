@@ -9,6 +9,12 @@ describe BlacklightUrlHelper do
       it { is_expected.to eq '/lib/ark:/99999/fk4v989d9j' }
     end
 
+    context "with an Etd" do
+      let(:model) { 'Etd' }
+      subject { helper.url_for_document(document) }
+      it { is_expected.to eq '/lib/ark:/99999/fk4v989d9j' }
+    end
+
     context "with a collection" do
       let(:model) { 'Collection' }
       subject { helper.url_for_document(document) }

@@ -10,8 +10,7 @@ class CatalogController < ApplicationController
   # These before_filters apply the hydra access controls
   # before_filter :enforce_show_permissions, :only=>:show
   # This applies appropriate access controls to all solr queries
-  # CatalogController.solr_search_params_logic += [:add_access_controls_to_solr_params]
-  CatalogController.search_params_logic += [:add_access_controls_to_solr_params, :only_images_and_collections]
+  CatalogController.search_params_logic += [:add_access_controls_to_solr_params, :only_visible_objects]
 
   add_show_tools_partial(:edit, partial: 'catalog/edit', if: :editor?)
   add_show_tools_partial(:download, partial: 'catalog/download')
@@ -61,7 +60,7 @@ class CatalogController < ApplicationController
     #
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
-    config.add_facet_field 'active_fedora_model_ssi', :label => 'Format'
+    config.add_facet_field 'active_fedora_model_ssi', label: 'Format'
     config.add_facet_field solr_name('location_label', :facetable), label: 'Location'
     config.add_facet_field solr_name('creator_label', :facetable), label: 'Creator'
     config.add_facet_field solr_name('lc_subject_label', :facetable), label: 'Subject'
@@ -82,8 +81,11 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field solr_name('lc_subject_label', :stored_searchable), label: 'Subject'
     config.add_index_field ImageIndexer::CONTRIBUTOR_LABEL, label: 'Creators / Contributors'
-    config.add_index_field solr_name('form_of_work_label', :stored_searchable), label: 'Type'
     config.add_index_field solr_name('publisher', :stored_searchable), label: 'Publisher'
+    config.add_index_field solr_name('author', :stored_searchable), label: 'Author'
+    config.add_index_field 'published_ss', label: 'Published'
+    config.add_index_field 'date_created_ss', label: 'Date Created'
+    config.add_index_field solr_name('form_of_work_label', :stored_searchable), label: 'Type'
     config.add_index_field solr_name('location_label', :stored_searchable), label: 'Location'
     config.add_index_field solr_name('language', :stored_searchable, type: :string), label: 'Language'
 
@@ -91,13 +93,26 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the show (single result) view
     # The ordering of the field names is the order of the display
     config.add_show_field 'foaf_name_tesim', label: 'FOAF Name'
+    config.add_show_field solr_name('author', :stored_searchable), label: 'Author'
+    config.add_show_field 'published_ss', label: 'Published'
+    config.add_show_field 'date_created_ss', label: 'Date Created'
+    config.add_show_field solr_name('form_of_work_label', :stored_searchable), label: 'Form of Resource'
+
     config.add_show_field solr_name('accession_number', :symbol), label: 'Accession Number'
     config.add_show_field solr_name('alternative', :stored_searchable), label: 'Alternative Title'
+    config.add_show_field 'description_ssim', label: 'Description'
+    config.add_show_field 'advisor_ssim', label: 'Notes'
     config.add_show_field solr_name('description', :stored_searchable), label: 'Description'
+    config.add_show_field solr_name('summary', :stored_searchable), label: 'Summary'
+    config.add_show_field 'genre_ssim', label: 'Genre'
+    config.add_show_field 'keyword_ssim', label: 'Keywords'
+    config.add_show_field 'degree_grantor_ssm', label: 'Degree grantor'
+    config.add_show_field 'discipline_ssm', label: 'Discipine'
+    config.add_show_field 'language_ssim', label: 'Language'
+    config.add_show_field 'isbn_ssim', label: 'ISBN'
     config.add_show_field solr_name('collection_label', :symbol), label: 'Collection', helper_method: :link_to_collection
     config.add_show_field solr_name('series_name', :displayable), label: 'Series'
     config.add_show_field solr_name('work_type', :stored_searchable), label: 'Type of Resource'
-    config.add_show_field solr_name('form_of_work_label', :stored_searchable), label: 'Form of Resource'
     config.add_show_field solr_name('extent', :displayable), label: 'Extent'
     config.add_show_field solr_name('identifier', :displayable), label: 'ARK'
     config.add_show_field solr_name('place_of_publication', :stored_searchable), label: 'Place of Publication'
@@ -115,7 +130,6 @@ class CatalogController < ApplicationController
       config.add_show_field solr_name("#{key}_label", :stored_searchable), label: key.to_s.titleize
     end
 
-    config.add_show_field solr_name('language', :stored_searchable, type: :string), label: 'Language'
     config.add_show_field solr_name('latitude', :displayable, type: :string), label: 'Latitude'
     config.add_show_field solr_name('longitude', :displayable, type: :string), label: 'Longitude'
     config.add_show_field solr_name('institution_label', :stored_searchable), label: 'Contributing Institution'

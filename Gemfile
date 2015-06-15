@@ -50,6 +50,7 @@ gem 'kaminari', github: 'jcoyne/kaminari', branch: 'sufia'
 
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
+gem 'traject', github: 'jcoyne/traject', branch: 'writer'
 
 group :development, :test do
   gem 'rspec-rails'

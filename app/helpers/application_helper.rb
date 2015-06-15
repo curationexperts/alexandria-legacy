@@ -14,7 +14,12 @@ module ApplicationHelper
   end
 
   def link_to_collection(stuff)
-    link_to stuff.fetch(:value).first, collections.collection_path(stuff.fetch(:document)[ImageIndexer::COLLECTION].first)
+    collection_id = Array(stuff.fetch(:document)[ImageIndexer::COLLECTION]).first
+    if collection_id
+      link_to stuff.fetch(:value).first, collections.collection_path(collection_id)
+    else
+      stuff.fetch(:value).first
+    end
   end
 
   def display_notes(data)
