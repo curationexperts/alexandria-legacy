@@ -27,6 +27,7 @@ class LocalAuthoritiesController < ApplicationController
     config.add_facet_field 'active_fedora_model_ssi', :label => 'Type'
 
     config.index.title_field = ['foaf_name_tesim', 'label_tesim']
+    config.add_index_field 'active_fedora_model_ssi', :label => 'Type'
   end  # configure_blacklight
 
   # Override rails path for the views so that we can use
