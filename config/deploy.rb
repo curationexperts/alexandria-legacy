@@ -8,6 +8,7 @@ set :branch, 'master'
 set :deploy_to, '/opt/alex2'
 set :log_level, :debug
 set :keep_releases, 5
+set :passenger_restart_with_touch, true
 
 set :assets_prefix, "#{shared_path}/public/assets"
 
