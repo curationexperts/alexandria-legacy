@@ -8,6 +8,7 @@ class Ability
     if current_user.admin?
       can [:create, :update], [ActiveFedora::Base, SolrDocument]
       can [:create, :show, :add_user, :remove_user, :index], Role
+      can :read, :local_authorities
     end
   end
 end

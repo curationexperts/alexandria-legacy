@@ -8,6 +8,21 @@ describe LocalAuthoritiesController do
   let(:topic) { Topic.create!(label: ['A Local Subject']) }
 
 
+  describe 'a regular user' do
+    let(:user) { create :user }
+    before { sign_in user }
+
+    describe 'get index' do
+      before { get :index }
+
+      it 'access is denied' do
+        expect(flash[:alert]).to match /You are not authorized/
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
+
+
   describe 'logged in as admin user' do
     let(:admin) { create :admin }
     before { sign_in admin }

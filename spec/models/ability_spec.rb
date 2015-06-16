@@ -16,6 +16,8 @@ describe Ability do
       is_expected.not_to be_able_to(:create, Image)
       is_expected.not_to be_able_to(:update, image)
       is_expected.not_to be_able_to(:destroy, image)
+
+      is_expected.not_to be_able_to(:read, :local_authorities)
     }
   end
 
@@ -29,6 +31,8 @@ describe Ability do
       is_expected.to be_able_to(:update, SolrDocument.new)
 
       is_expected.not_to be_able_to(:destroy, image)
+
+      is_expected.to be_able_to(:read, :local_authorities)
     }
   end
 end

@@ -5,6 +5,8 @@ class LocalAuthoritiesController < ApplicationController
 
   LocalAuthoritiesController.search_params_logic += [:only_models_for_local_authorities]
 
+  before_filter :auth
+
   configure_blacklight do |config|
     config.search_builder_class = LocalAuthoritiesSearchBuilder
 
@@ -32,4 +34,11 @@ class LocalAuthoritiesController < ApplicationController
   def _prefixes
     @_prefixes ||= super + ['catalog']
   end 
+
+private
+
+  def auth
+    authorize! :read, :local_authorities
+  end
+
 end
