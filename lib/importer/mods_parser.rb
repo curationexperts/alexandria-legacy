@@ -70,7 +70,7 @@ module Importer
         title: untyped_title,
         alternative: alt_title,
         description: mods_description,
-        lc_subject: mods.subject.topic.valueURI.map { |uri| RDF::URI.new(uri) },
+        lc_subject: subject,
         extent: mods.physical_description.extent.map{|node| strip_whitespace(node.text)},
         language: mods.language.languageTerm.valueURI.map { |uri| RDF::URI.new(uri) },
         digital_origin: mods.physical_description.digitalOrigin.map(&:text),
@@ -266,6 +266,11 @@ module Importer
 
       def strip_whitespace(text)
         text.gsub("\n", " ").gsub("\t", "")
+      end
+
+      def subject
+        subjects = mods.xpath('//mods:subject/mods:name/@valueURI', NAMESPACES) + mods.xpath('//mods:subject/mods:topic/@valueURI', NAMESPACES)
+        subjects.map { |uri| RDF::URI.new(uri) }
       end
 
   end
