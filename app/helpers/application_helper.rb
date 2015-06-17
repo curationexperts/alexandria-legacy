@@ -26,4 +26,8 @@ module ApplicationHelper
     safe_join(Array(data[:value]), '<br/>'.html_safe)
   end
 
+  def admin_user?
+    current_user && current_user.admin?
+  end
+
 end

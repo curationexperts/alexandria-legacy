@@ -10,6 +10,8 @@ class LocalAuthoritiesController < ApplicationController
   configure_blacklight do |config|
     config.search_builder_class = LocalAuthoritiesSearchBuilder
 
+    config.add_nav_action(:admin_menu, partial: 'shared/admin_menu', if: :admin_user?)
+
     config.default_solr_params = {
       qf: 'foaf_name_tesim',
       wt: 'json',
