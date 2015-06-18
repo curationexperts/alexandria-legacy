@@ -64,6 +64,17 @@ to_field 'form_of_work_label_tesim', literal("Thesis or dissertation")
 to_field 'has_model_ssim', literal("Etd")
 
 to_field 'title_tesim', extract_marc("245a", trim_punctuation: true)
+# TODO 245c is the statment of responsibility. Per call on 2015-6-17
+#
+# TODO embargo and open access status come from XML from proquest.
+#    linked on the pdf name in the marc record (contained in the proquest zip file)
+#
+# TODO there are two versions of proquest xml files with different ways of encoding embargos
+#    Spring 2014 change over date.
+#
+# TODO we need to extract the pdf names from the directory of zip files so that we can match marc records (pdf name) to zip file.
+#
+#
 # to_field 'broad_subject',     marc_lcc_to_broad_category
 # to_field "geographic_facet",  marc_geo_facet
 #
