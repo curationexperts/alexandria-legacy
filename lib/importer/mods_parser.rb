@@ -269,8 +269,7 @@ module Importer
       end
 
       def subject
-        subjects = mods.xpath('//mods:subject/mods:name/@valueURI', NAMESPACES) + mods.xpath('//mods:subject/mods:topic/@valueURI', NAMESPACES)
-        subjects.map { |uri| RDF::URI.new(uri) }
+        mods.xpath('//mods:subject/mods:name/@valueURI|//mods:subject/mods:topic/@valueURI', NAMESPACES).map { |uri| RDF::URI.new(uri) }
       end
 
   end
