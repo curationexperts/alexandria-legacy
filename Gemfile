@@ -37,7 +37,8 @@ gem 'rdf-marmotta', '~> 0.0.8'
 gem 'blacklight', '5.13.1'
 
 gem 'rsolr', '~> 1.0.12'
-gem 'activefedora-aggregation', '~> 0.2.0'
+#gem 'activefedora-aggregation', '~> 0.2.0'
+gem 'activefedora-aggregation', github: 'projecthydra-labs/activefedora-aggregation' # this will be 0.3.0
 
 gem 'mods', '~> 2.0.3'
 gem 'oargun', github: 'curationexperts/oargun', branch: 'AT_0.7.1'

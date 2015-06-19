@@ -5,8 +5,8 @@ describe RecordsController do
   let(:user) { create :admin }
   before { sign_in user }
 
-  # Don't bother indexing this record (speeds up test)
-  before { allow_any_instance_of(Image).to receive(:update_index) }
+  # Don't fetch external records (speed up)
+  before { allow_any_instance_of(RDF::DeepIndexingService).to receive(:fetch_external) }
 
   describe "#update" do
     let(:image) { Image.create!(id: 'fk/4d/n4/9s/fk4dn49s80', creator_attributes: initial_creators) }

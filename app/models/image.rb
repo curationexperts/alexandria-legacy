@@ -2,7 +2,7 @@ require 'active_fedora/aggregation'
 class Image < ActiveFedora::Base
   include Metadata
   include Hydra::Collections::Collectible
-  aggregates :generic_files
+  aggregates :generic_files, predicate: ::RDF::URI("http://pcdm.org/models#hasMember")
 
   def self.indexer
     ImageIndexer
