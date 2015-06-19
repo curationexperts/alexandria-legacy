@@ -25,9 +25,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'hydra-head', '~> 9.1.4'
-gem 'active-fedora', '~> 9.1.2'
+gem 'active-fedora', github: 'projecthydra/active_fedora' # this will be 9.2
 
-gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: 'dce-ucsb'
+
+gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: '0.7-future'
 gem 'hydra-editor', '~> 1.0.4'
 gem 'hydra-role-management'
 gem 'hydra-collections', '~> 5.0.1'
@@ -39,8 +40,8 @@ gem 'rsolr', '~> 1.0.12'
 gem 'activefedora-aggregation', '~> 0.2.0'
 
 gem 'mods', '~> 2.0.3'
-gem 'oargun', github: 'curationexperts/oargun', ref: 'ee9f79d'
-gem 'linked_vocabs', github: 'no-reply/linked_vocabs' # Waiting on 0.3.0
+gem 'oargun', github: 'curationexperts/oargun', branch: 'AT_0.7.1'
+gem 'linked_vocabs', github: 'jcoyne/linked_vocabs', branch: 'with_0.7_validation'
 gem 'blacklight-gallery'
 gem 'riiif', '~> 0.1.0'
 gem 'ezid-client', '~> 1.0'
