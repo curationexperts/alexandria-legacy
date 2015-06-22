@@ -128,6 +128,47 @@ describe RecordsController do
           end
         end
       end
+    end  # context dates
+  end  # describe #update
+
+
+  describe "#destroy" do
+    routes { Rails.application.routes }
+
+    describe "a local authority record" do
+      let!(:person) { create(:person) }
+
+      context 'a person that is referenced by another record' do
+        let!(:image) { create(:image, creator: [person]) }
+
+        it 'returns message that record cannot be destroyed' do
+          expect {
+            delete :destroy, id: person
+          }.to change { Person.count }.by(0)
+          expect(flash[:alert]).to eq "Record \"#{person.rdf_label.first}\" cannot be deleted because it is referenced by 1 other record."
+        end
+      end
+
+      context 'a person that is not referenced by any other record' do
+        it 'destroys the record' do
+          expect {
+            delete :destroy, id: person
+          }.to change { Person.count }.by(-1)
+          expect(response).to redirect_to local_authorities_path
+          expect(flash[:notice]).to eq "Record \"#{person.rdf_label.first}\" has been destroyed"
+        end
+      end
+
+      context 'a non-admin user' do
+        let(:user) { create :user }
+
+        it 'access is denied' do
+          delete :destroy, id: person
+          expect(flash[:alert]).to match /You are not authorized/
+          expect(response).to redirect_to root_path
+        end
+      end
     end
-  end
+  end  # describe #destroy
+
 end

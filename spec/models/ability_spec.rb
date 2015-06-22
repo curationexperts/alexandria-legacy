@@ -18,6 +18,7 @@ describe Ability do
       is_expected.not_to be_able_to(:destroy, image)
 
       is_expected.not_to be_able_to(:read, :local_authorities)
+      is_expected.not_to be_able_to(:destroy, :local_authorities)
     }
   end
 
@@ -33,6 +34,7 @@ describe Ability do
       is_expected.not_to be_able_to(:destroy, image)
 
       is_expected.to be_able_to(:read, :local_authorities)
+      is_expected.to be_able_to(:destroy, :local_authorities)
     }
   end
 end

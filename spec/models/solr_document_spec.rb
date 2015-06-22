@@ -23,4 +23,26 @@ describe SolrDocument do
       it { is_expected.to eq 'ark:/99999/fk4v989d9j' }
     end
   end
+
+  context '#to_param' do
+    let(:noid) { 'f123456789' }
+    let(:id)   { '12/34/56/f123456789' }
+
+    subject { document.to_param }
+
+    context 'for an object with an ARK' do
+      let(:document) { SolrDocument.new(id: id, identifier_ssm: ["ark:/99999/#{noid}"]) }
+
+      it 'converts the ark to a noid' do
+        expect(subject).to eq noid
+      end
+    end
+
+    context 'for an object without an ARK' do
+      let(:document) { SolrDocument.new(id: id, identifier_ssm: nil) }
+      it 'converts the id to a noid' do
+        expect(subject).to eq noid
+      end
+    end
+  end
 end

@@ -30,4 +30,12 @@ module ApplicationHelper
     current_user && current_user.admin?
   end
 
+  def show_delete_link?(config, options)
+    document = options.fetch(:document)
+    klass = document['active_fedora_model_ssi'].constantize
+    is_local = klass.included_modules.include?(LocalAuthority)
+
+    admin_user? && is_local
+  end
+
 end

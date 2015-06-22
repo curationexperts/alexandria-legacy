@@ -12,6 +12,7 @@ class CatalogController < ApplicationController
   # This applies appropriate access controls to all solr queries
   CatalogController.search_params_logic += [:add_access_controls_to_solr_params, :only_visible_objects]
 
+  add_show_tools_partial(:delete, partial: 'catalog/delete', if: :show_delete_link?)
   add_show_tools_partial(:edit, partial: 'catalog/edit', if: :editor?)
   add_show_tools_partial(:download, partial: 'catalog/download')
 
@@ -205,6 +206,8 @@ class CatalogController < ApplicationController
 
     def convert_ark_to_id
       if id = Identifier.ark_to_id(params[:id])
+        params[:id] = id
+      elsif id = Identifier.treeify(params[:id])
         params[:id] = id
       end
     end

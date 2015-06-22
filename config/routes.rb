@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   mount Qa::Engine => '/qa'
   mount HydraEditor::Engine => '/'
   mount Hydra::Collections::Engine => '/'
+
+  resources :records, only: :destroy
 end
