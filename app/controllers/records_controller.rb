@@ -24,6 +24,7 @@ class RecordsController < ApplicationController
   private
 
   def convert_noid_to_id
+    return unless params[:id]
     if id = Identifier.treeify(params[:id])
       params[:id] = id
     end
