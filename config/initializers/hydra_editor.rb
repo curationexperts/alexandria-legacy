@@ -1,1 +1,1 @@
-HydraEditor.models = ["Image", "Person", "Group", "Organization"]
+HydraEditor.models = ["Image", "Person", "Group", "Organization", "Topic"]

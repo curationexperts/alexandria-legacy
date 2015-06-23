@@ -1,5 +1,7 @@
 <% if [Agent, Person, Group, Organization].include?(@record.class) %>
   <%= render partial: 'records/agent_form' %>
+<% elsif @record.class == Topic %>
+  <%= render partial: 'records/topic_form' %>
 <% else %>
   <%= render partial: 'records/form' %>
 <% end %>
