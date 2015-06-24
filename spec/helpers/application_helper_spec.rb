@@ -16,6 +16,9 @@ describe ApplicationHelper do
 
       stub_remote_ip('169.231.111.111')
       expect(helper.on_campus?).to eq true
+
+      stub_remote_ip(nil)
+      expect(helper.on_campus?).to eq false
     end
   end
 

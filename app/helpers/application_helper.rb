@@ -5,6 +5,7 @@ module ApplicationHelper
   end
 
   def on_campus?
+    return false unless request.remote_ip
     on_campus_network_prefixes.any? {|prefix| request.remote_ip.start_with?(prefix) }
   end
 
