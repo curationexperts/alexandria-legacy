@@ -28,4 +28,15 @@ describe Qa::TermsController do
       expect(response.body).to eq "[{\"id\":\"http://localhost:8983/fedora/rest/test/fr0d0\",\"label\":\"Frodo Baggins\"}]"
     end
   end
+
+  describe "local subjects" do
+    let!(:topic) { Topic.create(id: 'fr0d0', label: ['Frodo Baggins']) }
+    let!(:person) { Person.create(foaf_name: 'Bilbo Baggins') }
+
+    it "returns (topic) Frodo but not (person) Bilbo" do
+      get :search, vocab: 'local', subauthority: 'subjects', q: 'Baggins'
+      expect(response).to be_success
+      expect(response.body).to eq "[{\"id\":\"http://localhost:8983/fedora/rest/test/fr0d0\",\"label\":\"Frodo Baggins\"}]"
+    end
+  end
 end

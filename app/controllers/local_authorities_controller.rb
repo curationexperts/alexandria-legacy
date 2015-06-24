@@ -13,7 +13,7 @@ class LocalAuthoritiesController < ApplicationController
     config.add_nav_action(:admin_menu, partial: 'shared/admin_menu', if: :admin_user?)
 
     config.default_solr_params = {
-      qf: 'foaf_name_tesim',
+      qf: 'foaf_name_tesim label_tesim',
       wt: 'json',
       qt: 'search',
       rows: 10
@@ -21,8 +21,8 @@ class LocalAuthoritiesController < ApplicationController
 
     config.add_search_field('name') do |field|
       field.solr_local_parameters = {
-        :qf => 'foaf_name_tesim',
-        :pf => 'foaf_name_tesim'
+        :qf => 'foaf_name_tesim label_tesim',
+        :pf => 'foaf_name_tesim label_tesim'
       }
     end
 
