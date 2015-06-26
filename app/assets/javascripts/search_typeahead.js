@@ -20,7 +20,9 @@ var searchUris = {
     'rights_holder':    searchUris['local_names'],
     'contributor':      searchUris['lcnames'],
     'institution':      searchUris['lcnames'],
-    'language':         '/qa/search/loc/iso639-2'
+    'language':         '/qa/search/loc/iso639-2',
+    'name_merge_target':    searchUris['local_names'],
+    'subject_merge_target': searchUris['local_subjects']
   };
 
   function qaPathForField(input) {

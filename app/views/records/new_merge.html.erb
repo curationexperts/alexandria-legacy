@@ -1,0 +1,20 @@
+<h1> Merge Record: <%= @form.title %> </h1>
+
+<p> Merge this record into another record.  All references to this record will be updated, and this record will be deleted. </p>
+
+<%= simple_form_for @form, url: merge_record_path(@record), html: { class: 'editor', method: :post } do |f| %>
+
+  <div class='well'>
+    <noscript> <h3> This form will not work without Javascript enabled </h3> </noscript>
+
+    <% (f.object.required_fields).each do |field_name| %>
+      <%= f.input field_name, label: 'Merge Into', as: :controlled_vocabulary_select, input_html: { class: 'form-control' }, required: true %>
+    <% end %>
+  </div>
+
+  <div class='form-actions'>
+    <div class='primary-actions'>
+      <%= f.submit 'Merge', class: 'btn btn-primary', data: { confirm: 'Are you sure you want to merge and delete this record?' } %>
+    </div>
+  </div>
+<% end %>

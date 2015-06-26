@@ -19,5 +19,9 @@ Rails.application.routes.draw do
   mount HydraEditor::Engine => '/'
   mount Hydra::Collections::Engine => '/'
 
-  resources :records, only: :destroy
+  resources :records, only: :destroy do
+    get 'new_merge', on: :member
+    post 'merge', on: :member
+  end
+
 end
