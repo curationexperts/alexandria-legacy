@@ -5,7 +5,7 @@
 # property set.  Don't declare `role :all`, it's a meta role.
 set :stage, :adrlsandbox
 set :rails_env, 'production'
-server '10.3.60.167', user: 'adrl', roles: [:web, :app, :db]
+server '10.3.60.167', user: 'adrl', roles: [:web, :app, :db, :resque_pool]
 
 # Extended Server Syntax
 # ======================

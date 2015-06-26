@@ -9,6 +9,8 @@ class Ability
       can [:create, :update], [ActiveFedora::Base, SolrDocument]
       can [:create, :show, :add_user, :remove_user, :index], Role
       can [:read, :destroy], :local_authorities
+
+      can [:new_merge, :merge], ActiveFedora::Base
     end
   end
 end

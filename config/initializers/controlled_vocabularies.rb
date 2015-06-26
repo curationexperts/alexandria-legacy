@@ -17,3 +17,5 @@ require 'vocabularies/local'
 Oargun::ControlledVocabularies::Creator.use_vocabulary :lcnames, class: Oargun::Vocabularies::LCNAMES
 Oargun::ControlledVocabularies::Creator.use_vocabulary :local, class: Vocabularies::LOCAL
 
+Oargun::ControlledVocabularies::Subject.use_vocabulary :local, class: Vocabularies::LOCAL
+

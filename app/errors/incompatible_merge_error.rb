@@ -1,0 +1,2 @@
+class IncompatibleMergeError < StandardError
+end

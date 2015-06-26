@@ -6,6 +6,7 @@ describe Ability do
   subject { ability }
   let(:ability) { Ability.new(user) }
   let(:image) { Image.create! }
+  let(:local_group) { create(:group) }
 
   context 'for a normal user' do
     let(:user) { User.new }
@@ -19,6 +20,9 @@ describe Ability do
 
       is_expected.not_to be_able_to(:read, :local_authorities)
       is_expected.not_to be_able_to(:destroy, :local_authorities)
+
+      is_expected.not_to be_able_to(:new_merge, local_group)
+      is_expected.not_to be_able_to(:merge, local_group)
     }
   end
 
@@ -35,6 +39,9 @@ describe Ability do
 
       is_expected.to be_able_to(:read, :local_authorities)
       is_expected.to be_able_to(:destroy, :local_authorities)
+
+      is_expected.to be_able_to(:new_merge, local_group)
+      is_expected.to be_able_to(:merge, local_group)
     }
   end
 end

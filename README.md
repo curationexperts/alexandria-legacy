@@ -13,6 +13,9 @@
   * Copy `config/smtp.yml.template` to `config/smtp.yml`
   * Edit `config/smtp.yml` and add fake email settings
   * Copy `config/solr.yml.template` to `config/solr.yml`
+  * Copy `config/redis.yml.template` to `config/redis.yml`
+  * Copy `config/resque-pool.yml.template` to `config/resque-pool.yml`
+  * Install [PhantomJS](https://github.com/teampoltergeist/poltergeist#installing-phantomjs)
 
 ### Set up Jetty
 
@@ -38,6 +41,32 @@ http://marmotta.apache.org/configuration.html
 On a mac:
 ```
 brew install imagemagick --with-jp2 --with-libtiff --with-ghostscript
+```
+
+### Background jobs
+
+#### Install redis
+
+On a mac:
+```
+brew install redis
+```
+
+#### Run background jobs
+
+To start the redis server:
+```
+redis-server /usr/local/etc/redis.conf
+```
+
+To see the status of recent jobs in the browser console:
+```
+resque-web
+```
+
+To start worker(s) to run the jobs:
+```
+resque-pool
 ```
 
 ### Run the test suite
