@@ -270,8 +270,8 @@ describe ImageIndexer do
     let(:image) { Image.create(notes: [acq_note, cit_note]) }
 
     it 'indexes with labels' do
-      expect(image.notes).to eq [acq_note, cit_note]
-      expect(subject['note_label_tesim']).to eq [acq_note.value, cit_note.value]
+      expect(image.notes).to include(acq_note, cit_note)
+      expect(subject['note_label_tesim']).to include(acq_note.value, cit_note.value)
     end
   end
 

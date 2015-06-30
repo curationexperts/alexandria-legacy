@@ -23,9 +23,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'hydra-head', '~> 9.1.4'
-gem 'active-fedora', github: 'projecthydra/active_fedora' # this will be 9.2
-
+gem 'hydra-head', '9.2.0.rc1'
+gem 'active-fedora', '9.2.0.rc1'
 
 gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: '0.7-future'
 gem 'hydra-editor', '~> 1.0.4'

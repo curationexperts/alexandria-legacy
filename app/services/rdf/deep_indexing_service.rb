@@ -49,11 +49,11 @@ class RDF::DeepIndexingService < ActiveFedora::RDF::IndexingService
     val = val.solrize
     self.class.create_and_insert_terms(solr_field_key,
                                        val.first,
-                                       field_info[:behaviors], solr_doc)
+                                       field_info.behaviors, solr_doc)
     if val.last.kind_of? Hash
       self.class.create_and_insert_terms("#{solr_field_key}_label",
                                          label(val),
-                                         field_info[:behaviors], solr_doc)
+                                         field_info.behaviors, solr_doc)
     end
   end
 
