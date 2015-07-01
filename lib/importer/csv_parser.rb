@@ -6,11 +6,12 @@ module Importer
       @file_name = file_name
     end
 
+    # @yieldparam attributes [Hash] the attributes from one row of the file
     def each(&block)
       headers = nil
       CSV.foreach(@file_name) do |row|
         if headers
-          yield 'Image', attributes(headers, row)
+          yield attributes(headers, row)
         else
           headers = row
         end
@@ -28,12 +29,15 @@ module Importer
       end
 
       def extract_field(header, val, processed)
+        return unless val
         case header
           when 'title'
             # title is singular
             processed[:title] = val
           when 'created_start', 'created_finish', 'created_label', 'created_start_qualifier', 'created_end_qualifier'
             #TODO extract dates
+          when 'note_value', 'note_type'
+            #TODO extract notes
           when 'files'
             processed[:files] ||= []
             processed[:files] << val if val
@@ -41,6 +45,9 @@ module Importer
             processed[:collection] ||= {}
             val = [val] if header == 'collection_accession_number'
             processed[:collection][header.gsub('collection_', '').to_sym] = val
+          when 'finding_aid'
+            # TODO I don't know what this is for.
+            $stderr.puts "Ignoring unknown property: #{header} => #{val}"
           else
             # Everything else is multivalued
             processed[header.to_sym] ||= []

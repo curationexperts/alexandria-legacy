@@ -1,10 +1,23 @@
 #!/usr/bin/env ruby
+#
 
 filename = ARGV[0]
-imagepath = ARGV[1]
+path_or_type = ARGV[1]
+type = ARGV[2]
+
+# Need to decide if path_or_type is type or path
+if !type && ['Collection', 'Image'].include?(path_or_type)
+  type = path_or_type
+else
+  type ||= 'Image'
+  imagepath = path_or_type
+end
 
 if filename.nil?
+  $stderr.puts "Usage: #{$PROGRAM_NAME} <csv file>"
+  $stderr.puts "Usage: #{$PROGRAM_NAME} <csv file> <image directory> <object type>"
   $stderr.puts "Usage: #{$PROGRAM_NAME} <csv file> <image directory>"
+  $stderr.puts "Usage: #{$PROGRAM_NAME} <csv file> <object type>"
   $stderr.puts "Please provide the csv file you want to import."
   exit(1)
 end
@@ -22,9 +35,9 @@ end
 puts "Loading environment..."
 require File.expand_path('../../config/environment',  __FILE__)
 require 'importer'
-puts "Starting import..."
+puts "Starting #{type.downcase} import..."
 
-size = Importer::CSVImporter.new(imagepath, filename).import_all
+size = Importer::CSVImporter.new(type, imagepath, filename).import_all
 
 puts "Imported #{size} records."
 
