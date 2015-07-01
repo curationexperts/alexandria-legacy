@@ -3,8 +3,7 @@ class LocalAuthoritiesSearchBuilder < Hydra::SearchBuilder
 
   def only_models_for_local_authorities(solr_params)
     solr_params[:fq] ||= []
-    models = [Agent, Person, Group, Organization, Topic]
-    solr_params[:fq] << "{!terms f=has_model_ssim}#{models.join(',')}"
+    solr_params[:fq] << "{!terms f=has_model_ssim}#{LocalAuthority.local_authority_models.join(',')}"
   end
 
 end

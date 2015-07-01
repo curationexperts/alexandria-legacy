@@ -1,5 +1,4 @@
 class Topic < ActiveFedora::Base
-  include LocalAuthority
 
   property :label, predicate: ::RDF::SKOS.prefLabel do |index|
     index.as :stored_searchable

@@ -9,7 +9,7 @@ class RecordsController < ApplicationController
     # delete using the UI are local authorities.
     authorize! :destroy, :local_authorities
 
-    references = @record.referenced_by
+    references = Record.references_for(@record)
     if references.empty?
       flash[:notice] = "Record \"#{@record.rdf_label.first}\" has been destroyed"
       @record.destroy
