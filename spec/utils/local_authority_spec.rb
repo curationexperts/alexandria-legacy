@@ -38,4 +38,32 @@ describe LocalAuthority do
     end
   end
 
+  describe '::local_name_authority?' do
+    subject { LocalAuthority.local_name_authority?(record) }
+
+    context 'a record that is a local name' do
+      let(:record) { SolrDocument.new('active_fedora_model_ssi' => 'Group') }
+      it { is_expected.to eq true }
+    end
+
+    context 'a record that isnt a local name' do
+      let(:record) { SolrDocument.new('active_fedora_model_ssi' => 'Topic') }
+      it { is_expected.to eq false }
+    end
+  end
+
+  describe '::local_subject_authority?' do
+    subject { LocalAuthority.local_subject_authority?(record) }
+
+    context 'a record that is a local subject' do
+      let(:record) { SolrDocument.new('active_fedora_model_ssi' => 'Topic') }
+      it { is_expected.to eq true }
+    end
+
+    context 'a record that isnt a local subject' do
+      let(:record) { SolrDocument.new('active_fedora_model_ssi' => 'Agent') }
+      it { is_expected.to eq false }
+    end
+  end
+
 end

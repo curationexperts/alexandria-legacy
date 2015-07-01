@@ -14,13 +14,22 @@ module LocalAuthority
   end
 
   # Input record should be ActiveFedora::Base or SolrDocument.
-  def self.local_authority?(record)
+  def self.local_authority?(record, models=nil)
     klass = if record.is_a?(SolrDocument)
               record['active_fedora_model_ssi'].constantize
             else
               record.class
             end
-    local_authority_models.include?(klass)
+    models ||= local_authority_models
+    models.include?(klass)
+  end
+
+  def self.local_name_authority?(record)
+    local_authority?(record, local_name_models)
+  end
+
+  def self.local_subject_authority?(record)
+    local_authority?(record, local_subject_models)
   end
 
 end
