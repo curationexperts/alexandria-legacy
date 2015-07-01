@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'importer'
 
 describe Importer::ModsParser do
-  let(:parser) { Importer::ModsParser.new(file) }
+  let(:parser) { described_class.new(file) }
   let(:attributes) { parser.attributes }
 
   describe "Determine which kind of record it is:" do
