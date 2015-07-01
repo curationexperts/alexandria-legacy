@@ -11,7 +11,7 @@ describe Importer::CSVImporter do
 
   let(:image_directory) { 'spec/fixtures/images' }
   let(:csv_file) { 'spec/fixtures/csv/pamss045.csv' }
-  let(:importer) { described_class.new(image_directory, csv_file) }
+  let(:importer) { described_class.new('Image', image_directory, csv_file) }
 
   it "creates new images" do
     expect(importer).to receive(:create_fedora_objects).exactly(5).times
