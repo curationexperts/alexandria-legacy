@@ -1,7 +1,5 @@
 module Importer
   class ModsParser
-    CREATOR = "http://id.loc.gov/vocabulary/relators/cre".freeze
-
     ORIGIN_TEXT = 'Converted from MODS 3.4 to local RDF profile by ADRL'.freeze
 
     NAMESPACES = { 'mods'.freeze => Mods::MODS_NS }

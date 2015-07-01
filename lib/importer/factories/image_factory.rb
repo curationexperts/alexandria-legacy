@@ -11,10 +11,12 @@ class ImageFactory < ObjectFactory
   end
 
   def after_create(image)
-    attributes[:files].each do |file_path|
-      create_file(image, file_path)
+    if files_directory
+      attributes[:files].each do |file_path|
+        create_file(image, file_path)
+      end
+      image.save # force a reindex after the files are created
     end
-    image.save # force a reindex after the files are created
   end
 
   def create_attributes

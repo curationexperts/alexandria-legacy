@@ -1,4 +1,4 @@
-
+require 'traject'
 require 'traject/macros/marc_format_classifier'
 require 'traject/macros/marc21_semantics'
 require 'solrizer'

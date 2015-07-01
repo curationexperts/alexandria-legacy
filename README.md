@@ -61,6 +61,13 @@ The first argument to the script is the directory that contains the MODS files. 
 
 Note:  When importing collections, the 2nd argument won't actually be used, so you can set it to any valid directory.
 
+#### CSV records
+```
+script/import_csv ../mods-for-adrl/mods_demo_set/pamss045.csv ../alexandria-images/special_collections/pamss045/tiff-a16
+```
+
+The first argument to the script is the CSV file that contains the records.  The second argument is the directory that contains supporting files, such as image files.
+
 #### MARC records (ETDs)
 
 ```

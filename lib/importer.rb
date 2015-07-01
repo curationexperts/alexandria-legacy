@@ -6,5 +6,7 @@ end
 module Importer
   extend ActiveSupport::Autoload
   autoload :ModsImporter
+  autoload :CSVImporter
   autoload :ModsParser
+  autoload :CSVParser
 end

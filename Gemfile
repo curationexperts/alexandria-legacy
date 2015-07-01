@@ -39,7 +39,7 @@ gem 'rsolr', '~> 1.0.12'
 gem 'activefedora-aggregation', github: 'projecthydra-labs/activefedora-aggregation' # this will be 0.3.0
 
 gem 'mods', '~> 2.0.3'
-gem 'oargun', github: 'curationexperts/oargun', branch: 'AT_0.7.1'
+gem 'oargun', github: 'curationexperts/oargun', ref: '38f16d2'
 gem 'linked_vocabs', github: 'jcoyne/linked_vocabs', branch: 'with_0.7_validation'
 gem 'blacklight-gallery'
 gem 'riiif', '~> 0.1.0'
@@ -50,7 +50,7 @@ gem 'kaminari', github: 'jcoyne/kaminari', branch: 'sufia'
 
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
-gem 'traject'
+gem 'traject', require: false
 
 group :development, :test do
   gem 'rspec-rails'
