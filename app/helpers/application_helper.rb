@@ -33,10 +33,7 @@ module ApplicationHelper
 
   def show_delete_link?(config, options)
     document = options.fetch(:document)
-    klass = document['active_fedora_model_ssi'].constantize
-    is_local = klass.included_modules.include?(LocalAuthority)
-
-    admin_user? && is_local
+    admin_user? && LocalAuthority.local_authority?(document)
   end
 
 end

@@ -1,6 +1,6 @@
-<% if [Agent, Person, Group, Organization].include?(@record.class) %>
+<% if LocalAuthority.local_name_authority?(@record) %>
   <%= render partial: 'records/agent_form' %>
-<% elsif @record.class == Topic %>
+<% elsif LocalAuthority.local_subject_authority?(@record) %>
   <%= render partial: 'records/topic_form' %>
 <% else %>
   <%= render partial: 'records/form' %>
