@@ -42,14 +42,20 @@ class ObjectFactory
 
   def create
     attrs = create_attributes
-    identifier = mint_ark
-    attrs.merge!(identifier: [identifier.id], id: Identifier.treeify(identifier.id.split(/\//).last))
+    # Don't mint arks for records that already have them (e.g. ETDs)
+    unless attrs[:identifier].present?
+      identifier = mint_ark
+      attrs[:identifier] = [identifier.id]
+      attrs[:id] = Identifier.treeify(identifier.id.split(/\//).last)
+    end
     klass.new(attrs) do |obj|
       obj.save!
       after_create(obj)
       after_save(obj)
-      identifier.target = path_for(obj)
-      identifier.save
+      if identifier
+        identifier.target = path_for(obj)
+        identifier.save
+      end
       puts "  Created #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
     end
   end

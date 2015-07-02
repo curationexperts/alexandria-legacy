@@ -73,6 +73,7 @@ class TimeSpan < ActiveFedora::Base
     end
 
     def extract_year(date)
+      date = date.to_s
       if date.blank?
         nil
       elsif /^\d{4}$/ =~ date
