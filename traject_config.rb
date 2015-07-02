@@ -17,10 +17,7 @@ end
 
 settings do
   provide "writer_class_name", "ObjectFactoryWriter"
-  # provide "writer_class_name", "Traject::JsonWriter"
-  # TODO use the solr.yml
-  # provide "solr.url", "http://localhost:8983/solr/development"
-  # provide "solr_writer.commit_on_close", "true"
+  provide "marc_source.type", "xml"
 end
 
 # These are the tags in the file
