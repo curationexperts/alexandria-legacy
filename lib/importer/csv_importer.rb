@@ -22,11 +22,8 @@ module Importer
 
       # Build a factory to create the objects in fedora.
       def create_fedora_objects(attributes)
-        factory_class.new(attributes, @files_directory).run
+        Factory.for(@model.to_s).new(attributes, @files_directory).run
       end
 
-      def factory_class
-        @factory_class ||= (@model.to_s + "Factory").constantize
-      end
   end
 end

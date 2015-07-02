@@ -29,8 +29,8 @@ describe Importer::ModsImporter do
       expect(identifier2).to receive(:target=).with(/http:\/\/test\.host\/lib\/ark:\/99999\/fk49876543$/)
       expect(identifier1).to receive(:save)
       expect(identifier2).to receive(:save)
-      expect_any_instance_of(ImageFactory).to receive(:mint_ark).and_return(identifier1)
-      expect_any_instance_of(CollectionFactory).to receive(:mint_ark).and_return(identifier2)
+      expect_any_instance_of(Importer::Factory::ImageFactory).to receive(:mint_ark).and_return(identifier1)
+      expect_any_instance_of(Importer::Factory::CollectionFactory).to receive(:mint_ark).and_return(identifier2)
 
       expect {
         image = importer.import(file)
@@ -65,7 +65,7 @@ describe Importer::ModsImporter do
       let!(:coll) { Collection.create(id: 'fk44174k70', accession_number: ['SBHC Mss 36']) }
       before do
         # skip creating files
-        allow_any_instance_of(ImageFactory).to receive(:after_create)
+        allow_any_instance_of(Importer::Factory::ImageFactory).to receive(:after_create)
       end
 
       it 'it adds image to existing collection' do

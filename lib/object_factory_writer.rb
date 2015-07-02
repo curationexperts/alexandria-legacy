@@ -58,6 +58,6 @@ class ObjectFactoryWriter
     # TODO ObjectFactory requires an accession number, but maybe it shouldn't
     attributes[:accession_number] = []
 
-    ImageFactory.new(attributes).run
+    Importer::Factory.for('ETD').new(attributes).run
   end
 end

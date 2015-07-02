@@ -1,14 +1,14 @@
 require 'rails_helper'
 require 'importer'
 
-describe ObjectFactory do
+describe Importer::Factory::ObjectFactory do
 
   describe '#find_or_create_rights_holders' do
     let(:regents_uri) { "http://id.loc.gov/authorities/names/n85088322" }
     let(:regents_string) { "Regents of the Univ." }
     let(:attributes) {{ rights_holder: [RDF::URI.new(regents_uri), regents_string] }}
 
-    subject { CollectionFactory.new(attributes, './tmp') }
+    subject { Importer::Factory::CollectionFactory.new(attributes, './tmp') }
 
     context "when local rights holder doesn't exist" do
       it 'creates a rights holder' do
@@ -73,7 +73,7 @@ describe ObjectFactory do
         contributor: [afmc_uri, { name: joel, type: 'personal' }] }
     end
 
-    subject { CollectionFactory.new(attributes, './tmp') }
+    subject { Importer::Factory::CollectionFactory.new(attributes, './tmp') }
 
     context "when contributors don't exist yet" do
       it "creates the contributors and returns a hash of the contributors" do

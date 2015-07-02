@@ -29,8 +29,7 @@ module Importer
     # we'll select the ImageFactory to create the fedora
     # objects.
     def create_fedora_objects(model, attributes)
-      object_factory = (model.to_s + "Factory").constantize
-      object_factory.new(attributes, @files_directory).run
+      Factory.for(model.to_s).new(attributes, @files_directory).run
     end
 
   end

@@ -1,14 +1,13 @@
 require 'rails_helper'
 require 'importer'
-describe Importer::Factory::ImageFactory do
+describe Importer::Factory::ETDFactory do
   let(:factory) { described_class.new(attributes) }
-  let(:collection_attrs) { { accession_number: ["SBHC Mss 36"] } }
+  let(:collection_attrs) { { accession_number: ["etds"] } }
 
   let(:attributes) do
     {
       collection: collection_attrs, files: [], accession_number: ['123'],
-      notes_attributes: [{:value=>"Title from item."}],
-      issued_attributes: [{ start: ["1925"], finish: [], label: [], start_qualifier: [], finish_qualifier: [] }]
+      created_attributes: [{ start: [2014] }]
     }
   end
 
@@ -26,6 +25,8 @@ describe Importer::Factory::ImageFactory do
         end
       }.to change { Collection.count }.by(0)
       expect(coll.reload.members.count).to eq 1
+      expect(coll.members.first).to be_instance_of ETD
     end
   end
 end
+
