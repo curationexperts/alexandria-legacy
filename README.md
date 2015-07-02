@@ -78,6 +78,6 @@ The first argument to the script is the CSV file that contains the records.  The
 #### MARC records (ETDs)
 
 ```
-bundle exec traject -c traject_config.rb spec/fixtures/marc/adrl_etd_sample.mrc -s solr.url=http://somehere:8983/solr
+bundle exec traject -c traject_config.rb spec/fixtures/marc/adrl_etd_sample.mrc
 ```
 
