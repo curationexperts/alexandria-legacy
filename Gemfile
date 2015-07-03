@@ -33,6 +33,7 @@ gem 'hydra-collections', '~> 5.0.1'
 gem 'rdf-marmotta', '~> 0.0.8'
 
 gem 'blacklight', '5.13.1'
+gem 'settingslogic'
 
 gem 'rsolr', '~> 1.0.12'
 #gem 'activefedora-aggregation', '~> 0.2.0'

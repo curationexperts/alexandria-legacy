@@ -47,7 +47,8 @@ class ObjectFactoryWriter
     attributes.delete('degree_grantor')
     attributes.delete('discipline')
     attributes.delete('fulltext_link')
-    attributes.delete('filename')
+
+    attributes[:files] = attributes.delete('filename')
 
     # attributes[:read_access_group] = 'public' #TODO replace with isGovernedBy_ssim
     attributes[:admin_policy_id] = AdminPolicy::PUBLIC_POLICY_ID
@@ -58,6 +59,6 @@ class ObjectFactoryWriter
     # TODO ObjectFactory requires an accession number, but maybe it shouldn't
     attributes[:accession_number] = []
 
-    Importer::Factory.for('ETD').new(attributes).run
+    Importer::Factory.for('ETD').new(attributes, Settings.etd_download_root).run
   end
 end
