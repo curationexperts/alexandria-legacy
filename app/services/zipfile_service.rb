@@ -8,11 +8,14 @@ class ZipfileService
     results.empty? ? nil : results
   end
 
-  # @param [String] file_path path of the file to extract from the zip file
   # @param [String] zip_path path to the zip file
-  # @return [String] path to the extracted file
-  def self.extract_single_file(file_path, zip_path)
-    `unzip -j "#{zip_path}" "#{file_path}" -d "#{Dir.tmpdir}"`
-    File.join(Dir.tmpdir, File.basename(file_path))
+  # @return [Hash] paths to the extracted files, keyed by extension
+  def self.extract_files(zip_path)
+    output = `unzip -j "#{zip_path}" -d "#{Dir.tmpdir}"`
+    output.split("\n").grep(/inflating/).each_with_object({}) do |line, h|
+      filename = line.gsub(/\s*inflating: /, '').rstrip
+      h[File.extname(filename).split('.').last] = filename
+
+    end
   end
 end
