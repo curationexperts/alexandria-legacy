@@ -35,6 +35,8 @@ end
 # to_field 'f007', extract_marc("007")
 # to_field 'f008', extract_marc("008")
 # to_field "language_code", extract_marc("008[35-37]")
+
+to_field "system_number", extract_marc("001")
 to_field "language", marc_languages
 to_field "created_start", marc_publication_date
 

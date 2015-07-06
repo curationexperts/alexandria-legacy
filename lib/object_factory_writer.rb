@@ -17,6 +17,7 @@ class ObjectFactoryWriter
   end
 
   def close
+    puts "closing"
     # null
   end
 
@@ -55,9 +56,6 @@ class ObjectFactoryWriter
 
     # TODO get a real collection properties
     attributes[:collection] = { id: "etds", title: "Electronic Theses and Dissertations", accession_number: ['etds'] }
-
-    # TODO ObjectFactory requires an accession number, but maybe it shouldn't
-    attributes[:accession_number] = []
 
     Importer::Factory.for('ETD').new(attributes, Settings.proquest_directory).run
   end
