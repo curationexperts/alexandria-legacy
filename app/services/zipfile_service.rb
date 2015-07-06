@@ -3,7 +3,7 @@ class ZipfileService
   # @param [String] filename a partial filename
   # @return [String, NilClass] the name of the zipfile containing the filename
   def self.find_file_containing(filename)
-    results = `for f in *.zip; do unzip -l $f | grep -q #{filename} && echo $f; done`
+    results = `for f in #{wildcard_zip}; do unzip -l $f | grep -q #{filename} && echo $f; done`
     results.chomp!
     results.empty? ? nil : results
   end
@@ -15,4 +15,12 @@ class ZipfileService
     `unzip -j "#{zip_path}" "#{file_path}" -d "#{Dir.tmpdir}"`
     File.join(Dir.tmpdir, File.basename(file_path))
   end
+
+  private
+
+    # @return [String] a pattern for seaching the zip files.
+    def self.wildcard_zip
+      %Q{"#{File.join(Settings.proquest_directory , '*.zip')}"}
+    end
+
 end
