@@ -48,7 +48,7 @@ to_field 'identifier', lambda { |record, accumulator, context|
   end.compact
   if fields.empty?
     #puts "No ARK, Skipping."
-    context.skip! # TODO mint an ark instead of skiping the record
+    context.skip!
   else
     # TODO update ARK to point at alexandria-v2?
     accumulator << fields.first
