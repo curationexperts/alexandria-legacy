@@ -38,14 +38,18 @@ describe Importer::Factory::ETDFactory do
     end
     let(:zip_path) { 'fake_file.zip' }
     let(:etd) { ETD.create }
+    let(:file_hash) { { 'pdf' => "#{Rails.root}/spec/fixtures/pdf/sample.pdf",
+                        'xml' => "#{Rails.root}/spec/fixtures/proquest/Johnson_ucsb_0035N_12164_DATA.xml"
+                    } }
     before do
       allow(ZipfileService).to receive(:find_file_containing).with(attributes[:files].first).and_return(zip_path)
-      allow(ZipfileService).to receive(:extract_file_from_zip).with(attributes[:files].first, zip_path).and_return("#{Rails.root}/spec/fixtures/pdf/sample.pdf")
+      allow(ZipfileService).to receive(:extract_files).with(zip_path).and_return(file_hash)
       factory.after_create(etd)
     end
     it "attaches files" do
       expect(etd.generic_files.first).to be_kind_of GenericFile
       expect(etd.generic_files.first.original.size).to eq 218882
+      expect(etd.proquest.size).to eq 5564
     end
   end
 end

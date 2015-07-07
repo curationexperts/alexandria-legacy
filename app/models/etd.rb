@@ -4,6 +4,8 @@ class ETD < ActiveFedora::Base
   include Hydra::Collections::Collectible
   aggregates :generic_files, predicate: ::RDF::URI("http://pcdm.org/models#hasMember")
 
+  contains :proquest
+
   def self.indexer
     ImageIndexer
   end
