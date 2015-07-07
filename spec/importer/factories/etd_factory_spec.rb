@@ -6,10 +6,11 @@ describe Importer::Factory::ETDFactory do
 
   let(:attributes) do
     {
-      collection: collection_attrs, files: [], system_number: ['123'],
-      identifier: ['ark:/48907/f3gt5k61'],
-      created_attributes: [{ start: [2014] }]
-    }
+      id: 'f3/gt/5k/61/f3gt5k61',
+      collection: collection_attrs, files: [], created_attributes: [{ start: [2014] }],
+      system_number: ['123'],
+      identifier: ['ark:/48907/f3gt5k61']
+    }.with_indifferent_access
   end
 
   # squelch output
