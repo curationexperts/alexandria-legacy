@@ -59,6 +59,6 @@ class ObjectFactoryWriter
     # TODO ObjectFactory requires an accession number, but maybe it shouldn't
     attributes[:accession_number] = []
 
-    Importer::Factory.for('ETD').new(attributes, Settings.etd_download_root).run
+    Importer::Factory.for('ETD').new(attributes, Settings.proquest_directory).run
   end
 end
