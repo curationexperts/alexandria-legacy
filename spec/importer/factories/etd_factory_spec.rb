@@ -9,6 +9,7 @@ describe Importer::Factory::ETDFactory do
       id: 'f3/gt/5k/61/f3gt5k61',
       collection: collection_attrs, files: [], created_attributes: [{ start: [2014] }],
       system_number: ['123'],
+      author: ['Valerie'],
       identifier: ['ark:/48907/f3gt5k61']
     }.with_indifferent_access
   end
@@ -27,7 +28,10 @@ describe Importer::Factory::ETDFactory do
       }.to change { Collection.count }.by(0)
       expect(coll.reload.members.count).to eq 1
       expect(coll.members.first).to be_instance_of ETD
+      expect(obj.id).to eq 'f3/gt/5k/61/f3gt5k61'
       expect(obj.system_number).to eq ['123']
+      expect(obj.identifier).to eq ['ark:/48907/f3gt5k61']
+      expect(obj.author).to eq ['Valerie']
     end
   end
 
