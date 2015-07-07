@@ -1,10 +1,10 @@
 defaults: &defaults
-  etd_download_root: "<%=Rails.root%>/tmp/etd"
+  download_root: "<%=Rails.root%>/tmp/download_root"
 development:
   <<: *defaults
 test:
   <<: *defaults
 production:
   <<: *defaults
-  etd_download_root: '/opt/data/download_root/proquest'
+  download_root: '/opt/download_root'
 

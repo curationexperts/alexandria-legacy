@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'importer'
 describe Importer::Factory::ETDFactory do
-  let(:factory) { described_class.new(attributes, Settings.etd_download_root) }
+  let(:factory) { described_class.new(attributes, Settings.proquest_directory) }
   let(:collection_attrs) { { accession_number: ["etds"] } }
 
   let(:attributes) do
