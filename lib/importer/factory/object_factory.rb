@@ -21,10 +21,10 @@ module Importer::Factory
     end
 
     def update(obj)
-      obj.attributes = transform_attributes.except(:id)
+      obj.attributes = update_attributes
       obj.save!
       after_save(obj)
-      puts "  Updated #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
+      log_updated(obj)
     end
 
     # override after_save if you want to put something here.
@@ -36,7 +36,11 @@ module Importer::Factory
     end
 
     def create_attributes
-      transform_attributes
+      transform_attributes.except(:files)
+    end
+
+    def update_attributes
+      transform_attributes.except(:id, :files)
     end
 
     def find
@@ -65,6 +69,10 @@ module Importer::Factory
 
     def log_created(obj)
       puts "  Created #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
+    end
+
+    def log_updated(obj)
+      puts "  Updated #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
     end
 
     def klass

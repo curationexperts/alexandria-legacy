@@ -2,7 +2,11 @@ module Importer
   module Factory
     module WithAssociatedCollection
       def create_attributes
-        transform_attributes.except(:files, :collection)
+        super.except(:collection)
+      end
+
+      def update_attributes
+        super.except(:collection)
       end
 
       def after_save(obj)
