@@ -14,7 +14,9 @@ module Importer::Factory
       else
         obj = create
       end
+      puts "done with save of #{obj}, now yielding (#{block_given?})"
       yield(obj) if block_given?
+      puts "done with yield, leaving run of #{self}"
       obj
     end
 
@@ -57,8 +59,12 @@ module Importer::Factory
           identifier.target = path_for(obj)
           identifier.save
         end
-        puts "  Created #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
+        log_created(obj)
       end
+    end
+
+    def log_created(obj)
+      puts "  Created #{klass.to_s.downcase} #{obj.id} (#{attributes[:accession_number].first})"
     end
 
     def klass
