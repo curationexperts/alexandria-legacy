@@ -195,15 +195,9 @@ describe ImageIndexer do
     let(:generic_file) { GenericFile.new(id: 'bf/74/27/75/bf742775-2a24-46dc-889e-cca03b27b5f3') }
     let(:image) { Image.new(generic_files: [generic_file]) }
 
-    it "should have a thumbnail image" do
+    it "has images" do
       expect(subject['thumbnail_url_ssm']).to eq ['http://test.host/images/bf%2F74%2F27%2F75%2Fbf742775-2a24-46dc-889e-cca03b27b5f3%2Foriginal/full/300,/0/native.jpg']
-    end
-
-    it "should have a medium image" do
       expect(subject['image_url_ssm']).to eq ['http://test.host/images/bf%2F74%2F27%2F75%2Fbf742775-2a24-46dc-889e-cca03b27b5f3%2Foriginal/full/600,/0/native.jpg']
-    end
-
-    it "should have a large image" do
       expect(subject['large_image_url_ssm']).to eq ['http://test.host/images/bf%2F74%2F27%2F75%2Fbf742775-2a24-46dc-889e-cca03b27b5f3%2Foriginal/full/1000,/0/native.jpg']
     end
   end
@@ -232,22 +226,21 @@ describe ImageIndexer do
     let(:creator) { [RDF::URI.new("http://id.loc.gov/authorities/names/n87914041")] }
     let(:singer) { [RDF::URI.new("http://id.loc.gov/authorities/names/n81053687")] }
     let(:person) { Person.create(foaf_name: 'Valerie') }
+    let(:author) { ['Frank'] }
     let(:photographer) { [RDF::URI.new(person.uri)] }
-    let(:image) { Image.new(creator: creator, singer: singer, photographer: photographer) }
+    let(:image) { Image.new(author: author, creator: creator, singer: singer, photographer: photographer) }
 
-    it "should have a creator" do
+    it "has a creator" do
       VCR.use_cassette('lc_names_american_film') do
+        expect_any_instance_of(ContributorIndexer).to receive(:generate_solr_document) do |_, solr_doc|
+          solr_doc.merge!('contributors' => 'this', 'sorted_creator' => 'that')
+        end
         expect(subject['creator_tesim']).to eq ['http://id.loc.gov/authorities/names/n87914041']
+        # The *_label_tesim is the result of the DeepIndexer
         expect(subject['creator_label_tesim']).to eq ["American Film Manufacturing Company"]
-        expect(subject['creator_label_si']).to eq "American Film Manufacturing Company"
-      end
-    end
-
-    it "has contributors" do
-      VCR.use_cassette('lc_names_american_film') do
-        expect(subject['contributor_label_tesim']).to eq ["American Film Manufacturing Company", "Valerie", "Haggard, Merle"]
-        expect(subject['photographer_label_tesim']).to eq ["Valerie"]
-        expect(subject['singer_label_tesim']).to eq ["Haggard, Merle"]
+        expect(subject['author_label_tesim']).to eq ['Frank']
+        expect(subject['contributors']).to eq 'this'
+        expect(subject['sorted_creator']).to eq 'that'
       end
     end
   end

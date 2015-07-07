@@ -14,9 +14,7 @@ module Importer::Factory
       else
         obj = create
       end
-      puts "done with save of #{obj}, now yielding (#{block_given?})"
       yield(obj) if block_given?
-      puts "done with yield, leaving run of #{self}"
       obj
     end
 
@@ -88,16 +86,7 @@ module Importer::Factory
       Hash.new.tap do |contributors|
         fields.each do |field|
           next unless attrs.key?(field)
-          contributors[field] = []
-
-          attributes[field].each do |value|
-            if value.is_a?(RDF::URI)
-              contributors[field] << value
-            elsif value.is_a?(Hash)
-              contributor = find_or_create_local_contributor(value.fetch(:type), value.fetch(:name))
-              contributors[field] << contributor
-            end
-          end
+          contributors[field] = contributors_for_field(attrs, field)
         end
       end
     end
@@ -115,6 +104,17 @@ module Importer::Factory
     end
 
     private
+
+      def contributors_for_field(attrs, field)
+        attrs[field].each_with_object([]) do |value, object|
+          object << case value
+            when RDF::URI, String
+              value
+            when Hash
+              find_or_create_local_contributor(value.fetch(:type), value.fetch(:name))
+          end
+        end
+      end
 
       def find_or_create_local_contributor(type, name)
         klass = contributor_classes[type]

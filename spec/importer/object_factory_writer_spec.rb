@@ -14,6 +14,7 @@ describe ObjectFactoryWriter do
     } }
     it "calls the etd factory" do
       expect(writer).to receive(:build_object).with(
+        author: ['Valerie'],
         identifier: ['ark:/99999/fk4zp46p1g'],
         id: 'fk/4z/p4/6p/fk4zp46p1g',
         files: ['My_stuff.pdf'], created_attributes: [{ start: ['2013'] }],

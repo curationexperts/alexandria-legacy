@@ -35,9 +35,6 @@ class ObjectFactoryWriter
     attributes[:title] = title.first
     attributes[:id] = attributes.delete('id').first
 
-    # TODO Current indexer can't handle a string for author. It's expecting a URI
-    attributes.delete('author')
-
     ## Delete entries that aren't in the schema yet
     attributes.delete('isbn')
     attributes.delete('published')
