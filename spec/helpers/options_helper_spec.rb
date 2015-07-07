@@ -13,7 +13,7 @@ describe OptionsHelper do
 
   describe "#sub_location_options" do
     subject { helper.sub_location_options }
-    it { is_expected.to eq ["Department of Special Collections", "Main Library", "Map & Imagery Laboratory"] }
+    it { is_expected.to include Qa::Authorities::Local.subauthority_for('sub_location').all.sample[:label] }
   end
 
   describe "#license_options" do
