@@ -117,6 +117,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('work_type', :stored_searchable), label: 'Type of Resource'
     config.add_show_field solr_name('extent', :displayable), label: 'Extent'
     config.add_show_field solr_name('identifier', :displayable), label: 'ARK'
+    config.add_show_field solr_name('system_number', :symbol), label: 'System Number'
     config.add_show_field solr_name('place_of_publication', :stored_searchable), label: 'Place of Publication'
     config.add_show_field solr_name('location_label', :stored_searchable), label: 'Location'
     config.add_show_field solr_name('lc_subject_label', :stored_searchable), label: 'Subject'

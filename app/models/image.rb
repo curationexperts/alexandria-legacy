@@ -1,6 +1,7 @@
 require 'active_fedora/aggregation'
 class Image < ActiveFedora::Base
   include Metadata
+  include NestedAttributes
   include Hydra::Collections::Collectible
   aggregates :generic_files, predicate: ::RDF::URI("http://pcdm.org/models#hasMember")
 

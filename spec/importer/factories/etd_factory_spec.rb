@@ -6,7 +6,8 @@ describe Importer::Factory::ETDFactory do
 
   let(:attributes) do
     {
-      collection: collection_attrs, files: [], accession_number: ['123'],
+      collection: collection_attrs, files: [], system_number: ['123'],
+      identifier: ['ark:/48907/f3gt5k61'],
       created_attributes: [{ start: [2014] }]
     }
   end
@@ -19,13 +20,13 @@ describe Importer::Factory::ETDFactory do
 
     it "should not create a new collection" do
       expect(coll.members.count).to eq 0
+      obj = nil
       expect {
-        VCR.use_cassette('ezid') do
-          factory.run
-        end
+        obj = factory.run
       }.to change { Collection.count }.by(0)
       expect(coll.reload.members.count).to eq 1
       expect(coll.members.first).to be_instance_of ETD
+      expect(obj.system_number).to eq ['123']
     end
   end
 
