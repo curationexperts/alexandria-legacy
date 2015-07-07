@@ -78,6 +78,6 @@ The first argument to the script is the CSV file that contains the records.  The
 #### MARC records (ETDs)
 
 ```
-bundle exec traject -c traject_config.rb spec/fixtures/marcxml/SBA01004092515-AlephSRU.xml
+bundle exec traject -c traject_config.rb /opt/download_root/marc/004511717.xml
 ```
 
