@@ -8,6 +8,8 @@ class ZipfileService
     results.empty? ? nil : results
   end
 
+  # TODO there may be more than one PDF file to be returned. There is an original
+  # and optional supplemental files
   # @param [String] zip_path path to the zip file
   # @return [Hash] paths to the extracted files, keyed by extension
   def self.extract_files(zip_path)
