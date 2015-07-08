@@ -23,7 +23,7 @@ class ZipfileService
 
     # @return [String] a pattern for seaching the zip files.
     def self.wildcard_zip
-      %Q{"#{File.join(Settings.proquest_directory , '*.zip')}"}
+      File.join(Shellwords.escape(Settings.proquest_directory), '*.zip')
     end
 
 end
