@@ -13,10 +13,6 @@ class ImageIndexer < ActiveFedora::IndexingService
   SORTABLE_DATE = Solrizer.solr_name('date', :sortable)
   FACETABLE_YEAR = 'year_iim'
 
-  CREATOR_MULTIPLE = Solrizer.solr_name('creator_label', :stored_searchable)
-  SORTABLE_CREATOR = Solrizer.solr_name('creator_label', :sortable)
-  CONTRIBUTOR_LABEL = Solrizer.solr_name('contributor_label', :stored_searchable)
-
   COLLECTION_LABEL = Solrizer.solr_name('collection_label', :symbol)
   COLLECTION = Solrizer.solr_name('collection', :symbol)
 
@@ -45,6 +41,10 @@ class ImageIndexer < ActiveFedora::IndexingService
 
   private
 
+    def index_contributors(solr_doc)
+      ContributorIndexer.new(object).generate_solr_document(solr_doc)
+    end
+
     def display_date(date_name)
       Array(object[date_name]).map(&:display_label)
     end
@@ -57,29 +57,6 @@ class ImageIndexer < ActiveFedora::IndexingService
     def issued
       return unless object.issued.present?
       object.issued.first.display_label
-    end
-
-    def index_contributors(solr_doc)
-      Image::RELATIONS.each do |key, value|
-        solr_field_name = Solrizer.solr_name("#{key}_label", :stored_searchable)
-        solr_doc[solr_field_name] = object[key].flat_map(&:rdf_label)
-      end
-
-      solr_doc[SORTABLE_CREATOR] = sortable_creator(solr_doc)
-      solr_doc[CONTRIBUTOR_LABEL] = contributors
-    end
-
-    def contributors
-      Metadata::MARCREL.keys.each_with_object([]) do |field, list|
-        next if object[field].empty?
-        list.push *object[field].map { |val|
-          val.respond_to?(:rdf_label) && val.rdf_label.first }
-      end
-    end
-
-    # Create a creator field suitable for sorting on
-    def sortable_creator(solr_doc)
-      solr_doc.fetch(CREATOR_MULTIPLE).first if solr_doc.key? CREATOR_MULTIPLE
     end
 
     # Create a date field for sorting on

@@ -40,5 +40,9 @@ module Importer::Factory
     def log_created(obj)
       puts "  Created #{klass.to_s.downcase} #{obj.id} (#{attributes[:system_number].first})"
     end
+
+    def log_updated(obj)
+      puts "  Updated #{klass.to_s.downcase} #{obj.id} (#{attributes[:system_number].first})"
+    end
   end
 end
