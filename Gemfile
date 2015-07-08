@@ -76,7 +76,6 @@ group :test do
   gem 'webmock', require: false
   gem 'vcr'
   gem 'database_cleaner'
-  gem 'connection_pool'
 end
 
 group :development do
