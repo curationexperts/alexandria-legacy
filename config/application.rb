@@ -12,7 +12,6 @@ module AlexandriaV2
       g.test_framework :rspec, :spec => true
     end
 
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -29,5 +28,8 @@ module AlexandriaV2
     config.active_record.raise_in_transactional_callbacks = true
 
     config.action_mailer.smtp_settings = YAML.load(File.read(Rails.root.join('config', 'smtp.yml')))[Rails.env] || {}
+
+    # Set the backend for running background jobs
+    config.active_job.queue_adapter = :resque
   end
 end

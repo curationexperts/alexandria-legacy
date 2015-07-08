@@ -11,6 +11,8 @@ before_script:
   - "cp config/database.yml.template config/database.yml"
   - "cp config/fedora.yml.template config/fedora.yml"
   - "cp config/solr.yml.template config/solr.yml"
+  - "cp config/redis.yml.template config/redis.yml"
+  - "cp config/resque-pool.yml.template config/resque-pool.yml"
 
 notifications:
   email:
