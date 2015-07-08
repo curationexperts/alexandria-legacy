@@ -3,6 +3,7 @@ class Collection < ActiveFedora::Base
   include Hydra::Collections::Relations
   include Metadata
   include NestedAttributes
+  include LocalAuthorityHashAccessor
 
   accepts_nested_attributes_for :creator, reject_if: proc { |attributes| attributes[:id].blank? }
   accepts_nested_attributes_for :collector, reject_if: proc { |attributes| attributes[:id].blank? }

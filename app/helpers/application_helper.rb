@@ -32,8 +32,11 @@ module ApplicationHelper
   end
 
   def show_delete_link?(config, options)
-    document = options.fetch(:document)
-    admin_user? && LocalAuthority.local_authority?(document)
+    admin_user? && LocalAuthority.local_authority?(options.fetch(:document))
+  end
+
+  def show_merge_link?(config, options)
+    admin_user? && LocalAuthority.local_authority?(options.fetch(:document))
   end
 
 end

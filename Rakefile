@@ -3,6 +3,9 @@
 
 require File.expand_path('../config/application', __FILE__)
 
+require 'resque/tasks'
+require 'resque/pool/tasks'
+
 Rails.application.load_tasks
 Jettywrapper.hydra_jetty_version = "v8.3.0" if defined? Jettywrapper
 
@@ -10,3 +13,4 @@ Jettywrapper.hydra_jetty_version = "v8.3.0" if defined? Jettywrapper
 task :default => []; Rake::Task[:default].clear
 
 task default: :ci
+

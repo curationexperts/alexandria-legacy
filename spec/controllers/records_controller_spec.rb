@@ -171,4 +171,84 @@ describe RecordsController do
     end
   end  # describe #destroy
 
+
+  describe '#new_merge' do
+    routes { Rails.application.routes }
+
+    context "for local authority records" do
+      let!(:person) { create(:person, foaf_name: 'old name') }
+
+      it 'displays the record merge form' do
+        get :new_merge, id: person
+        expect(assigns(:record)).to eq person
+        expect(response).to be_successful
+        expect(response).to render_template(:new_merge)
+      end
+    end
+
+    context "records that are not local authorities" do
+      let(:image) { create(:image) }
+
+      it 'returns message that record cannot be merged' do
+        get :new_merge, id: image
+        expect(flash[:alert]).to eq "This record cannot be merged.  Only local authority records can be merged."
+        expect(response).to redirect_to local_authorities_path
+      end
+    end
+
+    context 'a non-admin user' do
+      let(:user) { create :user }
+      let!(:person) { create(:person) }
+
+      it 'access is denied' do
+        get :new_merge, id: person
+        expect(flash[:alert]).to match /You are not authorized/
+        expect(response).to redirect_to root_path
+      end
+    end
+  end  # describe #new_merge
+
+
+  describe '#merge' do
+    routes { Rails.application.routes }
+
+    let!(:person) { create(:person) }
+    let(:target_id) { '92/20/85/43/92208543-9840-4f8b-8e97-561ba46cfd6f' }
+    let(:fedora_path) { ActiveFedora.config.credentials[:url] + ActiveFedora.config.credentials[:base_path] }
+
+    let(:form_params) do
+      # This is how it looks when the javascript adds the data to the form.
+      { "subject_merge_target_attributes" => { "0" => { "hidden_label" => "Topic 3", "id" => "#{fedora_path}/#{target_id}"}} }
+    end
+
+    it 'queues a job to merge the records' do
+      expect(MergeRecordsJob).to receive(:perform_later).with(person.id, target_id, user.user_key)
+      post :merge, { id: person }.merge(form_params)
+      expect(response).to redirect_to local_authorities_path
+    end
+
+    context 'missing arguments' do
+      let(:form_params) do
+        { "subject_merge_target_attributes" => { "0" => { "hidden_label" => "", "id" => ""}} }
+      end
+
+      it 'displays an error message' do
+        expect(MergeRecordsJob).to_not receive(:perform_later)
+        post :merge, { id: person }.merge(form_params)
+        expect(response).to render_template(:new_merge)
+        expect(flash[:alert]).to match /Error:  Unable to queue merge job.  Please fill in all required fields./
+      end
+    end
+
+    context 'a non-admin user' do
+      let(:user) { create :user }
+
+      it 'access is denied' do
+        post :merge, { id: person }.merge(form_params)
+        expect(flash[:alert]).to match /You are not authorized/
+        expect(response).to redirect_to root_path
+      end
+    end
+  end  # describe #merge
+
 end

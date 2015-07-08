@@ -53,6 +53,9 @@ gem 'devise'
 gem 'devise-guests', '~> 0.3'
 gem 'traject', require: false
 
+gem 'resque-status'
+gem 'resque-pool'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-activemodel-mocks'
@@ -60,6 +63,7 @@ group :development, :test do
   gem 'jettywrapper'
   # gem 'http_logger'
   gem 'capybara'
+  gem 'poltergeist'
   gem 'byebug'
   gem 'sqlite3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
@@ -71,6 +75,7 @@ group :test do
   gem 'timecop', '0.7.3'
   gem 'webmock', require: false
   gem 'vcr'
+  gem 'database_cleaner'
 end
 
 group :development do

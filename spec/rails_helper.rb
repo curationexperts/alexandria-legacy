@@ -7,6 +7,12 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 require 'capybara/rails'
+require 'capybara/poltergeist'
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, { js_errors: false })
+end
+Capybara.javascript_driver = :poltergeist
+
 # HttpLogger.logger = Logger.new(STDOUT)
 # HttpLogger.ignore = [/\/solr/]
 # HttpLogger.colorize = true
@@ -29,7 +35,6 @@ ActiveRecord::Migration.maintain_test_schema!
 
 require 'active_fedora/cleaner'
 
-
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -37,10 +42,24 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
-  config.before(:each) do
+  config.before :suite do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before :each do
     ActiveFedora::Cleaner.clean! if ActiveFedora::Base.count > 0
+    if Capybara.current_driver == :rack_test
+      DatabaseCleaner.strategy = :transaction
+    else
+      DatabaseCleaner.strategy = :truncation
+    end
+    DatabaseCleaner.start
+  end
+
+  config.after :each do
+    DatabaseCleaner.clean
   end
 
   config.infer_spec_type_from_file_location!
