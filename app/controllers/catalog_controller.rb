@@ -82,7 +82,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field solr_name('lc_subject_label', :stored_searchable), label: 'Subject'
-    config.add_index_field ImageIndexer::CONTRIBUTOR_LABEL, label: 'Creators / Contributors'
+    config.add_index_field ContributorIndexer::CONTRIBUTOR_LABEL, label: 'Creators / Contributors'
     config.add_index_field solr_name('publisher', :stored_searchable), label: 'Publisher'
     config.add_index_field solr_name('author', :stored_searchable), label: 'Author'
     config.add_index_field 'published_ss', label: 'Published'
@@ -96,7 +96,10 @@ class CatalogController < ApplicationController
     # The ordering of the field names is the order of the display
     config.add_show_field 'foaf_name_tesim', label: 'FOAF Name'
     config.add_show_field 'label_tesim', label: 'Label'
-    config.add_show_field solr_name('author', :stored_searchable), label: 'Author'
+    Metadata::RELATIONS.each do |key, value|
+      config.add_show_field solr_name("#{key}_label", :stored_searchable), label: key.to_s.titleize
+    end
+
     config.add_show_field 'published_ss', label: 'Published'
     config.add_show_field 'date_created_ss', label: 'Date Created'
     config.add_show_field solr_name('form_of_work_label', :stored_searchable), label: 'Form of Resource'
@@ -128,10 +131,6 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('date_valid', :displayable), label: 'Valid Dates'
     config.add_show_field solr_name('date_other', :displayable), label: 'Other Dates'
     config.add_show_field solr_name('digital_origin', :stored_searchable), label: 'Digital Origin'
-
-    Image::RELATIONS.each do |key, value|
-      config.add_show_field solr_name("#{key}_label", :stored_searchable), label: key.to_s.titleize
-    end
 
     config.add_show_field solr_name('latitude', :displayable, type: :string), label: 'Latitude'
     config.add_show_field solr_name('longitude', :displayable, type: :string), label: 'Longitude'

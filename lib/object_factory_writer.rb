@@ -1,4 +1,5 @@
 require 'importer'
+require 'traject'
 # require 'traject/util'
 # require 'traject/qualified_const_get'
 
@@ -23,18 +24,16 @@ class ObjectFactoryWriter
 
   # Add a single context to fedora
   def put(context)
-    attributes = context.output_hash
+    attributes = context.output_hash.with_indifferent_access
 
     # created date is a TimeSpan
     created = attributes.delete('created_start')
-    attributes[:created_attributes] = [{start: created}] if created
+    attributes[:created_attributes] = [{ start: created }] if created
 
     # title must be singular
     title = attributes.delete('title')
     attributes[:title] = title.first
-
-    # TODO Current indexer can't handle a string for author. It's expecting a URI
-    attributes.delete('author')
+    attributes[:id] = attributes.delete('id').first
 
     ## Delete entries that aren't in the schema yet
     attributes.delete('isbn')
@@ -57,6 +56,16 @@ class ObjectFactoryWriter
     # TODO get a real collection properties
     attributes[:collection] = { id: "etds", title: "Electronic Theses and Dissertations", accession_number: ['etds'] }
 
-    Importer::Factory.for('ETD').new(attributes, Settings.proquest_directory).run
+    build_object(attributes)
   end
+
+  private
+
+    def build_object(attributes)
+      factory.new(attributes, Settings.proquest_directory).run
+    end
+
+    def factory
+      Importer::Factory.for('ETD')
+    end
 end
