@@ -1,30 +1,33 @@
 class AttachFilesToETD
 
-  def self.run(etd, file_names)
-    service = AttachFilesToETD.new(etd)
-    file_names.each do |file_name|
-      zip_path = ZipfileService.find_file_containing(file_name)
-      next unless zip_path
-      service.attach_contents_of_zipfile(zip_path)
-    end
+  def self.run(etd, pdf_file_name)
+    AttachFilesToETD.new(etd, pdf_file_name).run
   end
 
-  attr_reader :etd
+  attr_reader :etd, :pdf_file_name
 
-  def initialize(etd)
+  def initialize(etd, pdf_file_name)
     @etd = etd
+    @pdf_file_name = pdf_file_name
   end
 
-  def attach_contents_of_zipfile(zip_path)
-    files = ZipfileService.extract_files(zip_path)
+  def run
+    files = zip_service.extract_files
+    return unless files
 
-    attach_proquest(files['xml'])
-    attach_original(files['pdf'])
+    attach_proquest(files.proquest) if files.proquest
+    attach_original(files.pdf) if files.pdf
     # TODO
-    # attach_supplementals(files['pdf'])
+    # attach_supplementals(files.supplemental)
   end
+
 
   private
+
+
+    def zip_service
+      @zip_service ||= ZipfileService.new(pdf_file_name)
+    end
 
     def attach_original(path)
       etd.generic_files.create do |gf|

@@ -43,7 +43,7 @@ describe Importer::Factory::ETDFactory do
     let(:etd) { ETD.create }
 
     it "attaches files" do
-      expect(AttachFilesToETD).to receive(:run).with(etd, attributes[:files])
+      expect(AttachFilesToETD).to receive(:run).with(etd, attributes[:files].first)
       factory.after_create(etd)
     end
   end

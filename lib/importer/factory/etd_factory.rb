@@ -9,8 +9,10 @@ module Importer::Factory
     def after_create(etd)
       return unless files_directory
 
+      Rails.logger.warn "Files for etd #{etd.id} were: #{attributes[:files]}, expected only 1" unless attributes[:files].size == 1
+
       # TODO move to background job
-      AttachFilesToETD.run(etd, attributes[:files])
+      AttachFilesToETD.run(etd, attributes[:files].first)
       etd.save # force a reindex after the files are created
     end
 
