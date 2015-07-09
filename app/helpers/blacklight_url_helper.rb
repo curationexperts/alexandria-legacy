@@ -6,7 +6,7 @@ module BlacklightUrlHelper
     case Array(doc['has_model_ssim']).first
     when 'Collection'
       collections.collection_path(doc)
-    when 'Image', 'Etd'
+    when 'Image', 'ETD'
       ark_path(doc.ark.html_safe)
     else
       super
