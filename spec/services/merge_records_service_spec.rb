@@ -93,7 +93,7 @@ describe MergeRecordsService do
       end
 
       it 'raises an error' do
-        expect { subject.run }.to raise_error
+        expect { subject.run }.to raise_error(Ldp::Gone)
       end
     end
   end  # describe #run
