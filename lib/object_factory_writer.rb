@@ -36,7 +36,6 @@ class ObjectFactoryWriter
     attributes[:id] = attributes.delete('id').first
 
     ## Delete entries that aren't in the schema yet
-    attributes.delete('isbn')
     attributes.delete('published')
     attributes.delete('description')
     attributes.delete('advisor')
