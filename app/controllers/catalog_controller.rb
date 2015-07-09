@@ -107,7 +107,6 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('accession_number', :symbol), label: 'Accession Number'
     config.add_show_field solr_name('alternative', :stored_searchable), label: 'Alternative Title'
     config.add_show_field 'description_ssim', label: 'Description'
-    config.add_show_field 'advisor_ssim', label: 'Notes'
     config.add_show_field solr_name('description', :stored_searchable), label: 'Description'
     config.add_show_field solr_name('summary', :stored_searchable), label: 'Summary'
     config.add_show_field 'genre_ssim', label: 'Genre'

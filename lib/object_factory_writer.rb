@@ -76,12 +76,12 @@ class ObjectFactoryWriter
     #     name = ['Paul J. Atzberger', 'Frodo Baggins']
     #     relators = ['degree supervisor.', 'adventurer']
     # will return the thesis advisor:
-    #     { advisor: ['Paul J. Atzberger'] }
+    #     { degree_supervisor: ['Paul J. Atzberger'] }
     def parse_relators(names, relators)
       fields = {}
 
-      advisor = names.find_all.with_index { |_, index| relators[index].match(/degree supervisor/i) }
-      fields[:advisor] = advisor unless advisor.blank?
+      ds = names.find_all.with_index { |_, index| relators[index].match(/degree supervisor/i) }
+      fields[:degree_supervisor] = ds unless ds.blank?
 
       fields
     end
