@@ -1,30 +1,73 @@
+# Proquest ships us a directory of zipfiles that contain a PDF, an XML file with
+# rights/embargo data and possibly some supplementary files. The only way to
+# associate the zip file with the MARC record for the ETD is that the MARC
+# record has the name of the pdf file contained within one of the
+# zipfiles.  This service identifies the zipfile based on the pdf name and extracts
+# all the files so we can save them with the Fedora object.
 class ZipfileService
 
-  # @param [String] filename a partial filename
-  # @return [String, NilClass] the name of the zipfile containing the filename
-  def self.find_file_containing(filename)
-    results = `for f in #{wildcard_zip}; do unzip -l $f | grep -q #{filename} && echo $f; done`
-    results.chomp!
-    results.empty? ? nil : results
+  attr_reader :pdf_file_name
+  # @param [String] pdf_file_name the base name of the PDF file to find
+  def initialize(pdf_file_name)
+    @pdf_file_name = pdf_file_name
   end
 
-  # TODO there may be more than one PDF file to be returned. There is an original
-  # and optional supplemental files
-  # @param [String] zip_path path to the zip file
-  # @return [Hash] paths to the extracted files, keyed by extension
-  def self.extract_files(zip_path)
-    output = `unzip -j "#{zip_path}" -d "#{Dir.tmpdir}"`
-    output.split("\n").grep(/inflating/).each_with_object({}) do |line, h|
-      filename = line.gsub(/\s*inflating: /, '').rstrip
-      h[File.extname(filename).split('.').last] = filename
+  # @return [ExtractedFiles] paths to the extracted files
+  def extract_files
+    zip_path = find_zip_file
+    return unless zip_path
+
+    filenames = extracted_files(run_unzip(zip_path))
+    filenames.each_with_object(ExtractedFiles.new) do |filename, extracted|
+      if File.basename(filename) == pdf_file_name
+        extracted.pdf = filename
+      elsif File.basename(filename) == "#{File.basename(pdf_file_name, '.pdf')}_DATA.xml"
+        extracted.proquest = filename
+      else
+        extracted.add_supplemental filename
+      end
 
     end
   end
 
+  class ExtractedFiles < Struct.new(:pdf, :proquest, :supplemental)
+    def add_supplemental(val)
+      self.supplemental ||=[]
+      supplemental << val
+    end
+
+  end
+
   private
 
+    def extracted_files(raw_output)
+      output = raw_output.split("\n").grep(/inflating/).map do |line|
+        line.gsub(/\s*inflating: /, '').rstrip
+      end
+    end
+
+    # @return [String, NilClass] the path tf the zipfile containing the pdf file
+    def find_zip_file
+      results = `for f in #{wildcard_zip}; do unzip -l $f | grep -q #{pdf_file_name} && echo $f; done`
+      results.chomp!
+      results.empty? ? nil : results
+    end
+
+    # Returns the output from extracting the archive to the tempdir
+    #
+    # Sample output:
+    # Archive:  /opt/download_root/proquest/etdadmin_upload_292976.zip
+    #   inflating: /tmp/jcoyne/Murray_ucsb_0035D_12159.pdf
+    #   inflating: /tmp/jcoyne/Murray_ucsb_0035D_12159_DATA.xml
+    #   inflating: /tmp/jcoyne/SupplementalFile1.pdf
+    #   inflating: /tmp/jcoyne/SupplementalFile2.pdf
+    #   inflating: /tmp/jcoyne/SupplementalFile3.pdf
+    def run_unzip(zip_path)
+      `unzip -j "#{zip_path}" -d "#{Dir.tmpdir}"`
+    end
+
     # @return [String] a pattern for seaching the zip files.
-    def self.wildcard_zip
+    def wildcard_zip
       File.join(Shellwords.escape(Settings.proquest_directory), '*.zip')
     end
 
