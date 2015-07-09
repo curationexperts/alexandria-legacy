@@ -29,7 +29,7 @@ describe ObjectFactoryWriter do
         admin_policy_id: "authorities/policies/public",
         collection: { id: "etds", title: "Electronic Theses and Dissertations", accession_number: ['etds'] },
         title: 'How to be awesome',
-        advisor: ['Paul', 'Hector']
+        degree_supervisor: ['Paul', 'Hector']
       )
 
       writer.put(traject_context)
