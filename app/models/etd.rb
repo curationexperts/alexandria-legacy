@@ -2,7 +2,12 @@ require 'active_fedora/aggregation'
 class ETD < ActiveFedora::Base
   include Metadata
   include LocalAuthorityHashAccessor
+
   property :system_number, predicate: ::RDF::Vocab::MODS.recordIdentifier do |index|
+    index.as :symbol
+  end
+
+  property :isbn, predicate: ::RDF::Vocab::Identifiers.isbn do |index|
     index.as :symbol
   end
 
