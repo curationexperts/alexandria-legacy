@@ -40,7 +40,7 @@ to_field "system_number", extract_marc("001")
 to_field "language", marc_languages
 to_field "created_start", marc_publication_date
 
-to_field 'isbn', extract_marc("020")
+to_field 'isbn', extract_marc("020a")
 
 ark_extractor = MarcExtractor.new("856u", :separator => nil)
 
