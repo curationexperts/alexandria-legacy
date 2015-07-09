@@ -16,25 +16,24 @@ class AttachFilesToETD
     return unless files
 
     attach_proquest(files.proquest) if files.proquest
-    attach_original(files.pdf) if files.pdf
-    # TODO
-    # attach_supplementals(files.supplemental)
+    attach_original_and_supplimentals([files.pdf] + files.supplemental)
   end
 
 
   private
 
-
     def zip_service
       @zip_service ||= ZipfileService.new(pdf_file_name)
     end
 
-    def attach_original(path)
-      etd.generic_files.create do |gf|
-        puts "  Attaching binary #{path}"
-        gf.original.mime_type = 'application/pdf'
-        gf.original.original_name = File.basename(path)
-        gf.original.content = File.new(path)
+    def attach_original_and_supplimentals(paths)
+      paths.each do |path|
+        etd.generic_files.create do |gf|
+          puts "  Attaching binary #{path}"
+          gf.original.mime_type = best_mime_for_filename(path)
+          gf.original.original_name = File.basename(path)
+          gf.original.content = File.new(path)
+        end
       end
     end
 
@@ -42,5 +41,10 @@ class AttachFilesToETD
       etd.proquest.mime_type = 'application/xml'
       etd.proquest.original_name = File.basename(path)
       etd.proquest.content = File.new(path)
+    end
+
+    def best_mime_for_filename(file_name)
+      mime_types = MIME::Types.of(file_name)
+      mime_types.empty? ? "application/octet-stream" : mime_types.first.content_type
     end
 end
