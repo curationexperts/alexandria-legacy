@@ -35,10 +35,9 @@ class ObjectFactoryWriter
     attributes[:title] = title.first
     attributes[:id] = attributes.delete('id').first
 
-    ## Delete entries that aren't in the schema yet
+    # Delete entries that aren't in the schema yet
     attributes.delete('published')
     attributes.delete('description')
-    attributes.delete('advisor')
     attributes.delete('dissertation')
     attributes.delete('bibliography')
     attributes.delete('summary')
@@ -55,6 +54,8 @@ class ObjectFactoryWriter
     # TODO get a real collection properties
     attributes[:collection] = { id: "etds", title: "Electronic Theses and Dissertations", accession_number: ['etds'] }
 
+    attributes.merge!(parse_relators(attributes.delete('names'), attributes.delete('relators')))
+
     build_object(attributes)
   end
 
@@ -67,4 +68,22 @@ class ObjectFactoryWriter
     def factory
       Importer::Factory.for('ETD')
     end
+
+    # @param [Array] names : a list of names
+    # @param [Array] relators : a list of roles that correspond to those names
+    # @return [Hash] relator fields
+    # Example:
+    #     name = ['Paul J. Atzberger', 'Frodo Baggins']
+    #     relators = ['degree supervisor.', 'adventurer']
+    # will return the thesis advisor:
+    #     { advisor: ['Paul J. Atzberger'] }
+    def parse_relators(names, relators)
+      fields = {}
+
+      advisor = names.find_all.with_index { |_, index| relators[index].match(/degree supervisor/i) }
+      fields[:advisor] = advisor unless advisor.blank?
+
+      fields
+    end
+
 end

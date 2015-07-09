@@ -3,6 +3,7 @@ module Metadata
     {
       actor:                                 RDF::Vocab::MARCRelators.act,
       adapter:                               RDF::Vocab::MARCRelators.adp,
+      advisor:                               RDF::Vocab::MARCRelators.ths,
       animator:                              RDF::Vocab::MARCRelators.anm,
       annotator:                             RDF::Vocab::MARCRelators.ann,
       architect:                             RDF::Vocab::MARCRelators.arc,
