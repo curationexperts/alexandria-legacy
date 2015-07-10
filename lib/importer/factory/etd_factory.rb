@@ -6,6 +6,11 @@ module Importer::Factory
       ETD
     end
 
+    def update(obj)
+      update_created_date(obj)
+      super
+    end
+
     def after_create(etd)
       return unless files_directory
 
@@ -23,5 +28,23 @@ module Importer::Factory
     def log_updated(obj)
       puts "  Updated #{klass.to_s.downcase} #{obj.id} (#{attributes[:system_number].first})"
     end
+
+private
+
+    def update_created_date(obj)
+      return if attributes[:created_attributes].blank?
+
+      new_date = Array(attributes.fetch(:created_attributes)).first.fetch(:start, nil)
+      return unless new_date
+
+      existing_date = obj.created.flat_map(&:start)
+
+      if existing_date == new_date
+        attributes.delete(:created_attributes)
+      else
+        obj.created.clear  # to be replaced by new date
+      end
+    end
+
   end
 end
