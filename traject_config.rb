@@ -87,7 +87,7 @@ to_field 'author', extract_marc("100a", trim_punctuation: true)
 
 
 to_field 'published', extract_marc("264", trim_punctuation: true)
-to_field 'description', extract_marc("300")
+to_field 'description', extract_marc("300a")
 to_field 'dissertation', extract_marc("502")
 to_field 'bibliography', extract_marc("504")
 
