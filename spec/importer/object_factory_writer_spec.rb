@@ -6,13 +6,19 @@ describe ObjectFactoryWriter do
 
   describe "#put" do
     let(:traject_context) { double(output_hash: traject_hash) }
-    let(:traject_hash) { { 'author' => ['Valerie'], 'title' => ["How to be awesome"],
-                           'created_start' => ['2013'],
-                           'filename' => ['My_stuff.pdf'],
-                           'isbn' => ['1234'],
-                           'identifier' => ['ark:/99999/fk4zp46p1g'],
-                           'id' => ['fk/4z/p4/6p/fk4zp46p1g'],
-    } }
+
+    let(:traject_hash) do
+      { 'author' => ['Valerie'],
+        'title' => ["How to be awesome"],
+        'created_start' => ['2013'],
+        'filename' => ['My_stuff.pdf'],
+        'isbn' => ['1234'],
+        'identifier' => ['ark:/99999/fk4zp46p1g'],
+        'id' => ['fk/4z/p4/6p/fk4zp46p1g'],
+        'names' => ['Paul', 'Frodo Baggins', 'Hector'],
+        'relators' => ['degree supervisor.', 'adventurer', 'Degree suPERvisor'] }
+    end
+
     it "calls the etd factory" do
       expect(writer).to receive(:build_object).with(
         author: ['Valerie'],
@@ -23,10 +29,11 @@ describe ObjectFactoryWriter do
         admin_policy_id: "authorities/policies/public",
         collection: { id: "etds", title: "Electronic Theses and Dissertations", accession_number: ['etds'] },
         title: 'How to be awesome',
+        degree_supervisor: ['Paul', 'Hector']
       )
 
       writer.put(traject_context)
-
     end
+
   end
 end

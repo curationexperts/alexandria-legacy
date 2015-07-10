@@ -88,11 +88,12 @@ to_field 'author', extract_marc("100a", trim_punctuation: true)
 
 to_field 'published', extract_marc("264", trim_punctuation: true)
 to_field 'description', extract_marc("300")
-to_field 'advisor', extract_marc("500") # and committee members
 to_field 'dissertation', extract_marc("502")
 to_field 'bibliography', extract_marc("504")
 
-
+# Names with relators, e.g. thesis advisor
+to_field 'names',    extract_marc("720a")
+to_field 'relators', extract_marc("720e")
 
 # to_field 'f506', extract_marc("506") # access rights statement
 to_field 'summary', extract_marc("520")
