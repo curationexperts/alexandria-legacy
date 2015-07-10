@@ -68,7 +68,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name('creator_label', :facetable), label: 'Creator'
     config.add_facet_field solr_name('lc_subject_label', :facetable), label: 'Subject'
     config.add_facet_field solr_name('publisher', :facetable), label: 'Publisher'
-    config.add_facet_field ImageIndexer::FACETABLE_YEAR, label: 'Year'
+    config.add_facet_field ObjectIndexer::FACETABLE_YEAR, label: 'Year'
     config.add_facet_field solr_name('form_of_work_label', :facetable), label: 'Type'
     config.add_facet_field solr_name('collection_label', :symbol), label: 'Collection'
 
@@ -191,11 +191,11 @@ class CatalogController < ApplicationController
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
-    config.add_sort_field "score desc, #{ImageIndexer::SORTABLE_DATE} desc, creator_label_si asc", label: 'relevance'
-    config.add_sort_field "#{ImageIndexer::SORTABLE_DATE} asc, creator_label_si asc", label: 'year ascending'
-    config.add_sort_field "#{ImageIndexer::SORTABLE_DATE} desc, creator_label_si asc", label: 'year descending'
-    config.add_sort_field "creator_label_si asc, #{ImageIndexer::SORTABLE_DATE} asc", label: 'creator ascending'
-    config.add_sort_field "creator_label_si desc, #{ImageIndexer::SORTABLE_DATE} asc", label: 'creator descending'
+    config.add_sort_field "score desc, #{ObjectIndexer::SORTABLE_DATE} desc, creator_label_si asc", label: 'relevance'
+    config.add_sort_field "#{ObjectIndexer::SORTABLE_DATE} asc, creator_label_si asc", label: 'year ascending'
+    config.add_sort_field "#{ObjectIndexer::SORTABLE_DATE} desc, creator_label_si asc", label: 'year descending'
+    config.add_sort_field "creator_label_si asc, #{ObjectIndexer::SORTABLE_DATE} asc", label: 'creator ascending'
+    config.add_sort_field "creator_label_si desc, #{ObjectIndexer::SORTABLE_DATE} asc", label: 'creator descending'
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.

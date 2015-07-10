@@ -19,7 +19,7 @@ class ETD < ActiveFedora::Base
   contains :proquest
 
   def self.indexer
-    ImageIndexer
+    ETDIndexer
   end
 
   def to_param
