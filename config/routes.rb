@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   resources :local_authorities, only: :index
 
+  resources :downloads
+
   devise_for :users
   mount Hydra::RoleManagement::Engine => '/'
   mount Riiif::Engine => '/images'

@@ -1,6 +1,6 @@
 <%= render 'show_default', document: document %>
 
-<% if document.key?('filename_ssim') %>
+<% if document.key?('original_download_url_ssm') %>
   <table class="table table-bordered" id="downloads">
     <thead>
       <tr>
@@ -9,12 +9,12 @@
       </tr>
     </thead>
     <tbody>
-      <% document.fetch('filename_ssim').each do |filename| %>
+      <% document.fetch('original_download_url_ssm').each do |path| %>
       <tr>
         <td class="access_row" colspan="2">Access: UC Santa Barbara Only</td>
       </tr>
       <tr>
-        <td class="col_1"><span id="thumbnail_image"><%= image_tag "pdf_32x.png" %></span><%=filename %><span id="file_size"> (???) </span></td>
+        <td class="col_1"><span id="thumbnail_image"><%= image_tag "pdf_32x.png" %></span><%= link_to 'pdf', path %><span id="file_size"> (???) </span></td>
         <td class="col_2">Full-text thesis or dissertation</td>
       </tr>
       <% end %>
