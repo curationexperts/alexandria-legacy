@@ -20,8 +20,9 @@ describe ZipfileService do
   inflating: /tmp/jcoyne/SupplementalFile3.pdf
 ")
     end
+    let(:dir) { Dir.mktmpdir }
 
-    subject { service.extract_files }
+    subject { service.extract_files(dir) }
     it { is_expected.to eq ZipfileService::ExtractedFiles.new(
         '/tmp/jcoyne/Murray_ucsb_0035D_12159.pdf',
         '/tmp/jcoyne/Murray_ucsb_0035D_12159_DATA.xml',

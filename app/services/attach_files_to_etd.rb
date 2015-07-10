@@ -12,11 +12,13 @@ class AttachFilesToETD
   end
 
   def run
-    files = zip_service.extract_files
-    return unless files
+    Dir.mktmpdir do |tmpdir|
+      files = zip_service.extract_files(tmpdir)
+      return unless files
 
-    attach_proquest(files.proquest) if files.proquest
-    attach_original_and_supplimentals([files.pdf] + files.supplemental)
+      attach_proquest(files.proquest) if files.proquest
+      attach_original_and_supplimentals([files.pdf] + files.supplemental)
+    end
   end
 
 
