@@ -12,12 +12,13 @@ class ZipfileService
     @pdf_file_name = pdf_file_name
   end
 
+  # @param [String] dir the directory to extract the files to
   # @return [ExtractedFiles] paths to the extracted files
-  def extract_files
+  def extract_files(dir)
     zip_path = find_zip_file
     return unless zip_path
 
-    filenames = extracted_files(run_unzip(zip_path))
+    filenames = extracted_files(run_unzip(zip_path, dir))
     filenames.each_with_object(ExtractedFiles.new) do |filename, extracted|
       if File.basename(filename) == pdf_file_name
         extracted.pdf = filename
@@ -62,8 +63,8 @@ class ZipfileService
     #   inflating: /tmp/jcoyne/SupplementalFile1.pdf
     #   inflating: /tmp/jcoyne/SupplementalFile2.pdf
     #   inflating: /tmp/jcoyne/SupplementalFile3.pdf
-    def run_unzip(zip_path)
-      `unzip -j "#{zip_path}" -d "#{Dir.tmpdir}"`
+    def run_unzip(zip_path, dir)
+      `unzip -j "#{zip_path}" -d "#{dir}"`
     end
 
     # @return [String] a pattern for seaching the zip files.
