@@ -11,6 +11,7 @@ class Ability
       can [:read, :destroy], :local_authorities
 
       can [:new_merge, :merge], ActiveFedora::Base
+      can :download, ActiveFedora::File # an etd download
     end
   end
 end
