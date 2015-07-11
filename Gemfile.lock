@@ -46,7 +46,8 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra-labs/activefedora-aggregation.git
-  revision: 0dfe4f43e115ec5f83b3dab046e557d0d2afd4e0
+  revision: ea8cc129c2202d62c9c156f35a3fbf9725087307
+  ref: ea8cc12
   specs:
     activefedora-aggregation (0.2.0)
       active-fedora
