@@ -38,7 +38,7 @@ gem 'settingslogic'
 
 gem 'rsolr', '~> 1.0.12'
 #gem 'activefedora-aggregation', '~> 0.2.0'
-gem 'activefedora-aggregation', github: 'projecthydra-labs/activefedora-aggregation' # this will be 0.3.0
+gem 'activefedora-aggregation', github: 'projecthydra-labs/activefedora-aggregation', ref: 'ea8cc12' # this will be 0.3.0
 
 gem 'mods', '~> 2.0.3'
 gem 'oargun', github: 'curationexperts/oargun', ref: '38f16d2'
