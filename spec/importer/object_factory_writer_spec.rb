@@ -26,7 +26,7 @@ describe ObjectFactoryWriter do
         identifier: ['ark:/99999/fk4zp46p1g'],
         id: 'fk/4z/p4/6p/fk4zp46p1g',
         files: ['My_stuff.pdf'], created_attributes: [{ start: ['2013'] }],
-        admin_policy_id: "authorities/policies/public",
+        admin_policy_id: AdminPolicy::ADMIN_USER_POLICY_ID,
         collection: { id: "etds", title: "Electronic Theses and Dissertations", accession_number: ['etds'] },
         title: 'How to be awesome',
         degree_supervisor: ['Paul', 'Hector']
