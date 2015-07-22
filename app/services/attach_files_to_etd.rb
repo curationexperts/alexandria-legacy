@@ -19,6 +19,7 @@ class AttachFilesToETD
       if files.proquest
         attach_proquest(files.proquest)
         UpdateMetadataFromProquestFile.new(etd).run
+        etd.proquest.content.rewind
       end
 
       attach_original_and_supplimentals([files.pdf] + files.supplemental)
