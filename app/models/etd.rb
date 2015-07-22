@@ -2,6 +2,7 @@ require 'active_fedora/aggregation'
 class ETD < ActiveFedora::Base
   include Metadata
   include LocalAuthorityHashAccessor
+  include Hydra::AccessControls::Embargoable
 
   property :system_number, predicate: ::RDF::Vocab::MODS.recordIdentifier do |index|
     index.as :symbol

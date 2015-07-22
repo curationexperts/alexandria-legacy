@@ -16,7 +16,11 @@ class AttachFilesToETD
       files = zip_service.extract_files(tmpdir)
       return unless files
 
-      attach_proquest(files.proquest) if files.proquest
+      if files.proquest
+        attach_proquest(files.proquest)
+        UpdateMetadataFromProquestFile.new(etd).run
+      end
+
       attach_original_and_supplimentals([files.pdf] + files.supplemental)
     end
   end
