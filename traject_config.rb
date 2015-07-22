@@ -10,11 +10,6 @@ require_relative 'app/utils/identifier'
 extend Traject::Macros::Marc21Semantics
 extend Traject::Macros::MarcFormats
 
-def ark_from_alexandria_uri(uri)
-  md = /http:\/\/alexandria\.ucsb\.edu\/lib\/(ark:\/\d{5}\/.*)/.match(uri)
-  md[1] if md
-end
-
 settings do
   provide "writer_class_name", "ObjectFactoryWriter"
   provide "marc_source.type", "xml"
@@ -42,14 +37,14 @@ to_field "created_start", marc_publication_date
 
 to_field 'isbn', extract_marc("020a")
 
-ark_extractor = MarcExtractor.new("856u", :separator => nil)
+ark_extractor = MarcExtractor.new("024a", :separator => nil)
 
 to_field 'identifier', lambda { |record, accumulator, context|
   fields = ark_extractor.extract(record).map do |field|
-    ark_from_alexandria_uri(field)
+    field
   end.compact
   if fields.empty?
-    #puts "No ARK, Skipping."
+    puts "No ARK, Skipping."
     context.skip!
   else
     # TODO update ARK to point at alexandria-v2?
