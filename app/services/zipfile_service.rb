@@ -32,6 +32,13 @@ class ZipfileService
   end
 
   class ExtractedFiles < Struct.new(:pdf, :proquest, :supplemental)
+
+    def initialize(pdf=nil, proquest=nil, supplemental=[])
+      self.pdf = pdf
+      self.proquest = proquest
+      self.supplemental = supplemental
+    end
+
     def add_supplemental(val)
       self.supplemental ||=[]
       supplemental << val
