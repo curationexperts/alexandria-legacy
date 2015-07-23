@@ -45,16 +45,6 @@ GIT
       sparql-client
 
 GIT
-  remote: git://github.com/projecthydra-labs/activefedora-aggregation.git
-  revision: d3b7fdba6850143b8cb805624a8dd11d3f971900
-  ref: d3b7fdb
-  specs:
-    activefedora-aggregation (0.2.0)
-      active-fedora
-      activesupport
-      rdf-vocab (~> 0.8.1)
-
-GIT
   remote: git://github.com/projecthydra/active_fedora.git
   revision: 1c6ce5ca48ee60e3149271b3eb7b795439baf557
   ref: 1c6ce5c
@@ -92,6 +82,10 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    activefedora-aggregation (0.3.0)
+      active-fedora
+      activesupport
+      rdf-vocab (~> 0.8.1)
     activejob (4.2.3)
       activesupport (= 4.2.3)
       globalid (>= 0.3.0)
@@ -578,7 +572,7 @@ PLATFORMS
 DEPENDENCIES
   active-fedora!
   active-triples!
-  activefedora-aggregation!
+  activefedora-aggregation (~> 0.3.0)
   awesome_print
   blacklight (~> 5.14.0)
   blacklight-gallery
@@ -630,4 +624,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.10.5
+   1.10.6
