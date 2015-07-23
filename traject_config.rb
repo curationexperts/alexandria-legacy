@@ -63,7 +63,7 @@ to_field 'id', lambda { |record, accumulator, context|
 
 to_field 'title', extract_marc("245a", trim_punctuation: true)
 
-# TODO 245c is the statment of responsibility. Per call on 2015-6-17
+# TODO 245c is the statment of responsibility. Per call on 2015-6-17. Don't use per #340
 #
 # TODO we need to extract the pdf names from the directory of zip files so that we can match marc records (pdf name) to zip file.
 #
@@ -76,16 +76,16 @@ to_field 'author', extract_marc("100a", trim_punctuation: true)
 
 
 to_field 'published', extract_marc("264", trim_punctuation: true)
-to_field 'description', extract_marc("300a")
-to_field 'dissertation', extract_marc("502")
-to_field 'bibliography', extract_marc("504")
+to_field 'description', extract_marc("300a") # TODO move this to extent #350
+to_field 'dissertation', extract_marc("502") # TODO split into three subfields #338
+to_field 'bibliography', extract_marc("504") # TODO Remove? #340
 
 # Names with relators, e.g. thesis advisor
 to_field 'names',    extract_marc("720a")
 to_field 'relators', extract_marc("720e")
 
 # to_field 'f506', extract_marc("506") # access rights statement
-to_field 'summary', extract_marc("520")
+to_field 'summary', extract_marc("520") # TODO this becomes description #348
 # to_field 'f588', extract_marc("588") # basis of description
 
 #
@@ -103,9 +103,9 @@ to_field "genre", lambda { |record, accumulator|
   accumulator << values.join(' -- ')
 }
 
-to_field 'degree_grantor', extract_marc("710ab")
-to_field 'discipline', extract_marc('650')
-to_field 'fulltext_link', extract_marc("856u")
+to_field 'degree_grantor', extract_marc("710ab") # TODO #347
+to_field 'discipline', extract_marc('650')  # TODO remove? #340
+to_field 'fulltext_link', extract_marc("856u") # TODO filter for proquest url. #351
 # to_field 'f948', extract_marc("948")
 to_field 'filename', extract_marc("956f")
 
