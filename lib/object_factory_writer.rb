@@ -36,15 +36,15 @@ class ObjectFactoryWriter
     attributes[:id] = attributes.delete('id').first
 
     # Delete entries that aren't in the schema yet
-    attributes.delete('published')
-    attributes.delete('description')
-    attributes.delete('dissertation')
-    attributes.delete('bibliography')
-    attributes.delete('summary')
-    attributes.delete('genre')
-    attributes.delete('degree_grantor')
-    attributes.delete('discipline')
-    attributes.delete('fulltext_link')
+    attributes.delete('published') # TODO this breaks out into publisher, place of publication and publication date #342
+    attributes.delete('description') # TODO this becomes extent #350
+    attributes.delete('dissertation') # TODO #338
+    attributes.delete('bibliography') # TODO remove? #340
+    attributes.delete('summary') # TODO this becomes description #348
+    attributes.delete('genre') # TODO remove? #340
+    attributes.delete('degree_grantor') # TODO #347
+    attributes.delete('discipline') # TODO remove? #340
+    attributes.delete('fulltext_link') # TODO #351 we need to filter only proquest urls
 
     attributes[:files] = attributes.delete('filename')
 
