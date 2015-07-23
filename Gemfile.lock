@@ -46,8 +46,8 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra-labs/activefedora-aggregation.git
-  revision: ea8cc129c2202d62c9c156f35a3fbf9725087307
-  ref: ea8cc12
+  revision: d3b7fdba6850143b8cb805624a8dd11d3f971900
+  ref: d3b7fdb
   specs:
     activefedora-aggregation (0.2.0)
       active-fedora
@@ -56,8 +56,8 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/active_fedora.git
-  revision: 223391b31c55875a4e0ff64474ab088a4110b46d
-  ref: 223391b
+  revision: 1c6ce5ca48ee60e3149271b3eb7b795439baf557
+  ref: 1c6ce5c
   specs:
     active-fedora (9.2.0)
       active-triples (~> 0.7.1)
@@ -630,4 +630,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.10.4
+   1.10.5

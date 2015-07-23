@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'hydra-head', '9.2.0'
 #gem 'active-fedora', '9.2.0'
-gem 'active-fedora', github: 'projecthydra/active_fedora', ref: '223391b'
+gem 'active-fedora', github: 'projecthydra/active_fedora', ref: '1c6ce5c'
 
 gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: '0.7-future'
 gem 'hydra-editor', '~> 1.0.4'
@@ -38,7 +38,7 @@ gem 'settingslogic'
 
 gem 'rsolr', '~> 1.0.12'
 #gem 'activefedora-aggregation', '~> 0.2.0'
-gem 'activefedora-aggregation', github: 'projecthydra-labs/activefedora-aggregation', ref: 'ea8cc12' # this will be 0.3.0
+gem 'activefedora-aggregation', github: 'projecthydra-labs/activefedora-aggregation', ref: 'd3b7fdb'
 
 gem 'mods', '~> 2.0.3'
 gem 'oargun', github: 'curationexperts/oargun', ref: '38f16d2'
