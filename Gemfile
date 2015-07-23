@@ -24,8 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'hydra-head', '9.2.0'
-#gem 'active-fedora', '9.2.0'
-gem 'active-fedora', github: 'projecthydra/active_fedora', ref: '1c6ce5c'
+gem 'active-fedora', '9.2.1'
 
 gem 'active-triples', github: 'jcoyne/ActiveTriples', branch: '0.7-future'
 gem 'hydra-editor', '~> 1.0.4'
