@@ -1,5 +1,6 @@
 defaults: &defaults
   download_root: "<%=Rails.root%>/tmp/download_root"
+  pegasus_sru_endpoint: 'http://pegasus-test.library.ucsb.edu:5661'
 development:
   <<: *defaults
 test:
@@ -7,4 +8,5 @@ test:
 production:
   <<: *defaults
   download_root: '/opt/download_root'
+  pegasus_sru_endpoint: 'http://pegasus.library.ucsb.edu:5661'
 
