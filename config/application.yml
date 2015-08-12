@@ -8,4 +8,5 @@ test:
 production:
   <<: *defaults
   download_root: '/opt/download_root'
+  pegasus_sru_endpoint: 'http://pegasus.library.ucsb.edu:5661'
 
