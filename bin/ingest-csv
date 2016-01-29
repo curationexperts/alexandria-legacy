@@ -14,7 +14,6 @@ end
 if filename.nil?
   $stderr.puts "Usage: #{$PROGRAM_NAME} <csv file>"
   $stderr.puts "Usage: #{$PROGRAM_NAME} <csv file> <image directory> <object type>"
-  $stderr.puts "Usage: #{$PROGRAM_NAME} <csv file> <image directory>"
   $stderr.puts "Usage: #{$PROGRAM_NAME} <csv file> <object type>"
   $stderr.puts 'Please provide the csv file you want to import.'
   exit(1)
