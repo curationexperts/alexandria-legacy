@@ -1,8 +1,9 @@
 defaults: &defaults
-  download_root: '/opt/download_root'
+  download_root: 'tmp/download_root'
   pegasus_sru_endpoint: 'http://pegasus-test.library.ucsb.edu:5661'
   marmotta_host: localhost:8180
   internal_local_vocab_root: <%= ActiveFedora.fedora.host %>
+  minter_state: 'tmp/minter-state'
 development:
   <<: *defaults
 test:
