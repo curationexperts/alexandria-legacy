@@ -21,8 +21,9 @@ public/assets
 /jetty
 .rvmrc
 
-# Passwords etc
+# Rails configs
 config/*.yml
+config/environment.rb
 
 tags
 env
