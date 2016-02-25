@@ -37,6 +37,6 @@
     - { role: smtp }
     - { role: hostname }
     - { role: riiif }
-    - { role: alexandria-v2 }
+    - { role: alexandria }
     - { role: deploy }
     - { role: sshd }

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/curationexperts/alexandria-v2.svg?branch=master)](https://travis-ci.org/curationexperts/alexandria-v2)
+[![Build Status](https://travis-ci.org/curationexperts/alexandria.svg?branch=master)](https://travis-ci.org/curationexperts/alexandria)
 
 # Setup
 
@@ -120,7 +120,7 @@ temporary file that can be re-used on failed plays.
 
 # Ingesting
 
-(See also: <https://github.com/curationexperts/alexandria-v2/wiki>)
+(See also: <https://github.com/curationexperts/alexandria/wiki>)
 
 The descriptive metadata repository
 (https://stash.library.ucsb.edu/projects/CMS/repos/adrl-dm/browse) is
@@ -136,7 +136,7 @@ to `/opt/ingest/data`.
 
 To export local authorities from the local machine, run the export script `bin/export-authorities`
 If you need to export local authorities on a remote box and don't want to run the process  on that box,
-see the notes in the wiki: [Exporting Local Authorities](https://github.com/curationexperts/alexandria-v2/wiki/Exporting-Local-Authorities-(especially-from-remote-systems))
+see the notes in the wiki: [Exporting Local Authorities](https://github.com/curationexperts/alexandria/wiki/Exporting-Local-Authorities-(especially-from-remote-systems))
 
 ### Importing Local Authorities from a CSV File
 
@@ -215,7 +215,7 @@ Usage Notes:
 * The possible values for the ```*_type``` fields are:  Person, Group, Organization, and Subject.
 
 For example, see the "lc_subject", "composer", and "rights_holder" fields in [the example CSV file in the spec fixtures]
-(https://github.com/curationexperts/alexandria-v2/blob/master/spec/fixtures/csv/pamss045_with_local_authorities.csv).
+(https://github.com/curationexperts/alexandria/blob/master/spec/fixtures/csv/pamss045_with_local_authorities.csv).
 
 
 # Caveats
@@ -242,9 +242,9 @@ For example, see the "lc_subject", "composer", and "rights_holder" fields in [th
 
 # Using Ansible to build production machines
 
-We recommend using Ansible to create production instances of Alexandria-v2. Clone https://github.com/acozine/sufia-centos and symlink the roles subdirectory of the sufia-centos code into the ansible subudirectory of the Alexandria-v2 code:
+We recommend using Ansible to create production instances of Alexandria. Clone https://github.com/acozine/sufia-centos and symlink the roles subdirectory of the sufia-centos code into the ansible subdirectory of the Alexandria code:
 ```
-sudo ln -s /path/to/sufia-centos/roles /path/to/alexandria-v2/ansible/roles
+sudo ln -s /path/to/sufia-centos/roles /path/to/alexandria/ansible/roles
 ```
 Review/modify ansible/ansible_vars.yml. If you're not creating your server on EC2, comment out the launch_ec2 and ec2 roles in ansible/ansible-ec2.yml, boot your server, add your public key to the centos user's authorized_keys file, add a disk at /opt if desired, then run the ansible scripts with:
 ```
