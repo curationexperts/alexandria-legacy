@@ -1,5 +1,5 @@
 ---
-# roles/alexandria-v2/tasks/main.yml
+# roles/alexandria/tasks/main.yml
 #
 - include: adrl-dm.yml
 - include: config.yml

@@ -10,7 +10,7 @@
 
     server_name: "{{ lookup('env', 'SERVER') }}"
     project_base: /opt
-    project_name: alexandria-v2
+    project_name: alexandria
     install_path: "{{ project_base }}/install"
 
     rails_env: production
@@ -63,4 +63,4 @@
     - { role: '../provisioning/centos/roles/hostname' }
     - { role: '../provisioning/centos/roles/automount' }
     - { role: '../provisioning/centos/roles/deploy' }
-    - { role: alexandria-v2, become: yes }
+    - { role: alexandria, become: yes }
