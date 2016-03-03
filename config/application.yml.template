@@ -4,6 +4,8 @@ defaults: &defaults
   ezid_port: 443
   internal_local_vocab_root: http://<%= Rails.application.config.host_name %>
   marmotta_host: localhost:8180
+  derivatives_dir: 'tmp/derivatives'
+  uploads_dir: 'tmp/uploads'
   minter_state: 'tmp/minter-state'
   pegasus_sru_endpoint: 'http://pegasus-test.library.ucsb.edu:5661'
 
@@ -18,3 +20,4 @@ production:
   marmotta_host: localhost:8080
   pegasus_sru_endpoint: 'http://pegasus.library.ucsb.edu:5661'
   internal_local_vocab_root: 'http://alexandria.ucsb.edu:8080/fedora/rest'
+
