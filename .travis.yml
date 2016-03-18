@@ -22,10 +22,6 @@ before_script:
   - "cp config/smtp.yml.template config/smtp.yml"
   - "cp config/solr.yml.template config/solr.yml"
 
-notifications:
-  email:
-    - justin@curationexperts.com
-
 env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
