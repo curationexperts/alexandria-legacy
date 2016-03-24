@@ -15,6 +15,7 @@
     - "  pegasus_sru_endpoint: 'http://pegasus.library.ucsb.edu:5661'"
     - "  derivatives_dir: {{ derivatives_directory }}"
     - "  uploads_dir: {{ uploads_directory }}"
+    - "  localhost_port: 8484"
 
 - name: write ADRL test settings to application.yml
   become: yes
@@ -31,10 +32,9 @@
   # this prevents 2 processes from creating file containers at the same time
   # see issue #626
   become: yes
-  template: 
+  template:
       src: resque-pool.yml.j2
       dest: "{{ config_path }}/resque-pool.yml"
       owner: "{{ deploy_user }}"
       group: "{{ deploy_group }}"
       backup: no
-  
