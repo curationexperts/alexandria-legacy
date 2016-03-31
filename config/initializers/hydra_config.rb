@@ -21,12 +21,9 @@ Hydra.configure do |_config|
   # config.user_model = 'User'
 
   # Map internal ids to external paths
-  Hydra.config.id_to_resource_uri = lambda do |id, graph|
-    result = graph.query([nil, ActiveFedora::RDF::Fcrepo::Model.hasModel, nil]).first
-    model = result.object.to_s.downcase.singularize
-
+  Hydra.config.id_to_resource_uri = lambda do |id, _|
     routes = Rails.application.routes.url_helpers
     builder = ActionDispatch::Routing::PolymorphicRoutes::HelperMethodBuilder
-    builder.polymorphic_method routes, model, nil, :url, id: id, host: Rails.application.config.host_name
+    builder.polymorphic_method routes, 'solr_document', nil, :url, id: id, host: Rails.application.config.host_name
   end
 end
