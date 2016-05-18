@@ -27,8 +27,8 @@ ec2_vpc:
 ## from the launch_ec2 role's tasks/main.yml
 #
 ## project-specific variables
-project_name: alexandria-v2 
-repo: https://github.com/curationexperts/alexandria-v2.git
+project_name: alexandria
+repo: https://github.com/curationexperts/alexandria.git
 rails_env: production
 # server_name: # FQDN, for example: sandbox.curationexperts.com; default is 127.0.0.1
 # install_path: # default is /opt/install

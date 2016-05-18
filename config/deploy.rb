@@ -1,10 +1,10 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'alexandria-v2'
+set :application, 'alexandria'
 set :scm, :git
-set :repo_url, ENV.fetch('REPO', 'https://github.com/curationexperts/alexandria-v2.git')
-set :deploy_to, '/opt/alexandria-v2'
+set :repo_url, ENV.fetch('REPO', 'https://github.com/curationexperts/alexandria.git')
+set :deploy_to, '/opt/alexandria'
 
 set :stages, %w(production vagrant)
 set :default_stage, 'vagrant'
