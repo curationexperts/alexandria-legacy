@@ -1,6 +1,6 @@
 ---
-# roles/alexandria-v2/defaults/main.yml
-project_name: alexandria-v2
+# roles/alexandria/defaults/main.yml
+project_name: alexandria
 project_base: /opt
 marmotta_server: 127.0.0.1
 deploy_user: adrl
