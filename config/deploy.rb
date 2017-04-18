@@ -45,6 +45,7 @@ set :linked_files,
       config/secrets.yml
       config/smtp.yml
       config/solr.yml
+      config/initializers/curation_concerns.rb
     )
 
 # Default value for linked_dirs is []
